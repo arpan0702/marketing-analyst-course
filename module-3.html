@@ -16,6 +16,8 @@
     <p class="lesson-goal">Tableau or Power BI, and the UX judgment that separates a chart from a dashboard someone can actually use in 30 seconds.</p>
   </div>
 
+  <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
+
   <h2>Core concepts</h2>
   <ul>
     <li><strong>Chart selection</strong>: when a line, bar, or table beats a fancier alternative (usually: often).</li>
@@ -76,6 +78,79 @@
     <li>Find a dashboard online you think is bad and rewrite its worst chart on paper.</li>
   </ol>
 
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Making the tool do more of the thinking</h2>
+  <ul>
+    <li><strong>Calculated fields</strong>: a formula built inside the BI tool (e.g. <code class="inline">ROAS = SUM(Revenue) / SUM(Spend)</code>) so it recalculates correctly at any level of aggregation, instead of averaging a pre-computed ROAS column (which silently produces the wrong number).</li>
+    <li><strong>Table calculations</strong>: running total, % of total, % change vs. previous period — computed by the tool over the chart's current view, so it stays correct as filters change.</li>
+    <li><strong>Parameters &amp; filters</strong>: a parameter lets a viewer swap what metric a chart shows (e.g. toggle between Spend / Revenue / ROAS) without you building three separate charts.</li>
+    <li><strong>Small multiples</strong>: the same small chart repeated once per channel/segment, side by side — often clearer than one crowded chart with 6 overlapping lines.</li>
+  </ul>
+
+  <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>Cohort retention heatmaps &amp; structuring the story</h2>
+  <p>A retention heatmap is the standard way to visualize the cohort query from Module 2's Advanced tier — rows are signup cohorts, columns are months since signup, color intensity is retention %. This is the chart most growth teams check weekly:</p>
+
+  <div class="box" style="padding:18px 20px;">
+    <svg viewBox="0 0 460 180" width="100%" height="180" role="img" aria-label="Retention heatmap: rows are monthly signup cohorts, columns are months since signup, darker cells mean higher retention percentage, fading right as cohorts age">
+      <g font-family="var(--mono)" font-size="10">
+        <text x="90" y="14" fill="var(--ink-faint)">Month 0</text>
+        <text x="164" y="14" fill="var(--ink-faint)">Month 1</text>
+        <text x="238" y="14" fill="var(--ink-faint)">Month 2</text>
+        <text x="312" y="14" fill="var(--ink-faint)">Month 3</text>
+        <text x="386" y="14" fill="var(--ink-faint)">Month 4</text>
+      </g>
+      <g font-family="var(--mono)" font-size="10.5" fill="var(--ink)">
+        <text x="0" y="42">Jan cohort</text>
+        <text x="0" y="72">Feb cohort</text>
+        <text x="0" y="102">Mar cohort</text>
+        <text x="0" y="132">Apr cohort</text>
+        <text x="0" y="162">May cohort</text>
+      </g>
+      <g font-family="var(--sans)" font-size="10.5" font-weight="700" text-anchor="middle">
+        <!-- Jan row: 100 62 48 40 35 -->
+        <rect x="76" y="24" width="66" height="26" fill="var(--teal)" opacity="1.0"/><text x="109" y="41" fill="var(--code-bg)">100%</text>
+        <rect x="150" y="24" width="66" height="26" fill="var(--teal)" opacity="0.62"/><text x="183" y="41" fill="var(--code-bg)">62%</text>
+        <rect x="224" y="24" width="66" height="26" fill="var(--teal)" opacity="0.48"/><text x="257" y="41" fill="var(--code-bg)">48%</text>
+        <rect x="298" y="24" width="66" height="26" fill="var(--teal)" opacity="0.40"/><text x="331" y="41" fill="var(--ink)">40%</text>
+        <rect x="372" y="24" width="66" height="26" fill="var(--teal)" opacity="0.35"/><text x="405" y="41" fill="var(--ink)">35%</text>
+        <!-- Feb row: 100 58 44 37 -->
+        <rect x="76" y="54" width="66" height="26" fill="var(--teal)" opacity="1.0"/><text x="109" y="71" fill="var(--code-bg)">100%</text>
+        <rect x="150" y="54" width="66" height="26" fill="var(--teal)" opacity="0.58"/><text x="183" y="71" fill="var(--code-bg)">58%</text>
+        <rect x="224" y="54" width="66" height="26" fill="var(--teal)" opacity="0.44"/><text x="257" y="71" fill="var(--ink)">44%</text>
+        <rect x="298" y="54" width="66" height="26" fill="var(--teal)" opacity="0.37"/><text x="331" y="71" fill="var(--ink)">37%</text>
+        <rect x="372" y="54" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="405" y="71" fill="var(--ink-faint)">—</text>
+        <!-- Mar row: 100 55 41 -->
+        <rect x="76" y="84" width="66" height="26" fill="var(--teal)" opacity="1.0"/><text x="109" y="101" fill="var(--code-bg)">100%</text>
+        <rect x="150" y="84" width="66" height="26" fill="var(--teal)" opacity="0.55"/><text x="183" y="101" fill="var(--code-bg)">55%</text>
+        <rect x="224" y="84" width="66" height="26" fill="var(--teal)" opacity="0.41"/><text x="257" y="101" fill="var(--ink)">41%</text>
+        <rect x="298" y="84" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="331" y="101" fill="var(--ink-faint)">—</text>
+        <rect x="372" y="84" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="405" y="101" fill="var(--ink-faint)">—</text>
+        <!-- Apr row: 100 49 -->
+        <rect x="76" y="114" width="66" height="26" fill="var(--teal)" opacity="1.0"/><text x="109" y="131" fill="var(--code-bg)">100%</text>
+        <rect x="150" y="114" width="66" height="26" fill="var(--teal)" opacity="0.49"/><text x="183" y="131" fill="var(--code-bg)">49%</text>
+        <rect x="224" y="114" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="257" y="131" fill="var(--ink-faint)">—</text>
+        <rect x="298" y="114" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="331" y="131" fill="var(--ink-faint)">—</text>
+        <rect x="372" y="114" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="405" y="131" fill="var(--ink-faint)">—</text>
+        <!-- May row: 100 -->
+        <rect x="76" y="144" width="66" height="26" fill="var(--teal)" opacity="1.0"/><text x="109" y="161" fill="var(--code-bg)">100%</text>
+        <rect x="150" y="144" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="183" y="161" fill="var(--ink-faint)">—</text>
+        <rect x="224" y="144" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="257" y="161" fill="var(--ink-faint)">—</text>
+        <rect x="298" y="144" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="331" y="161" fill="var(--ink-faint)">—</text>
+        <rect x="372" y="144" width="66" height="26" fill="var(--surface-2)" stroke="var(--line)"/><text x="405" y="161" fill="var(--ink-faint)">—</text>
+      </g>
+    </svg>
+    <p style="margin:12px 0 0; font-size:12.5px; color:var(--ink-muted);">The diagonal of blanks is normal — a May cohort simply hasn't reached "Month 3" yet. The read here: Feb–Mar cohorts retain slightly better at Month 1 than Jan (58%/55% vs. 62% is roughly flat, but watch this over more cohorts) — worth a note in an annotation, not a strong conclusion off 5 rows.</p>
+  </div>
+
+  <h3>Structuring a portfolio case study: SCQA</h3>
+  <p>When you present Portfolio Project 3 in an interview, structure the narrative with the consulting-standard <strong>SCQA</strong> framework instead of walking through your process chronologically:</p>
+  <div class="box teal">
+    <p style="margin:0"><strong>Situation</strong> — the business context, one sentence. <strong>Complication</strong> — what's wrong or uncertain (the CAC jump, the underperforming channel). <strong>Question</strong> — the one question your analysis answers. <strong>Answer</strong> — your recommendation, stated first, with the supporting data available if asked. This is also called the Pyramid Principle: conclusion first, evidence on demand — the opposite instinct from "let me walk you through my SQL."</p>
+  </div>
+
   <h2>Check your understanding</h2>
   <div id="quiz-mount"></div>
 
@@ -87,6 +162,10 @@
   <div class="qa">
     <p class="q">"Walk me through how you'd design a dashboard for a CMO who has 30 seconds to look at it."</p>
     <p class="a">Model answer: lead with 3–4 KPI tiles above the fold, each with a trend arrow, no more than one chart requiring interpretation, and a single annotation stating what changed and why it matters — the CMO should never have to ask "so what should I do with this."</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How do you present analysis findings to a non-technical audience?" (real, sourced)</p>
+    <p class="a">Model answer: lead with the recommendation (SCQA/Pyramid Principle), not the method — "We should shift budget from X to Y because Z," then offer the analysis behind it only if asked.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
@@ -160,6 +239,29 @@
       ],
       correct: 1,
       explain: 'Interviewers screen for judgment, not charting mechanics — the one-sentence "so what" is the actual deliverable.'
+    },
+    {
+      q: 'Why build ROAS as a calculated field (SUM(Revenue)/SUM(Spend)) instead of averaging a pre-computed ROAS column?',
+      options: [
+        'It looks more professional',
+        'Averaging a ratio column gives the wrong number once you aggregate across rows with different spend levels',
+        'There\'s no real difference',
+        'Calculated fields are required by Tableau'
+      ],
+      correct: 1,
+      explain: 'A calculated field recomputes the ratio from the summed totals at whatever level you\'re viewing — averaging pre-computed ratios weights every row equally regardless of its size, which is usually wrong.'
+    },
+    {
+      q: 'In a retention heatmap, what does the diagonal of blank cells (bottom-right) usually mean?',
+      options: ['A tracking error', 'Those cohorts simply haven\'t reached that many months of age yet', 'Zero retention', 'A chart bug'],
+      correct: 1,
+      explain: 'A May cohort can\'t have "Month 3" data in August — the blank triangle is expected, not missing data.'
+    },
+    {
+      q: 'The SCQA / Pyramid Principle structure for presenting analysis puts what first?',
+      options: ['The SQL query', 'The methodology', 'The recommendation/answer', 'A list of every metric considered'],
+      correct: 2,
+      explain: 'Lead with the answer; make the supporting analysis available on demand, not as the opening act — the opposite of a chronological walkthrough.'
     }
   ]);
 

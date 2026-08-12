@@ -1,0 +1,316 @@
+- generic [active] [ref=f27e1]:
+  - generic [ref=f27e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f27e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f27e4]: MA COURSE
+      - generic [ref=f27e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f27e6]:
+      - link "Home" [ref=f27e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f27e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f27e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f27e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f27e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f27e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f27e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f27e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f27e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f27e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f27e17]:
+    - generic [ref=f27e18]:
+      - paragraph [ref=f27e19]: Module 5
+      - heading "Marketing Metrics, A/B Testing & Statistical Fundamentals" [level=1] [ref=f27e20]
+      - paragraph [ref=f27e21]: CAC, LTV, ROAS, hypothesis testing, confidence — where "analyst" stops being a title and starts being a way of thinking.
+    - generic [ref=f27e22]: Beginner
+    - heading "Core concepts" [level=2] [ref=f27e25]
+    - list [ref=f27e26]:
+      - listitem [ref=f27e27]:
+        - strong [ref=f27e28]: CAC
+        - text: (Customer Acquisition Cost) = spend ÷ new customers.
+      - listitem [ref=f27e29]:
+        - strong [ref=f27e30]: LTV
+        - text: (Lifetime Value) = avg. order value × purchase frequency × customer lifespan.
+      - listitem [ref=f27e31]:
+        - strong [ref=f27e32]: ROAS
+        - text: (Return on Ad Spend) = revenue ÷ spend. Healthy
+        - strong [ref=f27e33]: "LTV : CAC"
+        - text: is roughly 3:1 or better.
+      - listitem [ref=f27e34]:
+        - strong [ref=f27e35]: Statistical significance
+        - text: ": whether an observed difference (e.g. Variant B's conversion rate) is likely real, or just noise."
+      - listitem [ref=f27e36]:
+        - strong [ref=f27e37]: Sample size / peeking risk
+        - text: ": checking significance too early inflates false positives — a test that looks \"significant\" on day 3 can flip by day 14."
+    - generic [ref=f27e38]:
+      - paragraph [ref=f27e39]: acquisition funnel — where each metric lives
+      - img "Funnel narrowing from 100,000 impressions to 8,000 clicks to 320 customers, with CAC, LTV, and ROAS labeled at the customer stage" [ref=f27e40]:
+        - generic [ref=f27e41]:
+          - generic [ref=f27e45]: IMPRESSIONS
+          - generic [ref=f27e46]: 100,000
+          - generic [ref=f27e47]: CLICKS
+          - generic [ref=f27e48]: 8,000
+          - generic [ref=f27e49]: ← A/B tests live on this transition
+          - generic [ref=f27e50]: CUSTOMERS
+          - generic [ref=f27e51]: "320"
+        - generic [ref=f27e52]:
+          - generic [ref=f27e53]: CAC = Spend / Customers
+          - generic [ref=f27e54]: LTV = Avg order value × purchase freq × lifespan
+          - generic [ref=f27e55]: ROAS = Revenue / Spend
+          - generic [ref=f27e56]: "Health check: LTV : CAC ≥ ~3 : 1"
+    - 'heading "Interactive: CAC · LTV · ROAS calculator" [level=2] [ref=f27e57]'
+    - generic [ref=f27e58]:
+      - generic [ref=f27e59]: Calculator
+      - generic [ref=f27e60]:
+        - generic [ref=f27e61]:
+          - generic [ref=f27e62]: Marketing spend ($)
+          - spinbutton "Marketing spend ($)" [ref=f27e63]: "20000"
+        - generic [ref=f27e64]:
+          - generic [ref=f27e65]: New customers acquired
+          - spinbutton "New customers acquired" [ref=f27e66]: "250"
+      - generic [ref=f27e67]:
+        - generic [ref=f27e68]:
+          - generic [ref=f27e69]: Avg. order value ($)
+          - spinbutton "Avg. order value ($)" [ref=f27e70]: "60"
+        - generic [ref=f27e71]:
+          - generic [ref=f27e72]: Purchases per year
+          - spinbutton "Purchases per year" [ref=f27e73]: "3"
+      - generic [ref=f27e74]:
+        - generic [ref=f27e75]:
+          - generic [ref=f27e76]: Avg. customer lifespan (years)
+          - spinbutton "Avg. customer lifespan (years)" [ref=f27e77]: "2"
+        - generic [ref=f27e78]:
+          - generic [ref=f27e79]: Total revenue from this spend ($)
+          - spinbutton "Total revenue from this spend ($)" [ref=f27e80]: "70000"
+      - generic [ref=f27e81]:
+        - generic [ref=f27e82]:
+          - generic [ref=f27e83]: "CAC: $80.00"
+          - generic [ref=f27e84]: "LTV: $360.00"
+          - generic [ref=f27e85]: "ROAS: 3.50x"
+          - generic [ref=f27e86]: "LTV : CAC: 4.50 : 1"
+        - generic [ref=f27e87]: Healthy — at or above the ~3:1 benchmark.
+    - 'heading "Interactive: is your A/B test result real?" [level=2] [ref=f27e88]'
+    - paragraph [ref=f27e89]: Two-proportion significance check (z-test), the same logic behind Portfolio Project 2. Enter each variant's visitors and conversions.
+    - generic [ref=f27e90]:
+      - generic [ref=f27e91]: Significance calculator
+      - generic [ref=f27e92]:
+        - generic [ref=f27e93]:
+          - generic [ref=f27e94]: Variant A visitors
+          - spinbutton "Variant A visitors" [ref=f27e95]: "5000"
+        - generic [ref=f27e96]:
+          - generic [ref=f27e97]: Variant A conversions
+          - spinbutton "Variant A conversions" [ref=f27e98]: "250"
+      - generic [ref=f27e99]:
+        - generic [ref=f27e100]:
+          - generic [ref=f27e101]: Variant B visitors
+          - spinbutton "Variant B visitors" [ref=f27e102]: "5000"
+        - generic [ref=f27e103]:
+          - generic [ref=f27e104]: Variant B conversions
+          - spinbutton "Variant B conversions" [ref=f27e105]: "290"
+      - generic [ref=f27e106]:
+        - generic [ref=f27e107]:
+          - generic [ref=f27e108]: "Variant A rate: 5.00%"
+          - generic [ref=f27e109]: "Variant B rate: 5.80%"
+          - generic [ref=f27e110]: "z-score: 1.77"
+          - generic [ref=f27e111]: "p-value: 0.0768"
+        - generic [ref=f27e112]: Not significant at 95% confidence (p ≥ 0.05) — don't call a winner yet; the difference could be random variation.
+    - heading "Exercises" [level=2] [ref=f27e113]
+    - list [ref=f27e114]:
+      - listitem [ref=f27e115]: Using the calculators above, try a scenario where LTV:CAC is under 2:1 — write one sentence recommending what you'd do.
+      - listitem [ref=f27e116]: Using the Kaggle "Marketing A/B Testing" dataset, calculate conversion rate for each group, then check significance (Sheets has a built-in chi-square function) against this page's calculator.
+      - listitem [ref=f27e117]: In the significance calculator, drop Variant B's visitor count to 500 with the same conversion rate — watch the result flip. Write two sentences on why that matters when a stakeholder wants to end a test early.
+    - generic [ref=f27e118]: Intermediate
+    - heading "Sizing a test before you run it" [level=2] [ref=f27e121]
+    - paragraph [ref=f27e122]:
+      - text: Real teams don't check significance and hope — they calculate the sample size needed
+      - emphasis [ref=f27e123]: before launch
+      - text: ", using industry-standard"
+      - strong [ref=f27e124]: 80% power
+      - text: (chance of detecting a real effect if one exists) and
+      - strong [ref=f27e125]: 95% confidence
+      - text: (chance of not falsely calling noise a real effect). Skipping this is how teams end up running an underpowered test for two weeks and learning nothing.
+    - generic [ref=f27e126]:
+      - generic [ref=f27e127]: Sample size calculator
+      - generic [ref=f27e128]:
+        - generic [ref=f27e129]:
+          - generic [ref=f27e130]: Baseline conversion rate (%)
+          - spinbutton "Baseline conversion rate (%)" [ref=f27e131]: "5"
+        - generic [ref=f27e132]:
+          - generic [ref=f27e133]: Minimum detectable lift (relative, %)
+          - spinbutton "Minimum detectable lift (relative, %)" [ref=f27e134]: "10"
+      - generic [ref=f27e135]:
+        - generic [ref=f27e136]: Detecting 10% relative lift (5.00% → 5.50%) needs ~31,234 visitors per variant (62,468 total), at 95% confidence / 80% power.
+        - generic [ref=f27e137]: Smaller lifts need dramatically more traffic — halving the MDE roughly quadruples the required sample.
+    - heading "Choosing the right statistical test, and reading cohorts over time" [level=2] [ref=f27e138]
+    - list [ref=f27e139]:
+      - listitem [ref=f27e140]:
+        - strong [ref=f27e141]: Chi-square test
+        - text: ": comparing conversion"
+        - emphasis [ref=f27e142]: rates
+        - text: "(categorical: converted / didn't) between two groups — what this course's significance calculator runs under the hood."
+      - listitem [ref=f27e143]:
+        - strong [ref=f27e144]: t-test
+        - text: ": comparing"
+        - emphasis [ref=f27e145]: averages
+        - text: of a continuous number between two groups (e.g. average order value in Variant A vs. B) — different math from a rate comparison, a common trap in interviews.
+      - listitem [ref=f27e146]:
+        - strong [ref=f27e147]: Confidence intervals
+        - text: ": instead of a single \"the lift is 8%,\" a range (\"the lift is between 3% and 13%, 95% confidence\") — more honest, and what you should actually report to a stakeholder asking \"so is it 8% for sure?\""
+      - listitem [ref=f27e148]:
+        - strong [ref=f27e149]: Retention curves
+        - text: ": the row-by-row read of Module 3's cohort heatmap — where retention typically drops steeply in month 1 then flattens; the flattening point is roughly your realistic long-run LTV assumption."
+    - generic [ref=f27e150]: Advanced
+    - heading "Proving it's causal, not just correlated" [level=2] [ref=f27e153]
+    - list [ref=f27e154]:
+      - listitem [ref=f27e155]:
+        - strong [ref=f27e156]: Correlation vs. causation
+        - text: ": spend and revenue moving together doesn't prove spend caused the revenue — both could be driven by seasonality. A recommendation based on correlation alone should be framed as a hypothesis to test, not a proven lever."
+      - listitem [ref=f27e157]:
+        - strong [ref=f27e158]: Incrementality / holdout testing
+        - text: ": deliberately withhold a channel or campaign from a random slice of geography or audience, then compare outcomes vs. the exposed group — this is how you separate \"channel gets credit for a sale\" from \"channel actually caused the sale,\" especially for brand/awareness spend attribution can't cleanly measure."
+      - listitem [ref=f27e159]:
+        - strong [ref=f27e160]: Multiple testing correction
+        - text: ": testing 5 variants at a 5% significance threshold gives roughly a 1-in-4 chance"
+        - emphasis [ref=f27e161]: at least one
+        - text: "looks \"significant\" purely by chance. A simple fix (Bonferroni correction): divide your significance threshold by the number of comparisons (5 tests → use 0.01, not 0.05, as the bar)."
+      - listitem [ref=f27e162]:
+        - strong [ref=f27e163]: Simple linear regression, conceptually
+        - text: ": fits a line describing how one variable moves with another (e.g. spend vs. revenue) and gives you a slope — useful for marketing-mix-style questions (\"what's the marginal return on the next $1,000 of spend\"), but only as good as the confounding variables you've controlled for."
+    - heading "Check your understanding" [level=2] [ref=f27e164]
+    - generic [ref=f27e166]:
+      - generic [ref=f27e167]:
+        - paragraph [ref=f27e168]:
+          - generic [ref=f27e169]: Q1
+          - text: "LTV : CAC of 5 : 1 generally signals:"
+        - generic [ref=f27e170]:
+          - generic [ref=f27e171] [cursor=pointer]:
+            - radio "Dangerously unprofitable acquisition" [ref=f27e172]
+            - generic [ref=f27e173]: Dangerously unprofitable acquisition
+          - generic [ref=f27e174] [cursor=pointer]:
+            - radio "A healthy, sustainable acquisition economics" [ref=f27e175]
+            - generic [ref=f27e176]: A healthy, sustainable acquisition economics
+          - generic [ref=f27e177] [cursor=pointer]:
+            - radio "A tracking error" [ref=f27e178]
+            - generic [ref=f27e179]: A tracking error
+          - generic [ref=f27e180] [cursor=pointer]:
+            - radio "Nothing without more context on churn" [ref=f27e181]
+            - generic [ref=f27e182]: Nothing without more context on churn
+      - generic [ref=f27e183]:
+        - paragraph [ref=f27e184]:
+          - generic [ref=f27e185]: Q2
+          - text: "A test shows p = 0.08. At the standard 95% confidence threshold, this result is:"
+        - generic [ref=f27e186]:
+          - generic [ref=f27e187] [cursor=pointer]:
+            - radio "Statistically significant" [ref=f27e188]
+            - generic [ref=f27e189]: Statistically significant
+          - generic [ref=f27e190] [cursor=pointer]:
+            - radio "Not statistically significant" [ref=f27e191]
+            - generic [ref=f27e192]: Not statistically significant
+          - generic [ref=f27e193] [cursor=pointer]:
+            - radio "Definitely a real effect" [ref=f27e194]
+            - generic [ref=f27e195]: Definitely a real effect
+          - generic [ref=f27e196] [cursor=pointer]:
+            - radio "Impossible to interpret" [ref=f27e197]
+            - generic [ref=f27e198]: Impossible to interpret
+      - generic [ref=f27e199]:
+        - paragraph [ref=f27e200]:
+          - generic [ref=f27e201]: Q3
+          - text: Why is "peeking" at A/B test results daily and stopping as soon as it looks significant a problem?
+        - generic [ref=f27e202]:
+          - generic [ref=f27e203] [cursor=pointer]:
+            - radio "It's not a problem, earlier is always better" [ref=f27e204]
+            - generic [ref=f27e205]: It's not a problem, earlier is always better
+          - generic [ref=f27e206] [cursor=pointer]:
+            - radio "It inflates the false-positive rate — a result that looks significant early can be random noise that regresses later" [ref=f27e207]
+            - generic [ref=f27e208]: It inflates the false-positive rate — a result that looks significant early can be random noise that regresses later
+          - generic [ref=f27e209] [cursor=pointer]:
+            - radio "It only matters for very large sample sizes" [ref=f27e210]
+            - generic [ref=f27e211]: It only matters for very large sample sizes
+          - generic [ref=f27e212] [cursor=pointer]:
+            - radio "It makes the dashboard slower" [ref=f27e213]
+            - generic [ref=f27e214]: It makes the dashboard slower
+      - generic [ref=f27e215]:
+        - paragraph [ref=f27e216]:
+          - generic [ref=f27e217]: Q4
+          - text: "ROAS of 2.5x on a campaign with very low product margin could still be:"
+        - generic [ref=f27e218]:
+          - generic [ref=f27e219] [cursor=pointer]:
+            - radio "Automatically profitable" [ref=f27e220]
+            - generic [ref=f27e221]: Automatically profitable
+          - generic [ref=f27e222] [cursor=pointer]:
+            - radio "Unprofitable — ROAS alone doesn't account for margin or fulfillment cost" [ref=f27e223]
+            - generic [ref=f27e224]: Unprofitable — ROAS alone doesn't account for margin or fulfillment cost
+          - generic [ref=f27e225] [cursor=pointer]:
+            - radio "Impossible to calculate" [ref=f27e226]
+            - generic [ref=f27e227]: Impossible to calculate
+          - generic [ref=f27e228] [cursor=pointer]:
+            - radio "The same thing as CAC" [ref=f27e229]
+            - generic [ref=f27e230]: The same thing as CAC
+      - generic [ref=f27e231]:
+        - paragraph [ref=f27e232]:
+          - generic [ref=f27e233]: Q5
+          - text: Comparing average order value (a continuous number) between two test groups — which test?
+        - generic [ref=f27e234]:
+          - generic [ref=f27e235] [cursor=pointer]:
+            - radio "Chi-square test" [ref=f27e236]
+            - generic [ref=f27e237]: Chi-square test
+          - generic [ref=f27e238] [cursor=pointer]:
+            - radio "t-test" [ref=f27e239]
+            - generic [ref=f27e240]: t-test
+          - generic [ref=f27e241] [cursor=pointer]:
+            - radio "RANK() window function" [ref=f27e242]
+            - generic [ref=f27e243]: RANK() window function
+          - generic [ref=f27e244] [cursor=pointer]:
+            - radio "COALESCE" [ref=f27e245]
+            - generic [ref=f27e246]: COALESCE
+      - generic [ref=f27e247]:
+        - paragraph [ref=f27e248]:
+          - generic [ref=f27e249]: Q6
+          - text: Testing 5 variants at a 5% significance threshold each — what's the real risk of at least one false positive?
+        - generic [ref=f27e250]:
+          - generic [ref=f27e251] [cursor=pointer]:
+            - radio "Exactly 5%" [ref=f27e252]
+            - generic [ref=f27e253]: Exactly 5%
+          - generic [ref=f27e254] [cursor=pointer]:
+            - radio "Roughly 1 in 4" [ref=f27e255]
+            - generic [ref=f27e256]: Roughly 1 in 4
+          - generic [ref=f27e257] [cursor=pointer]:
+            - radio "0%, thresholds don't stack" [ref=f27e258]
+            - generic [ref=f27e259]: 0%, thresholds don't stack
+          - generic [ref=f27e260] [cursor=pointer]:
+            - radio "50%" [ref=f27e261]
+            - generic [ref=f27e262]: 50%
+      - generic [ref=f27e263]:
+        - generic [ref=f27e264]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f27e265] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f27e266]
+    - generic [ref=f27e267]:
+      - paragraph [ref=f27e268]: "\"How do you explain statistical significance to a stakeholder with no stats background?\""
+      - paragraph [ref=f27e269]: "Model answer: \"It's how confident we are the difference we're seeing is a real effect, not random noise from a small sample — like flipping a coin 10 times and getting 7 heads doesn't mean the coin is rigged, but 700 heads out of 1,000 flips would.\""
+    - generic [ref=f27e270]:
+      - paragraph [ref=f27e271]: "\"If LTV:CAC is 1.5:1, what does that tell you and what would you recommend?\""
+      - paragraph [ref=f27e272]: "Model answer: unsustainable — the cost of acquiring a customer is too close to what they're worth over their lifetime, leaving little margin for overhead or profit. Recommend either reducing CAC by channel (cut underperforming spend) or increasing retention/LTV (lifecycle marketing) before scaling acquisition spend further."
+    - generic [ref=f27e273]:
+      - paragraph [ref=f27e274]: "\"How would you determine if you have enough sample size to trust an A/B test result?\""
+      - paragraph [ref=f27e275]: "Model answer: run a sample-size calculation before launch based on baseline conversion rate and minimum detectable effect, and commit to that sample size and duration up front — don't stop the test early just because it looks significant on day 3, since that inflates the false-positive rate."
+    - generic [ref=f27e276]:
+      - paragraph [ref=f27e277]: "\"What's the difference between correlation and causation, and how does it affect your recommendations?\" (real, sourced)"
+      - paragraph [ref=f27e278]: "Model answer: correlated metrics can share a third cause (seasonality driving both spend and revenue); recommendations from correlation alone should be framed as testable hypotheses, not proven levers — propose a holdout or A/B test before recommending a budget shift on correlation alone."
+    - generic [ref=f27e279]:
+      - paragraph [ref=f27e280]: "\"You tested 5 variants and one came back significant — what's the concern?\" (real, sourced)"
+      - paragraph [ref=f27e281]: "Model answer: the multiple-comparisons problem — at a 5% threshold and 5 tests, there's roughly a 1-in-4 chance of at least one false positive by pure chance. Correct the threshold (Bonferroni: divide 0.05 by the number of tests) or treat the winner as a hypothesis to re-confirm."
+    - button "Mark this module complete" [ref=f27e283] [cursor=pointer]
+    - generic [ref=f27e284]:
+      - link "← Module 4" [ref=f27e285] [cursor=pointer]:
+        - /url: module-4.html
+      - link "Course home →" [ref=f27e286] [cursor=pointer]:
+        - /url: index.html
+  - contentinfo [ref=f27e287]: MODULE 5 · METRICS & A/B TESTING

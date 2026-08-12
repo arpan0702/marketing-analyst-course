@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Interview Question Bank — Interview-Ready Marketing Analyst</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="interview-bank"></div>
+
+<main class="page" style="max-width:800px;">
+  <div class="lesson-head">
+    <p class="lesson-num">Interview Bank</p>
+    <h1>Real Questions, Asked at This Level</h1>
+    <p class="lesson-goal">Not invented practice questions — these are pulled from public interview-question aggregators (DataLemur, InterviewQuery, FinalRound AI, Glassdoor candidate reports) for Marketing Analyst / Growth Analyst roles around 1–3 years of experience, current as of August 2026. Full source list at the bottom.</p>
+  </div>
+
+  <div class="filter-bar" id="filter-bar"></div>
+  <div id="qbank"></div>
+
+  <h2>Sources</h2>
+  <p style="font-size:13px; color:var(--ink-muted);">Questions and the underlying facts on this page were gathered from, and can be cross-checked against:</p>
+  <ul style="font-size:13px; color:var(--ink-muted);">
+    <li><a href="https://www.finalroundai.com/blog/marketing-analyst-interview-questions" target="_blank" rel="noopener">FinalRound AI — 30 Marketing Analyst Interview Questions</a></li>
+    <li><a href="https://datalemur.com/blog/sql-marketing-analyst" target="_blank" rel="noopener">DataLemur — SQL for Marketing Analysts</a> (also see their "Google Ad Campaign ROAS" and "Facebook Advertiser Status" practice problems)</li>
+    <li><a href="https://www.interviewquery.com/p/marketing-analytics-questions" target="_blank" rel="noopener">InterviewQuery — Top 28 Marketing Analytics Interview Questions</a></li>
+    <li><a href="https://www.interviewquery.com/p/business-analyst-sql-questions" target="_blank" rel="noopener">InterviewQuery — SQL Interview Questions for Business Analysts</a></li>
+    <li><a href="https://www.glassdoor.com/Interview/growth-marketing-analyst-interview-questions-SRCH_KO0,24.htm" target="_blank" rel="noopener">Glassdoor — Growth Marketing Analyst interview question reports</a></li>
+    <li><a href="https://datalemur.com/blog/ab-testing-interview-questions-and-answers" target="_blank" rel="noopener">DataLemur — 50 A/B Testing Interview Questions & Answers</a></li>
+    <li><a href="https://funnel.io/blog/multi-touch-attribution" target="_blank" rel="noopener">Funnel.io — Multi-Touch Attribution</a></li>
+  </ul>
+
+  <div class="lesson-nav">
+    <a href="module-5.html">← Module 5</a>
+    <a href="resume.html">Resume &amp; Apply →</a>
+  </div>
+</main>
+
+<footer class="site">INTERVIEW BANK · INTERVIEW-READY MARKETING ANALYST</footer>
+
+<script src="assets/app.js"></script>
+<script>
+const QBANK = [
+  // ---------------- SQL & Technical ----------------
+  { cat: 'sql', q: 'Write a query to identify the top 3 marketing channels by ROI last quarter.', src: 'InterviewQuery',
+    a: 'SUM(revenue - spend) or revenue/spend per channel, GROUP BY channel, ORDER BY that value DESC, LIMIT 3. Say the metric choice out loud — "ROI" is ambiguous between profit-based and ratio-based, and picking one and stating why is part of the answer.' },
+  { cat: 'sql', q: 'Given two dates, return one row per week between them, numbered sequentially, accounting for a start date that falls mid-week.', src: 'InterviewQuery — Business Analyst SQL',
+    a: 'This is a "date spine" problem. Generate a sequence of dates (a recursive CTE, or a numbers/calendar table), bucket each into a week using a difference from the start date divided by 7, then aggregate. The trap is assuming every week starts on the same weekday as the data — it starts from your given start date.' },
+  { cat: 'sql', q: 'Compute a frequency table of a customer attribute (e.g. segment) that requires two JOINs, with correct GROUP BY / ORDER BY and NULL handling.', src: 'InterviewQuery',
+    a: 'JOIN the two lookup tables first, then GROUP BY the attribute, COUNT(*), and explicitly decide what happens to NULLs — do they get their own bucket ("Unknown") or get filtered? Silently dropping NULLs from a marketing segmentation query is a common real mistake that skews the read.' },
+  { cat: 'sql', q: 'How would you use SQL to analyze customer segmentation or campaign performance?', src: 'DataLemur',
+    a: 'Name the grain first (one row = one customer or one order?), then walk the RFM pattern from Module 2/Portfolio Project 1: GROUP BY customer, aggregate recency/frequency/monetary, then bucket with CASE WHEN.' },
+  { cat: 'sql', q: 'How do you handle missing data or outliers when using SQL for marketing analysis?', src: 'DataLemur',
+    a: 'Missing: decide COALESCE-to-default vs. exclude vs. flag, and say which you picked and why. Outliers: don\'t silently delete them — a $50,000 single order might be real (an enterprise deal) or a data error; check before excluding, and if you exclude, say so in the analysis, not just in the query.' },
+  { cat: 'sql', q: 'Practice problems worth doing beyond this course', src: 'DataLemur',
+    a: 'DataLemur\'s "Google Ad Campaign ROAS" and "Facebook Advertiser Status" problems are built specifically around marketing schemas — good next step after Module 2\'s live SQL runner.' },
+
+  // ---------------- Statistics & A/B Testing ----------------
+  { cat: 'stats', q: 'Explain A/B testing — how do you design a test and interpret the results?', src: 'FinalRound AI',
+    a: 'Start from a specific hypothesis and one success metric, run a power analysis to size the sample (industry-standard: 80% power, 95% confidence), randomize at the user level, run the full planned duration regardless of interim results, then check significance and effect size together, not significance alone.' },
+  { cat: 'stats', q: 'How do you design and analyze an A/B test for an email subject line?', src: 'FinalRound AI',
+    a: 'Hypothesis: "Subject line B increases open rate because [specific reason]." Randomly split the list, hold everything else constant (send time, sender name), pre-commit to sample size and duration, then run the same significance check as Module 5\'s calculator.' },
+  { cat: 'stats', q: 'Why is stopping a test early because it "looks significant" a problem?', src: 'DataLemur — A/B Testing',
+    a: 'Significance testing assumes a fixed sample size decided in advance. Checking repeatedly and stopping as soon as p < 0.05 appears inflates the false-positive rate — a result that looks real on day 3 can be pure noise that regresses by day 14. Covered hands-on in Module 5.' },
+  { cat: 'stats', q: 'You tested 5 variants and one came back significant — what\'s the concern?', src: 'DataLemur — A/B Testing',
+    a: 'Multiple comparisons problem: testing 5 variants at a 5% significance threshold gives roughly a 1-in-4 chance that at least one looks "significant" by pure chance. Either correct the threshold (Bonferroni) or treat a single winner among many as a hypothesis to re-test, not a conclusion.' },
+  { cat: 'stats', q: 'What\'s the difference between statistical and practical significance?', src: 'InterviewQuery',
+    a: 'A result can be statistically significant (real, not noise) but practically meaningless (a 0.1% conversion lift on a huge sample). Always pair the p-value with the effect size and ask "is this worth shipping," not just "is this real."' },
+  { cat: 'stats', q: 'What\'s the difference between correlation and causation, and how does it affect your recommendations?', src: 'FinalRound AI',
+    a: 'Two metrics moving together doesn\'t mean one causes the other — both could be driven by a third factor (e.g. seasonality driving both spend and revenue up). Recommendations based on correlation alone should be framed as hypotheses to test (via an A/B test or holdout), not as proven causal levers.' },
+
+  // ---------------- GA4 & Attribution ----------------
+  { cat: 'ga4', q: 'Walk me through investigating a 30% month-over-month drop in paid search conversion rate.', src: 'FinalRound AI',
+    a: 'Rule out measurement before behavior: check for a tracking/tagging break (GTM trigger, consent mode change), then check for a landing page or checkout change, then look at the breakdown by device/segment to see if the drop is broad or isolated, then check auction/competitive factors last.' },
+  { cat: 'ga4', q: 'How would you build a marketing attribution model when you have incomplete data across channels?', src: 'FinalRound AI',
+    a: 'State the limitation up front, then triangulate: use GA4\'s multi-touch view where available, supplement with a lift/holdout test for channels attribution can\'t see well (like brand/offline), and be explicit about which channels you trust the attributed number for and which you don\'t.' },
+  { cat: 'ga4', q: 'How do you reconcile GA4 numbers not matching your CRM or ad platform reports?', src: 'General practice',
+    a: 'This is expected, not a bug — different attribution windows, client-side tracking loss (ad blockers, iOS ITP), and ad platforms self-reporting more generous attribution than GA4\'s model all cause real discrepancies. Pick one source of truth per decision and say which, rather than trying to force all three to agree.' },
+  { cat: 'ga4', q: 'Multi-touch vs. last-touch attribution — when do you use each?', src: 'Funnel.io',
+    a: 'Multi-touch (linear, time-decay, data-driven) is better for evaluating mid-funnel channels like content and email that warm up a prospect before the final click. Last-touch is reasonable for channels where the final decision genuinely is that channel\'s work, like branded paid search.' },
+  { cat: 'ga4', q: 'What happens to GA4\'s attribution model when a conversion event has low volume?', src: 'Insider fact', fact: true,
+    a: 'GA4 defaults to data-driven attribution (DDA), but DDA needs roughly 300–400 monthly conversions on that specific conversion event to compute reliably. Below that threshold, GA4 silently reverts to a last-click-style model with no warning in the UI — worth checking explicitly before trusting an attribution report on a lower-volume conversion.' },
+
+  // ---------------- Case & Business Judgment ----------------
+  { cat: 'case', q: 'A marketing director wants to double the paid search budget — how do you evaluate whether that\'s the right investment?', src: 'FinalRound AI',
+    a: 'Check for diminishing returns first: has CAC or CPC trended up as spend increased, suggesting the channel is near-saturated? Model expected ROAS at 2x spend using the current marginal (not average) return, and propose a smaller test increase with a clear evaluation checkpoint before committing to the full doubling.' },
+  { cat: 'case', q: 'How do you evaluate the effectiveness of different marketing channels in driving revenue?', src: 'FinalRound AI',
+    a: 'Layer three views: attributed revenue (GA4/attribution model), incremental revenue (lift test or geo holdout, if available), and efficiency (CAC, ROAS) — and say which view you trust most for which type of channel (Module 4\'s multi-touch guidance applies here).' },
+  { cat: 'case', q: 'How do you decide which metrics to prioritize when evaluating a marketing program?', src: 'FinalRound AI',
+    a: 'Anchor to the business goal one level up (revenue growth? retention? efficiency?), pick 1–2 primary metrics that goal implies, and treat everything else as diagnostic, not primary — a dashboard with 15 "important" metrics has none.' },
+  { cat: 'case', q: 'If we spend €10,000 on ads and generate €50,000 in revenue, is a ROAS of 5 automatically good?', src: 'Case-interview pattern',
+    a: 'No — ROAS ignores margin. If product margin is 15%, that €50,000 in revenue is €7,500 in gross profit against €10,000 spent: a loss, despite a "5x" headline number. Always ask for margin before calling a ROAS good or bad.' },
+  { cat: 'case', q: 'CAC jumped 30% last month — how do you diagnose why?', src: 'Common case pattern',
+    a: 'Decompose CAC = spend ÷ new customers. Check whether spend rose, conversions fell, or both; break it down by channel to see if it\'s isolated or broad; rule out a tracking break before concluding it\'s a real cost or conversion problem. Full framework in Section 4 of this course.' },
+
+  // ---------------- Behavioral (data-story STAR) ----------------
+  { cat: 'behavioral', q: 'Describe a marketing campaign you analyzed where the results were meaningful. What did you find, and what happened as a result?', src: 'FinalRound AI',
+    a: 'This is a STAR prompt in disguise — see the worked model answer below with real numbers.' },
+  { cat: 'behavioral', q: 'Tell me about a time you had to explain complex data findings to a non-technical audience.', src: 'FinalRound AI',
+    a: 'Lead with the recommendation, not the method: "We should shift budget from X to Y because Z" — then offer the analysis behind it only if asked. Analysts who explain the SQL before the conclusion lose a non-technical room in the first ten seconds.' },
+  { cat: 'behavioral', q: 'How do you handle conflicting data from different sources that tell different stories?', src: 'FinalRound AI',
+    a: 'Name the likely cause (different attribution windows, different definitions of "conversion," sampling) rather than picking whichever number is more convenient, and state which source you\'re treating as ground truth for this specific decision and why.' },
+  { cat: 'behavioral', q: 'Tell me about a time you collaborated cross-functionally to complete a marketing analysis.', src: 'FinalRound AI',
+    a: 'The Marketing Manager background is a genuine advantage here — most analyst candidates have never had to get a sales or product team to change behavior based on their numbers. Use a real example of influencing without authority.' },
+];
+
+const CATS = [
+  { id: 'all', label: 'All' },
+  { id: 'sql', label: 'SQL & Technical' },
+  { id: 'stats', label: 'Statistics & A/B Testing' },
+  { id: 'ga4', label: 'GA4 & Attribution' },
+  { id: 'case', label: 'Case & Business' },
+  { id: 'behavioral', label: 'Behavioral' },
+];
+
+function renderBank(filter) {
+  const mount = document.getElementById('qbank');
+  const items = QBANK.filter(item => filter === 'all' || item.cat === filter);
+  mount.innerHTML = items.map(item => `
+    <div class="qa">
+      <p class="q">${item.q}<span class="source-tag">${item.src}</span></p>
+      ${item.fact ? `<div class="fact-callout"><b>Worth knowing before this comes up</b>${item.a}</div>` : `<p class="a">${item.a}</p>`}
+    </div>`).join('');
+
+  if (filter === 'all') {
+    mount.innerHTML = `
+      <div class="box gold" style="margin-bottom:8px;">
+        <p style="margin:0"><strong>Model STAR answer, worked with real numbers</strong> (a template for "describe a campaign you analyzed"): <em>"Our highest-cost paid channel showed a 0.8x ROAS on a last-click basis (Situation). I was asked to figure out if we should cut it (Task). I pulled the conversion path data and found a 45-day gap between typical first touch and purchase for that channel — well outside our default 7-day attribution window (Action with Data). Extending the attribution window to 45 days moved that channel's ROAS to 2.3x, and leadership reallocated $200K back into it instead of cutting it (Result/ROI)."</em> Notice the shape: a wrong first read, a specific data step that corrected it, and a dollar figure at the end.</p>
+      </div>` + mount.innerHTML;
+  }
+}
+
+function renderFilters() {
+  const bar = document.getElementById('filter-bar');
+  bar.innerHTML = CATS.map(c => `<button class="filter-btn ${c.id === 'all' ? 'active' : ''}" data-cat="${c.id}">${c.label}</button>`).join('');
+  bar.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderBank(btn.dataset.cat);
+    });
+  });
+}
+
+renderFilters();
+renderBank('all');
+</script>
+</body>
+</html>

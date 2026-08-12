@@ -1,0 +1,208 @@
+- generic [active] [ref=f21e1]:
+  - generic [ref=f21e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f21e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f21e4]: MA COURSE
+      - generic [ref=f21e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f21e6]:
+      - link "Home" [ref=f21e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f21e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f21e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f21e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f21e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f21e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f21e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f21e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f21e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f21e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f21e17]:
+    - generic [ref=f21e18]:
+      - paragraph [ref=f21e19]: Interview Bank
+      - heading "Real Questions, Asked at This Level" [level=1] [ref=f21e20]
+      - paragraph [ref=f21e21]: Not invented practice questions — these are pulled from public interview-question aggregators (DataLemur, InterviewQuery, FinalRound AI, Glassdoor candidate reports) for Marketing Analyst / Growth Analyst roles around 1–3 years of experience, current as of August 2026. Full source list at the bottom.
+    - generic [ref=f21e22]:
+      - button "All" [ref=f21e23] [cursor=pointer]
+      - button "SQL & Technical" [ref=f21e24] [cursor=pointer]
+      - button "Statistics & A/B Testing" [ref=f21e25] [cursor=pointer]
+      - button "GA4 & Attribution" [ref=f21e26] [cursor=pointer]
+      - button "Case & Business" [ref=f21e27] [cursor=pointer]
+      - button "Behavioral" [ref=f21e28] [cursor=pointer]
+    - generic [ref=f21e29]:
+      - paragraph [ref=f21e31]:
+        - strong [ref=f21e32]: Model STAR answer, worked with real numbers
+        - text: "(a template for \"describe a campaign you analyzed\"):"
+        - emphasis [ref=f21e33]: "\"Our highest-cost paid channel showed a 0.8x ROAS on a last-click basis (Situation). I was asked to figure out if we should cut it (Task). I pulled the conversion path data and found a 45-day gap between typical first touch and purchase for that channel — well outside our default 7-day attribution window (Action with Data). Extending the attribution window to 45 days moved that channel's ROAS to 2.3x, and leadership reallocated $200K back into it instead of cutting it (Result/ROI).\""
+        - text: "Notice the shape: a wrong first read, a specific data step that corrected it, and a dollar figure at the end."
+      - generic [ref=f21e34]:
+        - paragraph [ref=f21e35]:
+          - text: Write a query to identify the top 3 marketing channels by ROI last quarter.
+          - generic [ref=f21e36]: InterviewQuery
+        - paragraph [ref=f21e37]: SUM(revenue - spend) or revenue/spend per channel, GROUP BY channel, ORDER BY that value DESC, LIMIT 3. Say the metric choice out loud — "ROI" is ambiguous between profit-based and ratio-based, and picking one and stating why is part of the answer.
+      - generic [ref=f21e38]:
+        - paragraph [ref=f21e39]:
+          - text: Given two dates, return one row per week between them, numbered sequentially, accounting for a start date that falls mid-week.
+          - generic [ref=f21e40]: InterviewQuery — Business Analyst SQL
+        - paragraph [ref=f21e41]: This is a "date spine" problem. Generate a sequence of dates (a recursive CTE, or a numbers/calendar table), bucket each into a week using a difference from the start date divided by 7, then aggregate. The trap is assuming every week starts on the same weekday as the data — it starts from your given start date.
+      - generic [ref=f21e42]:
+        - paragraph [ref=f21e43]:
+          - text: Compute a frequency table of a customer attribute (e.g. segment) that requires two JOINs, with correct GROUP BY / ORDER BY and NULL handling.
+          - generic [ref=f21e44]: InterviewQuery
+        - paragraph [ref=f21e45]: JOIN the two lookup tables first, then GROUP BY the attribute, COUNT(*), and explicitly decide what happens to NULLs — do they get their own bucket ("Unknown") or get filtered? Silently dropping NULLs from a marketing segmentation query is a common real mistake that skews the read.
+      - generic [ref=f21e46]:
+        - paragraph [ref=f21e47]:
+          - text: How would you use SQL to analyze customer segmentation or campaign performance?
+          - generic [ref=f21e48]: DataLemur
+        - paragraph [ref=f21e49]: "Name the grain first (one row = one customer or one order?), then walk the RFM pattern from Module 2/Portfolio Project 1: GROUP BY customer, aggregate recency/frequency/monetary, then bucket with CASE WHEN."
+      - generic [ref=f21e50]:
+        - paragraph [ref=f21e51]:
+          - text: How do you handle missing data or outliers when using SQL for marketing analysis?
+          - generic [ref=f21e52]: DataLemur
+        - paragraph [ref=f21e53]: "Missing: decide COALESCE-to-default vs. exclude vs. flag, and say which you picked and why. Outliers: don't silently delete them — a $50,000 single order might be real (an enterprise deal) or a data error; check before excluding, and if you exclude, say so in the analysis, not just in the query."
+      - generic [ref=f21e54]:
+        - paragraph [ref=f21e55]:
+          - text: Practice problems worth doing beyond this course
+          - generic [ref=f21e56]: DataLemur
+        - paragraph [ref=f21e57]: DataLemur's "Google Ad Campaign ROAS" and "Facebook Advertiser Status" problems are built specifically around marketing schemas — good next step after Module 2's live SQL runner.
+      - generic [ref=f21e58]:
+        - paragraph [ref=f21e59]:
+          - text: Explain A/B testing — how do you design a test and interpret the results?
+          - generic [ref=f21e60]: FinalRound AI
+        - paragraph [ref=f21e61]: "Start from a specific hypothesis and one success metric, run a power analysis to size the sample (industry-standard: 80% power, 95% confidence), randomize at the user level, run the full planned duration regardless of interim results, then check significance and effect size together, not significance alone."
+      - generic [ref=f21e62]:
+        - paragraph [ref=f21e63]:
+          - text: How do you design and analyze an A/B test for an email subject line?
+          - generic [ref=f21e64]: FinalRound AI
+        - paragraph [ref=f21e65]: "Hypothesis: \"Subject line B increases open rate because [specific reason].\" Randomly split the list, hold everything else constant (send time, sender name), pre-commit to sample size and duration, then run the same significance check as Module 5's calculator."
+      - generic [ref=f21e66]:
+        - paragraph [ref=f21e67]:
+          - text: Why is stopping a test early because it "looks significant" a problem?
+          - generic [ref=f21e68]: DataLemur — A/B Testing
+        - paragraph [ref=f21e69]: Significance testing assumes a fixed sample size decided in advance. Checking repeatedly and stopping as soon as p < 0.05 appears inflates the false-positive rate — a result that looks real on day 3 can be pure noise that regresses by day 14. Covered hands-on in Module 5.
+      - generic [ref=f21e70]:
+        - paragraph [ref=f21e71]:
+          - text: You tested 5 variants and one came back significant — what's the concern?
+          - generic [ref=f21e72]: DataLemur — A/B Testing
+        - paragraph [ref=f21e73]: "Multiple comparisons problem: testing 5 variants at a 5% significance threshold gives roughly a 1-in-4 chance that at least one looks \"significant\" by pure chance. Either correct the threshold (Bonferroni) or treat a single winner among many as a hypothesis to re-test, not a conclusion."
+      - generic [ref=f21e74]:
+        - paragraph [ref=f21e75]:
+          - text: What's the difference between statistical and practical significance?
+          - generic [ref=f21e76]: InterviewQuery
+        - paragraph [ref=f21e77]: A result can be statistically significant (real, not noise) but practically meaningless (a 0.1% conversion lift on a huge sample). Always pair the p-value with the effect size and ask "is this worth shipping," not just "is this real."
+      - generic [ref=f21e78]:
+        - paragraph [ref=f21e79]:
+          - text: What's the difference between correlation and causation, and how does it affect your recommendations?
+          - generic [ref=f21e80]: FinalRound AI
+        - paragraph [ref=f21e81]: Two metrics moving together doesn't mean one causes the other — both could be driven by a third factor (e.g. seasonality driving both spend and revenue up). Recommendations based on correlation alone should be framed as hypotheses to test (via an A/B test or holdout), not as proven causal levers.
+      - generic [ref=f21e82]:
+        - paragraph [ref=f21e83]:
+          - text: Walk me through investigating a 30% month-over-month drop in paid search conversion rate.
+          - generic [ref=f21e84]: FinalRound AI
+        - paragraph [ref=f21e85]: "Rule out measurement before behavior: check for a tracking/tagging break (GTM trigger, consent mode change), then check for a landing page or checkout change, then look at the breakdown by device/segment to see if the drop is broad or isolated, then check auction/competitive factors last."
+      - generic [ref=f21e86]:
+        - paragraph [ref=f21e87]:
+          - text: How would you build a marketing attribution model when you have incomplete data across channels?
+          - generic [ref=f21e88]: FinalRound AI
+        - paragraph [ref=f21e89]: "State the limitation up front, then triangulate: use GA4's multi-touch view where available, supplement with a lift/holdout test for channels attribution can't see well (like brand/offline), and be explicit about which channels you trust the attributed number for and which you don't."
+      - generic [ref=f21e90]:
+        - paragraph [ref=f21e91]:
+          - text: How do you reconcile GA4 numbers not matching your CRM or ad platform reports?
+          - generic [ref=f21e92]: General practice
+        - paragraph [ref=f21e93]: This is expected, not a bug — different attribution windows, client-side tracking loss (ad blockers, iOS ITP), and ad platforms self-reporting more generous attribution than GA4's model all cause real discrepancies. Pick one source of truth per decision and say which, rather than trying to force all three to agree.
+      - generic [ref=f21e94]:
+        - paragraph [ref=f21e95]:
+          - text: Multi-touch vs. last-touch attribution — when do you use each?
+          - generic [ref=f21e96]: Funnel.io
+        - paragraph [ref=f21e97]: Multi-touch (linear, time-decay, data-driven) is better for evaluating mid-funnel channels like content and email that warm up a prospect before the final click. Last-touch is reasonable for channels where the final decision genuinely is that channel's work, like branded paid search.
+      - generic [ref=f21e98]:
+        - paragraph [ref=f21e99]:
+          - text: What happens to GA4's attribution model when a conversion event has low volume?
+          - generic [ref=f21e100]: Insider fact
+        - generic [ref=f21e101]:
+          - generic [ref=f21e102]: Worth knowing before this comes up
+          - text: GA4 defaults to data-driven attribution (DDA), but DDA needs roughly 300–400 monthly conversions on that specific conversion event to compute reliably. Below that threshold, GA4 silently reverts to a last-click-style model with no warning in the UI — worth checking explicitly before trusting an attribution report on a lower-volume conversion.
+      - generic [ref=f21e103]:
+        - paragraph [ref=f21e104]:
+          - text: A marketing director wants to double the paid search budget — how do you evaluate whether that's the right investment?
+          - generic [ref=f21e105]: FinalRound AI
+        - paragraph [ref=f21e106]: "Check for diminishing returns first: has CAC or CPC trended up as spend increased, suggesting the channel is near-saturated? Model expected ROAS at 2x spend using the current marginal (not average) return, and propose a smaller test increase with a clear evaluation checkpoint before committing to the full doubling."
+      - generic [ref=f21e107]:
+        - paragraph [ref=f21e108]:
+          - text: How do you evaluate the effectiveness of different marketing channels in driving revenue?
+          - generic [ref=f21e109]: FinalRound AI
+        - paragraph [ref=f21e110]: "Layer three views: attributed revenue (GA4/attribution model), incremental revenue (lift test or geo holdout, if available), and efficiency (CAC, ROAS) — and say which view you trust most for which type of channel (Module 4's multi-touch guidance applies here)."
+      - generic [ref=f21e111]:
+        - paragraph [ref=f21e112]:
+          - text: How do you decide which metrics to prioritize when evaluating a marketing program?
+          - generic [ref=f21e113]: FinalRound AI
+        - paragraph [ref=f21e114]: Anchor to the business goal one level up (revenue growth? retention? efficiency?), pick 1–2 primary metrics that goal implies, and treat everything else as diagnostic, not primary — a dashboard with 15 "important" metrics has none.
+      - generic [ref=f21e115]:
+        - paragraph [ref=f21e116]:
+          - text: If we spend €10,000 on ads and generate €50,000 in revenue, is a ROAS of 5 automatically good?
+          - generic [ref=f21e117]: Case-interview pattern
+        - paragraph [ref=f21e118]: "No — ROAS ignores margin. If product margin is 15%, that €50,000 in revenue is €7,500 in gross profit against €10,000 spent: a loss, despite a \"5x\" headline number. Always ask for margin before calling a ROAS good or bad."
+      - generic [ref=f21e119]:
+        - paragraph [ref=f21e120]:
+          - text: CAC jumped 30% last month — how do you diagnose why?
+          - generic [ref=f21e121]: Common case pattern
+        - paragraph [ref=f21e122]: Decompose CAC = spend ÷ new customers. Check whether spend rose, conversions fell, or both; break it down by channel to see if it's isolated or broad; rule out a tracking break before concluding it's a real cost or conversion problem. Full framework in Section 4 of this course.
+      - generic [ref=f21e123]:
+        - paragraph [ref=f21e124]:
+          - text: Describe a marketing campaign you analyzed where the results were meaningful. What did you find, and what happened as a result?
+          - generic [ref=f21e125]: FinalRound AI
+        - paragraph [ref=f21e126]: This is a STAR prompt in disguise — see the worked model answer below with real numbers.
+      - generic [ref=f21e127]:
+        - paragraph [ref=f21e128]:
+          - text: Tell me about a time you had to explain complex data findings to a non-technical audience.
+          - generic [ref=f21e129]: FinalRound AI
+        - paragraph [ref=f21e130]: "Lead with the recommendation, not the method: \"We should shift budget from X to Y because Z\" — then offer the analysis behind it only if asked. Analysts who explain the SQL before the conclusion lose a non-technical room in the first ten seconds."
+      - generic [ref=f21e131]:
+        - paragraph [ref=f21e132]:
+          - text: How do you handle conflicting data from different sources that tell different stories?
+          - generic [ref=f21e133]: FinalRound AI
+        - paragraph [ref=f21e134]: Name the likely cause (different attribution windows, different definitions of "conversion," sampling) rather than picking whichever number is more convenient, and state which source you're treating as ground truth for this specific decision and why.
+      - generic [ref=f21e135]:
+        - paragraph [ref=f21e136]:
+          - text: Tell me about a time you collaborated cross-functionally to complete a marketing analysis.
+          - generic [ref=f21e137]: FinalRound AI
+        - paragraph [ref=f21e138]: The Marketing Manager background is a genuine advantage here — most analyst candidates have never had to get a sales or product team to change behavior based on their numbers. Use a real example of influencing without authority.
+    - heading "Sources" [level=2] [ref=f21e139]
+    - paragraph [ref=f21e140]: "Questions and the underlying facts on this page were gathered from, and can be cross-checked against:"
+    - list [ref=f21e141]:
+      - listitem [ref=f21e142]:
+        - link "FinalRound AI — 30 Marketing Analyst Interview Questions" [ref=f21e143] [cursor=pointer]:
+          - /url: https://www.finalroundai.com/blog/marketing-analyst-interview-questions
+      - listitem [ref=f21e144]:
+        - link "DataLemur — SQL for Marketing Analysts" [ref=f21e145] [cursor=pointer]:
+          - /url: https://datalemur.com/blog/sql-marketing-analyst
+        - text: (also see their "Google Ad Campaign ROAS" and "Facebook Advertiser Status" practice problems)
+      - listitem [ref=f21e146]:
+        - link "InterviewQuery — Top 28 Marketing Analytics Interview Questions" [ref=f21e147] [cursor=pointer]:
+          - /url: https://www.interviewquery.com/p/marketing-analytics-questions
+      - listitem [ref=f21e148]:
+        - link "InterviewQuery — SQL Interview Questions for Business Analysts" [ref=f21e149] [cursor=pointer]:
+          - /url: https://www.interviewquery.com/p/business-analyst-sql-questions
+      - listitem [ref=f21e150]:
+        - link "Glassdoor — Growth Marketing Analyst interview question reports" [ref=f21e151] [cursor=pointer]:
+          - /url: https://www.glassdoor.com/Interview/growth-marketing-analyst-interview-questions-SRCH_KO0,24.htm
+      - listitem [ref=f21e152]:
+        - link "DataLemur — 50 A/B Testing Interview Questions & Answers" [ref=f21e153] [cursor=pointer]:
+          - /url: https://datalemur.com/blog/ab-testing-interview-questions-and-answers
+      - listitem [ref=f21e154]:
+        - link "Funnel.io — Multi-Touch Attribution" [ref=f21e155] [cursor=pointer]:
+          - /url: https://funnel.io/blog/multi-touch-attribution
+    - generic [ref=f21e156]:
+      - link "← Module 5" [ref=f21e157] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply →" [ref=f21e158] [cursor=pointer]:
+        - /url: resume.html
+  - contentinfo [ref=f21e159]: INTERVIEW BANK · INTERVIEW-READY MARKETING ANALYST

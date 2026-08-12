@@ -16,6 +16,8 @@
     <p class="lesson-goal">Reframe what "analysis" means before touching a single tool. Marketing judgment already contains most of the reasoning an analyst uses — this module names it.</p>
   </div>
 
+  <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
+
   <h2>Start here: what "being an analyst" actually means day-to-day</h2>
   <p>Strip away the job title and an analyst does one thing on repeat: someone has a question ("why did signups drop?"), the analyst finds data that can answer it, cleans that data until it's trustworthy, looks for the pattern, draws it so someone else can see the pattern too, and recommends what to do about it. That's the whole job. Every tool in this course (Excel, SQL, Tableau, GA4, statistics) exists only to make one of those six steps faster or more rigorous.</p>
 
@@ -97,6 +99,48 @@
     <li>Rewrite three resume bullets using: <code class="inline">[analytical verb] + [what was measured] + [tool/method] + [quantified result]</code> — before learning any tool. This proves the pivot is framing first, tools second.</li>
   </ol>
 
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Prioritizing when everyone wants an analysis "by Friday"</h2>
+  <p>Once you're producing real analysis, the job shifts from "can I do this" to "what do I do first." Marketing teams generate more analysis requests than one analyst can serve — the skill is triaging them defensibly, not silently working overtime.</p>
+  <ul>
+    <li><strong>ICE scoring</strong>: Impact × Confidence ÷ Effort. Quick, good for ranking a backlog of ad-hoc requests.</li>
+    <li><strong>RICE scoring</strong>: Reach × Impact × Confidence ÷ Effort. Adds "how many people/campaigns does this touch" — better when requests vary wildly in scope.</li>
+    <li><strong>The "so what" test</strong>: before starting any analysis, write the sentence you expect to end with ("we should shift budget from X to Y"). If you can't imagine a sentence that would change a decision, the analysis isn't worth doing yet.</li>
+  </ul>
+
+  <h2>Interactive: score your backlog</h2>
+  <p>Try it on a real request you've gotten. Reach and Impact and Confidence on a 1–10 scale, Effort in person-days.</p>
+  <div class="tool-card">
+    <span class="ttag">RICE calculator</span>
+    <div class="fieldrow">
+      <div class="field"><label for="rice-reach">Reach (1–10)</label><input type="number" id="rice-reach" min="1" max="10" value="7"></div>
+      <div class="field"><label for="rice-impact">Impact (1–10)</label><input type="number" id="rice-impact" min="1" max="10" value="8"></div>
+    </div>
+    <div class="fieldrow">
+      <div class="field"><label for="rice-conf">Confidence (1–10)</label><input type="number" id="rice-conf" min="1" max="10" value="6"></div>
+      <div class="field"><label for="rice-effort">Effort (person-days)</label><input type="number" id="rice-effort" min="0.5" step="0.5" value="2"></div>
+    </div>
+    <div class="result-box" id="rice-result" style="display:block;"></div>
+  </div>
+
+  <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>The analytics maturity model — and knowing which level you're operating at</h2>
+  <p>Interviewers at the 2-year mark expect you to know where a given piece of work sits on this ladder, and to be honest about which levels you can currently deliver:</p>
+  <ol>
+    <li><strong>Descriptive</strong> — "what happened" (a dashboard, a report). Most of Modules 1–4.</li>
+    <li><strong>Diagnostic</strong> — "why it happened" (funnel breakdowns, cohort analysis, the CAC-jumped-30% case pattern).</li>
+    <li><strong>Predictive</strong> — "what will happen" (forecasting, LTV modeling — touched in Module 5's advanced tier).</li>
+    <li><strong>Prescriptive</strong> — "what to do about it" (budget reallocation recommendations backed by a test, not just a hunch).</li>
+  </ol>
+  <p>Most real marketing-analyst work lives at levels 1–2, with occasional forays into 4 when a recommendation is well-supported. Claiming level 3–4 fluency you don't have is a common overreach that gets caught fast in a technical screen — better to be precise about what you've actually done.</p>
+
+  <h2>Biases that quietly wreck an analysis</h2>
+  <div class="box">
+    <p style="margin:0"><strong>Confirmation bias</strong> — building the query to find what you already expected. Counter it by writing the "so what" sentence <em>before</em> looking at the data, then checking if the data actually supports it. &nbsp;<strong>Survivorship bias</strong> — analyzing only customers who converted/stayed, missing what churned/bounced customers looked like. &nbsp;<strong>Simpson's paradox</strong> — a trend that holds in every individual segment can reverse when segments are combined (e.g. overall conversion rate drops even though it rose in every channel, because mix shifted toward a lower-converting channel). Always check a segment breakdown before trusting an aggregate trend.</p>
+  </div>
+
   <h2>Check your understanding</h2>
   <div id="quiz-mount"></div>
 
@@ -108,6 +152,10 @@
   <div class="qa">
     <p class="q">"What's the difference between a metric and a dimension?"</p>
     <p class="a">Model answer: a metric is a number you aggregate (revenue, clicks, sessions); a dimension is a category you group or filter by (channel, region, device). Every chart or query is really "which metric, sliced by which dimension."</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How do you decide which metrics to prioritize when evaluating a marketing program?" (real, sourced — see the <a href="interview-bank.html">Interview Bank</a>)</p>
+    <p class="a">Model answer: anchor to the business goal one level up, pick 1–2 primary metrics that goal implies, treat the rest as diagnostic. A dashboard where everything is "important" has no priority at all.</p>
   </div>
 
   <div style="margin-top:32px;">
@@ -165,6 +213,18 @@
   }
   renderSorter();
 
+  function updateRice() {
+    const reach = parseFloat(document.getElementById('rice-reach').value) || 0;
+    const impact = parseFloat(document.getElementById('rice-impact').value) || 0;
+    const conf = parseFloat(document.getElementById('rice-conf').value) || 0;
+    const effort = parseFloat(document.getElementById('rice-effort').value) || 1;
+    const score = (reach * impact * conf) / effort;
+    const res = document.getElementById('rice-result');
+    res.innerHTML = `<div style="font-family:var(--mono); font-size:15px;">RICE score: <b>${score.toFixed(1)}</b></div><div style="margin-top:6px; color:var(--ink-muted);">Score requests against each other, not in isolation — a 40 next to a backlog full of 15s is your Monday morning.</div>`;
+  }
+  ['rice-reach','rice-impact','rice-conf','rice-effort'].forEach(id => document.getElementById(id).addEventListener('input', updateRice));
+  updateRice();
+
   initQuiz('quiz-mount', [
     {
       q: 'A campaign brief that defines a target audience and a goal is closest to which analytical step?',
@@ -194,6 +254,24 @@
       ],
       correct: 1,
       explain: 'Always start from the business question — pulling data first and looking for a story afterward is how misleading analysis happens.'
+    },
+    {
+      q: 'In RICE scoring, what does a very high Effort number do to the score?',
+      options: ['Increases it', 'Has no effect', 'Decreases it — Effort is the denominator', 'Doubles the Reach'],
+      correct: 2,
+      explain: 'RICE = Reach × Impact × Confidence ÷ Effort. Effort divides the score, so a high-effort request needs proportionally higher Reach/Impact/Confidence to rank well.'
+    },
+    {
+      q: 'An overall metric goes down even though it improved in every individual segment. This is:',
+      options: ['A tracking bug, always', 'Simpson\'s paradox — a mix shift toward a lower-performing segment', 'Impossible', 'Survivorship bias'],
+      correct: 1,
+      explain: 'Simpson\'s paradox: the aggregate can move opposite to every underlying segment when the segment mix shifts. Always check the breakdown before trusting the headline number.'
+    },
+    {
+      q: 'Building a forecast of next quarter\'s conversions sits at which level of analytics maturity?',
+      options: ['Descriptive', 'Diagnostic', 'Predictive', 'Prescriptive'],
+      correct: 2,
+      explain: 'Forecasting "what will happen" is predictive analytics — one level up from diagnosing why something already happened.'
     }
   ]);
 

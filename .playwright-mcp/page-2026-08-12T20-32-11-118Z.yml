@@ -1,0 +1,101 @@
+- generic [ref=f21e1]:
+  - generic [ref=f21e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f21e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f21e4]: MA COURSE
+      - generic [ref=f21e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f21e6]:
+      - link "Home" [ref=f21e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f21e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f21e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f21e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f21e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f21e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f21e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f21e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f21e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f21e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f21e17]:
+    - generic [ref=f21e18]:
+      - paragraph [ref=f21e19]: Interview Bank
+      - heading "Real Questions, Asked at This Level" [level=1] [ref=f21e20]
+      - paragraph [ref=f21e21]: Not invented practice questions — these are pulled from public interview-question aggregators (DataLemur, InterviewQuery, FinalRound AI, Glassdoor candidate reports) for Marketing Analyst / Growth Analyst roles around 1–3 years of experience, current as of August 2026. Full source list at the bottom.
+    - generic [ref=f21e22]:
+      - button "All" [ref=f21e23] [cursor=pointer]
+      - button "SQL & Technical" [active] [ref=f21e24] [cursor=pointer]
+      - button "Statistics & A/B Testing" [ref=f21e25] [cursor=pointer]
+      - button "GA4 & Attribution" [ref=f21e26] [cursor=pointer]
+      - button "Case & Business" [ref=f21e27] [cursor=pointer]
+      - button "Behavioral" [ref=f21e28] [cursor=pointer]
+    - generic [ref=f21e29]:
+      - generic [ref=f21e160]:
+        - paragraph [ref=f21e161]:
+          - text: Write a query to identify the top 3 marketing channels by ROI last quarter.
+          - generic [ref=f21e162]: InterviewQuery
+        - paragraph [ref=f21e163]: SUM(revenue - spend) or revenue/spend per channel, GROUP BY channel, ORDER BY that value DESC, LIMIT 3. Say the metric choice out loud — "ROI" is ambiguous between profit-based and ratio-based, and picking one and stating why is part of the answer.
+      - generic [ref=f21e164]:
+        - paragraph [ref=f21e165]:
+          - text: Given two dates, return one row per week between them, numbered sequentially, accounting for a start date that falls mid-week.
+          - generic [ref=f21e166]: InterviewQuery — Business Analyst SQL
+        - paragraph [ref=f21e167]: This is a "date spine" problem. Generate a sequence of dates (a recursive CTE, or a numbers/calendar table), bucket each into a week using a difference from the start date divided by 7, then aggregate. The trap is assuming every week starts on the same weekday as the data — it starts from your given start date.
+      - generic [ref=f21e168]:
+        - paragraph [ref=f21e169]:
+          - text: Compute a frequency table of a customer attribute (e.g. segment) that requires two JOINs, with correct GROUP BY / ORDER BY and NULL handling.
+          - generic [ref=f21e170]: InterviewQuery
+        - paragraph [ref=f21e171]: JOIN the two lookup tables first, then GROUP BY the attribute, COUNT(*), and explicitly decide what happens to NULLs — do they get their own bucket ("Unknown") or get filtered? Silently dropping NULLs from a marketing segmentation query is a common real mistake that skews the read.
+      - generic [ref=f21e172]:
+        - paragraph [ref=f21e173]:
+          - text: How would you use SQL to analyze customer segmentation or campaign performance?
+          - generic [ref=f21e174]: DataLemur
+        - paragraph [ref=f21e175]: "Name the grain first (one row = one customer or one order?), then walk the RFM pattern from Module 2/Portfolio Project 1: GROUP BY customer, aggregate recency/frequency/monetary, then bucket with CASE WHEN."
+      - generic [ref=f21e176]:
+        - paragraph [ref=f21e177]:
+          - text: How do you handle missing data or outliers when using SQL for marketing analysis?
+          - generic [ref=f21e178]: DataLemur
+        - paragraph [ref=f21e179]: "Missing: decide COALESCE-to-default vs. exclude vs. flag, and say which you picked and why. Outliers: don't silently delete them — a $50,000 single order might be real (an enterprise deal) or a data error; check before excluding, and if you exclude, say so in the analysis, not just in the query."
+      - generic [ref=f21e180]:
+        - paragraph [ref=f21e181]:
+          - text: Practice problems worth doing beyond this course
+          - generic [ref=f21e182]: DataLemur
+        - paragraph [ref=f21e183]: DataLemur's "Google Ad Campaign ROAS" and "Facebook Advertiser Status" problems are built specifically around marketing schemas — good next step after Module 2's live SQL runner.
+    - heading "Sources" [level=2] [ref=f21e139]
+    - paragraph [ref=f21e140]: "Questions and the underlying facts on this page were gathered from, and can be cross-checked against:"
+    - list [ref=f21e141]:
+      - listitem [ref=f21e142]:
+        - link "FinalRound AI — 30 Marketing Analyst Interview Questions" [ref=f21e143] [cursor=pointer]:
+          - /url: https://www.finalroundai.com/blog/marketing-analyst-interview-questions
+      - listitem [ref=f21e144]:
+        - link "DataLemur — SQL for Marketing Analysts" [ref=f21e145] [cursor=pointer]:
+          - /url: https://datalemur.com/blog/sql-marketing-analyst
+        - text: (also see their "Google Ad Campaign ROAS" and "Facebook Advertiser Status" practice problems)
+      - listitem [ref=f21e146]:
+        - link "InterviewQuery — Top 28 Marketing Analytics Interview Questions" [ref=f21e147] [cursor=pointer]:
+          - /url: https://www.interviewquery.com/p/marketing-analytics-questions
+      - listitem [ref=f21e148]:
+        - link "InterviewQuery — SQL Interview Questions for Business Analysts" [ref=f21e149] [cursor=pointer]:
+          - /url: https://www.interviewquery.com/p/business-analyst-sql-questions
+      - listitem [ref=f21e150]:
+        - link "Glassdoor — Growth Marketing Analyst interview question reports" [ref=f21e151] [cursor=pointer]:
+          - /url: https://www.glassdoor.com/Interview/growth-marketing-analyst-interview-questions-SRCH_KO0,24.htm
+      - listitem [ref=f21e152]:
+        - link "DataLemur — 50 A/B Testing Interview Questions & Answers" [ref=f21e153] [cursor=pointer]:
+          - /url: https://datalemur.com/blog/ab-testing-interview-questions-and-answers
+      - listitem [ref=f21e154]:
+        - link "Funnel.io — Multi-Touch Attribution" [ref=f21e155] [cursor=pointer]:
+          - /url: https://funnel.io/blog/multi-touch-attribution
+    - generic [ref=f21e156]:
+      - link "← Module 5" [ref=f21e157] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply →" [ref=f21e158] [cursor=pointer]:
+        - /url: resume.html
+  - contentinfo [ref=f21e159]: INTERVIEW BANK · INTERVIEW-READY MARKETING ANALYST

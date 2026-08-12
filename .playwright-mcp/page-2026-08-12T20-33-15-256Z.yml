@@ -1,0 +1,261 @@
+- generic [active] [ref=f26e1]:
+  - generic [ref=f26e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f26e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f26e4]: MA COURSE
+      - generic [ref=f26e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f26e6]:
+      - link "Home" [ref=f26e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f26e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f26e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f26e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f26e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f26e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f26e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f26e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f26e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f26e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f26e17]:
+    - generic [ref=f26e18]:
+      - paragraph [ref=f26e19]: Module 4
+      - heading "Web & Digital Analytics" [level=1] [ref=f26e20]
+      - paragraph [ref=f26e21]: GA4, Google Tag Manager, and a UTM naming convention that doesn't fragment your reporting six weeks after launch.
+    - generic [ref=f26e22]: Beginner
+    - 'heading "Start here: three tools, one pipeline" [level=2] [ref=f26e25]'
+    - paragraph [ref=f26e26]: GA4, GTM, and UTMs are three different things that get confused constantly. A UTM is a tag on a URL (data about where a click came from). GTM is the deployment mechanism (it fires tracking code without an engineer touching the site). GA4 is where the data lands and gets reported. One flows into the next — see the pipeline below.
+    - generic [ref=f26e27]:
+      - paragraph [ref=f26e28]: "tracking pipeline: click to dashboard"
+      - 'img "Pipeline: UTM-tagged click leads to GTM tag fire, then GA4 event, which branches to GA4 UI reports and BigQuery export, and BigQuery feeds a Tableau or Power BI dashboard" [ref=f26e29]':
+        - generic [ref=f26e33]:
+          - generic [ref=f26e35]: Click (UTM tagged)
+          - generic [ref=f26e37]: GTM fires tag on trigger
+          - generic [ref=f26e39]: GA4 receives event
+          - generic [ref=f26e40]: (event + parameters)
+          - generic [ref=f26e42]: GA4 UI reports
+          - generic [ref=f26e43]: quick checks
+          - generic [ref=f26e45]: BigQuery export
+          - generic [ref=f26e46]: SQL analysis (Module 2)
+          - generic [ref=f26e48]: Tableau / Power BI (Module 3)
+    - heading "Core concepts" [level=2] [ref=f26e49]
+    - list [ref=f26e50]:
+      - listitem [ref=f26e51]:
+        - strong [ref=f26e52]: GA4's event model
+        - text: ": everything is an event with parameters (not session-based, like the old Universal Analytics)."
+      - listitem [ref=f26e53]:
+        - strong [ref=f26e54]: GTM
+        - text: ": tags, triggers, variables — how tracking gets deployed without engineering."
+      - listitem [ref=f26e55]:
+        - strong [ref=f26e56]: UTM architecture
+        - text: ": a consistent naming convention across source/medium/campaign so reporting doesn't fragment."
+      - listitem [ref=f26e57]:
+        - strong [ref=f26e58]: Key events
+        - text: (conversions), funnel/exploration reports, and DebugView for QA.
+    - 'heading "Interactive: UTM builder" [level=2] [ref=f26e59]'
+    - paragraph [ref=f26e60]: "Build a campaign URL and get live feedback against the naming-convention rules a real analytics team would enforce: lowercase, no spaces, consistent separators."
+    - generic [ref=f26e61]:
+      - generic [ref=f26e62]: Live builder
+      - generic [ref=f26e63]:
+        - generic [ref=f26e64]:
+          - generic [ref=f26e65]: Landing page URL
+          - textbox "Landing page URL" [ref=f26e66]: https://example.com/spring-sale
+        - generic [ref=f26e67]:
+          - generic [ref=f26e68]: utm_source
+          - textbox "utm_source" [ref=f26e69]:
+            - /placeholder: e.g. facebook
+      - generic [ref=f26e70]:
+        - generic [ref=f26e71]:
+          - generic [ref=f26e72]: utm_medium
+          - textbox "utm_medium" [ref=f26e73]:
+            - /placeholder: e.g. paid_social
+        - generic [ref=f26e74]:
+          - generic [ref=f26e75]: utm_campaign
+          - textbox "utm_campaign" [ref=f26e76]:
+            - /placeholder: e.g. spring_sale_2026
+      - generic [ref=f26e77]:
+        - generic [ref=f26e78]:
+          - generic [ref=f26e79]: utm_content (optional)
+          - textbox "utm_content (optional)" [ref=f26e80]:
+            - /placeholder: e.g. carousel_ad_1
+        - generic [ref=f26e81]:
+          - generic [ref=f26e82]: utm_term (optional, paid search)
+          - textbox "utm_term (optional, paid search)" [ref=f26e83]:
+            - /placeholder: e.g. marketing_analytics_course
+      - generic [ref=f26e84]: https://example.com/spring-sale
+    - heading "Exercises" [level=2] [ref=f26e85]
+    - list [ref=f26e86]:
+      - listitem [ref=f26e87]: Explore Google's public GA4 demo property ("Google Merchandise Store") and find the Explorations funnel report.
+      - listitem [ref=f26e88]: Design a full UTM naming convention doc for a hypothetical 3-channel launch (paid social, email, paid search) — write it down, don't just build one URL.
+      - listitem [ref=f26e89]: In GTM's free sandbox mode, configure one tag + trigger for a button-click event.
+      - listitem [ref=f26e90]:
+        - text: Query the public BigQuery GA4 sample dataset (
+        - code [ref=f26e91]: bigquery-public-data.ga4_obfuscated_sample_ecommerce
+        - text: ) with Module 2 SQL skills — this step is what most career-changers skip, and it's the differentiator.
+    - generic [ref=f26e92]: Intermediate
+    - 'heading "Beyond pageviews: tracking what actually matters to the business" [level=2] [ref=f26e95]'
+    - list [ref=f26e96]:
+      - listitem [ref=f26e97]:
+        - strong [ref=f26e98]: Enhanced ecommerce events
+        - text: ":"
+        - code [ref=f26e99]: view_item
+        - text: ","
+        - code [ref=f26e100]: add_to_cart
+        - text: ","
+        - code [ref=f26e101]: begin_checkout
+        - text: ","
+        - code [ref=f26e102]: purchase
+        - text: — GA4's built-in vocabulary for a purchase funnel, so you're not inventing custom event names for standard behavior.
+      - listitem [ref=f26e103]:
+        - strong [ref=f26e104]: Custom dimensions & metrics
+        - text: ": GA4 doesn't know your business's specific concepts (loyalty tier, lead source) until you register them as custom dimensions — otherwise that data arrives as an event parameter but never becomes a usable report column."
+      - listitem [ref=f26e105]:
+        - strong [ref=f26e106]: Audiences
+        - text: ": a saved segment definition (e.g. \"added to cart but didn't purchase in 7 days\") reusable across reports and exportable to Google Ads for remarketing — the bridge between analytics and media buying."
+      - listitem [ref=f26e107]:
+        - strong [ref=f26e108]: GA4 + Google Ads linking
+        - text: ": without this link, Ads campaign performance and GA4 on-site behavior live in two disconnected systems — linking is what makes an \"assisted conversions\" or full-funnel view possible at all."
+      - listitem [ref=f26e109]:
+        - strong [ref=f26e110]: Consent Mode
+        - text: ": when a visitor declines cookies, GA4 models (statistically estimates) the missing conversions rather than showing zero — worth knowing this exists so a sudden regional dip doesn't get mis-diagnosed as a real drop."
+    - generic [ref=f26e111]: Advanced
+    - heading "Attribution modeling & where the real edge cases live" [level=2] [ref=f26e114]
+    - generic [ref=f26e115]:
+      - generic [ref=f26e116]: Worth knowing before this comes up
+      - text: GA4 defaults to data-driven attribution (DDA), but DDA needs roughly
+      - strong [ref=f26e117]: 300–400 monthly conversions
+      - text: on a specific conversion event to compute reliably. Below that threshold, GA4 silently reverts to a last-click-style model — with no warning anywhere in the UI. On a lower-volume conversion event, check this explicitly before trusting an attribution report.
+    - list [ref=f26e118]:
+      - listitem [ref=f26e119]:
+        - strong [ref=f26e120]: Multi-touch vs. last-touch
+        - text: ": multi-touch models (linear, time-decay, data-driven) better credit mid-funnel channels like content and email that warm a prospect up before the final click; last-touch is reasonable for channels where the final decision genuinely is that channel's work, like branded paid search."
+      - listitem [ref=f26e121]:
+        - strong [ref=f26e122]: Server-side GTM
+        - text: ": instead of the browser sending tracking data directly to every vendor (Google, Meta, etc.), the browser sends it once to a server you control, which forwards it onward — improves data accuracy against ad blockers and gives you a single point to filter/enrich data before it leaves your system. You won't set this up as a marketing analyst, but you should recognize the term when a data/eng team mentions it."
+      - listitem [ref=f26e123]:
+        - strong [ref=f26e124]: Cross-domain tracking
+        - text: ": if a checkout lives on a different domain than the main site, GA4 needs to be explicitly configured to pass the client ID across that domain boundary, or every checkout session gets counted as two separate sessions from two \"different\" visitors."
+      - listitem [ref=f26e125]:
+        - strong [ref=f26e126]: Reconciling GA4 vs. CRM vs. ad platform numbers
+        - text: ": these will never match exactly, and that's expected — different attribution windows, client-side tracking loss (ad blockers, iOS ITP/Safari ITP), and ad platforms self-reporting more generous attribution than GA4's model all contribute. Pick one source of truth per decision and say which, rather than trying to force all three into agreement."
+    - heading "Check your understanding" [level=2] [ref=f26e127]
+    - generic [ref=f26e129]:
+      - generic [ref=f26e130]:
+        - paragraph [ref=f26e131]:
+          - generic [ref=f26e132]: Q1
+          - text: "GA4's data model is fundamentally organized around:"
+        - generic [ref=f26e133]:
+          - generic [ref=f26e134] [cursor=pointer]:
+            - radio "Sessions" [ref=f26e135]
+            - generic [ref=f26e136]: Sessions
+          - generic [ref=f26e137] [cursor=pointer]:
+            - radio "Events" [ref=f26e138]
+            - generic [ref=f26e139]: Events
+          - generic [ref=f26e140] [cursor=pointer]:
+            - radio "Pageviews only" [ref=f26e141]
+            - generic [ref=f26e142]: Pageviews only
+          - generic [ref=f26e143] [cursor=pointer]:
+            - radio "Cookies" [ref=f26e144]
+            - generic [ref=f26e145]: Cookies
+      - generic [ref=f26e146]:
+        - paragraph [ref=f26e147]:
+          - generic [ref=f26e148]: Q2
+          - text: Which utm_ parameter would you typically use for a specific ad creative variant (e.g. "carousel_ad_1")?
+        - generic [ref=f26e149]:
+          - generic [ref=f26e150] [cursor=pointer]:
+            - radio "utm_source" [ref=f26e151]
+            - generic [ref=f26e152]: utm_source
+          - generic [ref=f26e153] [cursor=pointer]:
+            - radio "utm_medium" [ref=f26e154]
+            - generic [ref=f26e155]: utm_medium
+          - generic [ref=f26e156] [cursor=pointer]:
+            - radio "utm_content" [ref=f26e157]
+            - generic [ref=f26e158]: utm_content
+          - generic [ref=f26e159] [cursor=pointer]:
+            - radio "utm_campaign" [ref=f26e160]
+            - generic [ref=f26e161]: utm_campaign
+      - generic [ref=f26e162]:
+        - paragraph [ref=f26e163]:
+          - generic [ref=f26e164]: Q3
+          - text: Why does UTM casing consistency (e.g. always "email", never "Email") matter?
+        - generic [ref=f26e165]:
+          - generic [ref=f26e166] [cursor=pointer]:
+            - radio "It doesn't, GA4 normalizes case automatically" [ref=f26e167]
+            - generic [ref=f26e168]: It doesn't, GA4 normalizes case automatically
+          - generic [ref=f26e169] [cursor=pointer]:
+            - radio "Inconsistent casing creates separate rows in reports, fragmenting a single channel's data" [ref=f26e170]
+            - generic [ref=f26e171]: Inconsistent casing creates separate rows in reports, fragmenting a single channel's data
+          - generic [ref=f26e172] [cursor=pointer]:
+            - radio "It affects page load speed" [ref=f26e173]
+            - generic [ref=f26e174]: It affects page load speed
+          - generic [ref=f26e175] [cursor=pointer]:
+            - radio "It's only a stylistic preference" [ref=f26e176]
+            - generic [ref=f26e177]: It's only a stylistic preference
+      - generic [ref=f26e178]:
+        - paragraph [ref=f26e179]:
+          - generic [ref=f26e180]: Q4
+          - text: A low-volume conversion event's GA4 attribution report looks suspiciously last-click-heavy. Most likely cause?
+        - generic [ref=f26e181]:
+          - generic [ref=f26e182] [cursor=pointer]:
+            - radio "GA4 is broken" [ref=f26e183]
+            - generic [ref=f26e184]: GA4 is broken
+          - generic [ref=f26e185] [cursor=pointer]:
+            - radio "The conversion doesn't have enough monthly volume (~300-400) for data-driven attribution, so GA4 silently fell back to a last-click-style model" [ref=f26e186]
+            - generic [ref=f26e187]: The conversion doesn't have enough monthly volume (~300-400) for data-driven attribution, so GA4 silently fell back to a last-click-style model
+          - generic [ref=f26e188] [cursor=pointer]:
+            - radio "Consent Mode is disabled" [ref=f26e189]
+            - generic [ref=f26e190]: Consent Mode is disabled
+          - generic [ref=f26e191] [cursor=pointer]:
+            - radio "The UTMs are wrong" [ref=f26e192]
+            - generic [ref=f26e193]: The UTMs are wrong
+      - generic [ref=f26e194]:
+        - paragraph [ref=f26e195]:
+          - generic [ref=f26e196]: Q5
+          - text: Why will GA4, your CRM, and your ad platform's dashboard rarely show identical numbers for the "same" metric?
+        - generic [ref=f26e197]:
+          - generic [ref=f26e198] [cursor=pointer]:
+            - radio "One of them is always wrong and should be ignored" [ref=f26e199]
+            - generic [ref=f26e200]: One of them is always wrong and should be ignored
+          - generic [ref=f26e201] [cursor=pointer]:
+            - radio "Different attribution windows, tracking loss, and self-reported ad-platform attribution are all expected sources of discrepancy" [ref=f26e202]
+            - generic [ref=f26e203]: Different attribution windows, tracking loss, and self-reported ad-platform attribution are all expected sources of discrepancy
+          - generic [ref=f26e204] [cursor=pointer]:
+            - radio "This never actually happens in practice" [ref=f26e205]
+            - generic [ref=f26e206]: This never actually happens in practice
+          - generic [ref=f26e207] [cursor=pointer]:
+            - radio "Currency conversion errors" [ref=f26e208]
+            - generic [ref=f26e209]: Currency conversion errors
+      - generic [ref=f26e210]:
+        - generic [ref=f26e211]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f26e212] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f26e213]
+    - generic [ref=f26e214]:
+      - paragraph [ref=f26e215]: "\"How would you set up UTM tracking for a new campaign launch across 3 channels?\""
+      - paragraph [ref=f26e216]: "Model answer: agree on a naming convention doc first (lowercase, underscores, a fixed list of medium values) before anyone builds a single link — most attribution reporting breaks not from missing UTMs but from inconsistent ones (\"Email\" vs \"email\" vs \"e-mail\" become three different rows)."
+    - generic [ref=f26e217]:
+      - paragraph [ref=f26e218]: "\"What's the difference between a GA4 event and a key event (conversion)?\""
+      - paragraph [ref=f26e219]: "Model answer: every interaction is an event (page_view, scroll, click); a key event is an event you've explicitly marked as meaningful to the business (purchase, form submission) — the subset GA4 optimizes and reports conversions against."
+    - generic [ref=f26e220]:
+      - paragraph [ref=f26e221]: "\"A campaign's traffic isn't showing up in GA4 — how do you debug it?\""
+      - paragraph [ref=f26e222]: "Model answer, in order: (1) check the UTM parameters are actually present and correctly formatted on the live URL, (2) check for an ad blocker or consent-mode issue suppressing the tag, (3) open GTM's Preview mode / GA4 DebugView to confirm the trigger is firing at all before assuming it's a reporting delay."
+    - generic [ref=f26e223]:
+      - paragraph [ref=f26e224]: "\"How would you build a marketing attribution model when you have incomplete data across channels?\" (real, sourced)"
+      - paragraph [ref=f26e225]: "Model answer: state the limitation up front, then triangulate — use GA4's multi-touch view where available, supplement with a lift/holdout test for channels attribution can't see well (brand, offline), and be explicit about which channels' numbers you trust and which you don't."
+    - generic [ref=f26e226]:
+      - paragraph [ref=f26e227]: "\"How do you reconcile GA4 numbers that don't match your CRM or ad platform reports?\" (real, sourced)"
+      - paragraph [ref=f26e228]: "Model answer: this is expected, not a bug — different attribution windows, client-side tracking loss, and ad platforms self-reporting generously all contribute. Pick a source of truth per decision and say which, rather than trying to make all three numbers agree."
+    - button "Mark this module complete" [ref=f26e230] [cursor=pointer]
+    - generic [ref=f26e231]:
+      - link "← Module 3" [ref=f26e232] [cursor=pointer]:
+        - /url: module-3.html
+      - link "Module 5 — Metrics & A/B Testing →" [ref=f26e233] [cursor=pointer]:
+        - /url: module-5.html
+  - contentinfo [ref=f26e234]: MODULE 4 · WEB & DIGITAL ANALYTICS

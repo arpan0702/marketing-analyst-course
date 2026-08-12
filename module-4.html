@@ -16,6 +16,8 @@
     <p class="lesson-goal">GA4, Google Tag Manager, and a UTM naming convention that doesn't fragment your reporting six weeks after launch.</p>
   </div>
 
+  <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
+
   <h2>Start here: three tools, one pipeline</h2>
   <p>GA4, GTM, and UTMs are three different things that get confused constantly. A UTM is a tag on a URL (data about where a click came from). GTM is the deployment mechanism (it fires tracking code without an engineer touching the site). GA4 is where the data lands and gets reported. One flows into the next — see the pipeline below.</p>
 
@@ -90,6 +92,33 @@
     <li>Query the public BigQuery GA4 sample dataset (<code class="inline">bigquery-public-data.ga4_obfuscated_sample_ecommerce</code>) with Module 2 SQL skills — this step is what most career-changers skip, and it's the differentiator.</li>
   </ol>
 
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Beyond pageviews: tracking what actually matters to the business</h2>
+  <ul>
+    <li><strong>Enhanced ecommerce events</strong>: <code class="inline">view_item</code>, <code class="inline">add_to_cart</code>, <code class="inline">begin_checkout</code>, <code class="inline">purchase</code> — GA4's built-in vocabulary for a purchase funnel, so you're not inventing custom event names for standard behavior.</li>
+    <li><strong>Custom dimensions &amp; metrics</strong>: GA4 doesn't know your business's specific concepts (loyalty tier, lead source) until you register them as custom dimensions — otherwise that data arrives as an event parameter but never becomes a usable report column.</li>
+    <li><strong>Audiences</strong>: a saved segment definition (e.g. "added to cart but didn't purchase in 7 days") reusable across reports and exportable to Google Ads for remarketing — the bridge between analytics and media buying.</li>
+    <li><strong>GA4 + Google Ads linking</strong>: without this link, Ads campaign performance and GA4 on-site behavior live in two disconnected systems — linking is what makes an "assisted conversions" or full-funnel view possible at all.</li>
+    <li><strong>Consent Mode</strong>: when a visitor declines cookies, GA4 models (statistically estimates) the missing conversions rather than showing zero — worth knowing this exists so a sudden regional dip doesn't get mis-diagnosed as a real drop.</li>
+  </ul>
+
+  <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>Attribution modeling &amp; where the real edge cases live</h2>
+
+  <div class="fact-callout">
+    <b>Worth knowing before this comes up</b>
+    GA4 defaults to data-driven attribution (DDA), but DDA needs roughly <strong>300–400 monthly conversions</strong> on a specific conversion event to compute reliably. Below that threshold, GA4 silently reverts to a last-click-style model — with no warning anywhere in the UI. On a lower-volume conversion event, check this explicitly before trusting an attribution report.
+  </div>
+
+  <ul>
+    <li><strong>Multi-touch vs. last-touch</strong>: multi-touch models (linear, time-decay, data-driven) better credit mid-funnel channels like content and email that warm a prospect up before the final click; last-touch is reasonable for channels where the final decision genuinely is that channel's work, like branded paid search.</li>
+    <li><strong>Server-side GTM</strong>: instead of the browser sending tracking data directly to every vendor (Google, Meta, etc.), the browser sends it once to a server you control, which forwards it onward — improves data accuracy against ad blockers and gives you a single point to filter/enrich data before it leaves your system. You won't set this up as a marketing analyst, but you should recognize the term when a data/eng team mentions it.</li>
+    <li><strong>Cross-domain tracking</strong>: if a checkout lives on a different domain than the main site, GA4 needs to be explicitly configured to pass the client ID across that domain boundary, or every checkout session gets counted as two separate sessions from two "different" visitors.</li>
+    <li><strong>Reconciling GA4 vs. CRM vs. ad platform numbers</strong>: these will never match exactly, and that's expected — different attribution windows, client-side tracking loss (ad blockers, iOS ITP/Safari ITP), and ad platforms self-reporting more generous attribution than GA4's model all contribute. Pick one source of truth per decision and say which, rather than trying to force all three into agreement.</li>
+  </ul>
+
   <h2>Check your understanding</h2>
   <div id="quiz-mount"></div>
 
@@ -105,6 +134,14 @@
   <div class="qa">
     <p class="q">"A campaign's traffic isn't showing up in GA4 — how do you debug it?"</p>
     <p class="a">Model answer, in order: (1) check the UTM parameters are actually present and correctly formatted on the live URL, (2) check for an ad blocker or consent-mode issue suppressing the tag, (3) open GTM's Preview mode / GA4 DebugView to confirm the trigger is firing at all before assuming it's a reporting delay.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How would you build a marketing attribution model when you have incomplete data across channels?" (real, sourced)</p>
+    <p class="a">Model answer: state the limitation up front, then triangulate — use GA4's multi-touch view where available, supplement with a lift/holdout test for channels attribution can't see well (brand, offline), and be explicit about which channels' numbers you trust and which you don't.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How do you reconcile GA4 numbers that don't match your CRM or ad platform reports?" (real, sourced)</p>
+    <p class="a">Model answer: this is expected, not a bug — different attribution windows, client-side tracking loss, and ad platforms self-reporting generously all contribute. Pick a source of truth per decision and say which, rather than trying to make all three numbers agree.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
@@ -179,6 +216,28 @@
       ],
       correct: 1,
       explain: 'GA4 treats "Email" and "email" as different dimension values — the channel\'s true performance ends up split across rows.'
+    },
+    {
+      q: 'A low-volume conversion event\'s GA4 attribution report looks suspiciously last-click-heavy. Most likely cause?',
+      options: [
+        'GA4 is broken',
+        'The conversion doesn\'t have enough monthly volume (~300-400) for data-driven attribution, so GA4 silently fell back to a last-click-style model',
+        'Consent Mode is disabled',
+        'The UTMs are wrong'
+      ],
+      correct: 1,
+      explain: 'This is a real, easy-to-miss GA4 behavior — worth checking conversion volume before trusting an attribution breakdown on a lower-traffic event.'
+    },
+    {
+      q: 'Why will GA4, your CRM, and your ad platform\'s dashboard rarely show identical numbers for the "same" metric?',
+      options: [
+        'One of them is always wrong and should be ignored',
+        'Different attribution windows, tracking loss, and self-reported ad-platform attribution are all expected sources of discrepancy',
+        'This never actually happens in practice',
+        'Currency conversion errors'
+      ],
+      correct: 1,
+      explain: 'Treat discrepancy as the default, not a red flag — the skill is picking one source of truth per decision and explaining why, not forcing three systems to agree.'
     }
   ]);
 

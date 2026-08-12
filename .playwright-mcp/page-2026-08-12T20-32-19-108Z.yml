@@ -1,0 +1,316 @@
+- generic [active] [ref=f22e1]:
+  - generic [ref=f22e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f22e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f22e4]: MA COURSE
+      - generic [ref=f22e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f22e6]:
+      - link "Home" [ref=f22e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f22e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f22e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f22e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f22e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f22e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f22e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f22e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f22e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f22e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f22e17]:
+    - generic [ref=f22e18]:
+      - paragraph [ref=f22e19]: Module 0
+      - heading "The Transition Mindset & Analytics Foundations" [level=1] [ref=f22e20]
+      - paragraph [ref=f22e21]: Reframe what "analysis" means before touching a single tool. Marketing judgment already contains most of the reasoning an analyst uses — this module names it.
+    - generic [ref=f22e22]: Beginner
+    - 'heading "Start here: what \"being an analyst\" actually means day-to-day" [level=2] [ref=f22e25]'
+    - paragraph [ref=f22e26]: "Strip away the job title and an analyst does one thing on repeat: someone has a question (\"why did signups drop?\"), the analyst finds data that can answer it, cleans that data until it's trustworthy, looks for the pattern, draws it so someone else can see the pattern too, and recommends what to do about it. That's the whole job. Every tool in this course (Excel, SQL, Tableau, GA4, statistics) exists only to make one of those six steps faster or more rigorous."
+    - heading "Core concepts" [level=2] [ref=f22e27]
+    - list [ref=f22e28]:
+      - listitem [ref=f22e29]:
+        - text: "The analytics workflow:"
+        - strong [ref=f22e30]: question → data → clean → analyze → visualize → recommend.
+      - listitem [ref=f22e31]: "Vocabulary shift: \"metric\" (a number, like clicks) vs. \"dimension\" (a category, like channel), \"grain\" (what one row represents), \"hypothesis,\" \"confidence.\""
+      - listitem [ref=f22e32]: Every marketing skill has an analytical shadow — see the map below.
+    - generic [ref=f22e33]:
+      - paragraph [ref=f22e34]: the workflow loop
+      - 'img "Analytics workflow loop: question, data, clean, analyze, visualize, recommend, back to question" [ref=f22e35]':
+        - generic [ref=f22e37]: stakeholder acts on the recommendation → a new question forms
+        - generic [ref=f22e38]:
+          - generic [ref=f22e39]: QUESTION
+          - generic [ref=f22e42]: DATA
+          - generic [ref=f22e45]: CLEAN
+          - generic [ref=f22e48]: ANALYZE
+          - generic [ref=f22e51]: VISUALIZE
+          - generic [ref=f22e54]: RECOMMEND
+    - 'heading "Skill map: what she already does → what it''s called" [level=3] [ref=f22e57]'
+    - paragraph [ref=f22e59]:
+      - strong [ref=f22e60]: Campaign brief
+      - text: → hypothesis + success metric ·
+      - strong [ref=f22e61]: Audience segments
+      - text: → SQL
+      - code [ref=f22e62]: GROUP BY
+      - text: / clustering ·
+      - strong [ref=f22e63]: Journey funnel
+      - text: → conversion & drop-off analysis ·
+      - strong [ref=f22e64]: Subject line testing
+      - text: → hypothesis testing ·
+      - strong [ref=f22e65]: Budget justification
+      - text: → ROI / attribution reasoning
+    - 'heading "Interactive: Metric or Dimension?" [level=2] [ref=f22e66]'
+    - paragraph [ref=f22e67]: Marketing terms, sorted fast. This is the single most common confusion for people new to analytics vocabulary — get it automatic now.
+    - generic [ref=f22e68]:
+      - generic [ref=f22e69]: Sorting drill
+      - generic [ref=f22e70]:
+        - generic [ref=f22e71]:
+          - generic [ref=f22e72]: Channel
+          - generic [ref=f22e73]:
+            - button "Dimension" [ref=f22e74] [cursor=pointer]
+            - button "Metric" [ref=f22e75] [cursor=pointer]
+        - generic [ref=f22e76]:
+          - generic [ref=f22e77]: Revenue
+          - generic [ref=f22e78]:
+            - button "Dimension" [ref=f22e79] [cursor=pointer]
+            - button "Metric" [ref=f22e80] [cursor=pointer]
+        - generic [ref=f22e81]:
+          - generic [ref=f22e82]: Campaign name
+          - generic [ref=f22e83]:
+            - button "Dimension" [ref=f22e84] [cursor=pointer]
+            - button "Metric" [ref=f22e85] [cursor=pointer]
+        - generic [ref=f22e86]:
+          - generic [ref=f22e87]: Click-through rate
+          - generic [ref=f22e88]:
+            - button "Dimension" [ref=f22e89] [cursor=pointer]
+            - button "Metric" [ref=f22e90] [cursor=pointer]
+        - generic [ref=f22e91]:
+          - generic [ref=f22e92]: Device type
+          - generic [ref=f22e93]:
+            - button "Dimension" [ref=f22e94] [cursor=pointer]
+            - button "Metric" [ref=f22e95] [cursor=pointer]
+        - generic [ref=f22e96]:
+          - generic [ref=f22e97]: Conversions
+          - generic [ref=f22e98]:
+            - button "Dimension" [ref=f22e99] [cursor=pointer]
+            - button "Metric" [ref=f22e100] [cursor=pointer]
+    - heading "Exercises (do these before moving on)" [level=2] [ref=f22e101]
+    - list [ref=f22e102]:
+      - listitem [ref=f22e103]: Pick one past campaign. Write the question you were actually trying to answer with its performance data, in one sentence.
+      - listitem [ref=f22e104]: List every metric you currently pull in your job. Label each a dimension or a metric.
+      - listitem [ref=f22e105]:
+        - text: "Rewrite three resume bullets using:"
+        - code [ref=f22e106]: "[analytical verb] + [what was measured] + [tool/method] + [quantified result]"
+        - text: — before learning any tool. This proves the pivot is framing first, tools second.
+    - generic [ref=f22e107]: Intermediate
+    - heading "Prioritizing when everyone wants an analysis \"by Friday\"" [level=2] [ref=f22e110]
+    - paragraph [ref=f22e111]: Once you're producing real analysis, the job shifts from "can I do this" to "what do I do first." Marketing teams generate more analysis requests than one analyst can serve — the skill is triaging them defensibly, not silently working overtime.
+    - list [ref=f22e112]:
+      - listitem [ref=f22e113]:
+        - strong [ref=f22e114]: ICE scoring
+        - text: ": Impact × Confidence ÷ Effort. Quick, good for ranking a backlog of ad-hoc requests."
+      - listitem [ref=f22e115]:
+        - strong [ref=f22e116]: RICE scoring
+        - text: ": Reach × Impact × Confidence ÷ Effort. Adds \"how many people/campaigns does this touch\" — better when requests vary wildly in scope."
+      - listitem [ref=f22e117]:
+        - strong [ref=f22e118]: The "so what" test
+        - text: ": before starting any analysis, write the sentence you expect to end with (\"we should shift budget from X to Y\"). If you can't imagine a sentence that would change a decision, the analysis isn't worth doing yet."
+    - 'heading "Interactive: score your backlog" [level=2] [ref=f22e119]'
+    - paragraph [ref=f22e120]: Try it on a real request you've gotten. Reach and Impact and Confidence on a 1–10 scale, Effort in person-days.
+    - generic [ref=f22e121]:
+      - generic [ref=f22e122]: RICE calculator
+      - generic [ref=f22e123]:
+        - generic [ref=f22e124]:
+          - generic [ref=f22e125]: Reach (1–10)
+          - spinbutton "Reach (1–10)" [ref=f22e126]: "7"
+        - generic [ref=f22e127]:
+          - generic [ref=f22e128]: Impact (1–10)
+          - spinbutton "Impact (1–10)" [ref=f22e129]: "8"
+      - generic [ref=f22e130]:
+        - generic [ref=f22e131]:
+          - generic [ref=f22e132]: Confidence (1–10)
+          - spinbutton "Confidence (1–10)" [ref=f22e133]: "6"
+        - generic [ref=f22e134]:
+          - generic [ref=f22e135]: Effort (person-days)
+          - spinbutton "Effort (person-days)" [ref=f22e136]: "2"
+      - generic [ref=f22e137]:
+        - generic [ref=f22e138]: "RICE score: 168.0"
+        - generic [ref=f22e139]: Score requests against each other, not in isolation — a 40 next to a backlog full of 15s is your Monday morning.
+    - generic [ref=f22e140]: Advanced
+    - heading "The analytics maturity model — and knowing which level you're operating at" [level=2] [ref=f22e143]
+    - paragraph [ref=f22e144]: "Interviewers at the 2-year mark expect you to know where a given piece of work sits on this ladder, and to be honest about which levels you can currently deliver:"
+    - list [ref=f22e145]:
+      - listitem [ref=f22e146]:
+        - strong [ref=f22e147]: Descriptive
+        - text: — "what happened" (a dashboard, a report). Most of Modules 1–4.
+      - listitem [ref=f22e148]:
+        - strong [ref=f22e149]: Diagnostic
+        - text: — "why it happened" (funnel breakdowns, cohort analysis, the CAC-jumped-30% case pattern).
+      - listitem [ref=f22e150]:
+        - strong [ref=f22e151]: Predictive
+        - text: — "what will happen" (forecasting, LTV modeling — touched in Module 5's advanced tier).
+      - listitem [ref=f22e152]:
+        - strong [ref=f22e153]: Prescriptive
+        - text: — "what to do about it" (budget reallocation recommendations backed by a test, not just a hunch).
+    - paragraph [ref=f22e154]: Most real marketing-analyst work lives at levels 1–2, with occasional forays into 4 when a recommendation is well-supported. Claiming level 3–4 fluency you don't have is a common overreach that gets caught fast in a technical screen — better to be precise about what you've actually done.
+    - heading "Biases that quietly wreck an analysis" [level=2] [ref=f22e155]
+    - paragraph [ref=f22e157]:
+      - strong [ref=f22e158]: Confirmation bias
+      - text: — building the query to find what you already expected. Counter it by writing the "so what" sentence
+      - emphasis [ref=f22e159]: before
+      - text: looking at the data, then checking if the data actually supports it.
+      - strong [ref=f22e160]: Survivorship bias
+      - text: — analyzing only customers who converted/stayed, missing what churned/bounced customers looked like.
+      - strong [ref=f22e161]: Simpson's paradox
+      - text: — a trend that holds in every individual segment can reverse when segments are combined (e.g. overall conversion rate drops even though it rose in every channel, because mix shifted toward a lower-converting channel). Always check a segment breakdown before trusting an aggregate trend.
+    - heading "Check your understanding" [level=2] [ref=f22e162]
+    - generic [ref=f22e164]:
+      - generic [ref=f22e165]:
+        - paragraph [ref=f22e166]:
+          - generic [ref=f22e167]: Q1
+          - text: A campaign brief that defines a target audience and a goal is closest to which analytical step?
+        - generic [ref=f22e168]:
+          - generic [ref=f22e169] [cursor=pointer]:
+            - radio "Data cleaning" [ref=f22e170]
+            - generic [ref=f22e171]: Data cleaning
+          - generic [ref=f22e172] [cursor=pointer]:
+            - radio "Defining a hypothesis and success metric" [ref=f22e173]
+            - generic [ref=f22e174]: Defining a hypothesis and success metric
+          - generic [ref=f22e175] [cursor=pointer]:
+            - radio "Building a dashboard" [ref=f22e176]
+            - generic [ref=f22e177]: Building a dashboard
+          - generic [ref=f22e178] [cursor=pointer]:
+            - radio "Running a JOIN" [ref=f22e179]
+            - generic [ref=f22e180]: Running a JOIN
+      - generic [ref=f22e181]:
+        - paragraph [ref=f22e182]:
+          - generic [ref=f22e183]: Q2
+          - text: "\"Channel\" is an example of a:"
+        - generic [ref=f22e184]:
+          - generic [ref=f22e185] [cursor=pointer]:
+            - radio "Metric" [ref=f22e186]
+            - generic [ref=f22e187]: Metric
+          - generic [ref=f22e188] [cursor=pointer]:
+            - radio "Dimension" [ref=f22e189]
+            - generic [ref=f22e190]: Dimension
+          - generic [ref=f22e191] [cursor=pointer]:
+            - radio "Hypothesis" [ref=f22e192]
+            - generic [ref=f22e193]: Hypothesis
+          - generic [ref=f22e194] [cursor=pointer]:
+            - radio "Grain" [ref=f22e195]
+            - generic [ref=f22e196]: Grain
+      - generic [ref=f22e197]:
+        - paragraph [ref=f22e198]:
+          - generic [ref=f22e199]: Q3
+          - text: What does "grain" mean in an analytics context?
+        - generic [ref=f22e200]:
+          - generic [ref=f22e201] [cursor=pointer]:
+            - radio "The level of precision in a chart" [ref=f22e202]
+            - generic [ref=f22e203]: The level of precision in a chart
+          - generic [ref=f22e204] [cursor=pointer]:
+            - radio "What one row in a dataset represents" [ref=f22e205]
+            - generic [ref=f22e206]: What one row in a dataset represents
+          - generic [ref=f22e207] [cursor=pointer]:
+            - radio "A rounding method" [ref=f22e208]
+            - generic [ref=f22e209]: A rounding method
+          - generic [ref=f22e210] [cursor=pointer]:
+            - radio "A type of SQL join" [ref=f22e211]
+            - generic [ref=f22e212]: A type of SQL join
+      - generic [ref=f22e213]:
+        - paragraph [ref=f22e214]:
+          - generic [ref=f22e215]: Q4
+          - text: Which of these is the best analytics-workflow order?
+        - generic [ref=f22e216]:
+          - generic [ref=f22e217] [cursor=pointer]:
+            - radio "Visualize → Question → Data → Recommend" [ref=f22e218]
+            - generic [ref=f22e219]: Visualize → Question → Data → Recommend
+          - generic [ref=f22e220] [cursor=pointer]:
+            - radio "Question → Data → Clean → Analyze → Visualize → Recommend" [ref=f22e221]
+            - generic [ref=f22e222]: Question → Data → Clean → Analyze → Visualize → Recommend
+          - generic [ref=f22e223] [cursor=pointer]:
+            - radio "Data → Visualize → Question → Clean" [ref=f22e224]
+            - generic [ref=f22e225]: Data → Visualize → Question → Clean
+          - generic [ref=f22e226] [cursor=pointer]:
+            - radio "Clean → Recommend → Question → Data" [ref=f22e227]
+            - generic [ref=f22e228]: Clean → Recommend → Question → Data
+      - generic [ref=f22e229]:
+        - paragraph [ref=f22e230]:
+          - generic [ref=f22e231]: Q5
+          - text: In RICE scoring, what does a very high Effort number do to the score?
+        - generic [ref=f22e232]:
+          - generic [ref=f22e233] [cursor=pointer]:
+            - radio "Increases it" [ref=f22e234]
+            - generic [ref=f22e235]: Increases it
+          - generic [ref=f22e236] [cursor=pointer]:
+            - radio "Has no effect" [ref=f22e237]
+            - generic [ref=f22e238]: Has no effect
+          - generic [ref=f22e239] [cursor=pointer]:
+            - radio "Decreases it — Effort is the denominator" [ref=f22e240]
+            - generic [ref=f22e241]: Decreases it — Effort is the denominator
+          - generic [ref=f22e242] [cursor=pointer]:
+            - radio "Doubles the Reach" [ref=f22e243]
+            - generic [ref=f22e244]: Doubles the Reach
+      - generic [ref=f22e245]:
+        - paragraph [ref=f22e246]:
+          - generic [ref=f22e247]: Q6
+          - text: "An overall metric goes down even though it improved in every individual segment. This is:"
+        - generic [ref=f22e248]:
+          - generic [ref=f22e249] [cursor=pointer]:
+            - radio "A tracking bug, always" [ref=f22e250]
+            - generic [ref=f22e251]: A tracking bug, always
+          - generic [ref=f22e252] [cursor=pointer]:
+            - radio "Simpson's paradox — a mix shift toward a lower-performing segment" [ref=f22e253]
+            - generic [ref=f22e254]: Simpson's paradox — a mix shift toward a lower-performing segment
+          - generic [ref=f22e255] [cursor=pointer]:
+            - radio "Impossible" [ref=f22e256]
+            - generic [ref=f22e257]: Impossible
+          - generic [ref=f22e258] [cursor=pointer]:
+            - radio "Survivorship bias" [ref=f22e259]
+            - generic [ref=f22e260]: Survivorship bias
+      - generic [ref=f22e261]:
+        - paragraph [ref=f22e262]:
+          - generic [ref=f22e263]: Q7
+          - text: Building a forecast of next quarter's conversions sits at which level of analytics maturity?
+        - generic [ref=f22e264]:
+          - generic [ref=f22e265] [cursor=pointer]:
+            - radio "Descriptive" [ref=f22e266]
+            - generic [ref=f22e267]: Descriptive
+          - generic [ref=f22e268] [cursor=pointer]:
+            - radio "Diagnostic" [ref=f22e269]
+            - generic [ref=f22e270]: Diagnostic
+          - generic [ref=f22e271] [cursor=pointer]:
+            - radio "Predictive" [ref=f22e272]
+            - generic [ref=f22e273]: Predictive
+          - generic [ref=f22e274] [cursor=pointer]:
+            - radio "Prescriptive" [ref=f22e275]
+            - generic [ref=f22e276]: Prescriptive
+      - generic [ref=f22e277]:
+        - generic [ref=f22e278]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f22e279] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f22e280]
+    - generic [ref=f22e281]:
+      - paragraph [ref=f22e282]: "\"Walk me through how you'd approach a completely new dataset you've never seen before.\""
+      - paragraph [ref=f22e283]: "Model answer: start with the grain (what does one row represent?), check for obvious data quality issues (nulls, duplicates, date ranges), then re-state the business question before writing a single query — most bad analysis comes from skipping this and jumping straight to a pivot table."
+    - generic [ref=f22e284]:
+      - paragraph [ref=f22e285]: "\"What's the difference between a metric and a dimension?\""
+      - paragraph [ref=f22e286]: "Model answer: a metric is a number you aggregate (revenue, clicks, sessions); a dimension is a category you group or filter by (channel, region, device). Every chart or query is really \"which metric, sliced by which dimension.\""
+    - generic [ref=f22e287]:
+      - paragraph [ref=f22e288]:
+        - text: "\"How do you decide which metrics to prioritize when evaluating a marketing program?\" (real, sourced — see the"
+        - link "Interview Bank" [ref=f22e289] [cursor=pointer]:
+          - /url: interview-bank.html
+        - text: )
+      - paragraph [ref=f22e290]: "Model answer: anchor to the business goal one level up, pick 1–2 primary metrics that goal implies, treat the rest as diagnostic. A dashboard where everything is \"important\" has no priority at all."
+    - button "✓ Marked complete" [ref=f22e292] [cursor=pointer]
+    - generic [ref=f22e293]:
+      - link "← Course home" [ref=f22e294] [cursor=pointer]:
+        - /url: index.html
+      - link "Module 1 — Excel & Google Sheets →" [ref=f22e295] [cursor=pointer]:
+        - /url: module-1.html
+  - contentinfo [ref=f22e296]: MODULE 0 · THE TRANSITION MINDSET

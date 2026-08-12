@@ -87,6 +87,7 @@ function renderTopbar(currentId) {
       <a href="index.html" class="${currentId ? '' : 'current'}">Home</a>
       <a href="roadmap.html" class="${currentId === 'roadmap' ? 'current' : ''}">Roadmap</a>
       ${moduleLinks}
+      <a href="interview-bank.html" class="${currentId === 'interview-bank' ? 'current' : ''}">Interview Bank</a>
       <a href="resume.html" class="${currentId === 'resume' ? 'current' : ''}">Resume &amp; Apply</a>
     </nav>`;
 }

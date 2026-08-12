@@ -16,6 +16,8 @@
     <p class="lesson-goal">CAC, LTV, ROAS, hypothesis testing, confidence — where "analyst" stops being a title and starts being a way of thinking.</p>
   </div>
 
+  <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
+
   <h2>Core concepts</h2>
   <ul>
     <li><strong>CAC</strong> (Customer Acquisition Cost) = spend ÷ new customers.</li>
@@ -92,6 +94,38 @@
     <li>In the significance calculator, drop Variant B's visitor count to 500 with the same conversion rate — watch the result flip. Write two sentences on why that matters when a stakeholder wants to end a test early.</li>
   </ol>
 
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Sizing a test before you run it</h2>
+  <p>Real teams don't check significance and hope — they calculate the sample size needed <em>before launch</em>, using industry-standard <strong>80% power</strong> (chance of detecting a real effect if one exists) and <strong>95% confidence</strong> (chance of not falsely calling noise a real effect). Skipping this is how teams end up running an underpowered test for two weeks and learning nothing.</p>
+
+  <div class="tool-card">
+    <span class="ttag">Sample size calculator</span>
+    <div class="fieldrow">
+      <div class="field"><label for="ss-baseline">Baseline conversion rate (%)</label><input type="number" id="ss-baseline" value="5" step="0.1"></div>
+      <div class="field"><label for="ss-mde">Minimum detectable lift (relative, %)</label><input type="number" id="ss-mde" value="10" step="1"></div>
+    </div>
+    <div class="result-box" id="ss-result" style="display:block;"></div>
+  </div>
+
+  <h2>Choosing the right statistical test, and reading cohorts over time</h2>
+  <ul>
+    <li><strong>Chi-square test</strong>: comparing conversion <em>rates</em> (categorical: converted / didn't) between two groups — what this course's significance calculator runs under the hood.</li>
+    <li><strong>t-test</strong>: comparing <em>averages</em> of a continuous number between two groups (e.g. average order value in Variant A vs. B) — different math from a rate comparison, a common trap in interviews.</li>
+    <li><strong>Confidence intervals</strong>: instead of a single "the lift is 8%," a range ("the lift is between 3% and 13%, 95% confidence") — more honest, and what you should actually report to a stakeholder asking "so is it 8% for sure?"</li>
+    <li><strong>Retention curves</strong>: the row-by-row read of Module 3's cohort heatmap — where retention typically drops steeply in month 1 then flattens; the flattening point is roughly your realistic long-run LTV assumption.</li>
+  </ul>
+
+  <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>Proving it's causal, not just correlated</h2>
+  <ul>
+    <li><strong>Correlation vs. causation</strong>: spend and revenue moving together doesn't prove spend caused the revenue — both could be driven by seasonality. A recommendation based on correlation alone should be framed as a hypothesis to test, not a proven lever.</li>
+    <li><strong>Incrementality / holdout testing</strong>: deliberately withhold a channel or campaign from a random slice of geography or audience, then compare outcomes vs. the exposed group — this is how you separate "channel gets credit for a sale" from "channel actually caused the sale," especially for brand/awareness spend attribution can't cleanly measure.</li>
+    <li><strong>Multiple testing correction</strong>: testing 5 variants at a 5% significance threshold gives roughly a 1-in-4 chance <em>at least one</em> looks "significant" purely by chance. A simple fix (Bonferroni correction): divide your significance threshold by the number of comparisons (5 tests → use 0.01, not 0.05, as the bar).</li>
+    <li><strong>Simple linear regression, conceptually</strong>: fits a line describing how one variable moves with another (e.g. spend vs. revenue) and gives you a slope — useful for marketing-mix-style questions ("what's the marginal return on the next $1,000 of spend"), but only as good as the confounding variables you've controlled for.</li>
+  </ul>
+
   <h2>Check your understanding</h2>
   <div id="quiz-mount"></div>
 
@@ -107,6 +141,14 @@
   <div class="qa">
     <p class="q">"How would you determine if you have enough sample size to trust an A/B test result?"</p>
     <p class="a">Model answer: run a sample-size calculation before launch based on baseline conversion rate and minimum detectable effect, and commit to that sample size and duration up front — don't stop the test early just because it looks significant on day 3, since that inflates the false-positive rate.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"What's the difference between correlation and causation, and how does it affect your recommendations?" (real, sourced)</p>
+    <p class="a">Model answer: correlated metrics can share a third cause (seasonality driving both spend and revenue); recommendations from correlation alone should be framed as testable hypotheses, not proven levers — propose a holdout or A/B test before recommending a budget shift on correlation alone.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"You tested 5 variants and one came back significant — what's the concern?" (real, sourced)</p>
+    <p class="a">Model answer: the multiple-comparisons problem — at a 5% threshold and 5 tests, there's roughly a 1-in-4 chance of at least one false positive by pure chance. Correct the threshold (Bonferroni: divide 0.05 by the number of tests) or treat the winner as a hypothesis to re-confirm.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
@@ -190,6 +232,28 @@
     document.getElementById(id).addEventListener('input', updateAB));
   updateAB();
 
+  function updateSampleSize() {
+    const p1 = (parseFloat(document.getElementById('ss-baseline').value) || 0) / 100;
+    const mdeRel = (parseFloat(document.getElementById('ss-mde').value) || 0) / 100;
+    const res = document.getElementById('ss-result');
+    if (!p1 || !mdeRel) { res.textContent = 'Enter a baseline rate and a minimum detectable lift.'; res.className = 'result-box'; return; }
+    const p2 = p1 * (1 + mdeRel);
+    const zAlpha = 1.96; // 95% confidence, two-tailed
+    const zBeta = 0.8416; // 80% power
+    const pBar = (p1 + p2) / 2;
+    const n = Math.pow(
+      zAlpha * Math.sqrt(2 * pBar * (1 - pBar)) + zBeta * Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2)), 2
+    ) / Math.pow(p2 - p1, 2);
+    const perGroup = Math.ceil(n);
+    res.className = 'result-box good';
+    res.innerHTML = `
+      <div style="font-family:var(--mono);">Detecting ${p1 ? (mdeRel*100).toFixed(0) : 0}% relative lift (${(p1*100).toFixed(2)}% → ${(p2*100).toFixed(2)}%) needs
+      <b>~${perGroup.toLocaleString()} visitors per variant</b> (${(perGroup*2).toLocaleString()} total), at 95% confidence / 80% power.</div>
+      <div style="margin-top:8px; color:var(--ink-muted);">Smaller lifts need dramatically more traffic — halving the MDE roughly quadruples the required sample.</div>`;
+  }
+  ['ss-baseline','ss-mde'].forEach(id => document.getElementById(id).addEventListener('input', updateSampleSize));
+  updateSampleSize();
+
   initQuiz('quiz-mount', [
     {
       q: 'LTV : CAC of 5 : 1 generally signals:',
@@ -219,6 +283,18 @@
       options: ['Automatically profitable', 'Unprofitable — ROAS alone doesn\'t account for margin or fulfillment cost', 'Impossible to calculate', 'The same thing as CAC'],
       correct: 1,
       explain: 'ROAS is revenue over spend, not profit over spend — a "good" ROAS can still lose money if margins are thin.'
+    },
+    {
+      q: 'Comparing average order value (a continuous number) between two test groups — which test?',
+      options: ['Chi-square test', 't-test', 'RANK() window function', 'COALESCE'],
+      correct: 1,
+      explain: 'Chi-square compares rates/proportions (categorical outcomes); a t-test compares averages of a continuous number. Mixing these up is a common interview trip-up.'
+    },
+    {
+      q: 'Testing 5 variants at a 5% significance threshold each — what\'s the real risk of at least one false positive?',
+      options: ['Exactly 5%', 'Roughly 1 in 4', '0%, thresholds don\'t stack', '50%'],
+      correct: 1,
+      explain: 'The multiple-comparisons problem: with 5 independent tests at 5% each, the chance of at least one false positive is roughly 1 - 0.95^5 ≈ 23% — correct with a method like Bonferroni.'
     }
   ]);
 

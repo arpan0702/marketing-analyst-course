@@ -1,0 +1,303 @@
+- generic [active] [ref=f25e1]:
+  - generic [ref=f25e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f25e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f25e4]: MA COURSE
+      - generic [ref=f25e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f25e6]:
+      - link "Home" [ref=f25e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f25e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f25e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f25e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f25e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f25e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f25e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f25e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f25e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f25e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f25e17]:
+    - generic [ref=f25e18]:
+      - paragraph [ref=f25e19]: Module 3
+      - heading "Data Visualization & Storytelling" [level=1] [ref=f25e20]
+      - paragraph [ref=f25e21]: Tableau or Power BI, and the UX judgment that separates a chart from a dashboard someone can actually use in 30 seconds.
+    - generic [ref=f25e22]: Beginner
+    - heading "Core concepts" [level=2] [ref=f25e25]
+    - list [ref=f25e26]:
+      - listitem [ref=f25e27]:
+        - strong [ref=f25e28]: Chart selection
+        - text: ": when a line, bar, or table beats a fancier alternative (usually: often)."
+      - listitem [ref=f25e29]:
+        - strong [ref=f25e30]: Dashboard UX
+        - text: ": one primary \"so what\" per view, filters that don't overwhelm, clear hierarchy."
+      - listitem [ref=f25e31]:
+        - strong [ref=f25e32]: Live data
+        - text: ": connect a real source (CSV, SQL result) rather than pasting static numbers."
+      - listitem [ref=f25e33]:
+        - strong [ref=f25e34]: Annotating
+        - text: ": every chart in a portfolio piece needs one sentence of interpretation next to it."
+    - paragraph [ref=f25e35]: "A well-built dashboard reads top-to-bottom, glance to detail. Here's what that actually looks like as a mockup — not a diagram of boxes, an actual miniature dashboard:"
+    - 'img "Mockup dashboard: four KPI tiles at top, a revenue trend line chart, a bar chart of revenue by channel, and a detail table at the bottom" [ref=f25e37]':
+      - generic [ref=f25e38]:
+        - generic [ref=f25e39]:
+          - generic [ref=f25e41]: SPEND
+          - generic [ref=f25e42]: $41.2K
+          - generic [ref=f25e44]: REVENUE
+          - generic [ref=f25e45]: $118K
+          - generic [ref=f25e47]: ROAS
+          - generic [ref=f25e48]: 2.9x
+          - generic [ref=f25e50]: CAC
+          - generic [ref=f25e51]: $82
+        - generic [ref=f25e52]: REVENUE TREND (context)
+        - generic [ref=f25e56]: REVENUE BY CHANNEL (diagnosis)
+        - generic [ref=f25e64]: CAMPAIGN DETAIL TABLE (drill-down)
+    - 'heading "Interactive: pick the right chart" [level=2] [ref=f25e67]'
+    - paragraph [ref=f25e68]: For each scenario, choose the chart type you'd actually ship. There's a defensible answer, not a trick.
+    - generic [ref=f25e69]:
+      - generic [ref=f25e70]: Chart picker
+      - generic [ref=f25e71]:
+        - generic [ref=f25e72]:
+          - generic [ref=f25e73]: 1. Revenue trend over the last 12 months
+          - combobox [ref=f25e74]:
+            - option "Line chart" [selected]
+            - option "Pie chart"
+            - option "Scatter plot"
+        - generic [ref=f25e75]:
+          - generic [ref=f25e76]: 2. Revenue by channel, single point in time
+          - combobox [ref=f25e77]:
+            - option "Line chart" [selected]
+            - option "Bar chart"
+            - option "Pie chart"
+        - generic [ref=f25e78]:
+          - generic [ref=f25e79]: 3. Exact spend, revenue, and ROAS for 40 individual campaigns, for an analyst to sort/filter
+          - combobox [ref=f25e80]:
+            - option "A sortable table" [selected]
+            - option "A single giant pie chart"
+            - option "A word cloud"
+        - generic [ref=f25e81]:
+          - generic [ref=f25e82]: 4. Relationship between ad spend and revenue across 50 campaigns, looking for a pattern
+          - combobox [ref=f25e83]:
+            - option "Bar chart" [selected]
+            - option "Scatter plot"
+            - option "Pie chart"
+        - generic [ref=f25e84]:
+          - generic [ref=f25e85]: 5. Market share of 4 channels as a % of total spend, for an exec summary slide
+          - combobox [ref=f25e86]:
+            - option "Stacked bar (or simple %) — not pie" [selected]
+            - option "Line chart"
+            - option "Scatter plot"
+      - button "Check my picks" [ref=f25e87] [cursor=pointer]
+    - heading "Exercises" [level=2] [ref=f25e88]
+    - list [ref=f25e89]:
+      - listitem [ref=f25e90]: Pull the SQL output from Module 2 (revenue by channel/month) into Tableau Public or Power BI.
+      - listitem [ref=f25e91]: "Build a 3-view dashboard: overview (KPI tiles), channel breakdown (bar/line), drill-down table."
+      - listitem [ref=f25e92]: Add one date-range filter and one annotation callout per view.
+      - listitem [ref=f25e93]: Find a dashboard online you think is bad and rewrite its worst chart on paper.
+    - generic [ref=f25e94]: Intermediate
+    - heading "Making the tool do more of the thinking" [level=2] [ref=f25e97]
+    - list [ref=f25e98]:
+      - listitem [ref=f25e99]:
+        - strong [ref=f25e100]: Calculated fields
+        - text: ": a formula built inside the BI tool (e.g."
+        - code [ref=f25e101]: ROAS = SUM(Revenue) / SUM(Spend)
+        - text: ) so it recalculates correctly at any level of aggregation, instead of averaging a pre-computed ROAS column (which silently produces the wrong number).
+      - listitem [ref=f25e102]:
+        - strong [ref=f25e103]: Table calculations
+        - text: ": running total, % of total, % change vs. previous period — computed by the tool over the chart's current view, so it stays correct as filters change."
+      - listitem [ref=f25e104]:
+        - strong [ref=f25e105]: Parameters & filters
+        - text: ": a parameter lets a viewer swap what metric a chart shows (e.g. toggle between Spend / Revenue / ROAS) without you building three separate charts."
+      - listitem [ref=f25e106]:
+        - strong [ref=f25e107]: Small multiples
+        - text: ": the same small chart repeated once per channel/segment, side by side — often clearer than one crowded chart with 6 overlapping lines."
+    - generic [ref=f25e108]: Advanced
+    - heading "Cohort retention heatmaps & structuring the story" [level=2] [ref=f25e111]
+    - paragraph [ref=f25e112]: "A retention heatmap is the standard way to visualize the cohort query from Module 2's Advanced tier — rows are signup cohorts, columns are months since signup, color intensity is retention %. This is the chart most growth teams check weekly:"
+    - generic [ref=f25e113]:
+      - 'img "Retention heatmap: rows are monthly signup cohorts, columns are months since signup, darker cells mean higher retention percentage, fading right as cohorts age" [ref=f25e114]':
+        - generic [ref=f25e115]:
+          - generic [ref=f25e116]: Month 0
+          - generic [ref=f25e117]: Month 1
+          - generic [ref=f25e118]: Month 2
+          - generic [ref=f25e119]: Month 3
+          - generic [ref=f25e120]: Month 4
+        - generic [ref=f25e121]:
+          - generic [ref=f25e122]: Jan cohort
+          - generic [ref=f25e123]: Feb cohort
+          - generic [ref=f25e124]: Mar cohort
+          - generic [ref=f25e125]: Apr cohort
+          - generic [ref=f25e126]: May cohort
+        - generic [ref=f25e127]:
+          - generic [ref=f25e129]: 100%
+          - generic [ref=f25e131]: 62%
+          - generic [ref=f25e133]: 48%
+          - generic [ref=f25e135]: 40%
+          - generic [ref=f25e137]: 35%
+          - generic [ref=f25e139]: 100%
+          - generic [ref=f25e141]: 58%
+          - generic [ref=f25e143]: 44%
+          - generic [ref=f25e145]: 37%
+          - generic [ref=f25e147]: —
+          - generic [ref=f25e149]: 100%
+          - generic [ref=f25e151]: 55%
+          - generic [ref=f25e153]: 41%
+          - generic [ref=f25e155]: —
+          - generic [ref=f25e157]: —
+          - generic [ref=f25e159]: 100%
+          - generic [ref=f25e161]: 49%
+          - generic [ref=f25e163]: —
+          - generic [ref=f25e165]: —
+          - generic [ref=f25e167]: —
+          - generic [ref=f25e169]: 100%
+          - generic [ref=f25e171]: —
+          - generic [ref=f25e173]: —
+          - generic [ref=f25e175]: —
+          - generic [ref=f25e177]: —
+      - paragraph [ref=f25e178]: "The diagonal of blanks is normal — a May cohort simply hasn't reached \"Month 3\" yet. The read here: Feb–Mar cohorts retain slightly better at Month 1 than Jan (58%/55% vs. 62% is roughly flat, but watch this over more cohorts) — worth a note in an annotation, not a strong conclusion off 5 rows."
+    - 'heading "Structuring a portfolio case study: SCQA" [level=3] [ref=f25e179]'
+    - paragraph [ref=f25e180]:
+      - text: When you present Portfolio Project 3 in an interview, structure the narrative with the consulting-standard
+      - strong [ref=f25e181]: SCQA
+      - text: "framework instead of walking through your process chronologically:"
+    - paragraph [ref=f25e183]:
+      - strong [ref=f25e184]: Situation
+      - text: — the business context, one sentence.
+      - strong [ref=f25e185]: Complication
+      - text: — what's wrong or uncertain (the CAC jump, the underperforming channel).
+      - strong [ref=f25e186]: Question
+      - text: — the one question your analysis answers.
+      - strong [ref=f25e187]: Answer
+      - text: "— your recommendation, stated first, with the supporting data available if asked. This is also called the Pyramid Principle: conclusion first, evidence on demand — the opposite instinct from \"let me walk you through my SQL.\""
+    - heading "Check your understanding" [level=2] [ref=f25e188]
+    - generic [ref=f25e190]:
+      - generic [ref=f25e191]:
+        - paragraph [ref=f25e192]:
+          - generic [ref=f25e193]: Q1
+          - text: A CMO wants to compare revenue across 5 channels at a glance. Best default choice?
+        - generic [ref=f25e194]:
+          - generic [ref=f25e195] [cursor=pointer]:
+            - radio "Pie chart" [ref=f25e196]
+            - generic [ref=f25e197]: Pie chart
+          - generic [ref=f25e198] [cursor=pointer]:
+            - radio "Bar chart" [ref=f25e199]
+            - generic [ref=f25e200]: Bar chart
+          - generic [ref=f25e201] [cursor=pointer]:
+            - radio "3D bar chart" [ref=f25e202]
+            - generic [ref=f25e203]: 3D bar chart
+          - generic [ref=f25e204] [cursor=pointer]:
+            - radio "Radar chart" [ref=f25e205]
+            - generic [ref=f25e206]: Radar chart
+      - generic [ref=f25e207]:
+        - paragraph [ref=f25e208]:
+          - generic [ref=f25e209]: Q2
+          - text: What's the main risk of a dashboard with 12 filters and 9 charts on one screen?
+        - generic [ref=f25e210]:
+          - generic [ref=f25e211] [cursor=pointer]:
+            - radio "It loads too slowly, nothing else" [ref=f25e212]
+            - generic [ref=f25e213]: It loads too slowly, nothing else
+          - generic [ref=f25e214] [cursor=pointer]:
+            - radio "The viewer can't tell which chart matters, so nothing gets acted on" [ref=f25e215]
+            - generic [ref=f25e216]: The viewer can't tell which chart matters, so nothing gets acted on
+          - generic [ref=f25e217] [cursor=pointer]:
+            - radio "It uses too many colors" [ref=f25e218]
+            - generic [ref=f25e219]: It uses too many colors
+          - generic [ref=f25e220] [cursor=pointer]:
+            - radio "There is no real risk" [ref=f25e221]
+            - generic [ref=f25e222]: There is no real risk
+      - generic [ref=f25e223]:
+        - paragraph [ref=f25e224]:
+          - generic [ref=f25e225]: Q3
+          - text: Why annotate a chart in a portfolio project instead of leaving it to speak for itself?
+        - generic [ref=f25e226]:
+          - generic [ref=f25e227] [cursor=pointer]:
+            - radio "Annotations are required by Tableau" [ref=f25e228]
+            - generic [ref=f25e229]: Annotations are required by Tableau
+          - generic [ref=f25e230] [cursor=pointer]:
+            - radio "It proves you can interpret the data, not just plot it — that's what's actually being evaluated" [ref=f25e231]
+            - generic [ref=f25e232]: It proves you can interpret the data, not just plot it — that's what's actually being evaluated
+          - generic [ref=f25e233] [cursor=pointer]:
+            - radio "It makes the file size smaller" [ref=f25e234]
+            - generic [ref=f25e235]: It makes the file size smaller
+          - generic [ref=f25e236] [cursor=pointer]:
+            - radio "It's not necessary if the chart is well-designed" [ref=f25e237]
+            - generic [ref=f25e238]: It's not necessary if the chart is well-designed
+      - generic [ref=f25e239]:
+        - paragraph [ref=f25e240]:
+          - generic [ref=f25e241]: Q4
+          - text: Why build ROAS as a calculated field (SUM(Revenue)/SUM(Spend)) instead of averaging a pre-computed ROAS column?
+        - generic [ref=f25e242]:
+          - generic [ref=f25e243] [cursor=pointer]:
+            - radio "It looks more professional" [ref=f25e244]
+            - generic [ref=f25e245]: It looks more professional
+          - generic [ref=f25e246] [cursor=pointer]:
+            - radio "Averaging a ratio column gives the wrong number once you aggregate across rows with different spend levels" [ref=f25e247]
+            - generic [ref=f25e248]: Averaging a ratio column gives the wrong number once you aggregate across rows with different spend levels
+          - generic [ref=f25e249] [cursor=pointer]:
+            - radio "There's no real difference" [ref=f25e250]
+            - generic [ref=f25e251]: There's no real difference
+          - generic [ref=f25e252] [cursor=pointer]:
+            - radio "Calculated fields are required by Tableau" [ref=f25e253]
+            - generic [ref=f25e254]: Calculated fields are required by Tableau
+      - generic [ref=f25e255]:
+        - paragraph [ref=f25e256]:
+          - generic [ref=f25e257]: Q5
+          - text: In a retention heatmap, what does the diagonal of blank cells (bottom-right) usually mean?
+        - generic [ref=f25e258]:
+          - generic [ref=f25e259] [cursor=pointer]:
+            - radio "A tracking error" [ref=f25e260]
+            - generic [ref=f25e261]: A tracking error
+          - generic [ref=f25e262] [cursor=pointer]:
+            - radio "Those cohorts simply haven't reached that many months of age yet" [ref=f25e263]
+            - generic [ref=f25e264]: Those cohorts simply haven't reached that many months of age yet
+          - generic [ref=f25e265] [cursor=pointer]:
+            - radio "Zero retention" [ref=f25e266]
+            - generic [ref=f25e267]: Zero retention
+          - generic [ref=f25e268] [cursor=pointer]:
+            - radio "A chart bug" [ref=f25e269]
+            - generic [ref=f25e270]: A chart bug
+      - generic [ref=f25e271]:
+        - paragraph [ref=f25e272]:
+          - generic [ref=f25e273]: Q6
+          - text: The SCQA / Pyramid Principle structure for presenting analysis puts what first?
+        - generic [ref=f25e274]:
+          - generic [ref=f25e275] [cursor=pointer]:
+            - radio "The SQL query" [ref=f25e276]
+            - generic [ref=f25e277]: The SQL query
+          - generic [ref=f25e278] [cursor=pointer]:
+            - radio "The methodology" [ref=f25e279]
+            - generic [ref=f25e280]: The methodology
+          - generic [ref=f25e281] [cursor=pointer]:
+            - radio "The recommendation/answer" [ref=f25e282]
+            - generic [ref=f25e283]: The recommendation/answer
+          - generic [ref=f25e284] [cursor=pointer]:
+            - radio "A list of every metric considered" [ref=f25e285]
+            - generic [ref=f25e286]: A list of every metric considered
+      - generic [ref=f25e287]:
+        - generic [ref=f25e288]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f25e289] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f25e290]
+    - generic [ref=f25e291]:
+      - paragraph [ref=f25e292]: "\"How do you decide what chart type to use for a given dataset?\""
+      - paragraph [ref=f25e293]: "Model answer: start from the question, not the data. Comparing categories → bar. Trend over time → line. Part-to-whole → stacked bar (rarely pie). Relationship between two numeric variables → scatter. Precise individual values → a table beats a chart."
+    - generic [ref=f25e294]:
+      - paragraph [ref=f25e295]: "\"Walk me through how you'd design a dashboard for a CMO who has 30 seconds to look at it.\""
+      - paragraph [ref=f25e296]: "Model answer: lead with 3–4 KPI tiles above the fold, each with a trend arrow, no more than one chart requiring interpretation, and a single annotation stating what changed and why it matters — the CMO should never have to ask \"so what should I do with this.\""
+    - generic [ref=f25e297]:
+      - paragraph [ref=f25e298]: "\"How do you present analysis findings to a non-technical audience?\" (real, sourced)"
+      - paragraph [ref=f25e299]: "Model answer: lead with the recommendation (SCQA/Pyramid Principle), not the method — \"We should shift budget from X to Y because Z,\" then offer the analysis behind it only if asked."
+    - button "Mark this module complete" [ref=f25e301] [cursor=pointer]
+    - generic [ref=f25e302]:
+      - link "← Module 2" [ref=f25e303] [cursor=pointer]:
+        - /url: module-2.html
+      - link "Module 4 — GA4, GTM & UTMs →" [ref=f25e304] [cursor=pointer]:
+        - /url: module-4.html
+  - contentinfo [ref=f25e305]: MODULE 3 · DATA VISUALIZATION & STORYTELLING

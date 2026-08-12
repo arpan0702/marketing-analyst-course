@@ -1,0 +1,377 @@
+- generic [active] [ref=f24e1]:
+  - generic [ref=f24e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f24e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f24e4]: MA COURSE
+      - generic [ref=f24e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f24e6]:
+      - link "Home" [ref=f24e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f24e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f24e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f24e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f24e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f24e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f24e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f24e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Interview Bank" [ref=f24e15] [cursor=pointer]:
+        - /url: interview-bank.html
+      - link "Resume & Apply" [ref=f24e16] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f24e17]:
+    - generic [ref=f24e18]:
+      - paragraph [ref=f24e19]: Module 2
+      - heading "SQL for Marketing Analytics" [level=1] [ref=f24e20]
+      - paragraph [ref=f24e21]: The single highest-leverage skill in this whole plan. A real SQL database is loaded below, in your browser — write real queries against it.
+    - generic [ref=f24e22]: Beginner
+    - 'heading "Start here: what a database actually is" [level=2] [ref=f24e25]'
+    - paragraph [ref=f24e26]:
+      - text: A database is just a set of spreadsheets (called
+      - strong [ref=f24e27]: tables
+      - text: ) that can talk to each other. Each table has columns (like a spreadsheet's headers) and rows (one row = one thing — one order, one customer). SQL is the language for asking that set of tables a question. Everything below — SELECT, JOIN, GROUP BY — is one type of question.
+    - heading "Core concepts" [level=2] [ref=f24e28]
+    - list [ref=f24e29]:
+      - listitem [ref=f24e30]:
+        - code [ref=f24e31]: SELECT
+        - text: ","
+        - code [ref=f24e32]: WHERE
+        - text: ","
+        - code [ref=f24e33]: ORDER BY
+        - text: ","
+        - code [ref=f24e34]: LIMIT
+        - text: — basic retrieval.
+      - listitem [ref=f24e35]:
+        - code [ref=f24e36]: JOIN
+        - text: (INNER, LEFT) — combining an orders table with a customers table.
+      - listitem [ref=f24e37]:
+        - code [ref=f24e38]: GROUP BY
+        - text: + aggregations (
+        - code [ref=f24e39]: SUM
+        - text: ","
+        - code [ref=f24e40]: COUNT
+        - text: ","
+        - code [ref=f24e41]: AVG
+        - text: ) — the pivot table, formalized.
+      - listitem [ref=f24e42]:
+        - text: Window functions (
+        - code [ref=f24e43]: RANK()
+        - text: ","
+        - code [ref=f24e44]: LAG()
+        - text: ) — rank within a group, month-over-month change.
+      - listitem [ref=f24e45]:
+        - code [ref=f24e46]: CASE WHEN
+        - text: for segment bucketing.
+    - generic [ref=f24e47]:
+      - paragraph [ref=f24e48]: orders ⋈ customers on customer_id
+      - generic [ref=f24e49]: orders customers JOIN result +----+----------+ +----+---------+ +----+----------+---------+ | id | cust_id | | id | country | | id | cust_id | country | +----+----------+ +----+---------+ ==> +----+----------+---------+ | 1 | 101 | | 101| US | | 1 | 101 | US | | 2 | 102 | | 102| UK | | 2 | 102 | UK | | 3 | 101 | +----+---------+ | 3 | 101 | US | +----+----------+ +----+----------+---------+ matched on cust_id = id
+    - generic [ref=f24e50]:
+      - paragraph [ref=f24e51]: which rows you get, by JOIN type
+      - img "Venn diagrams showing INNER JOIN keeps only overlap, LEFT JOIN keeps all of the left circle plus overlap, FULL JOIN keeps everything" [ref=f24e52]:
+        - generic [ref=f24e53]:
+          - generic [ref=f24e54]:
+            - generic [ref=f24e58]: INNER JOIN
+            - generic [ref=f24e59]: only matched rows
+          - generic [ref=f24e60]:
+            - generic [ref=f24e64]: LEFT JOIN
+            - generic [ref=f24e65]: all of orders, matched or not
+          - generic [ref=f24e66]:
+            - generic [ref=f24e69]: FULL JOIN
+            - generic [ref=f24e70]: everything, matched or not
+    - heading "Live SQL runner" [level=2] [ref=f24e71]
+    - paragraph [ref=f24e72]:
+      - text: "Two tables are loaded:"
+      - code [ref=f24e73]: orders
+      - text: and
+      - code [ref=f24e74]: customers
+      - text: . Write any query and run it.
+    - generic [ref=f24e75]:
+      - textbox [ref=f24e77]: SELECT channel, SUM(revenue) AS total_revenue FROM orders GROUP BY channel ORDER BY total_revenue DESC;
+      - generic [ref=f24e78]:
+        - button "Run query" [ref=f24e79] [cursor=pointer]
+        - button "Reset editor" [ref=f24e80] [cursor=pointer]
+        - generic [ref=f24e81]: OK — 4 row(s) returned.
+      - table [ref=f24e83]:
+        - rowgroup [ref=f24e84]:
+          - row [ref=f24e85]:
+            - columnheader "channel" [ref=f24e86]
+            - columnheader "total_revenue" [ref=f24e87]
+        - rowgroup [ref=f24e88]:
+          - row [ref=f24e89]:
+            - cell "Paid Search" [ref=f24e90]
+            - cell "875" [ref=f24e91]
+          - row [ref=f24e92]:
+            - cell "Paid Social" [ref=f24e93]
+            - cell "575.5" [ref=f24e94]
+          - row [ref=f24e95]:
+            - cell "Organic" [ref=f24e96]
+            - cell "325" [ref=f24e97]
+          - row [ref=f24e98]:
+            - cell "Email" [ref=f24e99]
+            - cell "295" [ref=f24e100]
+      - generic [ref=f24e101]: orders(id, customer_id, channel, order_date, month, revenue) · 24 rows · customers(customer_id, country, signup_month) · 10 rows
+    - heading "Challenges" [level=2] [ref=f24e102]
+    - paragraph [ref=f24e103]:
+      - text: Each challenge checks your query's
+      - emphasis [ref=f24e104]: output
+      - text: ", not the exact SQL text — there's more than one correct way to write it."
+    - generic [ref=f24e105]:
+      - generic [ref=f24e106]: Challenge 1
+      - text: Total revenue by channel, highest first.
+      - button "Load into editor" [ref=f24e108] [cursor=pointer]
+    - generic [ref=f24e109]:
+      - generic [ref=f24e110]: Challenge 2
+      - text: Revenue joined with each customer's country — one row per order, with the country attached.
+      - button "Load into editor" [ref=f24e112] [cursor=pointer]
+    - generic [ref=f24e113]:
+      - generic [ref=f24e114]: Challenge 3
+      - text: Rank customers by total revenue within their country (use a window function).
+      - button "Load into editor" [ref=f24e116] [cursor=pointer]
+    - heading "Exercises (beyond the challenges)" [level=2] [ref=f24e117]
+    - list [ref=f24e118]:
+      - listitem [ref=f24e119]:
+        - text: Use
+        - code [ref=f24e120]: LAG()
+        - text: to compute month-over-month revenue change per channel.
+      - listitem [ref=f24e121]:
+        - text: Write a
+        - code [ref=f24e122]: CASE WHEN
+        - text: that buckets customers into "high / medium / low" spend tiers.
+      - listitem [ref=f24e123]:
+        - text: Find channels with zero orders in the most recent month using a
+        - code [ref=f24e124]: LEFT JOIN
+        - text: .
+    - generic [ref=f24e125]: Intermediate
+    - heading "Breaking a question into steps" [level=2] [ref=f24e128]
+    - list [ref=f24e129]:
+      - listitem [ref=f24e130]:
+        - strong [ref=f24e131]: CTEs
+        - text: (
+        - code [ref=f24e132]: WITH name AS (...)
+        - text: "): name an intermediate result so a complex query reads top-to-bottom instead of as nested parentheses. Anywhere you'd build one pivot table, then a second pivot table off the first, a CTE is that same move in SQL."
+      - listitem [ref=f24e133]:
+        - strong [ref=f24e134]: Subqueries
+        - text: ": a query inside a query, often to filter against a computed value (e.g. \"channels above the average revenue\" — you can't write"
+        - code [ref=f24e135]: WHERE revenue > AVG(revenue)
+        - text: directly, the average has to be computed first).
+      - listitem [ref=f24e136]:
+        - strong [ref=f24e137]: HAVING vs. WHERE
+        - text: ":"
+        - code [ref=f24e138]: WHERE
+        - text: filters rows before grouping;
+        - code [ref=f24e139]: HAVING
+        - text: filters groups after aggregation (e.g. "channels with more than 5 orders").
+      - listitem [ref=f24e140]:
+        - strong [ref=f24e141]: COALESCE
+        - text: ":"
+        - code [ref=f24e142]: COALESCE(discount, 0)
+        - text: substitutes a default when a value is NULL — the SQL version of Module 1's blank-handling.
+      - listitem [ref=f24e143]:
+        - strong [ref=f24e144]: Date functions
+        - text: ": pulling a month or week out of a full date (SQLite:"
+        - code [ref=f24e145]: strftime('%Y-%m', order_date)
+        - text: ) — this is how the
+        - code [ref=f24e146]: month
+        - text: column in this dataset was actually derived.
+    - generic [ref=f24e147]:
+      - generic [ref=f24e148]: Challenge 4
+      - text: Using a CTE, find channels whose total revenue is above the average channel revenue.
+      - button "Load into editor" [ref=f24e150] [cursor=pointer]
+    - generic [ref=f24e151]: Advanced
+    - heading "Cohort analysis & working with real analytics exports" [level=2] [ref=f24e154]
+    - list [ref=f24e155]:
+      - listitem [ref=f24e156]:
+        - strong [ref=f24e157]: Cohort retention
+        - text: ": group customers by their signup month, then track how many of each cohort ordered in each subsequent month — the query the \"improve retention\" case interview question is actually asking for."
+      - listitem [ref=f24e158]:
+        - strong [ref=f24e159]: Correlated subqueries
+        - text: ": a subquery that references the outer query's current row (e.g. \"each customer's revenue vs. their own country's average\") — powerful but can be slow on large tables; a window function is often the faster equivalent."
+      - listitem [ref=f24e160]:
+        - strong [ref=f24e161]: Query performance (conceptually)
+        - text: ": an index is like a book's table of contents for a column — it lets the database find matching rows without scanning every one. You won't be building indexes as a marketing analyst, but knowing why a query on a 50M-row events table is slow (no index on the filtered column) is a real interview topic."
+      - listitem [ref=f24e162]:
+        - strong [ref=f24e163]: GA4's BigQuery export schema
+        - text: ": unlike this course's flat"
+        - code [ref=f24e164]: orders
+        - text: table, GA4's export stores event parameters as a
+        - emphasis [ref=f24e165]: nested, repeated
+        - text: field — you need
+        - code [ref=f24e166]: UNNEST(event_params)
+        - text: to flatten them into rows before you can filter or aggregate on a specific parameter like
+        - code [ref=f24e167]: campaign
+        - text: . This single function is the biggest jump from this course's schema to a real GA4 SQL analysis (see Module 4, Advanced).
+    - generic [ref=f24e168]:
+      - generic [ref=f24e169]: Challenge 5
+      - text: "Cohort retention: for each signup-month cohort, count distinct customers who placed an order in each order month at or after signup."
+      - button "Load into editor" [ref=f24e171] [cursor=pointer]
+    - heading "Check your understanding" [level=2] [ref=f24e172]
+    - generic [ref=f24e174]:
+      - generic [ref=f24e175]:
+        - paragraph [ref=f24e176]:
+          - generic [ref=f24e177]: Q1
+          - text: Which clause groups rows so aggregate functions (SUM, COUNT) apply per category?
+        - generic [ref=f24e178]:
+          - generic [ref=f24e179] [cursor=pointer]:
+            - radio "ORDER BY" [ref=f24e180]
+            - generic [ref=f24e181]: ORDER BY
+          - generic [ref=f24e182] [cursor=pointer]:
+            - radio "WHERE" [ref=f24e183]
+            - generic [ref=f24e184]: WHERE
+          - generic [ref=f24e185] [cursor=pointer]:
+            - radio "GROUP BY" [ref=f24e186]
+            - generic [ref=f24e187]: GROUP BY
+          - generic [ref=f24e188] [cursor=pointer]:
+            - radio "LIMIT" [ref=f24e189]
+            - generic [ref=f24e190]: LIMIT
+      - generic [ref=f24e191]:
+        - paragraph [ref=f24e192]:
+          - generic [ref=f24e193]: Q2
+          - text: You want every customer to appear even if they have zero orders. Which JOIN do you use, from the customers table?
+        - generic [ref=f24e194]:
+          - generic [ref=f24e195] [cursor=pointer]:
+            - radio "INNER JOIN" [ref=f24e196]
+            - generic [ref=f24e197]: INNER JOIN
+          - generic [ref=f24e198] [cursor=pointer]:
+            - radio "LEFT JOIN (customers LEFT JOIN orders)" [ref=f24e199]
+            - generic [ref=f24e200]: LEFT JOIN (customers LEFT JOIN orders)
+          - generic [ref=f24e201] [cursor=pointer]:
+            - radio "CROSS JOIN" [ref=f24e202]
+            - generic [ref=f24e203]: CROSS JOIN
+          - generic [ref=f24e204] [cursor=pointer]:
+            - radio "SELF JOIN" [ref=f24e205]
+            - generic [ref=f24e206]: SELF JOIN
+      - generic [ref=f24e207]:
+        - paragraph [ref=f24e208]:
+          - generic [ref=f24e209]: Q3
+          - text: RANK() OVER (PARTITION BY country ORDER BY revenue DESC) does what?
+        - generic [ref=f24e210]:
+          - generic [ref=f24e211] [cursor=pointer]:
+            - radio "Ranks all rows globally, ignoring country" [ref=f24e212]
+            - generic [ref=f24e213]: Ranks all rows globally, ignoring country
+          - generic [ref=f24e214] [cursor=pointer]:
+            - radio "Restarts the ranking within each country group" [ref=f24e215]
+            - generic [ref=f24e216]: Restarts the ranking within each country group
+          - generic [ref=f24e217] [cursor=pointer]:
+            - radio "Filters out all but the top row per country" [ref=f24e218]
+            - generic [ref=f24e219]: Filters out all but the top row per country
+          - generic [ref=f24e220] [cursor=pointer]:
+            - radio "Sorts countries alphabetically" [ref=f24e221]
+            - generic [ref=f24e222]: Sorts countries alphabetically
+      - generic [ref=f24e223]:
+        - paragraph [ref=f24e224]:
+          - generic [ref=f24e225]: Q4
+          - text: Which function would you use to compare this month's spend to last month's, row-by-row?
+        - generic [ref=f24e226]:
+          - generic [ref=f24e227] [cursor=pointer]:
+            - radio "SUM()" [ref=f24e228]
+            - generic [ref=f24e229]: SUM()
+          - generic [ref=f24e230] [cursor=pointer]:
+            - radio "LAG()" [ref=f24e231]
+            - generic [ref=f24e232]: LAG()
+          - generic [ref=f24e233] [cursor=pointer]:
+            - radio "COUNT()" [ref=f24e234]
+            - generic [ref=f24e235]: COUNT()
+          - generic [ref=f24e236] [cursor=pointer]:
+            - radio "DISTINCT" [ref=f24e237]
+            - generic [ref=f24e238]: DISTINCT
+      - generic [ref=f24e239]:
+        - paragraph [ref=f24e240]:
+          - generic [ref=f24e241]: Q5
+          - text: "A CTE (WITH clause) is best understood as:"
+        - generic [ref=f24e242]:
+          - generic [ref=f24e243] [cursor=pointer]:
+            - radio "A way to permanently save a new table" [ref=f24e244]
+            - generic [ref=f24e245]: A way to permanently save a new table
+          - generic [ref=f24e246] [cursor=pointer]:
+            - radio "A named, temporary result you can reference later in the same query — like naming an intermediate pivot table" [ref=f24e247]
+            - generic [ref=f24e248]: A named, temporary result you can reference later in the same query — like naming an intermediate pivot table
+          - generic [ref=f24e249] [cursor=pointer]:
+            - radio "A faster version of GROUP BY" [ref=f24e250]
+            - generic [ref=f24e251]: A faster version of GROUP BY
+          - generic [ref=f24e252] [cursor=pointer]:
+            - radio "A type of JOIN" [ref=f24e253]
+            - generic [ref=f24e254]: A type of JOIN
+      - generic [ref=f24e255]:
+        - paragraph [ref=f24e256]:
+          - generic [ref=f24e257]: Q6
+          - text: You need to filter groups AFTER aggregation (e.g. "channels with more than 5 orders"). Which clause?
+        - generic [ref=f24e258]:
+          - generic [ref=f24e259] [cursor=pointer]:
+            - radio "WHERE" [ref=f24e260]
+            - generic [ref=f24e261]: WHERE
+          - generic [ref=f24e262] [cursor=pointer]:
+            - radio "HAVING" [ref=f24e263]
+            - generic [ref=f24e264]: HAVING
+          - generic [ref=f24e265] [cursor=pointer]:
+            - radio "GROUP BY" [ref=f24e266]
+            - generic [ref=f24e267]: GROUP BY
+          - generic [ref=f24e268] [cursor=pointer]:
+            - radio "ORDER BY" [ref=f24e269]
+            - generic [ref=f24e270]: ORDER BY
+      - generic [ref=f24e271]:
+        - paragraph [ref=f24e272]:
+          - generic [ref=f24e273]: Q7
+          - text: In GA4's BigQuery export, event parameters are stored nested and repeated per event. What do you need to flatten them into queryable rows?
+        - generic [ref=f24e274]:
+          - generic [ref=f24e275] [cursor=pointer]:
+            - radio "GROUP BY" [ref=f24e276]
+            - generic [ref=f24e277]: GROUP BY
+          - generic [ref=f24e278] [cursor=pointer]:
+            - radio "UNNEST()" [ref=f24e279]
+            - generic [ref=f24e280]: UNNEST()
+          - generic [ref=f24e281] [cursor=pointer]:
+            - radio "HAVING" [ref=f24e282]
+            - generic [ref=f24e283]: HAVING
+          - generic [ref=f24e284] [cursor=pointer]:
+            - radio "A second table" [ref=f24e285]
+            - generic [ref=f24e286]: A second table
+      - generic [ref=f24e287]:
+        - generic [ref=f24e288]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f24e289] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f24e290]
+    - generic [ref=f24e291]:
+      - paragraph [ref=f24e292]: "\"Write a query to find the top 3 campaigns by conversion rate in each region.\""
+      - paragraph [ref=f24e293]:
+        - text: "Model answer: use"
+        - code [ref=f24e294]: RANK() OVER (PARTITION BY region ORDER BY conversion_rate DESC)
+        - text: in a subquery, then filter the outer query to rank <= 3. Partitioning is the key idea — it resets the ranking within each region instead of across the whole table.
+    - generic [ref=f24e295]:
+      - paragraph [ref=f24e296]: "\"What's the difference between INNER JOIN and LEFT JOIN, and when would a marketing analyst care?\""
+      - paragraph [ref=f24e297]:
+        - text: "Model answer: INNER JOIN only keeps rows with a match in both tables; LEFT JOIN keeps every row from the left table even without a match. A LEFT JOIN matters for churn or inactivity analysis — you need customers with"
+        - emphasis [ref=f24e298]: zero
+        - text: orders to show up, not disappear.
+    - generic [ref=f24e299]:
+      - paragraph [ref=f24e300]: "\"How would you find month-over-month percent change in spend using SQL?\""
+      - paragraph [ref=f24e301]:
+        - text: "Model answer:"
+        - code [ref=f24e302]: LAG(spend) OVER (PARTITION BY channel ORDER BY month)
+        - text: to get the prior month's value in the same row, then compute
+        - code [ref=f24e303]: (spend - prior_spend) / prior_spend
+        - text: .
+    - generic [ref=f24e304]:
+      - paragraph [ref=f24e305]:
+        - text: "Real, sourced: \"Given two dates, return one row per week between them, numbered sequentially.\" (see the"
+        - link "Interview Bank" [ref=f24e306] [cursor=pointer]:
+          - /url: interview-bank.html
+        - text: for source)
+      - paragraph [ref=f24e307]: "Model answer: this is a \"date spine\" problem — generate a continuous sequence of dates or week numbers (a recursive CTE, or a pre-built calendar table), then join your real data onto it so weeks with zero activity still appear as a row instead of silently disappearing."
+    - generic [ref=f24e308]:
+      - paragraph [ref=f24e309]: "\"How would you handle missing data or outliers when using SQL for marketing analysis?\" (real, sourced)"
+      - paragraph [ref=f24e310]:
+        - text: "Model answer: for missing values, decide explicitly between"
+        - code [ref=f24e311]: COALESCE
+        - text: "-to-a-default, excluding the row, or flagging it — and say which. For outliers, don't silently delete: a $50,000 single order might be a real enterprise deal, not a data error. Check before excluding, and disclose it in the write-up if you do."
+    - button "Mark this module complete" [ref=f24e313] [cursor=pointer]
+    - generic [ref=f24e314]:
+      - link "← Module 1" [ref=f24e315] [cursor=pointer]:
+        - /url: module-1.html
+      - link "Module 3 — Data Viz & Storytelling →" [ref=f24e316] [cursor=pointer]:
+        - /url: module-3.html
+  - contentinfo [ref=f24e317]: MODULE 2 · SQL FOR MARKETING ANALYTICS

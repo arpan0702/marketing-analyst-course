@@ -16,6 +16,8 @@
     <p class="lesson-goal">Pivot tables, XLOOKUP, and dynamic charts — the bridge into SQL logic. Every idea here has a direct SQL equivalent in Module 2.</p>
   </div>
 
+  <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
+
   <h2>Start here: what a pivot table actually does</h2>
   <p>A pivot table takes a long list of raw rows (one row per transaction) and collapses it into a summary: pick a category to group by (rows), pick a number to total up (values). Nothing more mysterious than that — see it happen below.</p>
 
@@ -113,6 +115,52 @@ Filter:  Month = "June"              FROM   campaigns
     <li>Build one dynamic chart that updates automatically when the pivot filter changes.</li>
   </ol>
 
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Beyond a single condition</h2>
+  <ul>
+    <li><strong>SUMIFS / COUNTIFS / AVERAGEIFS</strong>: sum, count, or average with multiple conditions at once — "total spend where channel = Email AND month = June" without a pivot table.</li>
+    <li><strong>Nested IFs / IFS()</strong>: more than two outcomes (e.g. "High" / "Medium" / "Low" spend tiers) without stacking IF-inside-IF by hand.</li>
+    <li><strong>Data validation</strong>: dropdown lists on a "channel" column prevent "Email" / "email" / "e-mail" from silently becoming three different values in a pivot table — this is the spreadsheet-side fix for the UTM-casing problem in Module 4.</li>
+    <li><strong>Pivot charts + slicers</strong>: a pivot table with a slicer becomes a lightweight, clickable dashboard — the spreadsheet precursor to Module 3.</li>
+  </ul>
+
+  <div class="challenge">
+    <b>Challenge 3</b>
+    Write a SUMIFS formula: total spend where channel = "Email" AND month = "June".
+  </div>
+  <div class="tool-card">
+    <div class="field">
+      <label for="formula-input-3">Formula</label>
+      <input type="text" id="formula-input-3" placeholder="=SUMIFS(...)">
+    </div>
+    <button id="formula-check-3">Check formula</button>
+    <div class="result-box" id="formula-result-3" style="display:none;"></div>
+  </div>
+
+  <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>Dynamic arrays &amp; automated reporting</h2>
+  <ul>
+    <li><strong>FILTER / UNIQUE / SORT</strong> (dynamic arrays): <code class="inline">=FILTER(range, condition)</code> spills a live list of matching rows without a pivot table or a manual filter click — it updates automatically as source data changes.</li>
+    <li><strong>SUMPRODUCT</strong>: multi-condition math that doesn't require an array-entered formula — useful for weighted metrics (e.g. spend-weighted average CPA across channels).</li>
+    <li><strong>Power Query / Get &amp; Transform</strong>: import and reshape messy source files (multiple CSV exports, inconsistent headers) into a clean table on a schedule, without manual copy-paste every week — this is what "automating a report" actually means before anyone touches SQL or Python.</li>
+    <li><strong>Named ranges</strong>: replace <code class="inline">$B$2:$B$500</code> with <code class="inline">Spend</code> in formulas — makes a workbook a stakeholder can audit instead of a black box.</li>
+  </ul>
+
+  <div class="challenge">
+    <b>Challenge 4</b>
+    Write a FILTER formula that returns all rows from a <code class="inline">campaigns</code> table where <code class="inline">channel = "Paid Social"</code>.
+  </div>
+  <div class="tool-card">
+    <div class="field">
+      <label for="formula-input-4">Formula</label>
+      <input type="text" id="formula-input-4" placeholder="=FILTER(...)">
+    </div>
+    <button id="formula-check-4">Check formula</button>
+    <div class="result-box" id="formula-result-4" style="display:none;"></div>
+  </div>
+
   <h2>Check your understanding</h2>
   <div id="quiz-mount"></div>
 
@@ -124,6 +172,10 @@ Filter:  Month = "June"              FROM   campaigns
   <div class="qa">
     <p class="q">"What's the difference between VLOOKUP and XLOOKUP, and why does it matter?"</p>
     <p class="a">Model answer: VLOOKUP only searches left-to-right and breaks if columns are reordered; XLOOKUP searches in either direction, returns a clean error value, and doesn't break when columns move. Mentioning XLOOKUP by name signals current tooling, not a 2015-era spreadsheet habit.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"When would you use SUMIFS instead of a pivot table?"</p>
+    <p class="a">Model answer: SUMIFS when you need one specific number embedded in a sentence or a KPI tile (e.g. a single cell feeding a summary dashboard); a pivot table when you need to explore or slice a full dataset interactively. They solve the same aggregation problem in different contexts.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
@@ -169,6 +221,28 @@ Filter:  Month = "June"              FROM   campaigns
       : 'Shape should be =IF(actual_cpa > target_cpa, "Over target", "") — an IF comparing the two CPA columns.';
   });
 
+  document.getElementById('formula-check-3').addEventListener('click', () => {
+    const val = document.getElementById('formula-input-3').value.trim().toUpperCase().replace(/\s+/g, '');
+    const pass = /=SUMIFS\(.+,.+,.*EMAIL.*,.+,.*JUNE.*\)/.test(val) || (/=SUMIFS\(/.test(val) && (val.match(/,/g) || []).length >= 4);
+    const res = document.getElementById('formula-result-3');
+    res.style.display = 'block';
+    res.className = 'result-box ' + (pass ? 'good' : 'bad');
+    res.textContent = pass
+      ? 'Correct shape — SUMIFS with two condition pairs.'
+      : 'Shape should be =SUMIFS(sum_range, channel_range, "Email", month_range, "June") — a sum range followed by condition-range/condition pairs.';
+  });
+
+  document.getElementById('formula-check-4').addEventListener('click', () => {
+    const val = document.getElementById('formula-input-4').value.trim().toUpperCase().replace(/\s+/g, '');
+    const pass = /=FILTER\(.+,.+PAIDSOCIAL.*\)/.test(val) || /=FILTER\(/.test(val);
+    const res = document.getElementById('formula-result-4');
+    res.style.display = 'block';
+    res.className = 'result-box ' + (pass ? 'good' : 'bad');
+    res.textContent = pass
+      ? 'Correct shape — FILTER(array, condition).'
+      : 'Shape should be =FILTER(campaigns!A:Z, campaigns!B:B = "Paid Social") — an array followed by a boolean condition on the channel column.';
+  });
+
   initQuiz('quiz-mount', [
     {
       q: 'In a pivot table, "SUM of Spend" is placed in which area?',
@@ -192,6 +266,23 @@ Filter:  Month = "June"              FROM   campaigns
       options: ['GROUP BY', 'JOIN', 'ORDER BY', 'WHERE clause'],
       correct: 1,
       explain: 'Matching rows across two tables by a shared key (channel) is exactly what a JOIN does in SQL.'
+    },
+    {
+      q: 'A FILTER formula\'s result updates automatically when source data changes. Why does that matter for reporting?',
+      options: [
+        'It doesn\'t matter, it\'s just a style preference',
+        'It removes the need to manually re-click a filter or rebuild a pivot table every time data refreshes',
+        'It makes the file smaller',
+        'FILTER only works on numbers, not text'
+      ],
+      correct: 1,
+      explain: 'Dynamic arrays "spill" and recalculate live — this is the first step toward the automated, self-refreshing reports Module 3 formalizes with dashboards.'
+    },
+    {
+      q: 'Data validation dropdowns on a "channel" input column primarily prevent:',
+      options: ['Formula errors', 'Free-text variants like "Email"/"email"/"e-mail" fragmenting one channel into three rows', 'Slow spreadsheets', 'Broken charts'],
+      correct: 1,
+      explain: 'Same root problem as inconsistent UTM casing in Module 4 — forcing a fixed list of values at entry time is cheaper than cleaning it up in every downstream report.'
     }
   ]);
 

@@ -16,6 +16,8 @@
     <p class="lesson-goal">The single highest-leverage skill in this whole plan. A real SQL database is loaded below, in your browser — write real queries against it.</p>
   </div>
 
+  <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
+
   <h2>Start here: what a database actually is</h2>
   <p>A database is just a set of spreadsheets (called <strong>tables</strong>) that can talk to each other. Each table has columns (like a spreadsheet's headers) and rows (one row = one thing — one order, one customer). SQL is the language for asking that set of tables a question. Everything below — SELECT, JOIN, GROUP BY — is one type of question.</p>
 
@@ -112,7 +114,6 @@ ORDER BY total_revenue DESC;</textarea>
     Rank customers by total revenue within their country (use a window function).
     <div style="margin-top:8px;"><button class="ghost" data-load-challenge="2" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
   </div>
-  <div id="challenge-result"></div>
 
   <h2>Exercises (beyond the challenges)</h2>
   <ol>
@@ -120,6 +121,40 @@ ORDER BY total_revenue DESC;</textarea>
     <li>Write a <code class="inline">CASE WHEN</code> that buckets customers into "high / medium / low" spend tiers.</li>
     <li>Find channels with zero orders in the most recent month using a <code class="inline">LEFT JOIN</code>.</li>
   </ol>
+
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Breaking a question into steps</h2>
+  <ul>
+    <li><strong>CTEs</strong> (<code class="inline">WITH name AS (...)</code>): name an intermediate result so a complex query reads top-to-bottom instead of as nested parentheses. Anywhere you'd build one pivot table, then a second pivot table off the first, a CTE is that same move in SQL.</li>
+    <li><strong>Subqueries</strong>: a query inside a query, often to filter against a computed value (e.g. "channels above the average revenue" — you can't write <code class="inline">WHERE revenue > AVG(revenue)</code> directly, the average has to be computed first).</li>
+    <li><strong>HAVING vs. WHERE</strong>: <code class="inline">WHERE</code> filters rows before grouping; <code class="inline">HAVING</code> filters groups after aggregation (e.g. "channels with more than 5 orders").</li>
+    <li><strong>COALESCE</strong>: <code class="inline">COALESCE(discount, 0)</code> substitutes a default when a value is NULL — the SQL version of Module 1's blank-handling.</li>
+    <li><strong>Date functions</strong>: pulling a month or week out of a full date (SQLite: <code class="inline">strftime('%Y-%m', order_date)</code>) — this is how the <code class="inline">month</code> column in this dataset was actually derived.</li>
+  </ul>
+
+  <div class="challenge">
+    <b>Challenge 4</b>
+    Using a CTE, find channels whose total revenue is above the average channel revenue.
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="3" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+
+  <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>Cohort analysis &amp; working with real analytics exports</h2>
+  <ul>
+    <li><strong>Cohort retention</strong>: group customers by their signup month, then track how many of each cohort ordered in each subsequent month — the query the "improve retention" case interview question is actually asking for.</li>
+    <li><strong>Correlated subqueries</strong>: a subquery that references the outer query's current row (e.g. "each customer's revenue vs. their own country's average") — powerful but can be slow on large tables; a window function is often the faster equivalent.</li>
+    <li><strong>Query performance (conceptually)</strong>: an index is like a book's table of contents for a column — it lets the database find matching rows without scanning every one. You won't be building indexes as a marketing analyst, but knowing why a query on a 50M-row events table is slow (no index on the filtered column) is a real interview topic.</li>
+    <li><strong>GA4's BigQuery export schema</strong>: unlike this course's flat <code class="inline">orders</code> table, GA4's export stores event parameters as a <em>nested, repeated</em> field — you need <code class="inline">UNNEST(event_params)</code> to flatten them into rows before you can filter or aggregate on a specific parameter like <code class="inline">campaign</code>. This single function is the biggest jump from this course's schema to a real GA4 SQL analysis (see Module 4, Advanced).</li>
+  </ul>
+
+  <div class="challenge">
+    <b>Challenge 5</b>
+    Cohort retention: for each signup-month cohort, count distinct customers who placed an order in each order month at or after signup.
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="4" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+  <div id="challenge-result"></div>
 
   <h2>Check your understanding</h2>
   <div id="quiz-mount"></div>
@@ -136,6 +171,14 @@ ORDER BY total_revenue DESC;</textarea>
   <div class="qa">
     <p class="q">"How would you find month-over-month percent change in spend using SQL?"</p>
     <p class="a">Model answer: <code class="inline">LAG(spend) OVER (PARTITION BY channel ORDER BY month)</code> to get the prior month's value in the same row, then compute <code class="inline">(spend - prior_spend) / prior_spend</code>.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Real, sourced: "Given two dates, return one row per week between them, numbered sequentially." (see the <a href="interview-bank.html">Interview Bank</a> for source)</p>
+    <p class="a">Model answer: this is a "date spine" problem — generate a continuous sequence of dates or week numbers (a recursive CTE, or a pre-built calendar table), then join your real data onto it so weeks with zero activity still appear as a row instead of silently disappearing.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How would you handle missing data or outliers when using SQL for marketing analysis?" (real, sourced)</p>
+    <p class="a">Model answer: for missing values, decide explicitly between <code class="inline">COALESCE</code>-to-a-default, excluding the row, or flagging it — and say which. For outliers, don't silently delete: a $50,000 single order might be a real enterprise deal, not a data error. Check before excluding, and disclose it in the write-up if you do.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
@@ -169,7 +212,22 @@ FROM (
   SELECT o.customer_id, c.country, SUM(o.revenue) AS total_revenue
   FROM orders o JOIN customers c ON o.customer_id = c.customer_id
   GROUP BY o.customer_id, c.country
-);`
+);`,
+`WITH channel_totals AS (
+  SELECT channel, SUM(revenue) AS total_revenue
+  FROM orders
+  GROUP BY channel
+)
+SELECT * FROM channel_totals
+WHERE total_revenue > (SELECT AVG(total_revenue) FROM channel_totals)
+ORDER BY total_revenue DESC;`,
+`SELECT c.signup_month AS cohort, o.month AS order_month,
+       COUNT(DISTINCT o.customer_id) AS active_customers
+FROM customers c
+JOIN orders o ON o.customer_id = c.customer_id
+WHERE o.month >= c.signup_month
+GROUP BY c.signup_month, o.month
+ORDER BY c.signup_month, o.month;`
   ];
 
   function initSql() {
@@ -277,6 +335,29 @@ FROM (
       options: ['SUM()', 'LAG()', 'COUNT()', 'DISTINCT'],
       correct: 1,
       explain: 'LAG() pulls a prior row\'s value into the current row — the standard way to compute period-over-period change.'
+    },
+    {
+      q: 'A CTE (WITH clause) is best understood as:',
+      options: [
+        'A way to permanently save a new table',
+        'A named, temporary result you can reference later in the same query — like naming an intermediate pivot table',
+        'A faster version of GROUP BY',
+        'A type of JOIN'
+      ],
+      correct: 1,
+      explain: 'CTEs exist purely for readability and structure — they let you break a complex query into named, sequential steps.'
+    },
+    {
+      q: 'You need to filter groups AFTER aggregation (e.g. "channels with more than 5 orders"). Which clause?',
+      options: ['WHERE', 'HAVING', 'GROUP BY', 'ORDER BY'],
+      correct: 1,
+      explain: 'WHERE filters rows before grouping happens; HAVING filters the grouped/aggregated results afterward.'
+    },
+    {
+      q: 'In GA4\'s BigQuery export, event parameters are stored nested and repeated per event. What do you need to flatten them into queryable rows?',
+      options: ['GROUP BY', 'UNNEST()', 'HAVING', 'A second table'],
+      correct: 1,
+      explain: 'UNNEST() turns the nested event_params array into individual rows you can filter and aggregate on — the key function bridging this course\'s flat schema to a real GA4 export.'
     }
   ]);
 
