@@ -1,0 +1,225 @@
+- generic [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f7e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f7e4]: MA COURSE
+      - generic [ref=f7e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f7e6]:
+      - link "Home" [ref=f7e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Mindset ✓" [ref=f7e8] [cursor=pointer]:
+        - /url: module-0.html
+      - link "Sheets" [ref=f7e9] [cursor=pointer]:
+        - /url: module-1.html
+      - link "SQL" [ref=f7e10] [cursor=pointer]:
+        - /url: module-2.html
+      - link "Dataviz" [ref=f7e11] [cursor=pointer]:
+        - /url: module-3.html
+      - link "GA4/GTM" [ref=f7e12] [cursor=pointer]:
+        - /url: module-4.html
+      - link "Metrics" [ref=f7e13] [cursor=pointer]:
+        - /url: module-5.html
+  - main [ref=f7e14]:
+    - generic [ref=f7e15]:
+      - paragraph [ref=f7e16]: Module 2
+      - heading "SQL for Marketing Analytics" [level=1] [ref=f7e17]
+      - paragraph [ref=f7e18]: The single highest-leverage skill in this whole plan. A real SQL database is loaded below, in your browser — write real queries against it.
+    - heading "Core concepts" [level=2] [ref=f7e19]
+    - list [ref=f7e20]:
+      - listitem [ref=f7e21]:
+        - code [ref=f7e22]: SELECT
+        - text: ","
+        - code [ref=f7e23]: WHERE
+        - text: ","
+        - code [ref=f7e24]: ORDER BY
+        - text: ","
+        - code [ref=f7e25]: LIMIT
+        - text: — basic retrieval.
+      - listitem [ref=f7e26]:
+        - code [ref=f7e27]: JOIN
+        - text: (INNER, LEFT) — combining an orders table with a customers table.
+      - listitem [ref=f7e28]:
+        - code [ref=f7e29]: GROUP BY
+        - text: + aggregations (
+        - code [ref=f7e30]: SUM
+        - text: ","
+        - code [ref=f7e31]: COUNT
+        - text: ","
+        - code [ref=f7e32]: AVG
+        - text: ) — the pivot table, formalized.
+      - listitem [ref=f7e33]:
+        - text: Window functions (
+        - code [ref=f7e34]: RANK()
+        - text: ","
+        - code [ref=f7e35]: LAG()
+        - text: ) — rank within a group, month-over-month change.
+      - listitem [ref=f7e36]:
+        - code [ref=f7e37]: CASE WHEN
+        - text: for segment bucketing.
+    - generic [ref=f7e38]:
+      - paragraph [ref=f7e39]: orders ⋈ customers on customer_id
+      - generic [ref=f7e40]: orders customers JOIN result +----+----------+ +----+---------+ +----+----------+---------+ | id | cust_id | | id | country | | id | cust_id | country | +----+----------+ +----+---------+ ==> +----+----------+---------+ | 1 | 101 | | 101| US | | 1 | 101 | US | | 2 | 102 | | 102| UK | | 2 | 102 | UK | | 3 | 101 | +----+---------+ | 3 | 101 | US | +----+----------+ +----+----------+---------+ matched on cust_id = id
+    - heading "Live SQL runner" [level=2] [ref=f7e41]
+    - paragraph [ref=f7e42]:
+      - text: "Two tables are loaded:"
+      - code [ref=f7e43]: orders
+      - text: and
+      - code [ref=f7e44]: customers
+      - text: . Write any query and run it.
+    - generic [ref=f7e45]:
+      - textbox [ref=f7e47]: SELECT o.id, o.customer_id, o.revenue, c.country FROM orders o JOIN customers c ON o.customer_id = c.customer_id;
+      - generic [ref=f7e48]:
+        - button "Run query" [ref=f7e49] [cursor=pointer]
+        - button "Reset editor" [ref=f7e50] [cursor=pointer]
+        - generic [ref=f7e51]: OK — 4 row(s) returned.
+      - table [ref=f7e53]:
+        - rowgroup [ref=f7e54]:
+          - row [ref=f7e55]:
+            - columnheader "channel" [ref=f7e56]
+            - columnheader "total_revenue" [ref=f7e57]
+        - rowgroup [ref=f7e58]:
+          - row [ref=f7e59]:
+            - cell "Paid Search" [ref=f7e60]
+            - cell "875" [ref=f7e61]
+          - row [ref=f7e62]:
+            - cell "Paid Social" [ref=f7e63]
+            - cell "575.5" [ref=f7e64]
+          - row [ref=f7e65]:
+            - cell "Organic" [ref=f7e66]
+            - cell "325" [ref=f7e67]
+          - row [ref=f7e68]:
+            - cell "Email" [ref=f7e69]
+            - cell "295" [ref=f7e70]
+      - generic [ref=f7e71]: orders(id, customer_id, channel, order_date, month, revenue) · 24 rows · customers(customer_id, country, signup_month) · 10 rows
+    - heading "Challenges" [level=2] [ref=f7e72]
+    - paragraph [ref=f7e73]:
+      - text: Each challenge checks your query's
+      - emphasis [ref=f7e74]: output
+      - text: ", not the exact SQL text — there's more than one correct way to write it."
+    - generic [ref=f7e75]:
+      - generic [ref=f7e76]: Challenge 1
+      - text: Total revenue by channel, highest first.
+      - button "Load into editor" [ref=f7e78] [cursor=pointer]
+    - generic [ref=f7e79]:
+      - generic [ref=f7e80]: Challenge 2
+      - text: Revenue joined with each customer's country — one row per order, with the country attached.
+      - button "Load into editor" [active] [ref=f7e82] [cursor=pointer]
+    - generic [ref=f7e83]:
+      - generic [ref=f7e84]: Challenge 3
+      - text: Rank customers by total revenue within their country (use a window function).
+      - button "Load into editor" [ref=f7e86] [cursor=pointer]
+    - heading "Exercises (beyond the challenges)" [level=2] [ref=f7e87]
+    - list [ref=f7e88]:
+      - listitem [ref=f7e89]:
+        - text: Use
+        - code [ref=f7e90]: LAG()
+        - text: to compute month-over-month revenue change per channel.
+      - listitem [ref=f7e91]:
+        - text: Write a
+        - code [ref=f7e92]: CASE WHEN
+        - text: that buckets customers into "high / medium / low" spend tiers.
+      - listitem [ref=f7e93]:
+        - text: Find channels with zero orders in the most recent month using a
+        - code [ref=f7e94]: LEFT JOIN
+        - text: .
+    - heading "Check your understanding" [level=2] [ref=f7e95]
+    - generic [ref=f7e97]:
+      - generic [ref=f7e98]:
+        - paragraph [ref=f7e99]:
+          - generic [ref=f7e100]: Q1
+          - text: Which clause groups rows so aggregate functions (SUM, COUNT) apply per category?
+        - generic [ref=f7e101]:
+          - generic [ref=f7e102] [cursor=pointer]:
+            - radio "ORDER BY" [ref=f7e103]
+            - generic [ref=f7e104]: ORDER BY
+          - generic [ref=f7e105] [cursor=pointer]:
+            - radio "WHERE" [ref=f7e106]
+            - generic [ref=f7e107]: WHERE
+          - generic [ref=f7e108] [cursor=pointer]:
+            - radio "GROUP BY" [ref=f7e109]
+            - generic [ref=f7e110]: GROUP BY
+          - generic [ref=f7e111] [cursor=pointer]:
+            - radio "LIMIT" [ref=f7e112]
+            - generic [ref=f7e113]: LIMIT
+      - generic [ref=f7e114]:
+        - paragraph [ref=f7e115]:
+          - generic [ref=f7e116]: Q2
+          - text: You want every customer to appear even if they have zero orders. Which JOIN do you use, from the customers table?
+        - generic [ref=f7e117]:
+          - generic [ref=f7e118] [cursor=pointer]:
+            - radio "INNER JOIN" [ref=f7e119]
+            - generic [ref=f7e120]: INNER JOIN
+          - generic [ref=f7e121] [cursor=pointer]:
+            - radio "LEFT JOIN (customers LEFT JOIN orders)" [ref=f7e122]
+            - generic [ref=f7e123]: LEFT JOIN (customers LEFT JOIN orders)
+          - generic [ref=f7e124] [cursor=pointer]:
+            - radio "CROSS JOIN" [ref=f7e125]
+            - generic [ref=f7e126]: CROSS JOIN
+          - generic [ref=f7e127] [cursor=pointer]:
+            - radio "SELF JOIN" [ref=f7e128]
+            - generic [ref=f7e129]: SELF JOIN
+      - generic [ref=f7e130]:
+        - paragraph [ref=f7e131]:
+          - generic [ref=f7e132]: Q3
+          - text: RANK() OVER (PARTITION BY country ORDER BY revenue DESC) does what?
+        - generic [ref=f7e133]:
+          - generic [ref=f7e134] [cursor=pointer]:
+            - radio "Ranks all rows globally, ignoring country" [ref=f7e135]
+            - generic [ref=f7e136]: Ranks all rows globally, ignoring country
+          - generic [ref=f7e137] [cursor=pointer]:
+            - radio "Restarts the ranking within each country group" [ref=f7e138]
+            - generic [ref=f7e139]: Restarts the ranking within each country group
+          - generic [ref=f7e140] [cursor=pointer]:
+            - radio "Filters out all but the top row per country" [ref=f7e141]
+            - generic [ref=f7e142]: Filters out all but the top row per country
+          - generic [ref=f7e143] [cursor=pointer]:
+            - radio "Sorts countries alphabetically" [ref=f7e144]
+            - generic [ref=f7e145]: Sorts countries alphabetically
+      - generic [ref=f7e146]:
+        - paragraph [ref=f7e147]:
+          - generic [ref=f7e148]: Q4
+          - text: Which function would you use to compare this month's spend to last month's, row-by-row?
+        - generic [ref=f7e149]:
+          - generic [ref=f7e150] [cursor=pointer]:
+            - radio "SUM()" [ref=f7e151]
+            - generic [ref=f7e152]: SUM()
+          - generic [ref=f7e153] [cursor=pointer]:
+            - radio "LAG()" [ref=f7e154]
+            - generic [ref=f7e155]: LAG()
+          - generic [ref=f7e156] [cursor=pointer]:
+            - radio "COUNT()" [ref=f7e157]
+            - generic [ref=f7e158]: COUNT()
+          - generic [ref=f7e159] [cursor=pointer]:
+            - radio "DISTINCT" [ref=f7e160]
+            - generic [ref=f7e161]: DISTINCT
+      - generic [ref=f7e162]:
+        - generic [ref=f7e163]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f7e164] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f7e165]
+    - generic [ref=f7e166]:
+      - paragraph [ref=f7e167]: "\"Write a query to find the top 3 campaigns by conversion rate in each region.\""
+      - paragraph [ref=f7e168]:
+        - text: "Model answer: use"
+        - code [ref=f7e169]: RANK() OVER (PARTITION BY region ORDER BY conversion_rate DESC)
+        - text: in a subquery, then filter the outer query to rank <= 3. Partitioning is the key idea — it resets the ranking within each region instead of across the whole table.
+    - generic [ref=f7e170]:
+      - paragraph [ref=f7e171]: "\"What's the difference between INNER JOIN and LEFT JOIN, and when would a marketing analyst care?\""
+      - paragraph [ref=f7e172]:
+        - text: "Model answer: INNER JOIN only keeps rows with a match in both tables; LEFT JOIN keeps every row from the left table even without a match. A LEFT JOIN matters for churn or inactivity analysis — you need customers with"
+        - emphasis [ref=f7e173]: zero
+        - text: orders to show up, not disappear.
+    - generic [ref=f7e174]:
+      - paragraph [ref=f7e175]: "\"How would you find month-over-month percent change in spend using SQL?\""
+      - paragraph [ref=f7e176]:
+        - text: "Model answer:"
+        - code [ref=f7e177]: LAG(spend) OVER (PARTITION BY channel ORDER BY month)
+        - text: to get the prior month's value in the same row, then compute
+        - code [ref=f7e178]: (spend - prior_spend) / prior_spend
+        - text: .
+    - button "Mark this module complete" [ref=f7e180] [cursor=pointer]
+    - generic [ref=f7e181]:
+      - link "← Module 1" [ref=f7e182] [cursor=pointer]:
+        - /url: module-1.html
+      - link "Module 3 — Data Viz & Storytelling →" [ref=f7e183] [cursor=pointer]:
+        - /url: module-3.html
+  - contentinfo [ref=f7e184]: MODULE 2 · SQL FOR MARKETING ANALYTICS

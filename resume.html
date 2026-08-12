@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Resume & Apply — Interview-Ready Marketing Analyst</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="resume"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Resume &amp; Apply</p>
+    <h1>Resume, LinkedIn &amp; When to Apply</h1>
+    <p class="lesson-goal">The technical skills only matter if a resume and a LinkedIn profile get someone to look at them. This page covers the rewrite, the keywords, who to target, and exactly when to start.</p>
+  </div>
+
+  <h2>When to start applying</h2>
+  <div class="box gold">
+    <p style="margin:0"><strong>Week 12</strong> — not "when everything feels ready." By week 12 you'll have Portfolio Projects 1 and 2 published and a rewritten resume; that's enough to start getting screens while Module 5 and Project 3 finish in parallel. See the full picture on the <a href="roadmap.html">Roadmap</a>.</p>
+  </div>
+
+  <h2>Translate the resume: skill map</h2>
+  <p>Every "soft" marketing skill has a hard analytical shadow. Name it — don't discard the marketing experience, reframe it.</p>
+  <table class="map-table">
+    <tr><th>She already does this</th><th></th><th>Which is actually this analytical skill</th></tr>
+    <tr><td>Writes campaign briefs with a target audience and goal</td><td class="arrow">→</td><td>Defining a hypothesis and success metric before pulling data</td></tr>
+    <tr><td>Segments audiences for messaging</td><td class="arrow">→</td><td>Customer segmentation — the same operation SQL <code class="inline">GROUP BY</code> does</td></tr>
+    <tr><td>Maps the customer journey funnel</td><td class="arrow">→</td><td>Funnel analysis — conversion rate at each stage, drop-off diagnosis</td></tr>
+    <tr><td>A/B tests subject lines or creative</td><td class="arrow">→</td><td>Hypothesis testing — already running experiments, just without significance math</td></tr>
+    <tr><td>Justifies budget to a CMO</td><td class="arrow">→</td><td>ROI / attribution reasoning — the exact skill CAC and ROAS formalize</td></tr>
+  </table>
+
+  <h2>Interactive: build a bullet</h2>
+  <p>The formula: <strong>[analytical verb] + [what was measured/built] + [tool/method] + [quantified result]</strong>. Fill in your own details and watch it assemble live.</p>
+  <div class="tool-card">
+    <span class="ttag">Bullet builder</span>
+    <div class="fieldrow">
+      <div class="field">
+        <label for="b-verb">Analytical verb</label>
+        <select id="b-verb">
+          <option value="Analyzed">Analyzed</option>
+          <option value="Tracked">Tracked</option>
+          <option value="Built">Built</option>
+          <option value="Segmented">Segmented</option>
+          <option value="Diagnosed">Diagnosed</option>
+          <option value="Optimized">Optimized</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="b-tool">Tool / method</label>
+        <select id="b-tool">
+          <option value="SQL">SQL</option>
+          <option value="pivot tables in Sheets">pivot tables in Sheets</option>
+          <option value="a Tableau dashboard">a Tableau dashboard</option>
+          <option value="an A/B test">an A/B test</option>
+          <option value="GA4">GA4</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="b-what">What was measured / built</label>
+      <input type="text" id="b-what" placeholder="e.g. email campaign performance across 6 segments" value="email campaign performance across 6 segments">
+    </div>
+    <div class="field">
+      <label for="b-result">Quantified result</label>
+      <input type="text" id="b-result" placeholder="e.g. lifted open rate 18%" value="lifted open rate 18%">
+    </div>
+    <div class="box" id="bullet-preview" style="margin:14px 0 0; font-size:14.5px;"></div>
+  </div>
+
+  <h3>Reference: before → after</h3>
+  <table class="map-table">
+    <tr><th>Generic phrasing</th><th></th><th>Rewritten analyst phrasing</th></tr>
+    <tr><td>"Managed email marketing campaigns"</td><td class="arrow">→</td><td>"Analyzed email campaign performance across 6 segments using pivot tables and A/B tests, identifying a subject-line pattern that lifted open rate 18%"</td></tr>
+    <tr><td>"Oversaw $200K digital ad budget"</td><td class="arrow">→</td><td>"Tracked CAC and ROAS across 4 paid channels; reallocated 20% of a $200K budget toward the two highest-LTV channels, improving blended ROAS by 1.4x"</td></tr>
+    <tr><td>"Led customer journey mapping"</td><td class="arrow">→</td><td>"Built a funnel analysis of the customer journey from lead to purchase, identifying a 40% drop-off at checkout and driving a fix that recovered ~$30K/quarter"</td></tr>
+    <tr><td>"Reported on campaign KPIs to leadership"</td><td class="arrow">→</td><td>"Built a self-serve GA4 + Looker Studio dashboard for leadership, cutting reporting time from 4 hours to 15 minutes"</td></tr>
+  </table>
+
+  <h2>ATS keyword pass</h2>
+  <p>Resume and LinkedIn "Skills" section should contain, verbatim: <code class="inline">SQL</code>, <code class="inline">Excel</code>, <code class="inline">Google Sheets</code>, <code class="inline">GA4</code>, <code class="inline">Tableau</code> / <code class="inline">Power BI</code>, <code class="inline">A/B testing</code>, <code class="inline">data visualization</code>, <code class="inline">campaign analytics</code>, <code class="inline">CAC</code>, <code class="inline">ROAS</code>, <code class="inline">LTV</code>. ATS systems match strings, not synonyms — "spreadsheet software" will not match a filter for "Excel."</p>
+  <div class="box">
+    <p style="margin:0">LinkedIn headline: <em>"Marketing Manager → Marketing Analyst | SQL, GA4, Tableau | Turning campaign data into revenue decisions."</em> The arrow signals "in transition, actively upskilled," not a mismatch between title and target.</p>
+  </div>
+
+  <h2>Target roles &amp; titles</h2>
+  <p>Search all of these — titles are inconsistent across companies, and narrowing to only "Marketing Analyst" cuts the funnel by more than half.</p>
+  <ul>
+    <li>Marketing Analyst</li>
+    <li>Growth Analyst / Growth Marketing Analyst</li>
+    <li>Campaign Performance Analyst</li>
+    <li>Customer Insights Analyst</li>
+    <li>Digital Analytics Specialist / Analyst</li>
+    <li>Marketing Data Analyst</li>
+    <li>CRM Analyst</li>
+    <li>Web Analyst</li>
+  </ul>
+
+  <h2>Application strategy</h2>
+  <div class="box teal">
+    <p style="margin:0"><strong>~20% cold applications, ~60% warm networking/referrals, ~20% recruiter outreach.</strong> Referred candidates get interviewed at multiples the rate of cold applicants — for a career-changer without the "safe" title match, a referral is often what gets the resume read at all instead of filtered by an ATS keyword match.</p>
+  </div>
+
+  <h3>Cold outreach templates</h3>
+  <div class="template">
+    <span class="tlabel">To a recruiter</span>
+    <p>Hi [Name] — I saw you recruit for marketing/growth analytics roles at [Company]. I'm a Marketing Manager transitioning into Marketing/Growth Analyst work — I've spent [X years] running campaigns and reading performance data, and I've spent the last few months building hands-on SQL, GA4, and dashboarding skills to formalize that into an analyst skillset (happy to share a portfolio piece on campaign ROI analysis). Would love to be on your radar for analyst-track roles you're working — open to a quick chat if it's useful, no pressure either way.</p>
+  </div>
+  <div class="template">
+    <span class="tlabel">To a Senior Marketing Analyst</span>
+    <p>Hi [Name] — I came across your profile and saw you made a similar move into analytics from a more marketing-generalist background. I'm a Marketing Manager currently building out SQL/GA4/dashboard skills to move into a Marketing Analyst role, and I'd genuinely value 15 minutes of your perspective — mainly: what actually mattered in your first 90 days that a course wouldn't have taught you? Completely understand if time's tight — even a two-line reply would help.</p>
+  </div>
+
+  <h2>Readiness checklist</h2>
+  <p>This checklist is the third ring of progress on the home page, alongside modules and roadmap milestones.</p>
+  <div id="resume-checklist" style="display:flex; flex-direction:column; gap:8px; margin:16px 0;"></div>
+
+  <div class="lesson-nav">
+    <a href="roadmap.html">← Roadmap</a>
+    <a href="index.html">Course home →</a>
+  </div>
+</main>
+
+<footer class="site">RESUME &amp; APPLY · INTERVIEW-READY MARKETING ANALYST</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  function updateBullet() {
+    const verb = document.getElementById('b-verb').value;
+    const tool = document.getElementById('b-tool').value;
+    const what = document.getElementById('b-what').value.trim() || '[what you measured or built]';
+    const result = document.getElementById('b-result').value.trim() || '[quantified result]';
+    document.getElementById('bullet-preview').innerHTML =
+      `"${verb} ${what} using ${tool}, ${result}"`;
+  }
+  ['b-verb','b-tool','b-what','b-result'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateBullet);
+    document.getElementById(id).addEventListener('change', updateBullet);
+  });
+  updateBullet();
+
+  initChecklist('resume-checklist', 'ma-resume-progress-v1', RESUME_CHECKLIST);
+</script>
+</body>
+</html>

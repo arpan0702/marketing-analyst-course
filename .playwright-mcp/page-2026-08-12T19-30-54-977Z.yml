@@ -1,0 +1,70 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f4e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f4e4]: MA COURSE
+      - generic [ref=f4e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f4e6]:
+      - link "Home" [ref=f4e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Mindset" [ref=f4e8] [cursor=pointer]:
+        - /url: module-0.html
+      - link "Sheets" [ref=f4e9] [cursor=pointer]:
+        - /url: module-1.html
+      - link "SQL" [ref=f4e10] [cursor=pointer]:
+        - /url: module-2.html
+      - link "Dataviz" [ref=f4e11] [cursor=pointer]:
+        - /url: module-3.html
+      - link "GA4/GTM" [ref=f4e12] [cursor=pointer]:
+        - /url: module-4.html
+      - link "Metrics" [ref=f4e13] [cursor=pointer]:
+        - /url: module-5.html
+  - main [ref=f4e14]:
+    - generic [ref=f4e15]:
+      - paragraph [ref=f4e16]: Interactive Course · 6 Modules
+      - heading "Marketing Manager → Marketing Analyst." [level=1] [ref=f4e17]
+      - paragraph [ref=f4e18]: "A hands-on curriculum: quizzes, a live SQL runner, a UTM builder, and a CAC/LTV/ROAS & significance calculator — not just reading. Work through the modules in order; progress is saved in this browser."
+    - generic [ref=f4e20]:
+      - generic [ref=f4e21]: Your progress
+      - generic [ref=f4e22]: 0 / 6 modules complete
+    - generic [ref=f4e24]:
+      - link "Not started Module 0 The Transition Mindset Reframe marketing judgment as analytical skill before touching a tool." [ref=f4e25] [cursor=pointer]:
+        - /url: module-0.html
+        - generic [ref=f4e26]: Not started
+        - generic [ref=f4e27]: Module 0
+        - heading "The Transition Mindset" [level=3] [ref=f4e28]
+        - paragraph [ref=f4e29]: Reframe marketing judgment as analytical skill before touching a tool.
+      - link "Not started Module 1 Excel & Google Sheets Pivot tables, XLOOKUP, dynamic charts — the bridge into SQL logic." [ref=f4e30] [cursor=pointer]:
+        - /url: module-1.html
+        - generic [ref=f4e31]: Not started
+        - generic [ref=f4e32]: Module 1
+        - heading "Excel & Google Sheets" [level=3] [ref=f4e33]
+        - paragraph [ref=f4e34]: Pivot tables, XLOOKUP, dynamic charts — the bridge into SQL logic.
+      - link "Not started Module 2 SQL for Marketing SELECT, JOIN, GROUP BY, window functions — run real queries in your browser." [ref=f4e35] [cursor=pointer]:
+        - /url: module-2.html
+        - generic [ref=f4e36]: Not started
+        - generic [ref=f4e37]: Module 2
+        - heading "SQL for Marketing" [level=3] [ref=f4e38]
+        - paragraph [ref=f4e39]: SELECT, JOIN, GROUP BY, window functions — run real queries in your browser.
+      - link "Not started Module 3 Data Viz & Storytelling Chart selection and dashboard UX that turns numbers into a decision." [ref=f4e40] [cursor=pointer]:
+        - /url: module-3.html
+        - generic [ref=f4e41]: Not started
+        - generic [ref=f4e42]: Module 3
+        - heading "Data Viz & Storytelling" [level=3] [ref=f4e43]
+        - paragraph [ref=f4e44]: Chart selection and dashboard UX that turns numbers into a decision.
+      - link "Not started Module 4 GA4, GTM & UTMs GA4 events, GTM tags, and a UTM architecture that survives a real launch." [ref=f4e45] [cursor=pointer]:
+        - /url: module-4.html
+        - generic [ref=f4e46]: Not started
+        - generic [ref=f4e47]: Module 4
+        - heading "GA4, GTM & UTMs" [level=3] [ref=f4e48]
+        - paragraph [ref=f4e49]: GA4 events, GTM tags, and a UTM architecture that survives a real launch.
+      - link "Not started Module 5 Metrics & A/B Testing CAC, LTV, ROAS, and whether your A/B test result actually means anything." [ref=f4e50] [cursor=pointer]:
+        - /url: module-5.html
+        - generic [ref=f4e51]: Not started
+        - generic [ref=f4e52]: Module 5
+        - heading "Metrics & A/B Testing" [level=3] [ref=f4e53]
+        - paragraph [ref=f4e54]: CAC, LTV, ROAS, and whether your A/B test result actually means anything.
+    - generic [ref=f4e55]:
+      - heading "How to use this" [level=4] [ref=f4e56]
+      - paragraph [ref=f4e57]: "Each module has: core concepts, a short quiz, and one interactive tool built for that skill (a live SQL editor in Module 2, a UTM builder in Module 4, a stats calculator in Module 5). Click \"Mark this module complete\" at the bottom of a lesson once you've run the tool and passed the quiz — that's what moves the bar above."
+  - contentinfo [ref=f4e58]: INTERVIEW-READY MARKETING ANALYST · LOCAL COURSE · PROGRESS STORED IN THIS BROWSER ONLY

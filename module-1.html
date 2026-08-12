@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Module 1 — Excel & Google Sheets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="m1"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Module 1</p>
+    <h1>Advanced Excel &amp; Google Sheets for Marketers</h1>
+    <p class="lesson-goal">Pivot tables, XLOOKUP, and dynamic charts — the bridge into SQL logic. Every idea here has a direct SQL equivalent in Module 2.</p>
+  </div>
+
+  <h2>Start here: what a pivot table actually does</h2>
+  <p>A pivot table takes a long list of raw rows (one row per transaction) and collapses it into a summary: pick a category to group by (rows), pick a number to total up (values). Nothing more mysterious than that — see it happen below.</p>
+
+  <div class="diagram">
+    <p class="diagram-label">before → after: raw rows become a summary</p>
+    <svg viewBox="0 0 640 190" width="100%" height="190" role="img" aria-label="Raw transaction rows on the left collapse into a pivot table summed by channel on the right">
+      <defs><marker id="arrow1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--teal)"/></marker></defs>
+      <g font-family="var(--mono)" font-size="11">
+        <!-- raw table -->
+        <text x="10" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">RAW ROWS</text>
+        <g stroke="#24312f" stroke-width="1">
+          <rect x="10" y="20" width="90" height="22" fill="#1a2523"/><rect x="100" y="20" width="70" height="22" fill="#1a2523"/>
+          <rect x="10" y="42" width="90" height="22" fill="none"/><rect x="100" y="42" width="70" height="22" fill="none"/>
+          <rect x="10" y="64" width="90" height="22" fill="none"/><rect x="100" y="64" width="70" height="22" fill="none"/>
+          <rect x="10" y="86" width="90" height="22" fill="none"/><rect x="100" y="86" width="70" height="22" fill="none"/>
+          <rect x="10" y="108" width="90" height="22" fill="none"/><rect x="100" y="108" width="70" height="22" fill="none"/>
+          <rect x="10" y="130" width="90" height="22" fill="none"/><rect x="100" y="130" width="70" height="22" fill="none"/>
+        </g>
+        <g fill="var(--code-ink)">
+          <text x="16" y="35" font-weight="700">Channel</text><text x="106" y="35" font-weight="700">Spend</text>
+          <text x="16" y="57">Email</text><text x="106" y="57">$45</text>
+          <text x="16" y="79">Paid Social</text><text x="106" y="79">$82</text>
+          <text x="16" y="101">Email</text><text x="106" y="101">$30</text>
+          <text x="16" y="123">Paid Social</text><text x="106" y="123">$95</text>
+          <text x="16" y="145">Paid Search</text><text x="106" y="145">$120</text>
+        </g>
+        <!-- arrow -->
+        <line x1="185" y1="90" x2="230" y2="90" stroke="var(--teal)" stroke-width="2" marker-end="url(#arrow1)"/>
+        <text x="207" y="78" text-anchor="middle" fill="var(--teal)" font-size="9.5">GROUP + SUM</text>
+        <!-- pivot table -->
+        <text x="250" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">PIVOT RESULT</text>
+        <g stroke="#24312f" stroke-width="1">
+          <rect x="250" y="20" width="120" height="22" fill="#1a2523"/><rect x="370" y="20" width="90" height="22" fill="#1a2523"/>
+          <rect x="250" y="42" width="120" height="22" fill="none"/><rect x="370" y="42" width="90" height="22" fill="none"/>
+          <rect x="250" y="64" width="120" height="22" fill="none"/><rect x="370" y="64" width="90" height="22" fill="none"/>
+        </g>
+        <g fill="var(--code-ink)">
+          <text x="256" y="35" font-weight="700">Channel</text><text x="376" y="35" font-weight="700">Sum of Spend</text>
+          <text x="256" y="57">Email</text><text x="376" y="57">$75</text>
+          <text x="256" y="79">Paid Social</text><text x="376" y="79">$177</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Core concepts</h2>
+  <ul>
+    <li><strong>Pivot tables</strong>: rows, columns, values, filters — maps directly to <code class="inline">GROUP BY</code>.</li>
+    <li><strong>XLOOKUP</strong> (over VLOOKUP/INDEX-MATCH): join a second table of data by a matching key — the spreadsheet version of a SQL JOIN.</li>
+    <li><strong>Dynamic charts &amp; conditional formatting</strong> for fast visual QA of a dataset.</li>
+    <li><strong>Cleaning</strong>: TRIM, TEXT-TO-COLUMNS, removing duplicates, handling blanks.</li>
+  </ul>
+
+  <div class="diagram">
+    <p class="diagram-label">mental model bridge</p>
+    <pre>PIVOT TABLE                          SQL EQUIVALENT (Module 2)
+------------------------------       -------------------------------
+Rows:    Channel                     SELECT channel,
+Values:  Sum of Spend         -->            SUM(spend)  AS total_spend
+Filter:  Month = "June"              FROM   campaigns
+                                      WHERE  month = 'June'
+                                      GROUP BY channel;</pre>
+  </div>
+
+  <h2>Interactive: write the XLOOKUP</h2>
+  <p>Scenario: you have a <code class="inline">campaigns</code> sheet with a <code class="inline">channel</code> column, and a separate <code class="inline">targets</code> sheet listing <code class="inline">channel</code> and <code class="inline">target_cpa</code>. Write a formula for cell C2 on <code class="inline">campaigns</code> that pulls in the matching <code class="inline">target_cpa</code>.</p>
+  <div class="tool-card">
+    <span class="ttag">Formula check</span>
+    <div class="field">
+      <label for="formula-input">Formula for C2</label>
+      <input type="text" id="formula-input" placeholder="=XLOOKUP(...)">
+    </div>
+    <button id="formula-check">Check formula</button>
+    <div class="result-box" id="formula-result" style="display:none;"></div>
+  </div>
+
+  <div class="challenge">
+    <b>Challenge 2</b>
+    Now write the conditional-flag formula: mark a channel "Over target" if <code class="inline">actual_cpa &gt; target_cpa</code>.
+  </div>
+  <div class="tool-card">
+    <div class="field">
+      <label for="formula-input-2">Formula for D2</label>
+      <input type="text" id="formula-input-2" placeholder="=IF(...)">
+    </div>
+    <button id="formula-check-2">Check formula</button>
+    <div class="result-box" id="formula-result-2" style="display:none;"></div>
+  </div>
+
+  <h2>Exercises</h2>
+  <ol>
+    <li>Download a raw campaign export (Kaggle "Marketing Campaign Performance Dataset" works well). Clean it: fix blanks, standardize dates, remove duplicate rows.</li>
+    <li>Build a pivot table: total spend and conversions by channel and month.</li>
+    <li>Use XLOOKUP to merge in a second table (channel-level target CPA) and flag channels over target.</li>
+    <li>Build one dynamic chart that updates automatically when the pivot filter changes.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div id="quiz-mount"></div>
+
+  <h2>Interview questions for this module</h2>
+  <div class="qa">
+    <p class="q">"How would you use a pivot table to find your top 5 campaigns by ROI?"</p>
+    <p class="a">Model answer: rows = campaign name, values = sum of revenue and sum of spend (or a calculated ROI field), sort descending on the ROI value, filter to top 5 — then say what you'd do with that list, not just how you built it.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"What's the difference between VLOOKUP and XLOOKUP, and why does it matter?"</p>
+    <p class="a">Model answer: VLOOKUP only searches left-to-right and breaks if columns are reordered; XLOOKUP searches in either direction, returns a clean error value, and doesn't break when columns move. Mentioning XLOOKUP by name signals current tooling, not a 2015-era spreadsheet habit.</p>
+  </div>
+
+  <div style="margin-top:32px;"><button id="complete-btn"></button></div>
+
+  <div class="lesson-nav">
+    <a href="module-0.html">← Module 0</a>
+    <a href="module-2.html">Module 2 — SQL for Marketing Analytics →</a>
+  </div>
+</main>
+
+<footer class="site">MODULE 1 · EXCEL &amp; GOOGLE SHEETS</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  function checkFormula(inputId, resultId, patterns, hint) {
+    const btn = document.activeElement;
+    const val = document.getElementById(inputId).value.trim();
+    const normalized = val.toUpperCase().replace(/\s+/g, '');
+    const pass = patterns.some(p => p.test(normalized));
+    const res = document.getElementById(resultId);
+    res.style.display = 'block';
+    res.className = 'result-box ' + (pass ? 'good' : 'bad');
+    res.textContent = pass
+      ? 'Correct shape — that will resolve the lookup correctly.'
+      : `Not quite. ${hint}`;
+  }
+
+  document.getElementById('formula-check').addEventListener('click', () => {
+    checkFormula('formula-input', 'formula-result',
+      [/=XLOOKUP\(.*CHANNEL.*,.*TARGETS.*CHANNEL.*,.*TARGETS.*TARGET_CPA.*\)/,
+       /=XLOOKUP\(A2,TARGETS!.+,TARGETS!.+\)/],
+      'Shape should be =XLOOKUP(lookup_value, lookup_array, return_array) — e.g. =XLOOKUP(A2, targets!A:A, targets!B:B)'
+    );
+  });
+  document.getElementById('formula-check-2').addEventListener('click', () => {
+    const val = document.getElementById('formula-input-2').value.trim().toUpperCase().replace(/\s+/g, '');
+    const pass = /=IF\(.*>.*,.*"?OVER ?TARGET"?/.test(val.replace(/\s+/g,' ')) || /=IF\(.*>.*,/.test(val);
+    const res = document.getElementById('formula-result-2');
+    res.style.display = 'block';
+    res.className = 'result-box ' + (pass ? 'good' : 'bad');
+    res.textContent = pass
+      ? 'Correct shape — an IF comparing the two CPA columns.'
+      : 'Shape should be =IF(actual_cpa > target_cpa, "Over target", "") — an IF comparing the two CPA columns.';
+  });
+
+  initQuiz('quiz-mount', [
+    {
+      q: 'In a pivot table, "SUM of Spend" is placed in which area?',
+      options: ['Rows', 'Filters', 'Values', 'Columns'],
+      correct: 2,
+      explain: 'Aggregated numbers (sums, counts, averages) go in the Values area — that\'s the SQL GROUP BY aggregation.'
+    },
+    {
+      q: 'Why is XLOOKUP generally preferred over VLOOKUP today?',
+      options: [
+        'It\'s faster to type',
+        'It can search in either direction and doesn\'t break when columns are reordered',
+        'It works in Excel but not Google Sheets',
+        'It doesn\'t require a lookup table'
+      ],
+      correct: 1,
+      explain: 'VLOOKUP is left-to-right only and column-position-fragile; XLOOKUP fixes both.'
+    },
+    {
+      q: 'You need to combine spend data with channel targets stored in a separate sheet. This is the spreadsheet equivalent of a SQL:',
+      options: ['GROUP BY', 'JOIN', 'ORDER BY', 'WHERE clause'],
+      correct: 1,
+      explain: 'Matching rows across two tables by a shared key (channel) is exactly what a JOIN does in SQL.'
+    }
+  ]);
+
+  initCompleteButton('m1');
+</script>
+</body>
+</html>

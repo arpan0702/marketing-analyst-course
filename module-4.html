@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Module 4 — GA4, GTM & UTM Architecture</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="m4"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Module 4</p>
+    <h1>Web &amp; Digital Analytics</h1>
+    <p class="lesson-goal">GA4, Google Tag Manager, and a UTM naming convention that doesn't fragment your reporting six weeks after launch.</p>
+  </div>
+
+  <h2>Start here: three tools, one pipeline</h2>
+  <p>GA4, GTM, and UTMs are three different things that get confused constantly. A UTM is a tag on a URL (data about where a click came from). GTM is the deployment mechanism (it fires tracking code without an engineer touching the site). GA4 is where the data lands and gets reported. One flows into the next — see the pipeline below.</p>
+
+  <div class="diagram">
+    <p class="diagram-label">tracking pipeline: click to dashboard</p>
+    <svg viewBox="0 0 760 210" width="100%" height="210" role="img" aria-label="Pipeline: UTM-tagged click leads to GTM tag fire, then GA4 event, which branches to GA4 UI reports and BigQuery export, and BigQuery feeds a Tableau or Power BI dashboard">
+      <defs><marker id="arrow4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--teal)"/></marker></defs>
+      <g stroke="var(--teal)" stroke-width="2" marker-end="url(#arrow4)" fill="none">
+        <line x1="160" y1="40" x2="180" y2="40"/>
+        <line x1="360" y1="40" x2="380" y2="40"/>
+        <path d="M480,60 C480,90 400,90 400,110"/>
+        <path d="M480,60 C480,90 580,90 580,110"/>
+        <line x1="580" y1="150" x2="580" y2="170"/>
+      </g>
+      <g font-family="var(--sans)" font-size="11.5" font-weight="700">
+        <rect x="10" y="20" width="150" height="40" rx="8" fill="var(--teal)"/>
+        <text x="85" y="41" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">Click (UTM tagged)</text>
+        <rect x="180" y="20" width="180" height="40" rx="8" fill="var(--teal)" opacity="0.9"/>
+        <text x="270" y="41" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">GTM fires tag on trigger</text>
+        <rect x="400" y="20" width="160" height="40" rx="8" fill="var(--teal)"/>
+        <text x="480" y="36" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">GA4 receives event</text>
+        <text x="480" y="50" text-anchor="middle" fill="var(--code-bg)" font-size="8.5" font-weight="400">(event + parameters)</text>
+
+        <rect x="320" y="110" width="160" height="40" rx="8" fill="var(--surface-2)" stroke="var(--line)"/>
+        <text x="400" y="127" text-anchor="middle" fill="var(--ink)" font-size="10.5">GA4 UI reports</text>
+        <text x="400" y="141" text-anchor="middle" fill="var(--ink-faint)" font-size="8.5" font-weight="400">quick checks</text>
+
+        <rect x="500" y="110" width="160" height="40" rx="8" fill="var(--gold)"/>
+        <text x="580" y="127" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">BigQuery export</text>
+        <text x="580" y="141" text-anchor="middle" fill="var(--code-bg)" font-size="8.5" font-weight="400">SQL analysis (Module 2)</text>
+
+        <rect x="490" y="170" width="180" height="34" rx="8" fill="var(--teal)"/>
+        <text x="580" y="191" text-anchor="middle" fill="var(--code-bg)" font-size="10">Tableau / Power BI (Module 3)</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Core concepts</h2>
+  <ul>
+    <li><strong>GA4's event model</strong>: everything is an event with parameters (not session-based, like the old Universal Analytics).</li>
+    <li><strong>GTM</strong>: tags, triggers, variables — how tracking gets deployed without engineering.</li>
+    <li><strong>UTM architecture</strong>: a consistent naming convention across source/medium/campaign so reporting doesn't fragment.</li>
+    <li><strong>Key events</strong> (conversions), funnel/exploration reports, and DebugView for QA.</li>
+  </ul>
+
+  <h2>Interactive: UTM builder</h2>
+  <p>Build a campaign URL and get live feedback against the naming-convention rules a real analytics team would enforce: lowercase, no spaces, consistent separators.</p>
+
+  <div class="tool-card">
+    <span class="ttag">Live builder</span>
+    <div class="fieldrow">
+      <div class="field"><label for="utm-url">Landing page URL</label><input type="text" id="utm-url" value="https://example.com/spring-sale"></div>
+      <div class="field"><label for="utm-source">utm_source</label><input type="text" id="utm-source" placeholder="e.g. facebook"></div>
+    </div>
+    <div class="fieldrow">
+      <div class="field"><label for="utm-medium">utm_medium</label><input type="text" id="utm-medium" placeholder="e.g. paid_social"></div>
+      <div class="field"><label for="utm-campaign">utm_campaign</label><input type="text" id="utm-campaign" placeholder="e.g. spring_sale_2026"></div>
+    </div>
+    <div class="fieldrow">
+      <div class="field"><label for="utm-content">utm_content (optional)</label><input type="text" id="utm-content" placeholder="e.g. carousel_ad_1"></div>
+      <div class="field"><label for="utm-term">utm_term (optional, paid search)</label><input type="text" id="utm-term" placeholder="e.g. marketing_analytics_course"></div>
+    </div>
+    <div class="box" style="margin:16px 0; word-break:break-all; font-family:var(--mono); font-size:12.5px;" id="utm-preview"></div>
+    <div class="result-box" id="utm-result" style="display:none;"></div>
+  </div>
+
+  <h2>Exercises</h2>
+  <ol>
+    <li>Explore Google's public GA4 demo property ("Google Merchandise Store") and find the Explorations funnel report.</li>
+    <li>Design a full UTM naming convention doc for a hypothetical 3-channel launch (paid social, email, paid search) — write it down, don't just build one URL.</li>
+    <li>In GTM's free sandbox mode, configure one tag + trigger for a button-click event.</li>
+    <li>Query the public BigQuery GA4 sample dataset (<code class="inline">bigquery-public-data.ga4_obfuscated_sample_ecommerce</code>) with Module 2 SQL skills — this step is what most career-changers skip, and it's the differentiator.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div id="quiz-mount"></div>
+
+  <h2>Interview questions for this module</h2>
+  <div class="qa">
+    <p class="q">"How would you set up UTM tracking for a new campaign launch across 3 channels?"</p>
+    <p class="a">Model answer: agree on a naming convention doc first (lowercase, underscores, a fixed list of medium values) before anyone builds a single link — most attribution reporting breaks not from missing UTMs but from inconsistent ones ("Email" vs "email" vs "e-mail" become three different rows).</p>
+  </div>
+  <div class="qa">
+    <p class="q">"What's the difference between a GA4 event and a key event (conversion)?"</p>
+    <p class="a">Model answer: every interaction is an event (page_view, scroll, click); a key event is an event you've explicitly marked as meaningful to the business (purchase, form submission) — the subset GA4 optimizes and reports conversions against.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"A campaign's traffic isn't showing up in GA4 — how do you debug it?"</p>
+    <p class="a">Model answer, in order: (1) check the UTM parameters are actually present and correctly formatted on the live URL, (2) check for an ad blocker or consent-mode issue suppressing the tag, (3) open GTM's Preview mode / GA4 DebugView to confirm the trigger is firing at all before assuming it's a reporting delay.</p>
+  </div>
+
+  <div style="margin-top:32px;"><button id="complete-btn"></button></div>
+
+  <div class="lesson-nav">
+    <a href="module-3.html">← Module 3</a>
+    <a href="module-5.html">Module 5 — Metrics &amp; A/B Testing →</a>
+  </div>
+</main>
+
+<footer class="site">MODULE 4 · WEB &amp; DIGITAL ANALYTICS</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  const ids = ['utm-url','utm-source','utm-medium','utm-campaign','utm-content','utm-term'];
+  function buildUrl() {
+    const url = document.getElementById('utm-url').value.trim() || 'https://example.com';
+    const params = [];
+    const src = document.getElementById('utm-source').value.trim();
+    const med = document.getElementById('utm-medium').value.trim();
+    const camp = document.getElementById('utm-campaign').value.trim();
+    const content = document.getElementById('utm-content').value.trim();
+    const term = document.getElementById('utm-term').value.trim();
+    if (src) params.push('utm_source=' + encodeURIComponent(src));
+    if (med) params.push('utm_medium=' + encodeURIComponent(med));
+    if (camp) params.push('utm_campaign=' + encodeURIComponent(camp));
+    if (content) params.push('utm_content=' + encodeURIComponent(content));
+    if (term) params.push('utm_term=' + encodeURIComponent(term));
+    const full = params.length ? `${url}?${params.join('&')}` : url;
+    document.getElementById('utm-preview').textContent = full;
+
+    const issues = [];
+    [['utm_source', src], ['utm_medium', med], ['utm_campaign', camp]].forEach(([name, val]) => {
+      if (!val) { issues.push(`${name} is required.`); return; }
+      if (/[A-Z]/.test(val)) issues.push(`${name} has uppercase letters — normalize to lowercase or it'll fragment as a separate row.`);
+      if (/\s/.test(val)) issues.push(`${name} has a space — use underscores or hyphens instead.`);
+    });
+    const res = document.getElementById('utm-result');
+    if (!src && !med && !camp) { res.style.display = 'none'; return; }
+    res.style.display = 'block';
+    if (issues.length) {
+      res.className = 'result-box bad';
+      res.innerHTML = issues.map(i => `• ${i}`).join('<br>');
+    } else {
+      res.className = 'result-box good';
+      res.textContent = 'Clean — lowercase, no spaces, all required params present.';
+    }
+  }
+  ids.forEach(id => document.getElementById(id).addEventListener('input', buildUrl));
+  buildUrl();
+
+  initQuiz('quiz-mount', [
+    {
+      q: 'GA4\'s data model is fundamentally organized around:',
+      options: ['Sessions', 'Events', 'Pageviews only', 'Cookies'],
+      correct: 1,
+      explain: 'GA4 replaced Universal Analytics\' session-based model with an event-based model — everything, including a pageview, is an event.'
+    },
+    {
+      q: 'Which utm_ parameter would you typically use for a specific ad creative variant (e.g. "carousel_ad_1")?',
+      options: ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign'],
+      correct: 2,
+      explain: 'utm_content differentiates versions of the same ad/link within one campaign — exactly what you\'d use in an A/B creative test.'
+    },
+    {
+      q: 'Why does UTM casing consistency (e.g. always "email", never "Email") matter?',
+      options: [
+        'It doesn\'t, GA4 normalizes case automatically',
+        'Inconsistent casing creates separate rows in reports, fragmenting a single channel\'s data',
+        'It affects page load speed',
+        'It\'s only a stylistic preference'
+      ],
+      correct: 1,
+      explain: 'GA4 treats "Email" and "email" as different dimension values — the channel\'s true performance ends up split across rows.'
+    }
+  ]);
+
+  initCompleteButton('m4');
+</script>
+</body>
+</html>

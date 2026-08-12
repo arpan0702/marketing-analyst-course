@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Module 0 — The Transition Mindset</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="m0"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Module 0</p>
+    <h1>The Transition Mindset &amp; Analytics Foundations</h1>
+    <p class="lesson-goal">Reframe what "analysis" means before touching a single tool. Marketing judgment already contains most of the reasoning an analyst uses — this module names it.</p>
+  </div>
+
+  <h2>Start here: what "being an analyst" actually means day-to-day</h2>
+  <p>Strip away the job title and an analyst does one thing on repeat: someone has a question ("why did signups drop?"), the analyst finds data that can answer it, cleans that data until it's trustworthy, looks for the pattern, draws it so someone else can see the pattern too, and recommends what to do about it. That's the whole job. Every tool in this course (Excel, SQL, Tableau, GA4, statistics) exists only to make one of those six steps faster or more rigorous.</p>
+
+  <h2>Core concepts</h2>
+  <ul>
+    <li>The analytics workflow: <strong>question → data → clean → analyze → visualize → recommend.</strong></li>
+    <li>Vocabulary shift: "metric" (a number, like clicks) vs. "dimension" (a category, like channel), "grain" (what one row represents), "hypothesis," "confidence."</li>
+    <li>Every marketing skill has an analytical shadow — see the map below.</li>
+  </ul>
+
+  <div class="diagram">
+    <p class="diagram-label">the workflow loop</p>
+    <svg viewBox="0 0 780 150" width="100%" height="150" role="img" aria-label="Analytics workflow loop: question, data, clean, analyze, visualize, recommend, back to question">
+      <defs>
+        <marker id="arrow0" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--teal)"/></marker>
+      </defs>
+      <!-- connecting arrows -->
+      <g stroke="var(--teal)" stroke-width="2" marker-end="url(#arrow0)">
+        <line x1="140" y1="40" x2="150" y2="40"/>
+        <line x1="270" y1="40" x2="280" y2="40"/>
+        <line x1="400" y1="40" x2="410" y2="40"/>
+        <line x1="530" y1="40" x2="540" y2="40"/>
+        <line x1="660" y1="40" x2="670" y2="40"/>
+      </g>
+      <!-- return loop -->
+      <path d="M 725,60 C 725,110 55,110 55,60" fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow0)"/>
+      <text x="390" y="128" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--gold-ink,#caa15a)">stakeholder acts on the recommendation → a new question forms</text>
+      <!-- boxes -->
+      <g font-family="var(--sans)" font-size="12" font-weight="700">
+        <g>
+          <rect x="10" y="20" width="130" height="40" rx="8" fill="var(--teal)"/>
+          <text x="75" y="45" text-anchor="middle" fill="var(--code-bg)">QUESTION</text>
+        </g>
+        <g>
+          <rect x="150" y="20" width="120" height="40" rx="8" fill="var(--teal)" opacity="0.9"/>
+          <text x="210" y="45" text-anchor="middle" fill="var(--code-bg)">DATA</text>
+        </g>
+        <g>
+          <rect x="280" y="20" width="120" height="40" rx="8" fill="var(--teal)" opacity="0.8"/>
+          <text x="340" y="45" text-anchor="middle" fill="var(--code-bg)">CLEAN</text>
+        </g>
+        <g>
+          <rect x="410" y="20" width="120" height="40" rx="8" fill="var(--teal)" opacity="0.9"/>
+          <text x="470" y="45" text-anchor="middle" fill="var(--code-bg)">ANALYZE</text>
+        </g>
+        <g>
+          <rect x="540" y="20" width="120" height="40" rx="8" fill="var(--teal)"/>
+          <text x="600" y="45" text-anchor="middle" fill="var(--code-bg)">VISUALIZE</text>
+        </g>
+        <g>
+          <rect x="670" y="20" width="105" height="40" rx="8" fill="var(--gold)"/>
+          <text x="722" y="45" text-anchor="middle" fill="var(--code-bg)">RECOMMEND</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <h3>Skill map: what she already does → what it's called</h3>
+  <div class="box teal">
+    <p style="margin:0"><strong>Campaign brief</strong> → hypothesis + success metric &nbsp;·&nbsp;
+    <strong>Audience segments</strong> → SQL <code class="inline">GROUP BY</code> / clustering &nbsp;·&nbsp;
+    <strong>Journey funnel</strong> → conversion &amp; drop-off analysis &nbsp;·&nbsp;
+    <strong>Subject line testing</strong> → hypothesis testing &nbsp;·&nbsp;
+    <strong>Budget justification</strong> → ROI / attribution reasoning</p>
+  </div>
+
+  <h2>Interactive: Metric or Dimension?</h2>
+  <p>Marketing terms, sorted fast. This is the single most common confusion for people new to analytics vocabulary — get it automatic now.</p>
+  <div class="tool-card">
+    <span class="ttag">Sorting drill</span>
+    <div id="sorter"></div>
+    <div class="result-box" id="sorter-result" style="display:none;"></div>
+  </div>
+
+  <h2>Exercises (do these before moving on)</h2>
+  <ol>
+    <li>Pick one past campaign. Write the question you were actually trying to answer with its performance data, in one sentence.</li>
+    <li>List every metric you currently pull in your job. Label each a dimension or a metric.</li>
+    <li>Rewrite three resume bullets using: <code class="inline">[analytical verb] + [what was measured] + [tool/method] + [quantified result]</code> — before learning any tool. This proves the pivot is framing first, tools second.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div id="quiz-mount"></div>
+
+  <h2>Interview questions for this module</h2>
+  <div class="qa">
+    <p class="q">"Walk me through how you'd approach a completely new dataset you've never seen before."</p>
+    <p class="a">Model answer: start with the grain (what does one row represent?), check for obvious data quality issues (nulls, duplicates, date ranges), then re-state the business question before writing a single query — most bad analysis comes from skipping this and jumping straight to a pivot table.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"What's the difference between a metric and a dimension?"</p>
+    <p class="a">Model answer: a metric is a number you aggregate (revenue, clicks, sessions); a dimension is a category you group or filter by (channel, region, device). Every chart or query is really "which metric, sliced by which dimension."</p>
+  </div>
+
+  <div style="margin-top:32px;">
+    <button id="complete-btn"></button>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="index.html">← Course home</a>
+    <a href="module-1.html">Module 1 — Excel &amp; Google Sheets →</a>
+  </div>
+</main>
+
+<footer class="site">MODULE 0 · THE TRANSITION MINDSET</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  const sorterItems = [
+    { term: 'Channel', answer: 'dimension' },
+    { term: 'Revenue', answer: 'metric' },
+    { term: 'Campaign name', answer: 'dimension' },
+    { term: 'Click-through rate', answer: 'metric' },
+    { term: 'Device type', answer: 'dimension' },
+    { term: 'Conversions', answer: 'metric' },
+  ];
+  function renderSorter() {
+    const mount = document.getElementById('sorter');
+    mount.innerHTML = sorterItems.map((it, i) => `
+      <div class="qopt" style="justify-content:space-between; margin-bottom:8px; cursor:default;">
+        <span>${it.term}</span>
+        <span>
+          <button type="button" class="ghost" data-i="${i}" data-guess="dimension" style="padding:6px 12px; font-size:12px;">Dimension</button>
+          <button type="button" class="ghost" data-i="${i}" data-guess="metric" style="padding:6px 12px; font-size:12px;">Metric</button>
+        </span>
+      </div>`).join('');
+    let correctCount = 0;
+    const answered = new Array(sorterItems.length).fill(false);
+    mount.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.i, 10);
+        if (answered[i]) return;
+        answered[i] = true;
+        const row = btn.closest('.qopt');
+        const correct = btn.dataset.guess === sorterItems[i].answer;
+        row.style.borderColor = correct ? 'var(--good)' : 'var(--bad)';
+        row.style.background = correct ? 'var(--good-soft)' : 'var(--bad-soft)';
+        if (correct) correctCount++;
+        if (answered.every(Boolean)) {
+          const res = document.getElementById('sorter-result');
+          res.style.display = 'block';
+          res.className = 'result-box ' + (correctCount === sorterItems.length ? 'good' : '');
+          res.textContent = `${correctCount} / ${sorterItems.length} correct.`;
+        }
+      });
+    });
+  }
+  renderSorter();
+
+  initQuiz('quiz-mount', [
+    {
+      q: 'A campaign brief that defines a target audience and a goal is closest to which analytical step?',
+      options: ['Data cleaning', 'Defining a hypothesis and success metric', 'Building a dashboard', 'Running a JOIN'],
+      correct: 1,
+      explain: 'A brief already states what you expect to happen and how you\'ll measure it — that\'s a hypothesis and a metric, just not labeled that way yet.'
+    },
+    {
+      q: '"Channel" is an example of a:',
+      options: ['Metric', 'Dimension', 'Hypothesis', 'Grain'],
+      correct: 1,
+      explain: 'Channel is a category you group or filter by — a dimension, not a number you sum or average.'
+    },
+    {
+      q: 'What does "grain" mean in an analytics context?',
+      options: ['The level of precision in a chart', 'What one row in a dataset represents', 'A rounding method', 'A type of SQL join'],
+      correct: 1,
+      explain: 'Grain = what one row means (one order? one customer? one day of spend?). Getting the grain wrong is the most common cause of double-counted or wrong aggregations.'
+    },
+    {
+      q: 'Which of these is the best analytics-workflow order?',
+      options: [
+        'Visualize → Question → Data → Recommend',
+        'Question → Data → Clean → Analyze → Visualize → Recommend',
+        'Data → Visualize → Question → Clean',
+        'Clean → Recommend → Question → Data'
+      ],
+      correct: 1,
+      explain: 'Always start from the business question — pulling data first and looking for a story afterward is how misleading analysis happens.'
+    }
+  ]);
+
+  initCompleteButton('m0');
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f5e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f5e4]: MA COURSE
+      - generic [ref=f5e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f5e6]:
+      - link "Home" [ref=f5e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Mindset" [ref=f5e8] [cursor=pointer]:
+        - /url: module-0.html
+      - link "Sheets" [ref=f5e9] [cursor=pointer]:
+        - /url: module-1.html
+      - link "SQL" [ref=f5e10] [cursor=pointer]:
+        - /url: module-2.html
+      - link "Dataviz" [ref=f5e11] [cursor=pointer]:
+        - /url: module-3.html
+      - link "GA4/GTM" [ref=f5e12] [cursor=pointer]:
+        - /url: module-4.html
+      - link "Metrics" [ref=f5e13] [cursor=pointer]:
+        - /url: module-5.html
+  - main [ref=f5e14]:
+    - generic [ref=f5e15]:
+      - paragraph [ref=f5e16]: Module 0
+      - heading "The Transition Mindset & Analytics Foundations" [level=1] [ref=f5e17]
+      - paragraph [ref=f5e18]: Reframe what "analysis" means before touching a single tool. Marketing judgment already contains most of the reasoning an analyst uses — this module names it.
+    - heading "Core concepts" [level=2] [ref=f5e19]
+    - list [ref=f5e20]:
+      - listitem [ref=f5e21]:
+        - text: "The analytics workflow:"
+        - strong [ref=f5e22]: question → data → clean → analyze → visualize → recommend.
+      - listitem [ref=f5e23]: "Vocabulary shift: \"metric\" (a number, like clicks) vs. \"dimension\" (a category, like channel), \"grain\" (what one row represents), \"hypothesis,\" \"confidence.\""
+      - listitem [ref=f5e24]: Every marketing skill has an analytical shadow — see the map below.
+    - generic [ref=f5e25]:
+      - paragraph [ref=f5e26]: the workflow loop
+      - generic [ref=f5e27]: QUESTION --> DATA --> CLEAN --> ANALYZE --> VISUALIZE --> RECOMMEND ^ | | | +---------------------- stakeholder acts, new question forms ----+
+    - 'heading "Skill map: what she already does → what it''s called" [level=3] [ref=f5e28]'
+    - paragraph [ref=f5e30]:
+      - strong [ref=f5e31]: Campaign brief
+      - text: → hypothesis + success metric ·
+      - strong [ref=f5e32]: Audience segments
+      - text: → SQL
+      - code [ref=f5e33]: GROUP BY
+      - text: / clustering ·
+      - strong [ref=f5e34]: Journey funnel
+      - text: → conversion & drop-off analysis ·
+      - strong [ref=f5e35]: Subject line testing
+      - text: → hypothesis testing ·
+      - strong [ref=f5e36]: Budget justification
+      - text: → ROI / attribution reasoning
+    - 'heading "Interactive: Metric or Dimension?" [level=2] [ref=f5e37]'
+    - paragraph [ref=f5e38]: Marketing terms, sorted fast. This is the single most common confusion for people new to analytics vocabulary — get it automatic now.
+    - generic [ref=f5e39]:
+      - generic [ref=f5e40]: Sorting drill
+      - generic [ref=f5e41]:
+        - generic [ref=f5e42]:
+          - generic [ref=f5e43]: Channel
+          - generic [ref=f5e44]:
+            - button "Dimension" [ref=f5e45] [cursor=pointer]
+            - button "Metric" [ref=f5e46] [cursor=pointer]
+        - generic [ref=f5e47]:
+          - generic [ref=f5e48]: Revenue
+          - generic [ref=f5e49]:
+            - button "Dimension" [ref=f5e50] [cursor=pointer]
+            - button "Metric" [ref=f5e51] [cursor=pointer]
+        - generic [ref=f5e52]:
+          - generic [ref=f5e53]: Campaign name
+          - generic [ref=f5e54]:
+            - button "Dimension" [ref=f5e55] [cursor=pointer]
+            - button "Metric" [ref=f5e56] [cursor=pointer]
+        - generic [ref=f5e57]:
+          - generic [ref=f5e58]: Click-through rate
+          - generic [ref=f5e59]:
+            - button "Dimension" [ref=f5e60] [cursor=pointer]
+            - button "Metric" [ref=f5e61] [cursor=pointer]
+        - generic [ref=f5e62]:
+          - generic [ref=f5e63]: Device type
+          - generic [ref=f5e64]:
+            - button "Dimension" [ref=f5e65] [cursor=pointer]
+            - button "Metric" [ref=f5e66] [cursor=pointer]
+        - generic [ref=f5e67]:
+          - generic [ref=f5e68]: Conversions
+          - generic [ref=f5e69]:
+            - button "Dimension" [ref=f5e70] [cursor=pointer]
+            - button "Metric" [ref=f5e71] [cursor=pointer]
+    - heading "Exercises (do these before moving on)" [level=2] [ref=f5e72]
+    - list [ref=f5e73]:
+      - listitem [ref=f5e74]: Pick one past campaign. Write the question you were actually trying to answer with its performance data, in one sentence.
+      - listitem [ref=f5e75]: List every metric you currently pull in your job. Label each a dimension or a metric.
+      - listitem [ref=f5e76]:
+        - text: "Rewrite three resume bullets using:"
+        - code [ref=f5e77]: "[analytical verb] + [what was measured] + [tool/method] + [quantified result]"
+        - text: — before learning any tool. This proves the pivot is framing first, tools second.
+    - heading "Check your understanding" [level=2] [ref=f5e78]
+    - generic [ref=f5e80]:
+      - generic [ref=f5e81]:
+        - paragraph [ref=f5e82]:
+          - generic [ref=f5e83]: Q1
+          - text: A campaign brief that defines a target audience and a goal is closest to which analytical step?
+        - generic [ref=f5e84]:
+          - generic [ref=f5e85] [cursor=pointer]:
+            - radio "Data cleaning" [ref=f5e86]
+            - generic [ref=f5e87]: Data cleaning
+          - generic [ref=f5e88] [cursor=pointer]:
+            - radio "Defining a hypothesis and success metric" [ref=f5e89]
+            - generic [ref=f5e90]: Defining a hypothesis and success metric
+          - generic [ref=f5e91] [cursor=pointer]:
+            - radio "Building a dashboard" [ref=f5e92]
+            - generic [ref=f5e93]: Building a dashboard
+          - generic [ref=f5e94] [cursor=pointer]:
+            - radio "Running a JOIN" [ref=f5e95]
+            - generic [ref=f5e96]: Running a JOIN
+      - generic [ref=f5e97]:
+        - paragraph [ref=f5e98]:
+          - generic [ref=f5e99]: Q2
+          - text: "\"Channel\" is an example of a:"
+        - generic [ref=f5e100]:
+          - generic [ref=f5e101] [cursor=pointer]:
+            - radio "Metric" [ref=f5e102]
+            - generic [ref=f5e103]: Metric
+          - generic [ref=f5e104] [cursor=pointer]:
+            - radio "Dimension" [ref=f5e105]
+            - generic [ref=f5e106]: Dimension
+          - generic [ref=f5e107] [cursor=pointer]:
+            - radio "Hypothesis" [ref=f5e108]
+            - generic [ref=f5e109]: Hypothesis
+          - generic [ref=f5e110] [cursor=pointer]:
+            - radio "Grain" [ref=f5e111]
+            - generic [ref=f5e112]: Grain
+      - generic [ref=f5e113]:
+        - paragraph [ref=f5e114]:
+          - generic [ref=f5e115]: Q3
+          - text: What does "grain" mean in an analytics context?
+        - generic [ref=f5e116]:
+          - generic [ref=f5e117] [cursor=pointer]:
+            - radio "The level of precision in a chart" [ref=f5e118]
+            - generic [ref=f5e119]: The level of precision in a chart
+          - generic [ref=f5e120] [cursor=pointer]:
+            - radio "What one row in a dataset represents" [ref=f5e121]
+            - generic [ref=f5e122]: What one row in a dataset represents
+          - generic [ref=f5e123] [cursor=pointer]:
+            - radio "A rounding method" [ref=f5e124]
+            - generic [ref=f5e125]: A rounding method
+          - generic [ref=f5e126] [cursor=pointer]:
+            - radio "A type of SQL join" [ref=f5e127]
+            - generic [ref=f5e128]: A type of SQL join
+      - generic [ref=f5e129]:
+        - paragraph [ref=f5e130]:
+          - generic [ref=f5e131]: Q4
+          - text: Which of these is the best analytics-workflow order?
+        - generic [ref=f5e132]:
+          - generic [ref=f5e133] [cursor=pointer]:
+            - radio "Visualize → Question → Data → Recommend" [ref=f5e134]
+            - generic [ref=f5e135]: Visualize → Question → Data → Recommend
+          - generic [ref=f5e136] [cursor=pointer]:
+            - radio "Question → Data → Clean → Analyze → Visualize → Recommend" [ref=f5e137]
+            - generic [ref=f5e138]: Question → Data → Clean → Analyze → Visualize → Recommend
+          - generic [ref=f5e139] [cursor=pointer]:
+            - radio "Data → Visualize → Question → Clean" [ref=f5e140]
+            - generic [ref=f5e141]: Data → Visualize → Question → Clean
+          - generic [ref=f5e142] [cursor=pointer]:
+            - radio "Clean → Recommend → Question → Data" [ref=f5e143]
+            - generic [ref=f5e144]: Clean → Recommend → Question → Data
+      - generic [ref=f5e145]:
+        - generic [ref=f5e146]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f5e147] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f5e148]
+    - generic [ref=f5e149]:
+      - paragraph [ref=f5e150]: "\"Walk me through how you'd approach a completely new dataset you've never seen before.\""
+      - paragraph [ref=f5e151]: "Model answer: start with the grain (what does one row represent?), check for obvious data quality issues (nulls, duplicates, date ranges), then re-state the business question before writing a single query — most bad analysis comes from skipping this and jumping straight to a pivot table."
+    - generic [ref=f5e152]:
+      - paragraph [ref=f5e153]: "\"What's the difference between a metric and a dimension?\""
+      - paragraph [ref=f5e154]: "Model answer: a metric is a number you aggregate (revenue, clicks, sessions); a dimension is a category you group or filter by (channel, region, device). Every chart or query is really \"which metric, sliced by which dimension.\""
+    - button "Mark this module complete" [ref=f5e156] [cursor=pointer]
+    - generic [ref=f5e157]:
+      - link "← Course home" [ref=f5e158] [cursor=pointer]:
+        - /url: index.html
+      - link "Module 1 — Excel & Google Sheets →" [ref=f5e159] [cursor=pointer]:
+        - /url: module-1.html
+  - contentinfo [ref=f5e160]: MODULE 0 · THE TRANSITION MINDSET

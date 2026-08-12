@@ -1,0 +1,216 @@
+- generic [active] [ref=f20e1]:
+  - generic [ref=f20e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f20e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f20e4]: MA COURSE
+      - generic [ref=f20e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f20e6]:
+      - link "Home" [ref=f20e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f20e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f20e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f20e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f20e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f20e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f20e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f20e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply" [ref=f20e15] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f20e16]:
+    - generic [ref=f20e17]:
+      - paragraph [ref=f20e18]: Module 5
+      - heading "Marketing Metrics, A/B Testing & Statistical Fundamentals" [level=1] [ref=f20e19]
+      - paragraph [ref=f20e20]: CAC, LTV, ROAS, hypothesis testing, confidence — where "analyst" stops being a title and starts being a way of thinking.
+    - heading "Core concepts" [level=2] [ref=f20e21]
+    - list [ref=f20e22]:
+      - listitem [ref=f20e23]:
+        - strong [ref=f20e24]: CAC
+        - text: (Customer Acquisition Cost) = spend ÷ new customers.
+      - listitem [ref=f20e25]:
+        - strong [ref=f20e26]: LTV
+        - text: (Lifetime Value) = avg. order value × purchase frequency × customer lifespan.
+      - listitem [ref=f20e27]:
+        - strong [ref=f20e28]: ROAS
+        - text: (Return on Ad Spend) = revenue ÷ spend. Healthy
+        - strong [ref=f20e29]: "LTV : CAC"
+        - text: is roughly 3:1 or better.
+      - listitem [ref=f20e30]:
+        - strong [ref=f20e31]: Statistical significance
+        - text: ": whether an observed difference (e.g. Variant B's conversion rate) is likely real, or just noise."
+      - listitem [ref=f20e32]:
+        - strong [ref=f20e33]: Sample size / peeking risk
+        - text: ": checking significance too early inflates false positives — a test that looks \"significant\" on day 3 can flip by day 14."
+    - generic [ref=f20e34]:
+      - paragraph [ref=f20e35]: acquisition funnel — where each metric lives
+      - img "Funnel narrowing from 100,000 impressions to 8,000 clicks to 320 customers, with CAC, LTV, and ROAS labeled at the customer stage" [ref=f20e36]:
+        - generic [ref=f20e37]:
+          - generic [ref=f20e41]: IMPRESSIONS
+          - generic [ref=f20e42]: 100,000
+          - generic [ref=f20e43]: CLICKS
+          - generic [ref=f20e44]: 8,000
+          - generic [ref=f20e45]: ← A/B tests live on this transition
+          - generic [ref=f20e46]: CUSTOMERS
+          - generic [ref=f20e47]: "320"
+        - generic [ref=f20e48]:
+          - generic [ref=f20e49]: CAC = Spend / Customers
+          - generic [ref=f20e50]: LTV = Avg order value × purchase freq × lifespan
+          - generic [ref=f20e51]: ROAS = Revenue / Spend
+          - generic [ref=f20e52]: "Health check: LTV : CAC ≥ ~3 : 1"
+    - 'heading "Interactive: CAC · LTV · ROAS calculator" [level=2] [ref=f20e53]'
+    - generic [ref=f20e54]:
+      - generic [ref=f20e55]: Calculator
+      - generic [ref=f20e56]:
+        - generic [ref=f20e57]:
+          - generic [ref=f20e58]: Marketing spend ($)
+          - spinbutton "Marketing spend ($)" [ref=f20e59]: "20000"
+        - generic [ref=f20e60]:
+          - generic [ref=f20e61]: New customers acquired
+          - spinbutton "New customers acquired" [ref=f20e62]: "250"
+      - generic [ref=f20e63]:
+        - generic [ref=f20e64]:
+          - generic [ref=f20e65]: Avg. order value ($)
+          - spinbutton "Avg. order value ($)" [ref=f20e66]: "60"
+        - generic [ref=f20e67]:
+          - generic [ref=f20e68]: Purchases per year
+          - spinbutton "Purchases per year" [ref=f20e69]: "3"
+      - generic [ref=f20e70]:
+        - generic [ref=f20e71]:
+          - generic [ref=f20e72]: Avg. customer lifespan (years)
+          - spinbutton "Avg. customer lifespan (years)" [ref=f20e73]: "2"
+        - generic [ref=f20e74]:
+          - generic [ref=f20e75]: Total revenue from this spend ($)
+          - spinbutton "Total revenue from this spend ($)" [ref=f20e76]: "70000"
+      - generic [ref=f20e77]:
+        - generic [ref=f20e78]:
+          - generic [ref=f20e79]: "CAC: $80.00"
+          - generic [ref=f20e80]: "LTV: $360.00"
+          - generic [ref=f20e81]: "ROAS: 3.50x"
+          - generic [ref=f20e82]: "LTV : CAC: 4.50 : 1"
+        - generic [ref=f20e83]: Healthy — at or above the ~3:1 benchmark.
+    - 'heading "Interactive: is your A/B test result real?" [level=2] [ref=f20e84]'
+    - paragraph [ref=f20e85]: Two-proportion significance check (z-test), the same logic behind Portfolio Project 2. Enter each variant's visitors and conversions.
+    - generic [ref=f20e86]:
+      - generic [ref=f20e87]: Significance calculator
+      - generic [ref=f20e88]:
+        - generic [ref=f20e89]:
+          - generic [ref=f20e90]: Variant A visitors
+          - spinbutton "Variant A visitors" [ref=f20e91]: "5000"
+        - generic [ref=f20e92]:
+          - generic [ref=f20e93]: Variant A conversions
+          - spinbutton "Variant A conversions" [ref=f20e94]: "250"
+      - generic [ref=f20e95]:
+        - generic [ref=f20e96]:
+          - generic [ref=f20e97]: Variant B visitors
+          - spinbutton "Variant B visitors" [ref=f20e98]: "5000"
+        - generic [ref=f20e99]:
+          - generic [ref=f20e100]: Variant B conversions
+          - spinbutton "Variant B conversions" [ref=f20e101]: "290"
+      - generic [ref=f20e102]:
+        - generic [ref=f20e103]:
+          - generic [ref=f20e104]: "Variant A rate: 5.00%"
+          - generic [ref=f20e105]: "Variant B rate: 5.80%"
+          - generic [ref=f20e106]: "z-score: 1.77"
+          - generic [ref=f20e107]: "p-value: 0.0768"
+        - generic [ref=f20e108]: Not significant at 95% confidence (p ≥ 0.05) — don't call a winner yet; the difference could be random variation.
+    - heading "Exercises" [level=2] [ref=f20e109]
+    - list [ref=f20e110]:
+      - listitem [ref=f20e111]: Using the calculators above, try a scenario where LTV:CAC is under 2:1 — write one sentence recommending what you'd do.
+      - listitem [ref=f20e112]: Using the Kaggle "Marketing A/B Testing" dataset, calculate conversion rate for each group, then check significance (Sheets has a built-in chi-square function) against this page's calculator.
+      - listitem [ref=f20e113]: In the significance calculator, drop Variant B's visitor count to 500 with the same conversion rate — watch the result flip. Write two sentences on why that matters when a stakeholder wants to end a test early.
+    - heading "Check your understanding" [level=2] [ref=f20e114]
+    - generic [ref=f20e116]:
+      - generic [ref=f20e117]:
+        - paragraph [ref=f20e118]:
+          - generic [ref=f20e119]: Q1
+          - text: "LTV : CAC of 5 : 1 generally signals:"
+        - generic [ref=f20e120]:
+          - generic [ref=f20e121] [cursor=pointer]:
+            - radio "Dangerously unprofitable acquisition" [ref=f20e122]
+            - generic [ref=f20e123]: Dangerously unprofitable acquisition
+          - generic [ref=f20e124] [cursor=pointer]:
+            - radio "A healthy, sustainable acquisition economics" [ref=f20e125]
+            - generic [ref=f20e126]: A healthy, sustainable acquisition economics
+          - generic [ref=f20e127] [cursor=pointer]:
+            - radio "A tracking error" [ref=f20e128]
+            - generic [ref=f20e129]: A tracking error
+          - generic [ref=f20e130] [cursor=pointer]:
+            - radio "Nothing without more context on churn" [ref=f20e131]
+            - generic [ref=f20e132]: Nothing without more context on churn
+      - generic [ref=f20e133]:
+        - paragraph [ref=f20e134]:
+          - generic [ref=f20e135]: Q2
+          - text: "A test shows p = 0.08. At the standard 95% confidence threshold, this result is:"
+        - generic [ref=f20e136]:
+          - generic [ref=f20e137] [cursor=pointer]:
+            - radio "Statistically significant" [ref=f20e138]
+            - generic [ref=f20e139]: Statistically significant
+          - generic [ref=f20e140] [cursor=pointer]:
+            - radio "Not statistically significant" [ref=f20e141]
+            - generic [ref=f20e142]: Not statistically significant
+          - generic [ref=f20e143] [cursor=pointer]:
+            - radio "Definitely a real effect" [ref=f20e144]
+            - generic [ref=f20e145]: Definitely a real effect
+          - generic [ref=f20e146] [cursor=pointer]:
+            - radio "Impossible to interpret" [ref=f20e147]
+            - generic [ref=f20e148]: Impossible to interpret
+      - generic [ref=f20e149]:
+        - paragraph [ref=f20e150]:
+          - generic [ref=f20e151]: Q3
+          - text: Why is "peeking" at A/B test results daily and stopping as soon as it looks significant a problem?
+        - generic [ref=f20e152]:
+          - generic [ref=f20e153] [cursor=pointer]:
+            - radio "It's not a problem, earlier is always better" [ref=f20e154]
+            - generic [ref=f20e155]: It's not a problem, earlier is always better
+          - generic [ref=f20e156] [cursor=pointer]:
+            - radio "It inflates the false-positive rate — a result that looks significant early can be random noise that regresses later" [ref=f20e157]
+            - generic [ref=f20e158]: It inflates the false-positive rate — a result that looks significant early can be random noise that regresses later
+          - generic [ref=f20e159] [cursor=pointer]:
+            - radio "It only matters for very large sample sizes" [ref=f20e160]
+            - generic [ref=f20e161]: It only matters for very large sample sizes
+          - generic [ref=f20e162] [cursor=pointer]:
+            - radio "It makes the dashboard slower" [ref=f20e163]
+            - generic [ref=f20e164]: It makes the dashboard slower
+      - generic [ref=f20e165]:
+        - paragraph [ref=f20e166]:
+          - generic [ref=f20e167]: Q4
+          - text: "ROAS of 2.5x on a campaign with very low product margin could still be:"
+        - generic [ref=f20e168]:
+          - generic [ref=f20e169] [cursor=pointer]:
+            - radio "Automatically profitable" [ref=f20e170]
+            - generic [ref=f20e171]: Automatically profitable
+          - generic [ref=f20e172] [cursor=pointer]:
+            - radio "Unprofitable — ROAS alone doesn't account for margin or fulfillment cost" [ref=f20e173]
+            - generic [ref=f20e174]: Unprofitable — ROAS alone doesn't account for margin or fulfillment cost
+          - generic [ref=f20e175] [cursor=pointer]:
+            - radio "Impossible to calculate" [ref=f20e176]
+            - generic [ref=f20e177]: Impossible to calculate
+          - generic [ref=f20e178] [cursor=pointer]:
+            - radio "The same thing as CAC" [ref=f20e179]
+            - generic [ref=f20e180]: The same thing as CAC
+      - generic [ref=f20e181]:
+        - generic [ref=f20e182]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f20e183] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f20e184]
+    - generic [ref=f20e185]:
+      - paragraph [ref=f20e186]: "\"How do you explain statistical significance to a stakeholder with no stats background?\""
+      - paragraph [ref=f20e187]: "Model answer: \"It's how confident we are the difference we're seeing is a real effect, not random noise from a small sample — like flipping a coin 10 times and getting 7 heads doesn't mean the coin is rigged, but 700 heads out of 1,000 flips would.\""
+    - generic [ref=f20e188]:
+      - paragraph [ref=f20e189]: "\"If LTV:CAC is 1.5:1, what does that tell you and what would you recommend?\""
+      - paragraph [ref=f20e190]: "Model answer: unsustainable — the cost of acquiring a customer is too close to what they're worth over their lifetime, leaving little margin for overhead or profit. Recommend either reducing CAC by channel (cut underperforming spend) or increasing retention/LTV (lifecycle marketing) before scaling acquisition spend further."
+    - generic [ref=f20e191]:
+      - paragraph [ref=f20e192]: "\"How would you determine if you have enough sample size to trust an A/B test result?\""
+      - paragraph [ref=f20e193]: "Model answer: run a sample-size calculation before launch based on baseline conversion rate and minimum detectable effect, and commit to that sample size and duration up front — don't stop the test early just because it looks significant on day 3, since that inflates the false-positive rate."
+    - button "Mark this module complete" [ref=f20e195] [cursor=pointer]
+    - generic [ref=f20e196]:
+      - link "← Module 4" [ref=f20e197] [cursor=pointer]:
+        - /url: module-4.html
+      - link "Course home →" [ref=f20e198] [cursor=pointer]:
+        - /url: index.html
+  - contentinfo [ref=f20e199]: MODULE 5 · METRICS & A/B TESTING

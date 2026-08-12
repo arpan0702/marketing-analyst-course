@@ -1,0 +1,189 @@
+- generic [active] [ref=f16e1]:
+  - generic [ref=f16e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f16e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f16e4]: MA COURSE
+      - generic [ref=f16e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f16e6]:
+      - link "Home" [ref=f16e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f16e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f16e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f16e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f16e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f16e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f16e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f16e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply" [ref=f16e15] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f16e16]:
+    - generic [ref=f16e17]:
+      - paragraph [ref=f16e18]: Module 1
+      - heading "Advanced Excel & Google Sheets for Marketers" [level=1] [ref=f16e19]
+      - paragraph [ref=f16e20]: Pivot tables, XLOOKUP, and dynamic charts — the bridge into SQL logic. Every idea here has a direct SQL equivalent in Module 2.
+    - 'heading "Start here: what a pivot table actually does" [level=2] [ref=f16e21]'
+    - paragraph [ref=f16e22]: "A pivot table takes a long list of raw rows (one row per transaction) and collapses it into a summary: pick a category to group by (rows), pick a number to total up (values). Nothing more mysterious than that — see it happen below."
+    - generic [ref=f16e23]:
+      - paragraph [ref=f16e24]: "before → after: raw rows become a summary"
+      - img "Raw transaction rows on the left collapse into a pivot table summed by channel on the right" [ref=f16e25]:
+        - generic [ref=f16e26]:
+          - generic [ref=f16e27]: RAW ROWS
+          - generic [ref=f16e41]:
+            - generic [ref=f16e42]: Channel
+            - generic [ref=f16e43]: Spend
+            - generic [ref=f16e44]: Email
+            - generic [ref=f16e45]: $45
+            - generic [ref=f16e46]: Paid Social
+            - generic [ref=f16e47]: $82
+            - generic [ref=f16e48]: Email
+            - generic [ref=f16e49]: $30
+            - generic [ref=f16e50]: Paid Social
+            - generic [ref=f16e51]: $95
+            - generic [ref=f16e52]: Paid Search
+            - generic [ref=f16e53]: $120
+          - generic [ref=f16e54]: GROUP + SUM
+          - generic [ref=f16e55]: PIVOT RESULT
+          - generic [ref=f16e63]:
+            - generic [ref=f16e64]: Channel
+            - generic [ref=f16e65]: Sum of Spend
+            - generic [ref=f16e66]: Email
+            - generic [ref=f16e67]: $75
+            - generic [ref=f16e68]: Paid Social
+            - generic [ref=f16e69]: $177
+    - heading "Core concepts" [level=2] [ref=f16e70]
+    - list [ref=f16e71]:
+      - listitem [ref=f16e72]:
+        - strong [ref=f16e73]: Pivot tables
+        - text: ": rows, columns, values, filters — maps directly to"
+        - code [ref=f16e74]: GROUP BY
+        - text: .
+      - listitem [ref=f16e75]:
+        - strong [ref=f16e76]: XLOOKUP
+        - text: "(over VLOOKUP/INDEX-MATCH): join a second table of data by a matching key — the spreadsheet version of a SQL JOIN."
+      - listitem [ref=f16e77]:
+        - strong [ref=f16e78]: Dynamic charts & conditional formatting
+        - text: for fast visual QA of a dataset.
+      - listitem [ref=f16e79]:
+        - strong [ref=f16e80]: Cleaning
+        - text: ": TRIM, TEXT-TO-COLUMNS, removing duplicates, handling blanks."
+    - generic [ref=f16e81]:
+      - paragraph [ref=f16e82]: mental model bridge
+      - generic [ref=f16e83]: "PIVOT TABLE SQL EQUIVALENT (Module 2) ------------------------------ ------------------------------- Rows: Channel SELECT channel, Values: Sum of Spend --> SUM(spend) AS total_spend Filter: Month = \"June\" FROM campaigns WHERE month = 'June' GROUP BY channel;"
+    - 'heading "Interactive: write the XLOOKUP" [level=2] [ref=f16e84]'
+    - paragraph [ref=f16e85]:
+      - text: "Scenario: you have a"
+      - code [ref=f16e86]: campaigns
+      - text: sheet with a
+      - code [ref=f16e87]: channel
+      - text: column, and a separate
+      - code [ref=f16e88]: targets
+      - text: sheet listing
+      - code [ref=f16e89]: channel
+      - text: and
+      - code [ref=f16e90]: target_cpa
+      - text: . Write a formula for cell C2 on
+      - code [ref=f16e91]: campaigns
+      - text: that pulls in the matching
+      - code [ref=f16e92]: target_cpa
+      - text: .
+    - generic [ref=f16e93]:
+      - generic [ref=f16e94]: Formula check
+      - generic [ref=f16e95]:
+        - generic [ref=f16e96]: Formula for C2
+        - textbox "Formula for C2" [ref=f16e97]:
+          - /placeholder: =XLOOKUP(...)
+      - button "Check formula" [ref=f16e98] [cursor=pointer]
+    - generic [ref=f16e99]:
+      - generic [ref=f16e100]: Challenge 2
+      - text: "Now write the conditional-flag formula: mark a channel \"Over target\" if"
+      - code [ref=f16e101]: actual_cpa > target_cpa
+      - text: .
+    - generic [ref=f16e102]:
+      - generic [ref=f16e103]:
+        - generic [ref=f16e104]: Formula for D2
+        - textbox "Formula for D2" [ref=f16e105]:
+          - /placeholder: =IF(...)
+      - button "Check formula" [ref=f16e106] [cursor=pointer]
+    - heading "Exercises" [level=2] [ref=f16e107]
+    - list [ref=f16e108]:
+      - listitem [ref=f16e109]: "Download a raw campaign export (Kaggle \"Marketing Campaign Performance Dataset\" works well). Clean it: fix blanks, standardize dates, remove duplicate rows."
+      - listitem [ref=f16e110]: "Build a pivot table: total spend and conversions by channel and month."
+      - listitem [ref=f16e111]: Use XLOOKUP to merge in a second table (channel-level target CPA) and flag channels over target.
+      - listitem [ref=f16e112]: Build one dynamic chart that updates automatically when the pivot filter changes.
+    - heading "Check your understanding" [level=2] [ref=f16e113]
+    - generic [ref=f16e115]:
+      - generic [ref=f16e116]:
+        - paragraph [ref=f16e117]:
+          - generic [ref=f16e118]: Q1
+          - text: In a pivot table, "SUM of Spend" is placed in which area?
+        - generic [ref=f16e119]:
+          - generic [ref=f16e120] [cursor=pointer]:
+            - radio "Rows" [ref=f16e121]
+            - generic [ref=f16e122]: Rows
+          - generic [ref=f16e123] [cursor=pointer]:
+            - radio "Filters" [ref=f16e124]
+            - generic [ref=f16e125]: Filters
+          - generic [ref=f16e126] [cursor=pointer]:
+            - radio "Values" [ref=f16e127]
+            - generic [ref=f16e128]: Values
+          - generic [ref=f16e129] [cursor=pointer]:
+            - radio "Columns" [ref=f16e130]
+            - generic [ref=f16e131]: Columns
+      - generic [ref=f16e132]:
+        - paragraph [ref=f16e133]:
+          - generic [ref=f16e134]: Q2
+          - text: Why is XLOOKUP generally preferred over VLOOKUP today?
+        - generic [ref=f16e135]:
+          - generic [ref=f16e136] [cursor=pointer]:
+            - radio "It's faster to type" [ref=f16e137]
+            - generic [ref=f16e138]: It's faster to type
+          - generic [ref=f16e139] [cursor=pointer]:
+            - radio "It can search in either direction and doesn't break when columns are reordered" [ref=f16e140]
+            - generic [ref=f16e141]: It can search in either direction and doesn't break when columns are reordered
+          - generic [ref=f16e142] [cursor=pointer]:
+            - radio "It works in Excel but not Google Sheets" [ref=f16e143]
+            - generic [ref=f16e144]: It works in Excel but not Google Sheets
+          - generic [ref=f16e145] [cursor=pointer]:
+            - radio "It doesn't require a lookup table" [ref=f16e146]
+            - generic [ref=f16e147]: It doesn't require a lookup table
+      - generic [ref=f16e148]:
+        - paragraph [ref=f16e149]:
+          - generic [ref=f16e150]: Q3
+          - text: "You need to combine spend data with channel targets stored in a separate sheet. This is the spreadsheet equivalent of a SQL:"
+        - generic [ref=f16e151]:
+          - generic [ref=f16e152] [cursor=pointer]:
+            - radio "GROUP BY" [ref=f16e153]
+            - generic [ref=f16e154]: GROUP BY
+          - generic [ref=f16e155] [cursor=pointer]:
+            - radio "JOIN" [ref=f16e156]
+            - generic [ref=f16e157]: JOIN
+          - generic [ref=f16e158] [cursor=pointer]:
+            - radio "ORDER BY" [ref=f16e159]
+            - generic [ref=f16e160]: ORDER BY
+          - generic [ref=f16e161] [cursor=pointer]:
+            - radio "WHERE clause" [ref=f16e162]
+            - generic [ref=f16e163]: WHERE clause
+      - generic [ref=f16e164]:
+        - generic [ref=f16e165]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f16e166] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f16e167]
+    - generic [ref=f16e168]:
+      - paragraph [ref=f16e169]: "\"How would you use a pivot table to find your top 5 campaigns by ROI?\""
+      - paragraph [ref=f16e170]: "Model answer: rows = campaign name, values = sum of revenue and sum of spend (or a calculated ROI field), sort descending on the ROI value, filter to top 5 — then say what you'd do with that list, not just how you built it."
+    - generic [ref=f16e171]:
+      - paragraph [ref=f16e172]: "\"What's the difference between VLOOKUP and XLOOKUP, and why does it matter?\""
+      - paragraph [ref=f16e173]: "Model answer: VLOOKUP only searches left-to-right and breaks if columns are reordered; XLOOKUP searches in either direction, returns a clean error value, and doesn't break when columns move. Mentioning XLOOKUP by name signals current tooling, not a 2015-era spreadsheet habit."
+    - button "Mark this module complete" [ref=f16e175] [cursor=pointer]
+    - generic [ref=f16e176]:
+      - link "← Module 0" [ref=f16e177] [cursor=pointer]:
+        - /url: module-0.html
+      - link "Module 2 — SQL for Marketing Analytics →" [ref=f16e178] [cursor=pointer]:
+        - /url: module-2.html
+  - contentinfo [ref=f16e179]: MODULE 1 · EXCEL & GOOGLE SHEETS

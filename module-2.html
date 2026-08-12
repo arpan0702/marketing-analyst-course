@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Module 2 — SQL for Marketing Analytics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="m2"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Module 2</p>
+    <h1>SQL for Marketing Analytics</h1>
+    <p class="lesson-goal">The single highest-leverage skill in this whole plan. A real SQL database is loaded below, in your browser — write real queries against it.</p>
+  </div>
+
+  <h2>Start here: what a database actually is</h2>
+  <p>A database is just a set of spreadsheets (called <strong>tables</strong>) that can talk to each other. Each table has columns (like a spreadsheet's headers) and rows (one row = one thing — one order, one customer). SQL is the language for asking that set of tables a question. Everything below — SELECT, JOIN, GROUP BY — is one type of question.</p>
+
+  <h2>Core concepts</h2>
+  <ul>
+    <li><code class="inline">SELECT</code>, <code class="inline">WHERE</code>, <code class="inline">ORDER BY</code>, <code class="inline">LIMIT</code> — basic retrieval.</li>
+    <li><code class="inline">JOIN</code> (INNER, LEFT) — combining an orders table with a customers table.</li>
+    <li><code class="inline">GROUP BY</code> + aggregations (<code class="inline">SUM</code>, <code class="inline">COUNT</code>, <code class="inline">AVG</code>) — the pivot table, formalized.</li>
+    <li>Window functions (<code class="inline">RANK()</code>, <code class="inline">LAG()</code>) — rank within a group, month-over-month change.</li>
+    <li><code class="inline">CASE WHEN</code> for segment bucketing.</li>
+  </ul>
+
+  <div class="diagram">
+    <p class="diagram-label">orders ⋈ customers on customer_id</p>
+    <pre>orders                    customers                 JOIN result
++----+----------+         +----+---------+          +----+----------+---------+
+| id | cust_id  |         | id | country |          | id | cust_id  | country |
++----+----------+         +----+---------+   ==>     +----+----------+---------+
+| 1  |  101     |         | 101| US      |          | 1  |  101     | US      |
+| 2  |  102     |         | 102| UK      |          | 2  |  102     | UK      |
+| 3  |  101     |         +----+---------+          | 3  |  101     | US      |
++----+----------+                                    +----+----------+---------+
+                            matched on cust_id = id</pre>
+  </div>
+
+  <div class="diagram">
+    <p class="diagram-label">which rows you get, by JOIN type</p>
+    <svg viewBox="0 0 640 170" width="100%" height="170" role="img" aria-label="Venn diagrams showing INNER JOIN keeps only overlap, LEFT JOIN keeps all of the left circle plus overlap, FULL JOIN keeps everything">
+      <g font-family="var(--sans)" font-size="11" fill="var(--code-ink)">
+        <!-- INNER -->
+        <g transform="translate(70,20)">
+          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.35"/>
+          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.35"/>
+          <path d="M55,15 A45,45 0 0 1 55,95 A45,45 0 0 1 55,15 Z" fill="var(--teal)" opacity="0.9"/>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">INNER JOIN</text>
+          <text x="55" y="145" text-anchor="middle" font-size="9.5" opacity="0.7">only matched rows</text>
+        </g>
+        <!-- LEFT -->
+        <g transform="translate(280,20)">
+          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.25"/>
+          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.9"/>
+          <path d="M55,15 A45,45 0 0 1 55,95 A45,45 0 0 1 55,15 Z" fill="var(--teal)" opacity="0.6"/>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">LEFT JOIN</text>
+          <text x="55" y="145" text-anchor="middle" font-size="9.5" opacity="0.7">all of orders, matched or not</text>
+        </g>
+        <!-- FULL -->
+        <g transform="translate(480,20)">
+          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.85"/>
+          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.55"/>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">FULL JOIN</text>
+          <text x="55" y="145" text-anchor="middle" font-size="9.5" opacity="0.7">everything, matched or not</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Live SQL runner</h2>
+  <p>Two tables are loaded: <code class="inline">orders</code> and <code class="inline">customers</code>. Write any query and run it.</p>
+
+  <div class="sql-runner">
+    <div class="sql-editor-wrap">
+      <textarea id="sql-input" spellcheck="false">SELECT channel, SUM(revenue) AS total_revenue
+FROM orders
+GROUP BY channel
+ORDER BY total_revenue DESC;</textarea>
+    </div>
+    <div class="sql-actions">
+      <button id="sql-run">Run query</button>
+      <button class="ghost" id="sql-reset" type="button">Reset editor</button>
+      <span id="sql-status" style="align-self:center; font-family:var(--mono); font-size:12px; color:var(--ink-muted);">Loading SQL engine…</span>
+    </div>
+    <div class="sql-output" id="sql-output"></div>
+    <div class="sql-schema">
+      <b>orders</b>(id, customer_id, channel, order_date, month, revenue) · 24 rows &nbsp;·&nbsp;
+      <b>customers</b>(customer_id, country, signup_month) · 10 rows
+    </div>
+  </div>
+
+  <h2>Challenges</h2>
+  <p>Each challenge checks your query's <em>output</em>, not the exact SQL text — there's more than one correct way to write it.</p>
+
+  <div class="challenge">
+    <b>Challenge 1</b>
+    Total revenue by channel, highest first.
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="0" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+  <div class="challenge">
+    <b>Challenge 2</b>
+    Revenue joined with each customer's country — one row per order, with the country attached.
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="1" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+  <div class="challenge">
+    <b>Challenge 3</b>
+    Rank customers by total revenue within their country (use a window function).
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="2" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+  <div id="challenge-result"></div>
+
+  <h2>Exercises (beyond the challenges)</h2>
+  <ol>
+    <li>Use <code class="inline">LAG()</code> to compute month-over-month revenue change per channel.</li>
+    <li>Write a <code class="inline">CASE WHEN</code> that buckets customers into "high / medium / low" spend tiers.</li>
+    <li>Find channels with zero orders in the most recent month using a <code class="inline">LEFT JOIN</code>.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div id="quiz-mount"></div>
+
+  <h2>Interview questions for this module</h2>
+  <div class="qa">
+    <p class="q">"Write a query to find the top 3 campaigns by conversion rate in each region."</p>
+    <p class="a">Model answer: use <code class="inline">RANK() OVER (PARTITION BY region ORDER BY conversion_rate DESC)</code> in a subquery, then filter the outer query to rank &lt;= 3. Partitioning is the key idea — it resets the ranking within each region instead of across the whole table.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"What's the difference between INNER JOIN and LEFT JOIN, and when would a marketing analyst care?"</p>
+    <p class="a">Model answer: INNER JOIN only keeps rows with a match in both tables; LEFT JOIN keeps every row from the left table even without a match. A LEFT JOIN matters for churn or inactivity analysis — you need customers with <em>zero</em> orders to show up, not disappear.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How would you find month-over-month percent change in spend using SQL?"</p>
+    <p class="a">Model answer: <code class="inline">LAG(spend) OVER (PARTITION BY channel ORDER BY month)</code> to get the prior month's value in the same row, then compute <code class="inline">(spend - prior_spend) / prior_spend</code>.</p>
+  </div>
+
+  <div style="margin-top:32px;"><button id="complete-btn"></button></div>
+
+  <div class="lesson-nav">
+    <a href="module-1.html">← Module 1</a>
+    <a href="module-3.html">Module 3 — Data Viz &amp; Storytelling →</a>
+  </div>
+</main>
+
+<footer class="site">MODULE 2 · SQL FOR MARKETING ANALYTICS</footer>
+
+<script src="assets/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/sql-wasm.js"></script>
+<script>
+  let db = null;
+  const statusEl = document.getElementById('sql-status');
+  const outputEl = document.getElementById('sql-output');
+
+  const CHALLENGES = [
+`SELECT channel, SUM(revenue) AS total_revenue
+FROM orders
+GROUP BY channel
+ORDER BY total_revenue DESC;`,
+`SELECT o.id, o.customer_id, o.revenue, c.country
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id;`,
+`SELECT customer_id, country, total_revenue,
+       RANK() OVER (PARTITION BY country ORDER BY total_revenue DESC) AS rnk
+FROM (
+  SELECT o.customer_id, c.country, SUM(o.revenue) AS total_revenue
+  FROM orders o JOIN customers c ON o.customer_id = c.customer_id
+  GROUP BY o.customer_id, c.country
+);`
+  ];
+
+  function initSql() {
+    initSqlJs({ locateFile: f => `https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/${f}` })
+      .then(SQL => {
+        db = new SQL.Database();
+        db.run(`
+          CREATE TABLE customers (customer_id INTEGER, country TEXT, signup_month TEXT);
+          CREATE TABLE orders (id INTEGER, customer_id INTEGER, channel TEXT, order_date TEXT, month TEXT, revenue REAL);
+        `);
+        const customers = [
+          [101,'US','2025-01'],[102,'UK','2025-01'],[103,'US','2025-02'],[104,'DE','2025-02'],
+          [105,'US','2025-03'],[106,'UK','2025-03'],[107,'CA','2025-04'],[108,'US','2025-04'],
+          [109,'DE','2025-05'],[110,'CA','2025-05']
+        ];
+        const orders = [
+          [1,101,'Paid Social','2025-02-03','2025-02',82.5],[2,102,'Email','2025-02-10','2025-02',45.0],
+          [3,101,'Paid Search','2025-02-18','2025-02',120.0],[4,103,'Organic','2025-02-20','2025-02',60.0],
+          [5,104,'Paid Social','2025-03-01','2025-03',95.0],[6,105,'Email','2025-03-05','2025-03',30.0],
+          [7,106,'Paid Search','2025-03-09','2025-03',140.0],[8,101,'Email','2025-03-14','2025-03',55.0],
+          [9,107,'Organic','2025-03-19','2025-03',70.0],[10,108,'Paid Social','2025-03-22','2025-03',110.0],
+          [11,102,'Paid Search','2025-04-02','2025-04',130.0],[12,109,'Email','2025-04-06','2025-04',40.0],
+          [13,103,'Paid Social','2025-04-11','2025-04',88.0],[14,110,'Organic','2025-04-15','2025-04',65.0],
+          [15,105,'Paid Search','2025-04-19','2025-04',150.0],[16,106,'Email','2025-04-24','2025-04',35.0],
+          [17,104,'Paid Social','2025-05-02','2025-05',102.0],[18,107,'Paid Search','2025-05-07','2025-05',160.0],
+          [19,108,'Organic','2025-05-12','2025-05',72.0],[20,101,'Paid Social','2025-05-16','2025-05',98.0],
+          [21,109,'Email','2025-05-20','2025-05',48.0],[22,110,'Paid Search','2025-05-25','2025-05',175.0],
+          [23,102,'Organic','2025-05-27','2025-05',58.0],[24,103,'Email','2025-05-29','2025-05',42.0]
+        ];
+        const cstmt = db.prepare('INSERT INTO customers VALUES (?,?,?)');
+        customers.forEach(r => cstmt.run(r)); cstmt.free();
+        const ostmt = db.prepare('INSERT INTO orders VALUES (?,?,?,?,?,?)');
+        orders.forEach(r => ostmt.run(r)); ostmt.free();
+
+        statusEl.textContent = 'Ready — 34 rows loaded.';
+        runQuery();
+      })
+      .catch(err => {
+        statusEl.textContent = 'Could not load SQL engine (offline?). Reload the page once you\'re back online.';
+        console.error(err);
+      });
+  }
+
+  function renderTable(res) {
+    if (!res || !res.length) { outputEl.innerHTML = '<p style="margin:0; color:var(--ink-faint); font-size:13px;">Query ran, no rows returned.</p>'; return; }
+    const { columns, values } = res[0];
+    outputEl.innerHTML = `<table class="result-table"><thead><tr>${columns.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+      <tbody>${values.map(row => `<tr>${row.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  }
+
+  function runQuery() {
+    if (!db) return;
+    const sql = document.getElementById('sql-input').value;
+    try {
+      const res = db.exec(sql);
+      renderTable(res);
+      statusEl.textContent = `OK — ${res.length ? res[0].values.length : 0} row(s) returned.`;
+    } catch (e) {
+      outputEl.innerHTML = `<p style="margin:0; color:var(--bad); font-family:var(--mono); font-size:13px;">${e.message}</p>`;
+      statusEl.textContent = 'Query error.';
+    }
+  }
+
+  document.getElementById('sql-run').addEventListener('click', runQuery);
+  document.getElementById('sql-reset').addEventListener('click', () => {
+    document.getElementById('sql-input').value = 'SELECT * FROM orders LIMIT 5;';
+    runQuery();
+  });
+  document.querySelectorAll('[data-load-challenge]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('sql-input').value = CHALLENGES[parseInt(btn.dataset.loadChallenge, 10)];
+      document.getElementById('challenge-result').innerHTML = '';
+      window.scrollTo({ top: document.querySelector('.sql-runner').offsetTop - 20, behavior: 'smooth' });
+    });
+  });
+
+  initSql();
+
+  initQuiz('quiz-mount', [
+    {
+      q: 'Which clause groups rows so aggregate functions (SUM, COUNT) apply per category?',
+      options: ['ORDER BY', 'WHERE', 'GROUP BY', 'LIMIT'],
+      correct: 2,
+      explain: 'GROUP BY is the SQL equivalent of a pivot table\'s row/column grouping.'
+    },
+    {
+      q: 'You want every customer to appear even if they have zero orders. Which JOIN do you use, from the customers table?',
+      options: ['INNER JOIN', 'LEFT JOIN (customers LEFT JOIN orders)', 'CROSS JOIN', 'SELF JOIN'],
+      correct: 1,
+      explain: 'LEFT JOIN keeps all rows from the left (customers) table regardless of a match — required for churn/inactivity analysis.'
+    },
+    {
+      q: 'RANK() OVER (PARTITION BY country ORDER BY revenue DESC) does what?',
+      options: [
+        'Ranks all rows globally, ignoring country',
+        'Restarts the ranking within each country group',
+        'Filters out all but the top row per country',
+        'Sorts countries alphabetically'
+      ],
+      correct: 1,
+      explain: 'PARTITION BY resets the window function per group — here, ranking restarts at 1 for each country.'
+    },
+    {
+      q: 'Which function would you use to compare this month\'s spend to last month\'s, row-by-row?',
+      options: ['SUM()', 'LAG()', 'COUNT()', 'DISTINCT'],
+      correct: 1,
+      explain: 'LAG() pulls a prior row\'s value into the current row — the standard way to compute period-over-period change.'
+    }
+  ]);
+
+  initCompleteButton('m2');
+</script>
+</body>
+</html>

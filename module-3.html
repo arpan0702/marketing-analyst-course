@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Module 3 — Data Viz & Storytelling</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="m3"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Module 3</p>
+    <h1>Data Visualization &amp; Storytelling</h1>
+    <p class="lesson-goal">Tableau or Power BI, and the UX judgment that separates a chart from a dashboard someone can actually use in 30 seconds.</p>
+  </div>
+
+  <h2>Core concepts</h2>
+  <ul>
+    <li><strong>Chart selection</strong>: when a line, bar, or table beats a fancier alternative (usually: often).</li>
+    <li><strong>Dashboard UX</strong>: one primary "so what" per view, filters that don't overwhelm, clear hierarchy.</li>
+    <li><strong>Live data</strong>: connect a real source (CSV, SQL result) rather than pasting static numbers.</li>
+    <li><strong>Annotating</strong>: every chart in a portfolio piece needs one sentence of interpretation next to it.</li>
+  </ul>
+
+  <p style="color:var(--ink-muted); font-size:14px;">A well-built dashboard reads top-to-bottom, glance to detail. Here's what that actually looks like as a mockup — not a diagram of boxes, an actual miniature dashboard:</p>
+  <div class="box" style="padding:18px 20px;">
+    <svg viewBox="0 0 640 300" width="100%" height="300" role="img" aria-label="Mockup dashboard: four KPI tiles at top, a revenue trend line chart, a bar chart of revenue by channel, and a detail table at the bottom">
+      <g font-family="var(--sans)">
+        <!-- KPI tiles -->
+        <g>
+          <rect x="0" y="0" width="145" height="56" rx="8" fill="var(--teal-soft)" stroke="var(--line)"/>
+          <text x="12" y="22" font-size="9.5" fill="var(--ink-faint)">SPEND</text><text x="12" y="42" font-size="17" font-weight="700" fill="var(--ink)">$41.2K</text>
+          <rect x="157" y="0" width="145" height="56" rx="8" fill="var(--teal-soft)" stroke="var(--line)"/>
+          <text x="169" y="22" font-size="9.5" fill="var(--ink-faint)">REVENUE</text><text x="169" y="42" font-size="17" font-weight="700" fill="var(--ink)">$118K</text>
+          <rect x="314" y="0" width="145" height="56" rx="8" fill="var(--gold-soft)" stroke="var(--line)"/>
+          <text x="326" y="22" font-size="9.5" fill="var(--ink-faint)">ROAS</text><text x="326" y="42" font-size="17" font-weight="700" fill="var(--ink)">2.9x</text>
+          <rect x="471" y="0" width="169" height="56" rx="8" fill="var(--gold-soft)" stroke="var(--line)"/>
+          <text x="483" y="22" font-size="9.5" fill="var(--ink-faint)">CAC</text><text x="483" y="42" font-size="17" font-weight="700" fill="var(--ink)">$82</text>
+        </g>
+        <text x="0" y="82" font-size="10" fill="var(--ink-faint)">REVENUE TREND (context)</text>
+        <rect x="0" y="88" width="640" height="70" rx="8" fill="var(--surface-2)" stroke="var(--line)"/>
+        <polyline points="16,140 100,130 184,115 268,125 352,100 436,90 520,95 604,70" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+        <circle cx="604" cy="70" r="4" fill="var(--teal)"/>
+        <text x="0" y="180" font-size="10" fill="var(--ink-faint)">REVENUE BY CHANNEL (diagnosis)</text>
+        <rect x="0" y="186" width="640" height="70" rx="8" fill="var(--surface-2)" stroke="var(--line)"/>
+        <g fill="var(--gold)">
+          <rect x="24" y="206" width="60" height="40" rx="3"/>
+          <rect x="114" y="216" width="60" height="30" rx="3"/>
+          <rect x="204" y="198" width="60" height="48" rx="3"/>
+          <rect x="294" y="226" width="60" height="20" rx="3"/>
+          <rect x="384" y="212" width="60" height="34" rx="3"/>
+        </g>
+        <text x="0" y="278" font-size="10" fill="var(--ink-faint)">CAMPAIGN DETAIL TABLE (drill-down)</text>
+        <rect x="0" y="284" width="640" height="14" fill="var(--surface-2)" stroke="var(--line)"/>
+        <rect x="0" y="298" width="640" height="1" fill="var(--line)"/>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Interactive: pick the right chart</h2>
+  <p>For each scenario, choose the chart type you'd actually ship. There's a defensible answer, not a trick.</p>
+  <div class="tool-card">
+    <span class="ttag">Chart picker</span>
+    <div id="chart-picker"></div>
+    <button id="chart-check" style="margin-top:12px;">Check my picks</button>
+    <div class="result-box" id="chart-result" style="display:none;"></div>
+  </div>
+
+  <h2>Exercises</h2>
+  <ol>
+    <li>Pull the SQL output from Module 2 (revenue by channel/month) into Tableau Public or Power BI.</li>
+    <li>Build a 3-view dashboard: overview (KPI tiles), channel breakdown (bar/line), drill-down table.</li>
+    <li>Add one date-range filter and one annotation callout per view.</li>
+    <li>Find a dashboard online you think is bad and rewrite its worst chart on paper.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div id="quiz-mount"></div>
+
+  <h2>Interview questions for this module</h2>
+  <div class="qa">
+    <p class="q">"How do you decide what chart type to use for a given dataset?"</p>
+    <p class="a">Model answer: start from the question, not the data. Comparing categories → bar. Trend over time → line. Part-to-whole → stacked bar (rarely pie). Relationship between two numeric variables → scatter. Precise individual values → a table beats a chart.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"Walk me through how you'd design a dashboard for a CMO who has 30 seconds to look at it."</p>
+    <p class="a">Model answer: lead with 3–4 KPI tiles above the fold, each with a trend arrow, no more than one chart requiring interpretation, and a single annotation stating what changed and why it matters — the CMO should never have to ask "so what should I do with this."</p>
+  </div>
+
+  <div style="margin-top:32px;"><button id="complete-btn"></button></div>
+
+  <div class="lesson-nav">
+    <a href="module-2.html">← Module 2</a>
+    <a href="module-4.html">Module 4 — GA4, GTM &amp; UTMs →</a>
+  </div>
+</main>
+
+<footer class="site">MODULE 3 · DATA VISUALIZATION &amp; STORYTELLING</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  const scenarios = [
+    { s: 'Revenue trend over the last 12 months', opts: ['Line chart', 'Pie chart', 'Scatter plot'], correct: 0 },
+    { s: 'Revenue by channel, single point in time', opts: ['Line chart', 'Bar chart', 'Pie chart'], correct: 1 },
+    { s: 'Exact spend, revenue, and ROAS for 40 individual campaigns, for an analyst to sort/filter', opts: ['A sortable table', 'A single giant pie chart', 'A word cloud'], correct: 0 },
+    { s: 'Relationship between ad spend and revenue across 50 campaigns, looking for a pattern', opts: ['Bar chart', 'Scatter plot', 'Pie chart'], correct: 1 },
+    { s: 'Market share of 4 channels as a % of total spend, for an exec summary slide', opts: ['Stacked bar (or simple %) — not pie', 'Line chart', 'Scatter plot'], correct: 0 },
+  ];
+  function renderPicker() {
+    const mount = document.getElementById('chart-picker');
+    mount.innerHTML = scenarios.map((sc, i) => `
+      <div class="field" style="margin-bottom:16px;">
+        <label style="text-transform:none; font-family:var(--sans); font-size:13.5px; color:var(--ink); letter-spacing:0;">${i + 1}. ${sc.s}</label>
+        <select id="chart-sel-${i}">
+          ${sc.opts.map((o, oi) => `<option value="${oi}">${o}</option>`).join('')}
+        </select>
+      </div>`).join('');
+  }
+  renderPicker();
+  document.getElementById('chart-check').addEventListener('click', () => {
+    let score = 0;
+    scenarios.forEach((sc, i) => {
+      const sel = document.getElementById(`chart-sel-${i}`);
+      if (parseInt(sel.value, 10) === sc.correct) { score++; sel.style.borderColor = 'var(--good)'; }
+      else { sel.style.borderColor = 'var(--bad)'; }
+    });
+    const res = document.getElementById('chart-result');
+    res.style.display = 'block';
+    res.className = 'result-box ' + (score === scenarios.length ? 'good' : '');
+    res.textContent = `${score} / ${scenarios.length} correct.`;
+  });
+
+  initQuiz('quiz-mount', [
+    {
+      q: 'A CMO wants to compare revenue across 5 channels at a glance. Best default choice?',
+      options: ['Pie chart', 'Bar chart', '3D bar chart', 'Radar chart'],
+      correct: 1,
+      explain: 'Bar charts let the eye compare lengths accurately; pie/3D/radar charts distort magnitude comparisons.'
+    },
+    {
+      q: 'What\'s the main risk of a dashboard with 12 filters and 9 charts on one screen?',
+      options: [
+        'It loads too slowly, nothing else',
+        'The viewer can\'t tell which chart matters, so nothing gets acted on',
+        'It uses too many colors',
+        'There is no real risk'
+      ],
+      correct: 1,
+      explain: 'A dashboard\'s job is to drive a decision. Without hierarchy, every chart competes for attention and none win.'
+    },
+    {
+      q: 'Why annotate a chart in a portfolio project instead of leaving it to speak for itself?',
+      options: [
+        'Annotations are required by Tableau',
+        'It proves you can interpret the data, not just plot it — that\'s what\'s actually being evaluated',
+        'It makes the file size smaller',
+        'It\'s not necessary if the chart is well-designed'
+      ],
+      correct: 1,
+      explain: 'Interviewers screen for judgment, not charting mechanics — the one-sentence "so what" is the actual deliverable.'
+    }
+  ]);
+
+  initCompleteButton('m3');
+</script>
+</body>
+</html>

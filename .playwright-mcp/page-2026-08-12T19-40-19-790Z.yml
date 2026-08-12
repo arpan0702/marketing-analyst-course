@@ -1,0 +1,158 @@
+- generic [active] [ref=f12e1]:
+  - generic [ref=f12e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f12e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f12e4]: MA COURSE
+      - generic [ref=f12e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f12e6]:
+      - link "Home" [ref=f12e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f12e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f12e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f12e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f12e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f12e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f12e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f12e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply" [ref=f12e15] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f12e16]:
+    - generic [ref=f12e17]:
+      - paragraph [ref=f12e18]: Roadmap
+      - heading "The 16-Week Plan, Visually" [level=1] [ref=f12e19]
+      - paragraph [ref=f12e20]: "Four tracks running in parallel: learning, portfolio building, applying, and interview prep. They overlap on purpose — you don't wait until everything is \"done\" to start applying."
+    - heading "Timeline at a glance" [level=2] [ref=f12e21]
+    - img [ref=f12e23]:
+      - generic [ref=f12e24]: "1"
+      - generic [ref=f12e25]: "2"
+      - generic [ref=f12e26]: "3"
+      - generic [ref=f12e27]: "4"
+      - generic [ref=f12e28]: "5"
+      - generic [ref=f12e29]: "6"
+      - generic [ref=f12e30]: "7"
+      - generic [ref=f12e31]: "8"
+      - generic [ref=f12e32]: "9"
+      - generic [ref=f12e33]: "10"
+      - generic [ref=f12e34]: "11"
+      - generic [ref=f12e35]: "12"
+      - generic [ref=f12e36]: "13"
+      - generic [ref=f12e37]: "14"
+      - generic [ref=f12e38]: "15"
+      - generic [ref=f12e39]: "16"
+      - generic [ref=f12e40]: start applying
+      - generic [ref=f12e41]: Learning
+      - generic [ref=f12e43]: M0+M1
+      - generic [ref=f12e45]: M2 SQL
+      - generic [ref=f12e47]: M3
+      - generic [ref=f12e49]: M4
+      - generic [ref=f12e51]: M5
+      - generic [ref=f12e52]: Portfolio
+      - generic [ref=f12e54]: Project 1
+      - generic [ref=f12e56]: Project 2
+      - generic [ref=f12e58]: Project 3
+      - generic [ref=f12e59]: Applications
+      - generic [ref=f12e61]: Applying
+      - generic [ref=f12e62]: Interview prep
+      - generic [ref=f12e64]: Mocks
+    - generic [ref=f12e65]:
+      - generic [ref=f12e66]: Learning
+      - generic [ref=f12e68]: Portfolio
+      - generic [ref=f12e70]: Applications
+      - generic [ref=f12e72]: Interview prep
+      - generic [ref=f12e74]: Applications start (week 12)
+    - generic [ref=f12e76]:
+      - heading "The one rule that matters most" [level=4] [ref=f12e77]
+      - paragraph [ref=f12e78]:
+        - text: Applications start in
+        - strong [ref=f12e79]: week 12
+        - text: — not after every module is finished. Portfolio Projects 1 and 2 plus a rewritten resume are enough to start getting screens while you finish Module 5 and Project 3 in parallel. Waiting for "fully ready" costs weeks you don't get back.
+    - heading "Milestones — check them off as you go" [level=2] [ref=f12e80]
+    - paragraph [ref=f12e81]: This checklist is the second ring of progress on the home page, alongside modules and the resume checklist.
+    - generic [ref=f12e82]:
+      - generic [ref=f12e83] [cursor=pointer]:
+        - checkbox "Weeks 1–3 Finish Module 0 + Module 1 (foundations)" [checked] [ref=f12e84]
+        - generic [ref=f12e85]:
+          - generic [ref=f12e86]: Weeks 1–3
+          - text: Finish Module 0 + Module 1 (foundations)
+      - generic [ref=f12e87] [cursor=pointer]:
+        - checkbox "Weeks 4–7 Finish Module 2 — SQL fluency (daily practice)" [checked] [ref=f12e88]
+        - generic [ref=f12e89]:
+          - generic [ref=f12e90]: Weeks 4–7
+          - text: Finish Module 2 — SQL fluency (daily practice)
+      - generic [ref=f12e91] [cursor=pointer]:
+        - checkbox "Weeks 8–9 Ship Portfolio Project 1 — Customer Segmentation" [ref=f12e92]
+        - generic [ref=f12e93]:
+          - generic [ref=f12e94]: Weeks 8–9
+          - text: Ship Portfolio Project 1 — Customer Segmentation
+      - generic [ref=f12e95] [cursor=pointer]:
+        - checkbox "Weeks 10–11 Finish Module 3 + ship Portfolio Project 2 — A/B Test & CRO" [ref=f12e96]
+        - generic [ref=f12e97]:
+          - generic [ref=f12e98]: Weeks 10–11
+          - text: Finish Module 3 + ship Portfolio Project 2 — A/B Test & CRO
+      - generic [ref=f12e99] [cursor=pointer]:
+        - checkbox "Week 12 Finish Module 4 + rewrite resume & LinkedIn" [ref=f12e100]
+        - generic [ref=f12e101]:
+          - generic [ref=f12e102]: Week 12
+          - text: Finish Module 4 + rewrite resume & LinkedIn
+      - generic [ref=f12e103] [cursor=pointer]:
+        - checkbox "Week 12 Start applying (target titles + first 10 applications)" [ref=f12e104]
+        - generic [ref=f12e105]:
+          - generic [ref=f12e106]: Week 12
+          - text: Start applying (target titles + first 10 applications)
+      - generic [ref=f12e107] [cursor=pointer]:
+        - checkbox "Weeks 13–14 Finish Module 5 + ship Portfolio Project 3 — ROI Dashboard" [ref=f12e108]
+        - generic [ref=f12e109]:
+          - generic [ref=f12e110]: Weeks 13–14
+          - text: Finish Module 5 + ship Portfolio Project 3 — ROI Dashboard
+      - generic [ref=f12e111] [cursor=pointer]:
+        - checkbox "Weeks 15–16 Mock interviews + outreach ramp-up, applications ongoing" [ref=f12e112]
+        - generic [ref=f12e113]:
+          - generic [ref=f12e114]: Weeks 15–16
+          - text: Mock interviews + outreach ramp-up, applications ongoing
+    - heading "Week-by-week detail" [level=2] [ref=f12e115]
+    - generic [ref=f12e116]:
+      - generic [ref=f12e117]:
+        - generic [ref=f12e118]: Weeks 1–3
+        - generic [ref=f12e119]: "Foundations: Module 0 + Module 1"
+        - generic [ref=f12e120]: Learn the vocabulary shift and rebuild 3 reports you currently get from someone else, yourself, using pivot tables and XLOOKUP.
+      - generic [ref=f12e121]:
+        - generic [ref=f12e122]: Weeks 4–7
+        - generic [ref=f12e123]: SQL fluency — Module 2
+        - generic [ref=f12e124]: "Daily practice: SQLBolt → Mode → StrataScratch. By week 7, write a JOIN + GROUP BY + window function unassisted."
+      - generic [ref=f12e125]:
+        - generic [ref=f12e126]: Weeks 8–9
+        - generic [ref=f12e127]: Portfolio Project 1 — Customer Segmentation
+        - generic [ref=f12e128]: Built in SQL + Sheets on the Kaggle "Online Retail II" or "Mall Customer Segmentation" dataset. Publish with a written narrative, not just charts.
+      - generic [ref=f12e129]:
+        - generic [ref=f12e130]: Weeks 10–11
+        - generic [ref=f12e131]: Module 3 (Dataviz) + Portfolio Project 2 — A/B Test & CRO
+        - generic [ref=f12e132]: Learn Tableau/Power BI while building the second project, so the tool is applied immediately.
+      - generic [ref=f12e133]:
+        - generic [ref=f12e134]: Week 12
+        - generic [ref=f12e135]: Module 4 (GA4/GTM) + resume & LinkedIn overhaul
+        - generic [ref=f12e136]:
+          - text: Rewrite the resume with the bullet formula on the
+          - link "Resume & Apply" [ref=f12e137] [cursor=pointer]:
+            - /url: resume.html
+          - text: page. Applications begin this week.
+      - generic [ref=f12e138]:
+        - generic [ref=f12e139]: Weeks 13–14
+        - generic [ref=f12e140]: Module 5 (Metrics & Testing) + Portfolio Project 3 — ROI Dashboard
+        - generic [ref=f12e141]: The capstone — the project you screen-share in interviews. Applications continue in parallel.
+      - generic [ref=f12e142]:
+        - generic [ref=f12e143]: Weeks 15–16
+        - generic [ref=f12e144]: "Interview-ready: mock interviews, case drills, outreach ramp-up"
+        - generic [ref=f12e145]: Week-12 applications should be converting to screens by now. Keep applying — this doesn't stop at week 16.
+    - generic [ref=f12e146]:
+      - link "← Course home" [ref=f12e147] [cursor=pointer]:
+        - /url: index.html
+      - link "Start Module 0 →" [ref=f12e148] [cursor=pointer]:
+        - /url: module-0.html
+  - contentinfo [ref=f12e149]: ROADMAP · INTERVIEW-READY MARKETING ANALYST

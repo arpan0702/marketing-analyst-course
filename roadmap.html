@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Roadmap — Interview-Ready Marketing Analyst</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .gantt-wrap{overflow-x:auto; margin:20px 0;}
+  .gantt-row-label{font-family:var(--mono); font-size:11px; fill:var(--ink-muted);}
+  .gantt-week-label{font-family:var(--mono); font-size:9.5px; fill:var(--ink-faint);}
+  .legend{display:flex; gap:20px; flex-wrap:wrap; margin:14px 0 0; font-size:12.5px; color:var(--ink-muted);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:11px; height:11px; border-radius:3px; display:inline-block;}
+</style>
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="roadmap"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Roadmap</p>
+    <h1>The 16-Week Plan, Visually</h1>
+    <p class="lesson-goal">Four tracks running in parallel: learning, portfolio building, applying, and interview prep. They overlap on purpose — you don't wait until everything is "done" to start applying.</p>
+  </div>
+
+  <h2>Timeline at a glance</h2>
+  <div class="gantt-wrap">
+    <svg id="gantt" width="860" height="220" viewBox="0 0 860 220"></svg>
+  </div>
+  <div class="legend" id="gantt-legend"></div>
+
+  <div class="box gold" style="margin-top:22px;">
+    <h4 style="margin-top:0;">The one rule that matters most</h4>
+    <p style="margin:0">Applications start in <strong>week 12</strong> — not after every module is finished. Portfolio Projects 1 and 2 plus a rewritten resume are enough to start getting screens while you finish Module 5 and Project 3 in parallel. Waiting for "fully ready" costs weeks you don't get back.</p>
+  </div>
+
+  <h2>Milestones — check them off as you go</h2>
+  <p>This checklist is the second ring of progress on the home page, alongside modules and the resume checklist.</p>
+  <div id="roadmap-checklist" style="display:flex; flex-direction:column; gap:8px; margin:16px 0;"></div>
+
+  <h2>Week-by-week detail</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-week">Weeks 1–3</div>
+      <div class="tl-title">Foundations: Module 0 + Module 1</div>
+      <div class="tl-body">Learn the vocabulary shift and rebuild 3 reports you currently get from someone else, yourself, using pivot tables and XLOOKUP.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Weeks 4–7</div>
+      <div class="tl-title">SQL fluency — Module 2</div>
+      <div class="tl-body">Daily practice: SQLBolt → Mode → StrataScratch. By week 7, write a JOIN + GROUP BY + window function unassisted.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Weeks 8–9</div>
+      <div class="tl-title">Portfolio Project 1 — Customer Segmentation</div>
+      <div class="tl-body">Built in SQL + Sheets on the Kaggle "Online Retail II" or "Mall Customer Segmentation" dataset. Publish with a written narrative, not just charts.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Weeks 10–11</div>
+      <div class="tl-title">Module 3 (Dataviz) + Portfolio Project 2 — A/B Test &amp; CRO</div>
+      <div class="tl-body">Learn Tableau/Power BI while building the second project, so the tool is applied immediately.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Week 12</div>
+      <div class="tl-title">Module 4 (GA4/GTM) + resume &amp; LinkedIn overhaul</div>
+      <div class="tl-body">Rewrite the resume with the bullet formula on the <a href="resume.html">Resume &amp; Apply</a> page. Applications begin this week.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Weeks 13–14</div>
+      <div class="tl-title">Module 5 (Metrics &amp; Testing) + Portfolio Project 3 — ROI Dashboard</div>
+      <div class="tl-body">The capstone — the project you screen-share in interviews. Applications continue in parallel.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Weeks 15–16</div>
+      <div class="tl-title">Interview-ready: mock interviews, case drills, outreach ramp-up</div>
+      <div class="tl-body">Week-12 applications should be converting to screens by now. Keep applying — this doesn't stop at week 16.</div>
+    </div>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="index.html">← Course home</a>
+    <a href="module-0.html">Start Module 0 →</a>
+  </div>
+</main>
+
+<footer class="site">ROADMAP · INTERVIEW-READY MARKETING ANALYST</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  initChecklist('roadmap-checklist', 'ma-roadmap-progress-v1', ROADMAP_MILESTONES);
+
+  // ---------- Gantt chart ----------
+  const WEEKS = 16;
+  const chartX = 130, chartW = 700, weekW = chartW / WEEKS;
+  const rowH = 34, rowGap = 10, topPad = 26;
+
+  const TRACKS = [
+    { label: 'Learning', color: 'var(--teal)', segs: [
+      { s: 1, e: 3, t: 'M0+M1' }, { s: 4, e: 7, t: 'M2 SQL' }, { s: 10, e: 11, t: 'M3' },
+      { s: 12, e: 12, t: 'M4' }, { s: 13, e: 14, t: 'M5' }
+    ]},
+    { label: 'Portfolio', color: 'var(--gold)', segs: [
+      { s: 8, e: 9, t: 'Project 1' }, { s: 10, e: 11, t: 'Project 2' }, { s: 13, e: 14, t: 'Project 3' }
+    ]},
+    { label: 'Applications', color: 'var(--ink-muted)', segs: [
+      { s: 12, e: 16, t: 'Applying' }
+    ]},
+    { label: 'Interview prep', color: 'var(--ink-faint)', segs: [
+      { s: 15, e: 16, t: 'Mocks' }
+    ]},
+  ];
+
+  function renderGantt() {
+    const svg = document.getElementById('gantt');
+    let html = '';
+    // week gridlines + labels
+    for (let w = 0; w <= WEEKS; w++) {
+      const x = chartX + w * weekW;
+      html += `<line x1="${x}" y1="${topPad - 6}" x2="${x}" y2="${topPad + TRACKS.length * (rowH + rowGap)}" stroke="var(--line-soft)" stroke-width="1"/>`;
+      if (w < WEEKS) html += `<text x="${x + weekW/2}" y="${topPad - 10}" text-anchor="middle" class="gantt-week-label">${w+1}</text>`;
+    }
+    // week-12 "applications start" marker
+    const markX = chartX + 11 * weekW;
+    html += `<line x1="${markX}" y1="${topPad-6}" x2="${markX}" y2="${topPad + TRACKS.length * (rowH+rowGap)}" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+    html += `<text x="${markX}" y="${topPad + TRACKS.length * (rowH+rowGap) + 14}" text-anchor="middle" class="gantt-week-label" fill="var(--gold-ink)">start applying</text>`;
+
+    TRACKS.forEach((track, ti) => {
+      const y = topPad + ti * (rowH + rowGap);
+      html += `<text x="${chartX - 12}" y="${y + rowH/2 + 4}" text-anchor="end" class="gantt-row-label">${track.label}</text>`;
+      track.segs.forEach(seg => {
+        const x = chartX + (seg.s - 1) * weekW;
+        const w = (seg.e - seg.s + 1) * weekW - 3;
+        html += `<rect x="${x}" y="${y}" width="${w}" height="${rowH}" rx="6" fill="${track.color}" opacity="0.88"/>`;
+        html += `<text x="${x + w/2}" y="${y + rowH/2 + 4}" text-anchor="middle" font-family="var(--sans)" font-size="11" font-weight="600" fill="var(--surface)">${seg.t}</text>`;
+      });
+    });
+    svg.innerHTML = html;
+    svg.setAttribute('height', topPad + TRACKS.length * (rowH + rowGap) + 26);
+    svg.setAttribute('viewBox', `0 0 860 ${topPad + TRACKS.length * (rowH + rowGap) + 26}`);
+
+    document.getElementById('gantt-legend').innerHTML = TRACKS.map(t =>
+      `<span><i style="background:${t.color};"></i>${t.label}</span>`).join('') +
+      `<span><i style="background:var(--gold); width:11px; height:2px; border-radius:0;"></i>Applications start (week 12)</span>`;
+  }
+  renderGantt();
+</script>
+</body>
+</html>

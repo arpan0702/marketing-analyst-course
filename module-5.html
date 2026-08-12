@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Module 5 — Metrics & A/B Testing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="m5"></div>
+
+<main class="page">
+  <div class="lesson-head">
+    <p class="lesson-num">Module 5</p>
+    <h1>Marketing Metrics, A/B Testing &amp; Statistical Fundamentals</h1>
+    <p class="lesson-goal">CAC, LTV, ROAS, hypothesis testing, confidence — where "analyst" stops being a title and starts being a way of thinking.</p>
+  </div>
+
+  <h2>Core concepts</h2>
+  <ul>
+    <li><strong>CAC</strong> (Customer Acquisition Cost) = spend ÷ new customers.</li>
+    <li><strong>LTV</strong> (Lifetime Value) = avg. order value × purchase frequency × customer lifespan.</li>
+    <li><strong>ROAS</strong> (Return on Ad Spend) = revenue ÷ spend. Healthy <strong>LTV : CAC</strong> is roughly 3:1 or better.</li>
+    <li><strong>Statistical significance</strong>: whether an observed difference (e.g. Variant B's conversion rate) is likely real, or just noise.</li>
+    <li><strong>Sample size / peeking risk</strong>: checking significance too early inflates false positives — a test that looks "significant" on day 3 can flip by day 14.</li>
+  </ul>
+
+  <div class="diagram">
+    <p class="diagram-label">acquisition funnel — where each metric lives</p>
+    <svg viewBox="0 0 640 260" width="100%" height="260" role="img" aria-label="Funnel narrowing from 100,000 impressions to 8,000 clicks to 320 customers, with CAC, LTV, and ROAS labeled at the customer stage">
+      <g font-family="var(--sans)">
+        <polygon points="60,20 340,20 300,84 100,84" fill="var(--teal)"/>
+        <polygon points="100,88 300,88 250,152 150,152" fill="var(--teal)" opacity="0.75"/>
+        <polygon points="150,156 250,156 225,210 175,210" fill="var(--gold)"/>
+
+        <text x="200" y="56" text-anchor="middle" fill="var(--code-bg)" font-size="13" font-weight="700">IMPRESSIONS</text>
+        <text x="360" y="56" fill="var(--code-ink)" font-size="13" font-weight="700">100,000</text>
+
+        <text x="200" y="124" text-anchor="middle" fill="var(--code-bg)" font-size="12" font-weight="700">CLICKS</text>
+        <text x="310" y="124" fill="var(--code-ink)" font-size="12" font-weight="700">8,000</text>
+        <text x="440" y="124" fill="var(--gold)" font-size="9.5">← A/B tests live on this transition</text>
+
+        <text x="200" y="187" text-anchor="middle" fill="var(--code-bg)" font-size="10.5" font-weight="700">CUSTOMERS</text>
+        <text x="265" y="187" fill="var(--code-ink)" font-size="10.5" font-weight="700">320</text>
+      </g>
+      <g font-family="var(--mono)" font-size="10.5" fill="var(--code-ink)" opacity="0.85">
+        <text x="10" y="235">CAC = Spend / Customers</text>
+        <text x="10" y="250">LTV = Avg order value × purchase freq × lifespan</text>
+        <text x="330" y="235">ROAS = Revenue / Spend</text>
+        <text x="330" y="250">Health check: LTV : CAC ≥ ~3 : 1</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Interactive: CAC · LTV · ROAS calculator</h2>
+  <div class="tool-card">
+    <span class="ttag">Calculator</span>
+    <div class="fieldrow">
+      <div class="field"><label for="cac-spend">Marketing spend ($)</label><input type="number" id="cac-spend" value="20000"></div>
+      <div class="field"><label for="cac-customers">New customers acquired</label><input type="number" id="cac-customers" value="250"></div>
+    </div>
+    <div class="fieldrow">
+      <div class="field"><label for="ltv-aov">Avg. order value ($)</label><input type="number" id="ltv-aov" value="60"></div>
+      <div class="field"><label for="ltv-freq">Purchases per year</label><input type="number" id="ltv-freq" value="3"></div>
+    </div>
+    <div class="fieldrow">
+      <div class="field"><label for="ltv-years">Avg. customer lifespan (years)</label><input type="number" id="ltv-years" value="2"></div>
+      <div class="field"><label for="roas-revenue">Total revenue from this spend ($)</label><input type="number" id="roas-revenue" value="70000"></div>
+    </div>
+    <div class="result-box" id="calc-result" style="display:block;"></div>
+  </div>
+
+  <h2>Interactive: is your A/B test result real?</h2>
+  <p>Two-proportion significance check (z-test), the same logic behind Portfolio Project 2. Enter each variant's visitors and conversions.</p>
+  <div class="tool-card">
+    <span class="ttag">Significance calculator</span>
+    <div class="fieldrow">
+      <div class="field"><label for="ab-visitors-a">Variant A visitors</label><input type="number" id="ab-visitors-a" value="5000"></div>
+      <div class="field"><label for="ab-conv-a">Variant A conversions</label><input type="number" id="ab-conv-a" value="250"></div>
+    </div>
+    <div class="fieldrow">
+      <div class="field"><label for="ab-visitors-b">Variant B visitors</label><input type="number" id="ab-visitors-b" value="5000"></div>
+      <div class="field"><label for="ab-conv-b">Variant B conversions</label><input type="number" id="ab-conv-b" value="290"></div>
+    </div>
+    <div class="result-box" id="ab-result" style="display:block;"></div>
+  </div>
+
+  <h2>Exercises</h2>
+  <ol>
+    <li>Using the calculators above, try a scenario where LTV:CAC is under 2:1 — write one sentence recommending what you'd do.</li>
+    <li>Using the Kaggle "Marketing A/B Testing" dataset, calculate conversion rate for each group, then check significance (Sheets has a built-in chi-square function) against this page's calculator.</li>
+    <li>In the significance calculator, drop Variant B's visitor count to 500 with the same conversion rate — watch the result flip. Write two sentences on why that matters when a stakeholder wants to end a test early.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div id="quiz-mount"></div>
+
+  <h2>Interview questions for this module</h2>
+  <div class="qa">
+    <p class="q">"How do you explain statistical significance to a stakeholder with no stats background?"</p>
+    <p class="a">Model answer: "It's how confident we are the difference we're seeing is a real effect, not random noise from a small sample — like flipping a coin 10 times and getting 7 heads doesn't mean the coin is rigged, but 700 heads out of 1,000 flips would."</p>
+  </div>
+  <div class="qa">
+    <p class="q">"If LTV:CAC is 1.5:1, what does that tell you and what would you recommend?"</p>
+    <p class="a">Model answer: unsustainable — the cost of acquiring a customer is too close to what they're worth over their lifetime, leaving little margin for overhead or profit. Recommend either reducing CAC by channel (cut underperforming spend) or increasing retention/LTV (lifecycle marketing) before scaling acquisition spend further.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"How would you determine if you have enough sample size to trust an A/B test result?"</p>
+    <p class="a">Model answer: run a sample-size calculation before launch based on baseline conversion rate and minimum detectable effect, and commit to that sample size and duration up front — don't stop the test early just because it looks significant on day 3, since that inflates the false-positive rate.</p>
+  </div>
+
+  <div style="margin-top:32px;"><button id="complete-btn"></button></div>
+
+  <div class="lesson-nav">
+    <a href="module-4.html">← Module 4</a>
+    <a href="index.html">Course home →</a>
+  </div>
+</main>
+
+<footer class="site">MODULE 5 · METRICS &amp; A/B TESTING</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  function erf(x) {
+    const sign = x < 0 ? -1 : 1; x = Math.abs(x);
+    const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+    const t = 1 / (1 + p * x);
+    const y = 1 - (((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+    return sign * y;
+  }
+  function normalCdf(z) { return 0.5 * (1 + erf(z / Math.sqrt(2))); }
+
+  function updateCalc() {
+    const spend = parseFloat(document.getElementById('cac-spend').value) || 0;
+    const customers = parseFloat(document.getElementById('cac-customers').value) || 0;
+    const aov = parseFloat(document.getElementById('ltv-aov').value) || 0;
+    const freq = parseFloat(document.getElementById('ltv-freq').value) || 0;
+    const years = parseFloat(document.getElementById('ltv-years').value) || 0;
+    const revenue = parseFloat(document.getElementById('roas-revenue').value) || 0;
+
+    const cac = customers ? spend / customers : 0;
+    const ltv = aov * freq * years;
+    const roas = spend ? revenue / spend : 0;
+    const ratio = cac ? ltv / cac : 0;
+
+    const res = document.getElementById('calc-result');
+    const healthy = ratio >= 3;
+    res.className = 'result-box ' + (healthy ? 'good' : (ratio > 0 ? 'bad' : ''));
+    res.innerHTML = `
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; font-family:var(--mono);">
+        <div>CAC: <b>$${cac.toFixed(2)}</b></div>
+        <div>LTV: <b>$${ltv.toFixed(2)}</b></div>
+        <div>ROAS: <b>${roas.toFixed(2)}x</b></div>
+        <div>LTV : CAC: <b>${ratio.toFixed(2)} : 1</b></div>
+      </div>
+      <div style="margin-top:10px;">${healthy ? 'Healthy — at or above the ~3:1 benchmark.' : 'Below the ~3:1 benchmark — acquisition cost is eating too much of customer value.'}</div>`;
+  }
+  ['cac-spend','cac-customers','ltv-aov','ltv-freq','ltv-years','roas-revenue'].forEach(id =>
+    document.getElementById(id).addEventListener('input', updateCalc));
+  updateCalc();
+
+  function updateAB() {
+    const nA = parseFloat(document.getElementById('ab-visitors-a').value) || 0;
+    const cA = parseFloat(document.getElementById('ab-conv-a').value) || 0;
+    const nB = parseFloat(document.getElementById('ab-visitors-b').value) || 0;
+    const cB = parseFloat(document.getElementById('ab-conv-b').value) || 0;
+    const res = document.getElementById('ab-result');
+    if (!nA || !nB) { res.className = 'result-box'; res.textContent = 'Enter visitor counts for both variants.'; return; }
+
+    const pA = cA / nA, pB = cB / nB;
+    const pPool = (cA + cB) / (nA + nB);
+    const se = Math.sqrt(pPool * (1 - pPool) * (1 / nA + 1 / nB));
+    const z = se ? (pB - pA) / se : 0;
+    const pValue = 2 * (1 - normalCdf(Math.abs(z)));
+    const sig = pValue < 0.05;
+
+    res.className = 'result-box ' + (sig ? 'good' : 'bad');
+    res.innerHTML = `
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; font-family:var(--mono);">
+        <div>Variant A rate: <b>${(pA*100).toFixed(2)}%</b></div>
+        <div>Variant B rate: <b>${(pB*100).toFixed(2)}%</b></div>
+        <div>z-score: <b>${z.toFixed(2)}</b></div>
+        <div>p-value: <b>${pValue.toFixed(4)}</b></div>
+      </div>
+      <div style="margin-top:10px;">${sig
+        ? `Significant at 95% confidence — the difference is unlikely to be noise. Consider shipping the winner.`
+        : `Not significant at 95% confidence (p ≥ 0.05) — don't call a winner yet; the difference could be random variation.`}</div>`;
+  }
+  ['ab-visitors-a','ab-conv-a','ab-visitors-b','ab-conv-b'].forEach(id =>
+    document.getElementById(id).addEventListener('input', updateAB));
+  updateAB();
+
+  initQuiz('quiz-mount', [
+    {
+      q: 'LTV : CAC of 5 : 1 generally signals:',
+      options: ['Dangerously unprofitable acquisition', 'A healthy, sustainable acquisition economics', 'A tracking error', 'Nothing without more context on churn'],
+      correct: 1,
+      explain: 'Above the ~3:1 benchmark is generally considered healthy — customers are worth well more than it costs to acquire them.'
+    },
+    {
+      q: 'A test shows p = 0.08. At the standard 95% confidence threshold, this result is:',
+      options: ['Statistically significant', 'Not statistically significant', 'Definitely a real effect', 'Impossible to interpret'],
+      correct: 1,
+      explain: 'p = 0.08 is above the conventional 0.05 threshold — the observed difference could plausibly be random noise.'
+    },
+    {
+      q: 'Why is "peeking" at A/B test results daily and stopping as soon as it looks significant a problem?',
+      options: [
+        'It\'s not a problem, earlier is always better',
+        'It inflates the false-positive rate — a result that looks significant early can be random noise that regresses later',
+        'It only matters for very large sample sizes',
+        'It makes the dashboard slower'
+      ],
+      correct: 1,
+      explain: 'Significance testing assumes a fixed sample size decided in advance; checking repeatedly and stopping early multiplies your chances of a false positive.'
+    },
+    {
+      q: 'ROAS of 2.5x on a campaign with very low product margin could still be:',
+      options: ['Automatically profitable', 'Unprofitable — ROAS alone doesn\'t account for margin or fulfillment cost', 'Impossible to calculate', 'The same thing as CAC'],
+      correct: 1,
+      explain: 'ROAS is revenue over spend, not profit over spend — a "good" ROAS can still lose money if margins are thin.'
+    }
+  ]);
+
+  initCompleteButton('m5');
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+- generic [active] [ref=f18e1]:
+  - generic [ref=f18e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f18e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f18e4]: MA COURSE
+      - generic [ref=f18e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f18e6]:
+      - link "Home" [ref=f18e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f18e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f18e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f18e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f18e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f18e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f18e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f18e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply" [ref=f18e15] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f18e16]:
+    - generic [ref=f18e17]:
+      - paragraph [ref=f18e18]: Module 3
+      - heading "Data Visualization & Storytelling" [level=1] [ref=f18e19]
+      - paragraph [ref=f18e20]: Tableau or Power BI, and the UX judgment that separates a chart from a dashboard someone can actually use in 30 seconds.
+    - heading "Core concepts" [level=2] [ref=f18e21]
+    - list [ref=f18e22]:
+      - listitem [ref=f18e23]:
+        - strong [ref=f18e24]: Chart selection
+        - text: ": when a line, bar, or table beats a fancier alternative (usually: often)."
+      - listitem [ref=f18e25]:
+        - strong [ref=f18e26]: Dashboard UX
+        - text: ": one primary \"so what\" per view, filters that don't overwhelm, clear hierarchy."
+      - listitem [ref=f18e27]:
+        - strong [ref=f18e28]: Live data
+        - text: ": connect a real source (CSV, SQL result) rather than pasting static numbers."
+      - listitem [ref=f18e29]:
+        - strong [ref=f18e30]: Annotating
+        - text: ": every chart in a portfolio piece needs one sentence of interpretation next to it."
+    - paragraph [ref=f18e31]: "A well-built dashboard reads top-to-bottom, glance to detail. Here's what that actually looks like as a mockup — not a diagram of boxes, an actual miniature dashboard:"
+    - 'img "Mockup dashboard: four KPI tiles at top, a revenue trend line chart, a bar chart of revenue by channel, and a detail table at the bottom" [ref=f18e33]':
+      - generic [ref=f18e34]:
+        - generic [ref=f18e35]:
+          - generic [ref=f18e37]: SPEND
+          - generic [ref=f18e38]: $41.2K
+          - generic [ref=f18e40]: REVENUE
+          - generic [ref=f18e41]: $118K
+          - generic [ref=f18e43]: ROAS
+          - generic [ref=f18e44]: 2.9x
+          - generic [ref=f18e46]: CAC
+          - generic [ref=f18e47]: $82
+        - generic [ref=f18e48]: REVENUE TREND (context)
+        - generic [ref=f18e52]: REVENUE BY CHANNEL (diagnosis)
+        - generic [ref=f18e60]: CAMPAIGN DETAIL TABLE (drill-down)
+    - 'heading "Interactive: pick the right chart" [level=2] [ref=f18e63]'
+    - paragraph [ref=f18e64]: For each scenario, choose the chart type you'd actually ship. There's a defensible answer, not a trick.
+    - generic [ref=f18e65]:
+      - generic [ref=f18e66]: Chart picker
+      - generic [ref=f18e67]:
+        - generic [ref=f18e68]:
+          - generic [ref=f18e69]: 1. Revenue trend over the last 12 months
+          - combobox [ref=f18e70]:
+            - option "Line chart" [selected]
+            - option "Pie chart"
+            - option "Scatter plot"
+        - generic [ref=f18e71]:
+          - generic [ref=f18e72]: 2. Revenue by channel, single point in time
+          - combobox [ref=f18e73]:
+            - option "Line chart" [selected]
+            - option "Bar chart"
+            - option "Pie chart"
+        - generic [ref=f18e74]:
+          - generic [ref=f18e75]: 3. Exact spend, revenue, and ROAS for 40 individual campaigns, for an analyst to sort/filter
+          - combobox [ref=f18e76]:
+            - option "A sortable table" [selected]
+            - option "A single giant pie chart"
+            - option "A word cloud"
+        - generic [ref=f18e77]:
+          - generic [ref=f18e78]: 4. Relationship between ad spend and revenue across 50 campaigns, looking for a pattern
+          - combobox [ref=f18e79]:
+            - option "Bar chart" [selected]
+            - option "Scatter plot"
+            - option "Pie chart"
+        - generic [ref=f18e80]:
+          - generic [ref=f18e81]: 5. Market share of 4 channels as a % of total spend, for an exec summary slide
+          - combobox [ref=f18e82]:
+            - option "Stacked bar (or simple %) — not pie" [selected]
+            - option "Line chart"
+            - option "Scatter plot"
+      - button "Check my picks" [ref=f18e83] [cursor=pointer]
+    - heading "Exercises" [level=2] [ref=f18e84]
+    - list [ref=f18e85]:
+      - listitem [ref=f18e86]: Pull the SQL output from Module 2 (revenue by channel/month) into Tableau Public or Power BI.
+      - listitem [ref=f18e87]: "Build a 3-view dashboard: overview (KPI tiles), channel breakdown (bar/line), drill-down table."
+      - listitem [ref=f18e88]: Add one date-range filter and one annotation callout per view.
+      - listitem [ref=f18e89]: Find a dashboard online you think is bad and rewrite its worst chart on paper.
+    - heading "Check your understanding" [level=2] [ref=f18e90]
+    - generic [ref=f18e92]:
+      - generic [ref=f18e93]:
+        - paragraph [ref=f18e94]:
+          - generic [ref=f18e95]: Q1
+          - text: A CMO wants to compare revenue across 5 channels at a glance. Best default choice?
+        - generic [ref=f18e96]:
+          - generic [ref=f18e97] [cursor=pointer]:
+            - radio "Pie chart" [ref=f18e98]
+            - generic [ref=f18e99]: Pie chart
+          - generic [ref=f18e100] [cursor=pointer]:
+            - radio "Bar chart" [ref=f18e101]
+            - generic [ref=f18e102]: Bar chart
+          - generic [ref=f18e103] [cursor=pointer]:
+            - radio "3D bar chart" [ref=f18e104]
+            - generic [ref=f18e105]: 3D bar chart
+          - generic [ref=f18e106] [cursor=pointer]:
+            - radio "Radar chart" [ref=f18e107]
+            - generic [ref=f18e108]: Radar chart
+      - generic [ref=f18e109]:
+        - paragraph [ref=f18e110]:
+          - generic [ref=f18e111]: Q2
+          - text: What's the main risk of a dashboard with 12 filters and 9 charts on one screen?
+        - generic [ref=f18e112]:
+          - generic [ref=f18e113] [cursor=pointer]:
+            - radio "It loads too slowly, nothing else" [ref=f18e114]
+            - generic [ref=f18e115]: It loads too slowly, nothing else
+          - generic [ref=f18e116] [cursor=pointer]:
+            - radio "The viewer can't tell which chart matters, so nothing gets acted on" [ref=f18e117]
+            - generic [ref=f18e118]: The viewer can't tell which chart matters, so nothing gets acted on
+          - generic [ref=f18e119] [cursor=pointer]:
+            - radio "It uses too many colors" [ref=f18e120]
+            - generic [ref=f18e121]: It uses too many colors
+          - generic [ref=f18e122] [cursor=pointer]:
+            - radio "There is no real risk" [ref=f18e123]
+            - generic [ref=f18e124]: There is no real risk
+      - generic [ref=f18e125]:
+        - paragraph [ref=f18e126]:
+          - generic [ref=f18e127]: Q3
+          - text: Why annotate a chart in a portfolio project instead of leaving it to speak for itself?
+        - generic [ref=f18e128]:
+          - generic [ref=f18e129] [cursor=pointer]:
+            - radio "Annotations are required by Tableau" [ref=f18e130]
+            - generic [ref=f18e131]: Annotations are required by Tableau
+          - generic [ref=f18e132] [cursor=pointer]:
+            - radio "It proves you can interpret the data, not just plot it — that's what's actually being evaluated" [ref=f18e133]
+            - generic [ref=f18e134]: It proves you can interpret the data, not just plot it — that's what's actually being evaluated
+          - generic [ref=f18e135] [cursor=pointer]:
+            - radio "It makes the file size smaller" [ref=f18e136]
+            - generic [ref=f18e137]: It makes the file size smaller
+          - generic [ref=f18e138] [cursor=pointer]:
+            - radio "It's not necessary if the chart is well-designed" [ref=f18e139]
+            - generic [ref=f18e140]: It's not necessary if the chart is well-designed
+      - generic [ref=f18e141]:
+        - generic [ref=f18e142]: Answer all questions, then check your score.
+        - button "Check answers" [ref=f18e143] [cursor=pointer]
+    - heading "Interview questions for this module" [level=2] [ref=f18e144]
+    - generic [ref=f18e145]:
+      - paragraph [ref=f18e146]: "\"How do you decide what chart type to use for a given dataset?\""
+      - paragraph [ref=f18e147]: "Model answer: start from the question, not the data. Comparing categories → bar. Trend over time → line. Part-to-whole → stacked bar (rarely pie). Relationship between two numeric variables → scatter. Precise individual values → a table beats a chart."
+    - generic [ref=f18e148]:
+      - paragraph [ref=f18e149]: "\"Walk me through how you'd design a dashboard for a CMO who has 30 seconds to look at it.\""
+      - paragraph [ref=f18e150]: "Model answer: lead with 3–4 KPI tiles above the fold, each with a trend arrow, no more than one chart requiring interpretation, and a single annotation stating what changed and why it matters — the CMO should never have to ask \"so what should I do with this.\""
+    - button "Mark this module complete" [ref=f18e152] [cursor=pointer]
+    - generic [ref=f18e153]:
+      - link "← Module 2" [ref=f18e154] [cursor=pointer]:
+        - /url: module-2.html
+      - link "Module 4 — GA4, GTM & UTMs →" [ref=f18e155] [cursor=pointer]:
+        - /url: module-4.html
+  - contentinfo [ref=f18e156]: MODULE 3 · DATA VISUALIZATION & STORYTELLING

@@ -1,0 +1,101 @@
+- generic [active] [ref=f14e1]:
+  - generic [ref=f14e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f14e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f14e4]: MA COURSE
+      - generic [ref=f14e5]: Interview-Ready Marketing Analyst
+    - navigation [ref=f14e6]:
+      - link "Home" [ref=f14e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f14e8] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f14e9] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f14e10] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f14e11] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f14e12] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f14e13] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f14e14] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply" [ref=f14e15] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f14e16]:
+    - generic [ref=f14e17]:
+      - paragraph [ref=f14e18]: Interactive Course · Zero to Interview-Ready
+      - heading "Marketing Manager → Marketing Analyst." [level=1] [ref=f14e19]
+      - paragraph [ref=f14e20]: "A complete, hands-on curriculum for someone who has never written a formula-heavy spreadsheet or a line of SQL: 6 modules, a visual 16-week roadmap, a live SQL runner, a UTM builder, a stats calculator, and a resume/application system — everything tracked in this browser."
+    - generic [ref=f14e21]:
+      - img [ref=f14e22]:
+        - generic [ref=f14e25]: 20%
+        - generic [ref=f14e26]: COMPLETE
+      - generic [ref=f14e27]:
+        - text: Overall course progress
+        - paragraph [ref=f14e28]: 4 / 20 steps across modules, roadmap & resume checklist
+        - generic [ref=f14e29]:
+          - generic [ref=f14e30]: Modules
+          - generic [ref=f14e31]: 1 / 6 modules complete
+    - generic [ref=f14e34]:
+      - link "Plan The 16-Week Roadmap A visual, week-by-week timeline from zero to applying — with milestones you check off." [ref=f14e35] [cursor=pointer]:
+        - /url: roadmap.html
+        - generic [ref=f14e36]: Plan
+        - heading "The 16-Week Roadmap" [level=3] [ref=f14e37]
+        - paragraph [ref=f14e38]: A visual, week-by-week timeline from zero to applying — with milestones you check off.
+      - link "Get Hired Resume, LinkedIn & When to Apply Bullet rewrite tool, keyword pass, target titles, outreach templates, and a readiness checklist." [ref=f14e39] [cursor=pointer]:
+        - /url: resume.html
+        - generic [ref=f14e40]: Get Hired
+        - heading "Resume, LinkedIn & When to Apply" [level=3] [ref=f14e41]
+        - paragraph [ref=f14e42]: Bullet rewrite tool, keyword pass, target titles, outreach templates, and a readiness checklist.
+    - heading "The 6 modules" [level=2] [ref=f14e43]
+    - paragraph [ref=f14e44]: Work through these in order — each one builds on the last.
+    - generic [ref=f14e45]:
+      - link "Complete Module 0 The Transition Mindset Reframe marketing judgment as analytical skill before touching a tool." [ref=f14e46] [cursor=pointer]:
+        - /url: module-0.html
+        - generic [ref=f14e47]: Complete
+        - generic [ref=f14e48]: Module 0
+        - heading "The Transition Mindset" [level=3] [ref=f14e49]
+        - paragraph [ref=f14e50]: Reframe marketing judgment as analytical skill before touching a tool.
+      - link "Not started Module 1 Excel & Google Sheets Pivot tables, XLOOKUP, dynamic charts — the bridge into SQL logic." [ref=f14e51] [cursor=pointer]:
+        - /url: module-1.html
+        - generic [ref=f14e52]: Not started
+        - generic [ref=f14e53]: Module 1
+        - heading "Excel & Google Sheets" [level=3] [ref=f14e54]
+        - paragraph [ref=f14e55]: Pivot tables, XLOOKUP, dynamic charts — the bridge into SQL logic.
+      - link "Not started Module 2 SQL for Marketing SELECT, JOIN, GROUP BY, window functions — run real queries in your browser." [ref=f14e56] [cursor=pointer]:
+        - /url: module-2.html
+        - generic [ref=f14e57]: Not started
+        - generic [ref=f14e58]: Module 2
+        - heading "SQL for Marketing" [level=3] [ref=f14e59]
+        - paragraph [ref=f14e60]: SELECT, JOIN, GROUP BY, window functions — run real queries in your browser.
+      - link "Not started Module 3 Data Viz & Storytelling Chart selection and dashboard UX that turns numbers into a decision." [ref=f14e61] [cursor=pointer]:
+        - /url: module-3.html
+        - generic [ref=f14e62]: Not started
+        - generic [ref=f14e63]: Module 3
+        - heading "Data Viz & Storytelling" [level=3] [ref=f14e64]
+        - paragraph [ref=f14e65]: Chart selection and dashboard UX that turns numbers into a decision.
+      - link "Not started Module 4 GA4, GTM & UTMs GA4 events, GTM tags, and a UTM architecture that survives a real launch." [ref=f14e66] [cursor=pointer]:
+        - /url: module-4.html
+        - generic [ref=f14e67]: Not started
+        - generic [ref=f14e68]: Module 4
+        - heading "GA4, GTM & UTMs" [level=3] [ref=f14e69]
+        - paragraph [ref=f14e70]: GA4 events, GTM tags, and a UTM architecture that survives a real launch.
+      - link "Not started Module 5 Metrics & A/B Testing CAC, LTV, ROAS, and whether your A/B test result actually means anything." [ref=f14e71] [cursor=pointer]:
+        - /url: module-5.html
+        - generic [ref=f14e72]: Not started
+        - generic [ref=f14e73]: Module 5
+        - heading "Metrics & A/B Testing" [level=3] [ref=f14e74]
+        - paragraph [ref=f14e75]: CAC, LTV, ROAS, and whether your A/B test result actually means anything.
+    - generic [ref=f14e76]:
+      - heading "How to use this" [level=4] [ref=f14e77]
+      - paragraph [ref=f14e78]:
+        - text: Every module teaches from zero, with diagrams, a quiz, and one interactive tool built for that specific skill (a live SQL editor in Module 2, a UTM builder in Module 4, a stats calculator in Module 5). Mark a module complete once you've run its tool and passed its quiz. Check off
+        - link "Roadmap" [ref=f14e79] [cursor=pointer]:
+          - /url: roadmap.html
+        - text: milestones as you hit them, and work the
+        - link "Resume & Apply" [ref=f14e80] [cursor=pointer]:
+          - /url: resume.html
+        - text: checklist in parallel from around week 12 — the ring above combines all three.
+  - contentinfo [ref=f14e81]: INTERVIEW-READY MARKETING ANALYST · LOCAL COURSE · PROGRESS STORED IN THIS BROWSER ONLY

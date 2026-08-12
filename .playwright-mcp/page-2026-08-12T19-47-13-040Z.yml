@@ -1,0 +1,207 @@
+- generic [ref=f13e1]:
+  - generic [ref=f13e2]:
+    - link "MA COURSE Interview-Ready Marketing Analyst" [ref=f13e159] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f13e160]: MA COURSE
+      - generic [ref=f13e161]: Interview-Ready Marketing Analyst
+    - navigation [ref=f13e162]:
+      - link "Home" [ref=f13e163] [cursor=pointer]:
+        - /url: index.html
+      - link "Roadmap" [ref=f13e164] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "M0 Mindset ✓" [ref=f13e165] [cursor=pointer]:
+        - /url: module-0.html
+      - link "M1 Sheets" [ref=f13e166] [cursor=pointer]:
+        - /url: module-1.html
+      - link "M2 SQL" [ref=f13e167] [cursor=pointer]:
+        - /url: module-2.html
+      - link "M3 Dataviz" [ref=f13e168] [cursor=pointer]:
+        - /url: module-3.html
+      - link "M4 GA4/GTM" [ref=f13e169] [cursor=pointer]:
+        - /url: module-4.html
+      - link "M5 Metrics" [ref=f13e170] [cursor=pointer]:
+        - /url: module-5.html
+      - link "Resume & Apply" [ref=f13e171] [cursor=pointer]:
+        - /url: resume.html
+  - main [ref=f13e16]:
+    - generic [ref=f13e17]:
+      - paragraph [ref=f13e18]: Resume & Apply
+      - heading "Resume, LinkedIn & When to Apply" [level=1] [ref=f13e19]
+      - paragraph [ref=f13e20]: The technical skills only matter if a resume and a LinkedIn profile get someone to look at them. This page covers the rewrite, the keywords, who to target, and exactly when to start.
+    - heading "When to start applying" [level=2] [ref=f13e21]
+    - paragraph [ref=f13e23]:
+      - strong [ref=f13e24]: Week 12
+      - text: — not "when everything feels ready." By week 12 you'll have Portfolio Projects 1 and 2 published and a rewritten resume; that's enough to start getting screens while Module 5 and Project 3 finish in parallel. See the full picture on the
+      - link "Roadmap" [ref=f13e25] [cursor=pointer]:
+        - /url: roadmap.html
+      - text: .
+    - 'heading "Translate the resume: skill map" [level=2] [ref=f13e26]'
+    - paragraph [ref=f13e27]: Every "soft" marketing skill has a hard analytical shadow. Name it — don't discard the marketing experience, reframe it.
+    - table [ref=f13e28]:
+      - rowgroup [ref=f13e29]:
+        - row [ref=f13e30]:
+          - columnheader "She already does this" [ref=f13e31]
+          - columnheader [ref=f13e32]
+          - columnheader "Which is actually this analytical skill" [ref=f13e33]
+        - row [ref=f13e34]:
+          - cell "Writes campaign briefs with a target audience and goal" [ref=f13e35]
+          - cell "→" [ref=f13e36]
+          - cell "Defining a hypothesis and success metric before pulling data" [ref=f13e37]
+        - row [ref=f13e38]:
+          - cell "Segments audiences for messaging" [ref=f13e39]
+          - cell "→" [ref=f13e40]
+          - cell [ref=f13e41]:
+            - text: Customer segmentation — the same operation SQL
+            - code [ref=f13e42]: GROUP BY
+            - text: does
+        - row [ref=f13e43]:
+          - cell "Maps the customer journey funnel" [ref=f13e44]
+          - cell "→" [ref=f13e45]
+          - cell "Funnel analysis — conversion rate at each stage, drop-off diagnosis" [ref=f13e46]
+        - row [ref=f13e47]:
+          - cell "A/B tests subject lines or creative" [ref=f13e48]
+          - cell "→" [ref=f13e49]
+          - cell "Hypothesis testing — already running experiments, just without significance math" [ref=f13e50]
+        - row [ref=f13e51]:
+          - cell "Justifies budget to a CMO" [ref=f13e52]
+          - cell "→" [ref=f13e53]
+          - cell "ROI / attribution reasoning — the exact skill CAC and ROAS formalize" [ref=f13e54]
+    - 'heading "Interactive: build a bullet" [level=2] [ref=f13e55]'
+    - paragraph [ref=f13e56]:
+      - text: "The formula:"
+      - strong [ref=f13e57]: "[analytical verb] + [what was measured/built] + [tool/method] + [quantified result]"
+      - text: . Fill in your own details and watch it assemble live.
+    - generic [ref=f13e58]:
+      - generic [ref=f13e59]: Bullet builder
+      - generic [ref=f13e60]:
+        - generic [ref=f13e61]:
+          - generic [ref=f13e62]: Analytical verb
+          - combobox "Analytical verb" [ref=f13e63]:
+            - option "Analyzed"
+            - option "Tracked"
+            - option "Built"
+            - option "Segmented" [selected]
+            - option "Diagnosed"
+            - option "Optimized"
+        - generic [ref=f13e64]:
+          - generic [ref=f13e65]: Tool / method
+          - combobox "Tool / method" [ref=f13e66]:
+            - option "SQL" [selected]
+            - option "pivot tables in Sheets"
+            - option "a Tableau dashboard"
+            - option "an A/B test"
+            - option "GA4"
+      - generic [ref=f13e67]:
+        - generic [ref=f13e68]: What was measured / built
+        - textbox "What was measured / built" [ref=f13e69]:
+          - /placeholder: e.g. email campaign performance across 6 segments
+          - text: the customer base into 4 lifecycle tiers
+      - generic [ref=f13e70]:
+        - generic [ref=f13e71]: Quantified result
+        - textbox "Quantified result" [ref=f13e72]:
+          - /placeholder: e.g. lifted open rate 18%
+          - text: revealing a segment worth 61% of revenue
+      - generic [ref=f13e73]: "\"Segmented the customer base into 4 lifecycle tiers using SQL, revealing a segment worth 61% of revenue\""
+    - 'heading "Reference: before → after" [level=3] [ref=f13e74]'
+    - table [ref=f13e75]:
+      - rowgroup [ref=f13e76]:
+        - row [ref=f13e77]:
+          - columnheader "Generic phrasing" [ref=f13e78]
+          - columnheader [ref=f13e79]
+          - columnheader "Rewritten analyst phrasing" [ref=f13e80]
+        - row [ref=f13e81]:
+          - cell "\"Managed email marketing campaigns\"" [ref=f13e82]
+          - cell "→" [ref=f13e83]
+          - cell "\"Analyzed email campaign performance across 6 segments using pivot tables and A/B tests, identifying a subject-line pattern that lifted open rate 18%\"" [ref=f13e84]
+        - row [ref=f13e85]:
+          - cell "\"Oversaw $200K digital ad budget\"" [ref=f13e86]
+          - cell "→" [ref=f13e87]
+          - cell "\"Tracked CAC and ROAS across 4 paid channels; reallocated 20% of a $200K budget toward the two highest-LTV channels, improving blended ROAS by 1.4x\"" [ref=f13e88]
+        - row [ref=f13e89]:
+          - cell "\"Led customer journey mapping\"" [ref=f13e90]
+          - cell "→" [ref=f13e91]
+          - cell "\"Built a funnel analysis of the customer journey from lead to purchase, identifying a 40% drop-off at checkout and driving a fix that recovered ~$30K/quarter\"" [ref=f13e92]
+        - row [ref=f13e93]:
+          - cell "\"Reported on campaign KPIs to leadership\"" [ref=f13e94]
+          - cell "→" [ref=f13e95]
+          - cell "\"Built a self-serve GA4 + Looker Studio dashboard for leadership, cutting reporting time from 4 hours to 15 minutes\"" [ref=f13e96]
+    - heading "ATS keyword pass" [level=2] [ref=f13e97]
+    - paragraph [ref=f13e98]:
+      - text: "Resume and LinkedIn \"Skills\" section should contain, verbatim:"
+      - code [ref=f13e99]: SQL
+      - text: ","
+      - code [ref=f13e100]: Excel
+      - text: ","
+      - code [ref=f13e101]: Google Sheets
+      - text: ","
+      - code [ref=f13e102]: GA4
+      - text: ","
+      - code [ref=f13e103]: Tableau
+      - text: /
+      - code [ref=f13e104]: Power BI
+      - text: ","
+      - code [ref=f13e105]: A/B testing
+      - text: ","
+      - code [ref=f13e106]: data visualization
+      - text: ","
+      - code [ref=f13e107]: campaign analytics
+      - text: ","
+      - code [ref=f13e108]: CAC
+      - text: ","
+      - code [ref=f13e109]: ROAS
+      - text: ","
+      - code [ref=f13e110]: LTV
+      - text: . ATS systems match strings, not synonyms — "spreadsheet software" will not match a filter for "Excel."
+    - paragraph [ref=f13e112]:
+      - text: "LinkedIn headline:"
+      - emphasis [ref=f13e113]: "\"Marketing Manager → Marketing Analyst | SQL, GA4, Tableau | Turning campaign data into revenue decisions.\""
+      - text: The arrow signals "in transition, actively upskilled," not a mismatch between title and target.
+    - heading "Target roles & titles" [level=2] [ref=f13e114]
+    - paragraph [ref=f13e115]: Search all of these — titles are inconsistent across companies, and narrowing to only "Marketing Analyst" cuts the funnel by more than half.
+    - list [ref=f13e116]:
+      - listitem [ref=f13e117]: Marketing Analyst
+      - listitem [ref=f13e118]: Growth Analyst / Growth Marketing Analyst
+      - listitem [ref=f13e119]: Campaign Performance Analyst
+      - listitem [ref=f13e120]: Customer Insights Analyst
+      - listitem [ref=f13e121]: Digital Analytics Specialist / Analyst
+      - listitem [ref=f13e122]: Marketing Data Analyst
+      - listitem [ref=f13e123]: CRM Analyst
+      - listitem [ref=f13e124]: Web Analyst
+    - heading "Application strategy" [level=2] [ref=f13e125]
+    - paragraph [ref=f13e127]:
+      - strong [ref=f13e128]: ~20% cold applications, ~60% warm networking/referrals, ~20% recruiter outreach.
+      - text: Referred candidates get interviewed at multiples the rate of cold applicants — for a career-changer without the "safe" title match, a referral is often what gets the resume read at all instead of filtered by an ATS keyword match.
+    - heading "Cold outreach templates" [level=3] [ref=f13e129]
+    - generic [ref=f13e130]:
+      - text: To a recruiter
+      - paragraph [ref=f13e131]: Hi [Name] — I saw you recruit for marketing/growth analytics roles at [Company]. I'm a Marketing Manager transitioning into Marketing/Growth Analyst work — I've spent [X years] running campaigns and reading performance data, and I've spent the last few months building hands-on SQL, GA4, and dashboarding skills to formalize that into an analyst skillset (happy to share a portfolio piece on campaign ROI analysis). Would love to be on your radar for analyst-track roles you're working — open to a quick chat if it's useful, no pressure either way.
+    - generic [ref=f13e132]:
+      - text: To a Senior Marketing Analyst
+      - paragraph [ref=f13e133]: "Hi [Name] — I came across your profile and saw you made a similar move into analytics from a more marketing-generalist background. I'm a Marketing Manager currently building out SQL/GA4/dashboard skills to move into a Marketing Analyst role, and I'd genuinely value 15 minutes of your perspective — mainly: what actually mattered in your first 90 days that a course wouldn't have taught you? Completely understand if time's tight — even a two-line reply would help."
+    - heading "Readiness checklist" [level=2] [ref=f13e134]
+    - paragraph [ref=f13e135]: This checklist is the third ring of progress on the home page, alongside modules and roadmap milestones.
+    - generic [ref=f13e136]:
+      - generic [ref=f13e137] [cursor=pointer]:
+        - checkbox "All 6 modules marked complete" [checked] [active] [ref=f13e138]
+        - generic [ref=f13e139]: All 6 modules marked complete
+      - generic [ref=f13e140] [cursor=pointer]:
+        - checkbox "Portfolio Project 1 (Segmentation) published with a written narrative" [ref=f13e141]
+        - generic [ref=f13e142]: Portfolio Project 1 (Segmentation) published with a written narrative
+      - generic [ref=f13e143] [cursor=pointer]:
+        - checkbox "Portfolio Project 2 (A/B Test) published with a written narrative" [ref=f13e144]
+        - generic [ref=f13e145]: Portfolio Project 2 (A/B Test) published with a written narrative
+      - generic [ref=f13e146] [cursor=pointer]:
+        - checkbox "Portfolio Project 3 (ROI Dashboard) published — this is the one you lead with" [ref=f13e147]
+        - generic [ref=f13e148]: Portfolio Project 3 (ROI Dashboard) published — this is the one you lead with
+      - generic [ref=f13e149] [cursor=pointer]:
+        - checkbox "Resume rewritten using the analyst bullet formula, keyword pass done" [ref=f13e150]
+        - generic [ref=f13e151]: Resume rewritten using the analyst bullet formula, keyword pass done
+      - generic [ref=f13e152] [cursor=pointer]:
+        - checkbox "LinkedIn headline + skills section updated, \"Open to Work\" set to recruiters only" [ref=f13e153]
+        - generic [ref=f13e154]: LinkedIn headline + skills section updated, "Open to Work" set to recruiters only
+    - generic [ref=f13e155]:
+      - link "← Roadmap" [ref=f13e156] [cursor=pointer]:
+        - /url: roadmap.html
+      - link "Course home →" [ref=f13e157] [cursor=pointer]:
+        - /url: index.html
+  - contentinfo [ref=f13e158]: RESUME & APPLY · INTERVIEW-READY MARKETING ANALYST
