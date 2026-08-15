@@ -1,0 +1,91 @@
+month,channel,campaign_name,spend,impressions,clicks,conversions,revenue
+2026-01,Paid Search,Brand Search,5418.28,191946,3120,223,12082.76
+2026-01,Paid Search,Competitor Conquest,5530.1,167823,3962,87,18083.43
+2026-01,Paid Search,Generic Category,4155.91,119343,1832,119,11678.11
+2026-01,Paid Social,Prospecting - Lookalike,3862.35,169596,6435,131,7801.95
+2026-01,Paid Social,Retargeting - Cart Abandoners,4514.55,167881,2308,200,11286.38
+2026-01,Paid Social,Awareness - Video,3341.49,102287,4025,250,6315.42
+2026-01,Email,Weekly Newsletter,351.78,14942,657,30,2831.83
+2026-01,Email,Win-back Series,288.01,12874,513,30,2419.28
+2026-01,Email,Post-Purchase Flow,326.14,11138,208,5,1845.95
+2026-01,Affiliate,Coupon Partners,1479.35,52524,1655,75,3890.69
+2026-01,Affiliate,Content Partners,1644.22,57890,2469,161,4554.49
+2026-01,Affiliate,Loyalty Network,1930.96,92080,1293,60,5252.21
+2026-01,Organic Search,Blog / SEO,49.48,2129,70,5,1163.77
+2026-01,Organic Search,Organic Product Pages,38.8,1120,22,1,625.46
+2026-01,Organic Search,Organic Landing Pages,10.55,545,10,1,305.63
+2026-02,Paid Search,Brand Search,4686.9,189299,3369,125,15466.77
+2026-02,Paid Search,Competitor Conquest,5184.1,226979,9355,448,13063.93
+2026-02,Paid Search,Generic Category,4157.96,173624,1973,45,14137.06
+2026-02,Paid Social,Prospecting - Lookalike,2774.12,137003,3235,79,6741.11
+2026-02,Paid Social,Retargeting - Cart Abandoners,3454.05,146058,6416,514,9671.34
+2026-02,Paid Social,Awareness - Video,2528.7,117347,3270,126,6372.32
+2026-02,Email,Weekly Newsletter,310.24,12328,305,26,1827.31
+2026-02,Email,Win-back Series,368.96,15317,223,18,2368.72
+2026-02,Email,Post-Purchase Flow,367.63,16635,507,15,2404.3
+2026-02,Affiliate,Coupon Partners,2115.01,103683,2864,57,6768.03
+2026-02,Affiliate,Content Partners,1588.99,84352,3417,267,4020.14
+2026-02,Affiliate,Loyalty Network,1569.02,81128,3491,90,4048.07
+2026-02,Organic Search,Blog / SEO,24.3,1179,42,1,321.98
+2026-02,Organic Search,Organic Product Pages,23.76,835,33,1,520.34
+2026-02,Organic Search,Organic Landing Pages,10.59,505,7,1,229.91
+2026-03,Paid Search,Brand Search,6485.45,258307,7013,199,19326.64
+2026-03,Paid Search,Competitor Conquest,4174.09,183177,3025,107,10894.37
+2026-03,Paid Search,Generic Category,3712.98,126914,5266,422,10990.42
+2026-03,Paid Social,Prospecting - Lookalike,2677.14,123315,1964,57,5461.37
+2026-03,Paid Social,Retargeting - Cart Abandoners,4838.79,197239,7303,558,11467.93
+2026-03,Paid Social,Awareness - Video,2976.02,117964,2792,147,5654.44
+2026-03,Email,Weekly Newsletter,332.27,18132,211,10,2611.64
+2026-03,Email,Win-back Series,234.83,8151,122,6,2000.75
+2026-03,Email,Post-Purchase Flow,255.47,8876,374,19,1652.89
+2026-03,Affiliate,Coupon Partners,2233.62,65592,2949,231,7192.26
+2026-03,Affiliate,Content Partners,2362.8,120301,1702,91,8742.36
+2026-03,Affiliate,Loyalty Network,1456.5,43087,948,84,4398.63
+2026-03,Organic Search,Blog / SEO,13.26,534,12,1,346.22
+2026-03,Organic Search,Organic Product Pages,49.77,2358,32,1,1094.94
+2026-03,Organic Search,Organic Landing Pages,48.44,2065,73,1,1086.51
+2026-04,Paid Search,Brand Search,5252.53,268002,3705,323,14707.08
+2026-04,Paid Search,Competitor Conquest,3740.33,164821,5436,198,9051.6
+2026-04,Paid Search,Generic Category,3859.66,133728,4011,254,12621.09
+2026-04,Paid Social,Prospecting - Lookalike,3548.06,149427,6363,218,8444.38
+2026-04,Paid Social,Retargeting - Cart Abandoners,4290.48,165982,5452,223,8752.58
+2026-04,Paid Social,Awareness - Video,3290.44,98577,2460,221,8390.62
+2026-04,Email,Weekly Newsletter,399.02,13468,239,20,2298.36
+2026-04,Email,Win-back Series,370.22,14059,194,15,3176.49
+2026-04,Email,Post-Purchase Flow,325.88,17811,573,11,2489.72
+2026-04,Affiliate,Coupon Partners,2180.52,100110,4278,125,6301.7
+2026-04,Affiliate,Content Partners,1338.51,57471,1038,64,3533.67
+2026-04,Affiliate,Loyalty Network,2061.13,93007,1652,89,5688.72
+2026-04,Organic Search,Blog / SEO,45.27,1380,32,1,1232.7
+2026-04,Organic Search,Organic Product Pages,0.18,8,1,1,4.66
+2026-04,Organic Search,Organic Landing Pages,27.58,779,8,1,543.33
+2026-05,Paid Search,Brand Search,6211.79,313907,9276,281,17703.6
+2026-05,Paid Search,Competitor Conquest,3882.34,202939,7601,609,9977.61
+2026-05,Paid Search,Generic Category,6196.77,215259,2540,189,15182.09
+2026-05,Paid Social,Prospecting - Lookalike,4710.34,210824,2892,246,10409.85
+2026-05,Paid Social,Retargeting - Cart Abandoners,4661.51,232566,9445,205,12959.0
+2026-05,Paid Social,Awareness - Video,4341.41,230667,8692,699,9247.2
+2026-05,Email,Weekly Newsletter,352.69,17373,208,16,2267.8
+2026-05,Email,Win-back Series,364.65,18249,456,18,2290.0
+2026-05,Email,Post-Purchase Flow,348.84,9990,151,6,2197.69
+2026-05,Affiliate,Coupon Partners,2237.22,79502,2522,120,8411.95
+2026-05,Affiliate,Content Partners,2377.38,126855,1556,136,7607.62
+2026-05,Affiliate,Loyalty Network,1414.28,49736,597,30,5303.55
+2026-05,Organic Search,Blog / SEO,36.43,1616,43,2,642.99
+2026-05,Organic Search,Organic Product Pages,28.83,1358,10,1,478.29
+2026-05,Organic Search,Organic Landing Pages,26.92,1293,42,1,671.65
+2026-06,Paid Search,Brand Search,3709.92,136953,2686,213,11129.76
+2026-06,Paid Search,Competitor Conquest,5659.26,205717,4754,228,14487.71
+2026-06,Paid Search,Generic Category,4386.97,172636,7387,497,10309.38
+2026-06,Paid Social,Prospecting - Lookalike,4757.01,171850,4858,97,11511.96
+2026-06,Paid Social,Retargeting - Cart Abandoners,3217.28,140465,4526,237,7174.53
+2026-06,Paid Social,Awareness - Video,3605.4,147013,6078,460,7246.85
+2026-06,Email,Weekly Newsletter,192.42,8065,253,10,1116.04
+2026-06,Email,Win-back Series,354.61,16370,267,9,2882.98
+2026-06,Email,Post-Purchase Flow,156.11,6373,251,6,992.86
+2026-06,Affiliate,Coupon Partners,1697.33,56435,1905,104,5635.14
+2026-06,Affiliate,Content Partners,1492.78,42021,1503,111,5000.81
+2026-06,Affiliate,Loyalty Network,1327.9,43487,1889,106,4050.1
+2026-06,Organic Search,Blog / SEO,2.51,127,3,1,41.39
+2026-06,Organic Search,Organic Product Pages,33.38,1471,63,5,994.06
+2026-06,Organic Search,Organic Landing Pages,30.63,1275,49,2,764.22

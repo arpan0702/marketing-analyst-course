@@ -56,6 +56,24 @@
   <p>This checklist is the fourth ring of progress on the home page, alongside modules, roadmap, and the resume checklist.</p>
   <div id="projects-checklist" style="display:flex; flex-direction:column; gap:8px; margin:16px 0;"></div>
 
+  <h2>Get the data — no Kaggle account needed</h2>
+  <p>On the job, a marketing analyst pulls from GA4, an ad platform export, or a CRM — not Kaggle. For a portfolio piece, though, you need data you're allowed to publish publicly, and your employer's real numbers aren't that. So: three ready-made datasets, sized and shaped like real campaign data, one click, no login, no searching. Download all three now and reuse them across every project below.</p>
+  <div class="tool-grid">
+    <div class="tool">
+      <b><a href="assets/data/campaign_performance.csv" download target="_blank" rel="noopener">campaign_performance.csv</a></b>
+      <span>90 rows — 5 channels × 3 campaigns × 6 months. Spend, impressions, clicks, conversions, revenue. Powers the ROI Dashboard capstone and the Module 1 &amp; 3 mini-projects.</span>
+    </div>
+    <div class="tool">
+      <b><a href="assets/data/customer_orders.csv" download target="_blank" rel="noopener">customer_orders.csv</a></b>
+      <span>509 orders across 180 customers, with repeat purchases and signup dates — built for RFM segmentation. Powers the Customer Segmentation capstone.</span>
+    </div>
+    <div class="tool">
+      <b><a href="assets/data/ab_test_results.csv" download target="_blank" rel="noopener">ab_test_results.csv</a></b>
+      <span>5,000 visitor-level rows, two variants, a real (small but genuine) lift baked in. Powers the A/B Test capstone and the Module 5 mini-project.</span>
+    </div>
+  </div>
+  <p style="font-size:13.5px; color:var(--ink-muted);">Want a bigger, messier dataset for a fourth portfolio piece later? Kaggle's "Online Retail II" and "Marketing A/B Testing" datasets are the standard, recruiter-recognized public sources — optional, not required to finish any project on this page.</p>
+
   <h2>Mini-projects — one per module</h2>
   <p>Do each one right after finishing its module, while the skill is fresh. None of these need anything beyond what that module already taught.</p>
 
@@ -75,7 +93,7 @@
       <h4>Build a weekly channel report</h4>
       <dl>
         <dt>Goal</dt><dd>The exact spreadsheet skill a Marketing Analyst does every single week.</dd>
-        <dt>Dataset</dt><dd>Kaggle — "Marketing Campaign Performance Dataset."</dd>
+        <dt>Dataset</dt><dd><code class="inline">campaign_performance.csv</code> (downloaded above).</dd>
         <dt>Steps</dt><dd>Clean it (fix blanks, standardize dates, remove duplicates). Build a pivot table: spend and conversions by channel and month. Add a second small sheet of made-up "target CPA" per channel, XLOOKUP it in, and flag any channel over target. Add one SUMIFS KPI cell and one combination chart (bars + a rate line).</dd>
         <dt>Deliverable</dt><dd>A saved spreadsheet file with the pivot, the XLOOKUP flag column, and the chart.</dd>
       </dl>
@@ -109,7 +127,7 @@
       <h4>Rebuild one bad dashboard</h4>
       <dl>
         <dt>Goal</dt><dd>Dashboard judgment is the actual skill being tested, not chart mechanics.</dd>
-        <dt>Steps</dt><dd>Find a dashboard online you think is genuinely bad (a public Tableau Public gallery entry, a screenshot from a "worst dashboards" blog post, or one from your current job). Identify what's wrong using this course's hierarchy (KPI tiles → trend → breakdown → detail table). Rebuild the single worst chart from it in Tableau Public or Power BI Desktop (both free), following the hierarchy properly, using this course's SQL output as sample data if you don't have the original.</dd>
+        <dt>Steps</dt><dd>Find a dashboard online you think is genuinely bad (a public dashboard gallery entry, a screenshot from a "worst dashboards" blog post, or one from your current job). Identify what's wrong using this course's hierarchy (KPI tiles → trend → breakdown → detail table). Rebuild the single worst chart from it in Power BI Desktop (free), loading <code class="inline">campaign_performance.csv</code> as your data source, following the hierarchy properly.</dd>
         <dt>Deliverable</dt><dd>A screenshot of the "before," a screenshot of your rebuild, and a 3-sentence written critique of what changed and why.</dd>
       </dl>
     </div>
@@ -129,7 +147,7 @@
       <h4>A/B test read-out memo</h4>
       <dl>
         <dt>Goal</dt><dd>The actual deliverable a marketing analyst produces after a test ends — a decision memo, not a stats homework answer.</dd>
-        <dt>Dataset</dt><dd>Kaggle — "Marketing A/B Testing" dataset.</dd>
+        <dt>Dataset</dt><dd><code class="inline">ab_test_results.csv</code> (downloaded above) — Variant A vs. Variant B, 2,500 visitors each.</dd>
         <dt>Steps</dt><dd>Calculate each group's conversion rate. Run it through this course's significance calculator (or a chi-square function in Sheets) to get a z-score and p-value. Check whether the sample size was actually large enough using this course's sample-size calculator, retroactively.</dd>
         <dt>Deliverable</dt><dd>A one-page memo: the result, whether it's significant, a ship/no-ship recommendation, and one caveat about the sample (size, duration, or representativeness).</dd>
       </dl>
@@ -144,20 +162,20 @@
       <span class="card-tag">Capstone 1 — Weeks 8–9</span>
       <h4>Customer Segmentation Analysis</h4>
       <dl>
-        <dt>Dataset</dt><dd>Kaggle — "Online Retail II" (UCI) or "Mall Customer Segmentation Data." Both are transaction/customer-level and messy enough to require real cleaning.</dd>
-        <dt>Build it with</dt><dd>Module 1 (cleaning, pivot exploration) + Module 2's RFM/NTILE technique (Advanced tier) for the actual scoring.</dd>
+        <dt>Dataset</dt><dd><code class="inline">customer_orders.csv</code> (downloaded above) — 509 orders, 180 customers, real repeat-purchase patterns already built in.</dd>
+        <dt>Build it with</dt><dd>Module 1 (pivot exploration) + Module 2's RFM/NTILE technique (Advanced tier) for the actual scoring + Power BI for the visual.</dd>
         <dt>Steps</dt>
         <dd>
           <ol style="margin:8px 0 0; padding-left:18px;">
-            <li>Clean the raw data in Excel/Sheets — remove cancelled orders, fix blanks, standardize customer IDs.</li>
-            <li>Load it into a SQL environment (or keep using this course's SQLite pattern with your own data) and compute Recency, Frequency, Monetary per customer.</li>
+            <li>Open it in Excel/Sheets first — sanity-check it with a pivot table (revenue by country, orders by month) before touching SQL.</li>
+            <li>Load it into a SQL environment (or extend this course's Module 2 database with your own tables) and compute Recency, Frequency, Monetary per customer.</li>
             <li>Score each with <code class="inline">NTILE(4)</code>, exactly as taught in Module 2, and combine into segment codes.</li>
-            <li>Visualize segment sizes and average value per segment in a simple bar chart.</li>
+            <li>In Power BI Desktop: <b>Get Data → Text/CSV</b>, load your scored output, and build one bar chart of customer count per segment plus one bar chart of average revenue per segment.</li>
             <li>Write the narrative — this is the actual deliverable, not the query.</li>
           </ol>
         </dd>
-        <dt>The narrative to write</dt><dd>"I identified that X% of customers drive Y% of revenue and recommend a retention campaign for the next-highest-value segment." That sentence is the deliverable — the SQL is how you earned the right to say it.</dd>
-        <dt>Publish it</dt><dd>A doc or a simple webpage with the segment chart, the RFM table, and the narrative. Link it from your resume.</dd>
+        <dt>The narrative to write</dt><dd>"I identified that X% of customers drive Y% of revenue and recommend a retention campaign for the next-highest-value segment." Run the numbers on this exact dataset and use your real X/Y — that's the deliverable, the SQL is how you earned the right to say it.</dd>
+        <dt>Publish it</dt><dd>A Power BI screenshot (segment chart + RFM table) plus a 3–4 sentence narrative, on a doc or simple webpage. Link it from your resume.</dd>
       </dl>
     </div>
 
@@ -165,19 +183,21 @@
       <span class="card-tag">Capstone 2 — Weeks 10–11</span>
       <h4>A/B Testing &amp; Conversion Rate Optimization</h4>
       <dl>
-        <dt>Dataset</dt><dd>Kaggle — "Marketing A/B Testing" dataset, or the Google Merchandise Store's public BigQuery sample (GA4 event-level, free).</dd>
+        <dt>Dataset</dt><dd><code class="inline">ab_test_results.csv</code> (downloaded above) — 2,500 visitors per variant, visitor-level, with device.</dd>
         <dt>Build it with</dt><dd>Module 5 in full — significance calculator, sample-size calculator, the peeking/multiple-testing warnings.</dd>
         <dt>Steps</dt>
         <dd>
           <ol style="margin:8px 0 0; padding-left:18px;">
             <li>State the hypothesis and success metric before looking at results (Module 0's "so what" test, applied for real).</li>
-            <li>Calculate conversion rate per group, run the significance test, and check it against a sample-size calculation done retroactively.</li>
-            <li>Segment the result by device or another dimension — check whether the effect holds everywhere or is concentrated in one segment.</li>
+            <li>Calculate conversion rate per group (pivot table or SQL: <code class="inline">COUNT</code> conversions ÷ <code class="inline">COUNT</code> visitors, grouped by variant). Plug the two rates into Module 5's significance calculator to get a z-score and p-value.</li>
+            <li>Segment the result by device — check whether the effect holds on both desktop and mobile or is concentrated in one.</li>
+            <li>Build one Power BI bar chart: conversion rate by variant, split by device.</li>
             <li>Write the ship/no-ship recommendation with the confidence level and one caveat.</li>
           </ol>
         </dd>
-        <dt>The narrative to write</dt><dd>"Variant B lifted conversion X points at 95% confidence; I'd recommend shipping it but flag that the sample under-represents mobile traffic." The caveat is what separates an analyst from someone who ran a formula.</dd>
-        <dt>Publish it</dt><dd>A one-page write-up with the numbers, the chart, and the recommendation — this is the mini-project from Module 5, extended into a full narrative.</dd>
+        <dt>What you should find</dt><dd>Variant A converts at roughly 5.0%, Variant B at roughly 6.4% — a real, if modest, lift that should come back statistically significant at 95% confidence (p around 0.03). Your exact numbers will differ slightly once you segment by device — that's the actual finding to write up, not the topline.</dd>
+        <dt>The narrative to write</dt><dd>"Variant B lifted conversion ~1.4 points (a 28% relative lift) at 95% confidence; I'd recommend shipping it but flag that the lift is concentrated on [device] traffic." The caveat is what separates an analyst from someone who ran a formula.</dd>
+        <dt>Publish it</dt><dd>A one-page write-up with the numbers, the Power BI chart, and the recommendation — this is the mini-project from Module 5, extended into a full narrative.</dd>
       </dl>
     </div>
 
@@ -185,21 +205,42 @@
       <span class="card-tag">Capstone 3 — Weeks 13–14 — lead with this one</span>
       <h4>Marketing Campaign ROI Dashboard</h4>
       <dl>
-        <dt>Dataset</dt><dd>Kaggle — "Marketing Campaign Performance Dataset," blended with a UTM-tagged funnel you construct yourself (or Google/Meta Ads' downloadable sample exports).</dd>
-        <dt>Build it with</dt><dd>Everything — Module 1 (cleaning), Module 2 (SQL aggregation), Module 3 (dashboard build), Module 4 (UTM/channel structure), Module 5 (CAC/ROAS/LTV).</dd>
+        <dt>Dataset</dt><dd><code class="inline">campaign_performance.csv</code> (downloaded above) — 90 rows, 5 channels, 6 months, already has spend, conversions, and revenue for a real ROAS calculation.</dd>
+        <dt>Build it with</dt><dd>Everything — Module 1 (Excel sanity-check), Module 2 (SQL aggregation), Module 3 (dashboard build), Module 4 (channel/UTM thinking), Module 5 (CAC/ROAS).</dd>
         <dt>Steps</dt>
         <dd>
           <ol style="margin:8px 0 0; padding-left:18px;">
-            <li>Aggregate spend, revenue, CAC, and ROAS by channel and month in SQL.</li>
-            <li>Build a 3-view Tableau/Power BI dashboard following Module 3's hierarchy: KPI tiles → trend → channel breakdown → detail table.</li>
-            <li>Add one filter (date range) and one annotation per view — the "so what," not just the number.</li>
-            <li>Find the one non-obvious insight (e.g. a channel that looks cheap by CAC but has weak 90-day LTV) and lead the write-up with it.</li>
+            <li>Aggregate spend, revenue, and ROAS by channel and month — in Excel with a pivot table first, then again in SQL to double-check yourself.</li>
+            <li>In Power BI Desktop: <b>Get Data → Text/CSV</b>, load <code class="inline">campaign_performance.csv</code> directly (no cleaning needed, it's already tidy).</li>
+            <li>Build a 3-view report following Module 3's hierarchy: KPI cards (total spend, revenue, blended ROAS) → a line chart of revenue by month → a bar chart of ROAS by channel → a matrix/table of campaign-level detail.</li>
+            <li>Add one slicer (month) and one text-box annotation per page — the "so what," not just the number.</li>
+            <li>Find the one non-obvious insight and lead the write-up with it — this dataset has one baked in: Organic Search has near-zero spend but punches far above its weight on ROAS, while Paid Search drives the most absolute revenue at a much lower ROAS multiple. That tension is your story.</li>
           </ol>
         </dd>
-        <dt>The narrative to write</dt><dd>"Channel C looks cheapest by CAC but has the worst 90-day LTV — reallocating 15% of its budget to Channel A would improve blended ROAS." This is the project you self-assigned and completed like the actual job.</dd>
-        <dt>Publish it</dt><dd>A published/embedded dashboard (Tableau Public is free and public by default) plus the write-up. This is the project you open with in a case-study interview round.</dd>
+        <dt>The narrative to write</dt><dd>"Organic Search returns the highest ROAS by a wide margin but is capped on volume; Paid Search drives the most revenue at a fraction of the efficiency — I'd recommend testing a modest budget shift from Paid Search into scaling Organic content investment." This is the project you self-assigned and completed like the actual job.</dd>
+        <dt>Publish it</dt><dd>Power BI Desktop has a free <b>Publish to web</b> option under the Share menu — it gives you a public, embeddable link with zero hosting setup. Use that link plus a screenshot in your write-up. This is the project you open with in a case-study interview round.</dd>
       </dl>
     </div>
+  </div>
+
+  <h2>Making a recruiter actually stop scrolling</h2>
+  <p>A recruiter spends seconds, not minutes, on a portfolio link. The project itself being good isn't enough — how you present it is what earns the click.</p>
+  <ul>
+    <li><strong>Screenshot first, link second.</strong> Post the Power BI chart or the segment table as an image directly in the LinkedIn post — a bare link gets scrolled past; a chart with real numbers on it stops the scroll.</li>
+    <li><strong>Lead with the number, not the tool.</strong> "Found a 28% conversion lift" beats "Built an A/B testing dashboard in Power BI" as an opening line — the number is the hook, the tool is a footnote.</li>
+    <li><strong>One insight, not a feature list.</strong> A recruiter isn't evaluating your Power BI proficiency in the caption — they're checking whether you can find something and say it clearly. Give them one sentence, not a tour.</li>
+  </ul>
+
+  <div class="template">
+    <span class="tlabel">LinkedIn post template</span>
+    <p>[The finding, in plain numbers — no jargon]
+
+I dug into [dataset/project] to see [the question you asked]. Turns out [the counterintuitive or useful part].
+
+Here's the breakdown 👇
+[screenshot of the Power BI chart]
+
+Built with SQL + Power BI, as part of a hands-on analytics program I've been working through. Full write-up: [link]</p>
   </div>
 
   <div class="box teal" style="margin-top:8px;">
