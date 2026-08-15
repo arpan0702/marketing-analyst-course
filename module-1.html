@@ -184,6 +184,10 @@ Filter:  Month = "June"              FROM   campaigns
     <li><strong>Data validation</strong>: dropdown lists on a "channel" column prevent "Email" / "email" / "e-mail" from silently becoming three different values in a pivot table — this is the spreadsheet-side fix for the UTM-casing problem in Module 4.</li>
   </ul>
 
+  <div class="box gold">
+    <p style="margin:0"><strong>SUMIFS or a pivot table — how to decide:</strong> reach for SUMIFS when you need exactly <em>one</em> number — a single KPI-tile value, a figure dropped into a sentence in a report. Reach for a pivot table when you need to <em>explore</em> — slice the same data by different categories, drill in, change your mind about what to group by. Same underlying aggregation, different job: one static answer vs. an interactive one.</p>
+  </div>
+
   <div class="challenge">
     <b>Challenge 4</b>
     Write a SUMIFS formula: total spend where channel = "Email" AND month = "June".
@@ -196,6 +200,8 @@ Filter:  Month = "June"              FROM   campaigns
     <button id="formula-check-3">Check formula</button>
     <div class="result-box" id="formula-result-3" style="display:none;"></div>
   </div>
+
+  <p>One rule that trips people up: <code class="inline">IFS</code> (and nested <code class="inline">IF</code>) checks its conditions <em>in the order you write them</em> and stops at the first one that's true. That means order matters — the tightest/highest condition has to come first. Write <code class="inline">spend&gt;=50</code> before <code class="inline">spend&gt;=100</code> and every value of 100+ gets caught by the ≥50 check first and mislabeled "Medium," since it's true too and it was asked first.</p>
 
   <div class="challenge">
     <b>Challenge 5</b>
@@ -493,6 +499,12 @@ Filter:  Month = "June"              FROM   campaigns
       ],
       correct: 1,
       explain: 'A volume metric (spend, in thousands) and a rate metric (ROAS, a small multiplier) need separate axes to both be readable on the same chart.'
+    },
+    {
+      q: 'In =IFS(spend>=50,"Medium", spend>=100,"High", TRUE,"Low"), a spend of 150 returns:',
+      options: ['"High"', '"Medium" — wrong, but why it happens is the point', '"Low"', 'An error'],
+      correct: 1,
+      explain: 'IFS checks conditions in order and stops at the first true one. spend>=50 is checked first and is already true at 150, so it never reaches the >=100 check — the conditions were written in the wrong order.'
     }
   ]);
 

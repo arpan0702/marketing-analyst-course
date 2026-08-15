@@ -84,6 +84,18 @@
     <li><strong>Key events</strong> (conversions), funnel/exploration reports, and DebugView for QA.</li>
   </ul>
 
+  <h2>What each UTM parameter is actually for</h2>
+  <p>Five parameters, each answering a different question about where a click came from:</p>
+  <table class="map-table">
+    <tr><th>Parameter</th><th>Answers</th><th>Example</th></tr>
+    <tr><td><code class="inline">utm_source</code></td><td>Which platform sent this click?</td><td><code class="inline">facebook</code>, <code class="inline">google</code>, <code class="inline">newsletter</code></td></tr>
+    <tr><td><code class="inline">utm_medium</code></td><td>What category of traffic is this?</td><td><code class="inline">paid_social</code>, <code class="inline">email</code>, <code class="inline">cpc</code></td></tr>
+    <tr><td><code class="inline">utm_campaign</code></td><td>Which specific campaign?</td><td><code class="inline">spring_sale_2026</code></td></tr>
+    <tr><td><code class="inline">utm_content</code></td><td>Which specific ad/link variant, when two links point to the same campaign? — this is your A/B-test-the-creative parameter.</td><td><code class="inline">carousel_ad_1</code> vs <code class="inline">carousel_ad_2</code></td></tr>
+    <tr><td><code class="inline">utm_term</code></td><td>Which paid-search keyword triggered this? (paid search only)</td><td><code class="inline">marketing_analytics_course</code></td></tr>
+  </table>
+  <p>Required on essentially every link: source, medium, campaign. Optional, situational: content (when you're running more than one creative in the same campaign) and term (paid search specifically).</p>
+
   <h2>Interactive: UTM builder</h2>
   <p>Build a campaign URL and get live feedback against the naming-convention rules a real analytics team would enforce: lowercase, no spaces, consistent separators.</p>
 
