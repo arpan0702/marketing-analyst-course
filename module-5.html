@@ -72,6 +72,14 @@
     <div class="result-box" id="calc-result" style="display:block;"></div>
   </div>
 
+  <h2>What "statistically significant" actually means, before you compute one</h2>
+  <p>Flip a coin 10 times and get 7 heads — that doesn't mean the coin is rigged, small samples wobble by luck alone. Flip it 1,000 times and get 700 heads, and something is really going on. "Statistical significance" is that same instinct, formalized: it's a check for whether an observed difference (Variant B converting better than A) is big enough, on a big enough sample, that it's unlikely to be pure luck.</p>
+  <p>Two numbers do that check for you:</p>
+  <div class="box gold">
+    <p style="margin:0"><strong>z-score</strong> — how many "standard deviations" apart the two variants' conversion rates are. Bigger (further from 0, either direction) = a bigger, more surprising gap. <strong>p-value</strong> — the actual probability of seeing a gap this big (or bigger) purely by chance if there were truly no real difference. The standard bar: <strong>p &lt; 0.05</strong> means less than a 5% chance this is a coincidence — call it significant. p ≥ 0.05 means the gap could plausibly be noise — don't call a winner yet.</p>
+  </div>
+  <p>Now run it below and watch both numbers move as you change the inputs — that's the concept becoming concrete, not just a formula.</p>
+
   <h2>Interactive: is your A/B test result real?</h2>
   <p>Two-proportion significance check (z-test), the same logic behind Portfolio Project 2. Enter each variant's visitors and conversions.</p>
   <div class="tool-card">
@@ -194,6 +202,11 @@
   <div class="qa">
     <p class="q">"You tested 5 variants and one came back significant — what's the concern?" (real, sourced)</p>
     <p class="a">Model answer: the multiple-comparisons problem — at a 5% threshold and 5 tests, there's roughly a 1-in-4 chance of at least one false positive by pure chance. Correct the threshold (Bonferroni: divide 0.05 by the number of tests) or treat the winner as a hypothesis to re-confirm.</p>
+  </div>
+
+  <div class="box gold" style="margin-top:32px;">
+    <h4 style="margin-top:0;">Your mini-project for this module</h4>
+    <p style="margin:0"><strong>A/B test read-out memo</strong> — a small, concrete deliverable using only what this module taught. Full instructions on the <a href="projects.html#mini-5">Projects page</a>.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>

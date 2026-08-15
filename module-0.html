@@ -84,8 +84,15 @@
     <strong>Budget justification</strong> → ROI / attribution reasoning</p>
   </div>
 
+  <h2>How to actually tell a metric from a dimension</h2>
+  <p>Definitions alone don't make this automatic — what makes it automatic is one test you run on any term you're unsure about:</p>
+  <div class="box gold">
+    <p style="margin:0"><strong>Ask: "does it make sense to add these up or average them?"</strong> If yes, it's a metric — <code class="inline">revenue</code> summed across rows means something ($4,500 total). If adding it up would be nonsense — you can't "sum" the word "Email" plus "Paid Social" into a meaningful total — it's a dimension. A dimension is something you'd only ever <em>group by</em> or <em>filter on</em>, never add together.</p>
+  </div>
+  <p>A second tell: dimensions are almost always text or a fixed category, even when they're stored as numbers — a <code class="inline">customer_id</code> like 10245 is technically numeric, but summing two customer IDs together produces a meaningless number. It's a dimension (an identifier/label) wearing a number's clothing. If summing it would be absurd, that's the giveaway, not whether it looks numeric.</p>
+
   <h2>Interactive: Metric or Dimension?</h2>
-  <p>Marketing terms, sorted fast. This is the single most common confusion for people new to analytics vocabulary — get it automatic now.</p>
+  <p>Run the test above on each of these before clicking — don't guess from memory.</p>
   <div class="tool-card">
     <span class="ttag">Sorting drill</span>
     <div id="sorter"></div>
@@ -162,6 +169,11 @@
   <div class="qa">
     <p class="q">"How do you decide which metrics to prioritize when evaluating a marketing program?" (real, sourced — see the <a href="interview-bank.html">Interview Bank</a>)</p>
     <p class="a">Model answer: anchor to the business goal one level up, pick 1–2 primary metrics that goal implies, treat the rest as diagnostic. A dashboard where everything is "important" has no priority at all.</p>
+  </div>
+
+<div class="box gold" style="margin-top:32px;">
+    <h4 style="margin-top:0;">Your mini-project for this module</h4>
+    <p style="margin:0"><strong>Reframe your resume</strong> — a small, concrete deliverable using only what this module taught. Full instructions on the <a href="projects.html#mini-0">Projects page</a>.</p>
   </div>
 
   <div style="margin-top:32px;">

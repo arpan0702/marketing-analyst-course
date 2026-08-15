@@ -39,6 +39,19 @@ const RESUME_CHECKLIST = [
   { id: 'c6', title: 'LinkedIn headline + skills section updated, "Open to Work" set to recruiters only' },
 ];
 
+// Projects checklist — 6 mini-projects (one per module) + 3 capstone portfolio projects. Shared with projects.html + the home ring.
+const PROJECTS_CHECKLIST = [
+  { id: 'p0', title: 'Mini-project 0 — Reframe 3 real resume bullets with the analyst formula' },
+  { id: 'p1', title: 'Mini-project 1 — Build a weekly channel report (pivot + XLOOKUP + chart)' },
+  { id: 'p2', title: 'Mini-project 2 — SQL audit: answer 8 business questions against the live database' },
+  { id: 'p3', title: 'Mini-project 3 — Rebuild one bad dashboard with a proper 3-view hierarchy' },
+  { id: 'p4', title: 'Mini-project 4 — UTM governance doc + one GA4 demo funnel finding' },
+  { id: 'p5', title: 'Mini-project 5 — A/B test read-out memo with a ship/no-ship call' },
+  { id: 'cap1', title: 'Capstone — Portfolio Project 1: Customer Segmentation (RFM)' },
+  { id: 'cap2', title: 'Capstone — Portfolio Project 2: A/B Test & CRO' },
+  { id: 'cap3', title: 'Capstone — Portfolio Project 3: Marketing ROI Dashboard' },
+];
+
 // ---------- Generic checklist store (localStorage) ----------
 function getChecklist(key) {
   try { return JSON.parse(localStorage.getItem(key)) || {}; } catch (e) { return {}; }
@@ -54,6 +67,7 @@ function isChecked(key, id) { return !!getChecklist(key)[id]; }
 const MODULE_KEY = 'ma-course-progress-v1';
 const ROADMAP_KEY = 'ma-roadmap-progress-v1';
 const RESUME_KEY = 'ma-resume-progress-v1';
+const PROJECTS_KEY = 'ma-projects-progress-v1';
 
 function getProgress() { return getChecklist(MODULE_KEY); }
 function setModuleComplete(id, done) { setChecklistItem(MODULE_KEY, id, done); }
@@ -61,11 +75,12 @@ function isModuleComplete(id) { return isChecked(MODULE_KEY, id); }
 
 // ---------- Overall progress (drives the home page ring) ----------
 function getOverallProgress() {
-  const total = MODULES.length + ROADMAP_MILESTONES.length + RESUME_CHECKLIST.length;
+  const total = MODULES.length + ROADMAP_MILESTONES.length + RESUME_CHECKLIST.length + PROJECTS_CHECKLIST.length;
   const done =
     MODULES.filter(m => isModuleComplete(m.id)).length +
     ROADMAP_MILESTONES.filter(r => isChecked(ROADMAP_KEY, r.id)).length +
-    RESUME_CHECKLIST.filter(c => isChecked(RESUME_KEY, c.id)).length;
+    RESUME_CHECKLIST.filter(c => isChecked(RESUME_KEY, c.id)).length +
+    PROJECTS_CHECKLIST.filter(p => isChecked(PROJECTS_KEY, p.id)).length;
   return { done, total, pct: total ? Math.round((done / total) * 100) : 0 };
 }
 
@@ -87,6 +102,7 @@ function renderTopbar(currentId) {
       <a href="index.html" class="${currentId ? '' : 'current'}">Home</a>
       <a href="roadmap.html" class="${currentId === 'roadmap' ? 'current' : ''}">Roadmap</a>
       ${moduleLinks}
+      <a href="projects.html" class="${currentId === 'projects' ? 'current' : ''}">Projects</a>
       <a href="interview-bank.html" class="${currentId === 'interview-bank' ? 'current' : ''}">Interview Bank</a>
       <a href="resume.html" class="${currentId === 'resume' ? 'current' : ''}">Resume &amp; Apply</a>
     </nav>`;
@@ -127,7 +143,7 @@ function renderDashboard() {
   if (label) label.textContent = `${done} / ${MODULES.length} modules complete`;
   renderProgressRing('progress-ring', overall.pct);
   const ringLabel = document.getElementById('ring-label');
-  if (ringLabel) ringLabel.textContent = `${overall.done} / ${overall.total} steps across modules, roadmap &amp; resume checklist`.replace('&amp;','&');
+  if (ringLabel) ringLabel.textContent = `${overall.done} / ${overall.total} steps across modules, roadmap, projects & resume checklist`;
 
   grid.innerHTML = MODULES.map((m, i) => `
     <a class="mcard" href="${m.file}">

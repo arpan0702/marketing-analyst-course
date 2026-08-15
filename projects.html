@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Projects — Interview-Ready Marketing Analyst</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="topbar" id="topbar-mount" data-current="projects"></div>
+
+<main class="page" style="max-width:820px;">
+  <div class="lesson-head">
+    <p class="lesson-num">Projects</p>
+    <h1>Six Mini-Projects, Three Capstones</h1>
+    <p class="lesson-goal">Reading a module doesn't make you an analyst — doing the work does. Each module below ends with a small, concrete deliverable that uses only what that module taught. The three capstones combine everything into the portfolio pieces you actually lead an interview with.</p>
+  </div>
+
+  <div class="diagram">
+    <p class="diagram-label">how the mini-projects feed the capstones</p>
+    <svg viewBox="0 0 700 190" width="100%" height="190" role="img" aria-label="Six mini-project nodes for modules 0 through 5 converging into three capstone project nodes: Customer Segmentation, A/B Test and CRO, and Marketing ROI Dashboard">
+      <defs><marker id="arrowp" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--teal)"/></marker></defs>
+      <g font-family="var(--sans)" font-size="10" font-weight="700">
+        <g fill="var(--teal)">
+          <rect x="0" y="10" width="90" height="30" rx="6"/><rect x="0" y="46" width="90" height="30" rx="6"/><rect x="0" y="82" width="90" height="30" rx="6"/>
+          <rect x="0" y="118" width="90" height="30" rx="6"/><rect x="0" y="154" width="90" height="30" rx="6" opacity="0.9"/>
+        </g>
+        <rect x="0" y="190" width="0" height="0"/>
+        <text x="45" y="29" text-anchor="middle" fill="var(--code-bg)" font-size="9.5">M0 mini</text>
+        <text x="45" y="65" text-anchor="middle" fill="var(--code-bg)" font-size="9.5">M1 mini</text>
+        <text x="45" y="101" text-anchor="middle" fill="var(--code-bg)" font-size="9.5">M2 mini</text>
+        <text x="45" y="137" text-anchor="middle" fill="var(--code-bg)" font-size="9.5">M3 mini</text>
+        <text x="45" y="173" text-anchor="middle" fill="var(--code-bg)" font-size="9.5">M4+M5 mini</text>
+
+        <path d="M90,25 C 220,25 220,45 280,45" fill="none" stroke="var(--teal)" stroke-width="1.5" marker-end="url(#arrowp)"/>
+        <path d="M90,61 C 220,61 220,45 280,45" fill="none" stroke="var(--teal)" stroke-width="1.5" marker-end="url(#arrowp)"/>
+        <path d="M90,97 C 220,97 220,97 280,97" fill="none" stroke="var(--gold)" stroke-width="1.5" marker-end="url(#arrowp)"/>
+        <path d="M90,133 C 220,133 220,97 280,97" fill="none" stroke="var(--gold)" stroke-width="1.5" marker-end="url(#arrowp)"/>
+        <path d="M90,169 C 240,169 240,149 280,149" fill="none" stroke="var(--code-ink)" opacity="0.6" stroke-width="1.5" marker-end="url(#arrowp)"/>
+
+        <rect x="280" y="20" width="200" height="50" rx="8" fill="var(--teal)"/>
+        <text x="380" y="41" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">Capstone 1</text>
+        <text x="380" y="57" text-anchor="middle" fill="var(--code-bg)" font-size="9" font-weight="400">Customer Segmentation</text>
+
+        <rect x="280" y="80" width="200" height="34" rx="8" fill="var(--gold)"/>
+        <text x="380" y="101" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">Capstone 2 — A/B Test &amp; CRO</text>
+
+        <rect x="280" y="128" width="200" height="50" rx="8" fill="var(--teal)" opacity="0.9"/>
+        <text x="380" y="149" text-anchor="middle" fill="var(--code-bg)" font-size="10.5">Capstone 3</text>
+        <text x="380" y="165" text-anchor="middle" fill="var(--code-bg)" font-size="9" font-weight="400">Marketing ROI Dashboard — lead with this one</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Progress</h2>
+  <p>This checklist is the fourth ring of progress on the home page, alongside modules, roadmap, and the resume checklist.</p>
+  <div id="projects-checklist" style="display:flex; flex-direction:column; gap:8px; margin:16px 0;"></div>
+
+  <h2>Mini-projects — one per module</h2>
+  <p>Do each one right after finishing its module, while the skill is fresh. None of these need anything beyond what that module already taught.</p>
+
+  <div class="cards">
+    <div class="card" id="mini-0">
+      <span class="card-tag">Module 0</span>
+      <h4>Reframe your resume</h4>
+      <dl>
+        <dt>Goal</dt><dd>Prove the pivot is framing, not tools — before touching a single technical skill.</dd>
+        <dt>Steps</dt><dd>Pick 3 real bullets from your current resume. Rewrite each with the formula: [analytical verb] + [what was measured] + [tool/method] + [quantified result]. If you don't have a real number, estimate one honestly and mark it as an estimate — don't leave it blank.</dd>
+        <dt>Deliverable</dt><dd>A before/after list of 3 bullets, saved somewhere you'll actually use it on the <a href="resume.html">Resume &amp; Apply</a> page later.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="mini-1">
+      <span class="card-tag">Module 1</span>
+      <h4>Build a weekly channel report</h4>
+      <dl>
+        <dt>Goal</dt><dd>The exact spreadsheet skill a Marketing Analyst does every single week.</dd>
+        <dt>Dataset</dt><dd>Kaggle — "Marketing Campaign Performance Dataset."</dd>
+        <dt>Steps</dt><dd>Clean it (fix blanks, standardize dates, remove duplicates). Build a pivot table: spend and conversions by channel and month. Add a second small sheet of made-up "target CPA" per channel, XLOOKUP it in, and flag any channel over target. Add one SUMIFS KPI cell and one combination chart (bars + a rate line).</dd>
+        <dt>Deliverable</dt><dd>A saved spreadsheet file with the pivot, the XLOOKUP flag column, and the chart.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="mini-2">
+      <span class="card-tag">Module 2</span>
+      <h4>SQL audit — 8 business questions</h4>
+      <dl>
+        <dt>Goal</dt><dd>Prove you can go from a plain-English business question to a working query without hand-holding — this is exactly what a technical screen tests.</dd>
+        <dt>Where</dt><dd>The live SQL runner already in Module 2 — no setup needed.</dd>
+        <dt>The 8 questions</dt>
+        <dd>
+          <ol style="margin:8px 0 0; padding-left:18px;">
+            <li>Which channel has the highest average order value?</li>
+            <li>Which 3 customers have generated the most total revenue?</li>
+            <li>How many distinct customers ordered in each month?</li>
+            <li>Which country has the highest total revenue, and from how many customers?</li>
+            <li>Find any customer who has never placed an order that shows a NULL country (data-quality check).</li>
+            <li>What's the month-over-month revenue change for the "Paid Search" channel specifically?</li>
+            <li>Which customers signed up but placed zero orders in their signup month (slow starters)?</li>
+            <li>Using the order_items table, which single product appears in the most baskets?</li>
+          </ol>
+        </dd>
+        <dt>Deliverable</dt><dd>A doc with each question, the query you wrote, the result, and one sentence on what a marketer should do with the answer.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="mini-3">
+      <span class="card-tag">Module 3</span>
+      <h4>Rebuild one bad dashboard</h4>
+      <dl>
+        <dt>Goal</dt><dd>Dashboard judgment is the actual skill being tested, not chart mechanics.</dd>
+        <dt>Steps</dt><dd>Find a dashboard online you think is genuinely bad (a public Tableau Public gallery entry, a screenshot from a "worst dashboards" blog post, or one from your current job). Identify what's wrong using this course's hierarchy (KPI tiles → trend → breakdown → detail table). Rebuild the single worst chart from it in Tableau Public or Power BI Desktop (both free), following the hierarchy properly, using this course's SQL output as sample data if you don't have the original.</dd>
+        <dt>Deliverable</dt><dd>A screenshot of the "before," a screenshot of your rebuild, and a 3-sentence written critique of what changed and why.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="mini-4">
+      <span class="card-tag">Module 4</span>
+      <h4>UTM governance doc + one real GA4 finding</h4>
+      <dl>
+        <dt>Goal</dt><dd>Prove you can think about tracking architecture before a launch, not just react to broken data after.</dd>
+        <dt>Steps</dt><dd>Write a one-page UTM naming convention doc for a hypothetical 3-channel launch (paid social, email, paid search) — casing rule, separator rule, a fixed list of allowed utm_medium values. Then open Google's public GA4 demo property ("Google Merchandise Store"), find the Explorations funnel report, and identify one real drop-off point.</dd>
+        <dt>Deliverable</dt><dd>The naming convention doc, plus a screenshot of the funnel with 2 sentences on what the drop-off suggests.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="mini-5">
+      <span class="card-tag">Module 5</span>
+      <h4>A/B test read-out memo</h4>
+      <dl>
+        <dt>Goal</dt><dd>The actual deliverable a marketing analyst produces after a test ends — a decision memo, not a stats homework answer.</dd>
+        <dt>Dataset</dt><dd>Kaggle — "Marketing A/B Testing" dataset.</dd>
+        <dt>Steps</dt><dd>Calculate each group's conversion rate. Run it through this course's significance calculator (or a chi-square function in Sheets) to get a z-score and p-value. Check whether the sample size was actually large enough using this course's sample-size calculator, retroactively.</dd>
+        <dt>Deliverable</dt><dd>A one-page memo: the result, whether it's significant, a ship/no-ship recommendation, and one caveat about the sample (size, duration, or representativeness).</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h2>The 3 capstone portfolio projects</h2>
+  <p>These are the pieces that go on your resume and LinkedIn, and the ones you present in a case-study interview round. Build them in order — each is meant to take about 1–2 weeks alongside the module you're on, per the <a href="roadmap.html">Roadmap</a>.</p>
+
+  <div class="cards">
+    <div class="card" id="cap-1">
+      <span class="card-tag">Capstone 1 — Weeks 8–9</span>
+      <h4>Customer Segmentation Analysis</h4>
+      <dl>
+        <dt>Dataset</dt><dd>Kaggle — "Online Retail II" (UCI) or "Mall Customer Segmentation Data." Both are transaction/customer-level and messy enough to require real cleaning.</dd>
+        <dt>Build it with</dt><dd>Module 1 (cleaning, pivot exploration) + Module 2's RFM/NTILE technique (Advanced tier) for the actual scoring.</dd>
+        <dt>Steps</dt>
+        <dd>
+          <ol style="margin:8px 0 0; padding-left:18px;">
+            <li>Clean the raw data in Excel/Sheets — remove cancelled orders, fix blanks, standardize customer IDs.</li>
+            <li>Load it into a SQL environment (or keep using this course's SQLite pattern with your own data) and compute Recency, Frequency, Monetary per customer.</li>
+            <li>Score each with <code class="inline">NTILE(4)</code>, exactly as taught in Module 2, and combine into segment codes.</li>
+            <li>Visualize segment sizes and average value per segment in a simple bar chart.</li>
+            <li>Write the narrative — this is the actual deliverable, not the query.</li>
+          </ol>
+        </dd>
+        <dt>The narrative to write</dt><dd>"I identified that X% of customers drive Y% of revenue and recommend a retention campaign for the next-highest-value segment." That sentence is the deliverable — the SQL is how you earned the right to say it.</dd>
+        <dt>Publish it</dt><dd>A doc or a simple webpage with the segment chart, the RFM table, and the narrative. Link it from your resume.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="cap-2">
+      <span class="card-tag">Capstone 2 — Weeks 10–11</span>
+      <h4>A/B Testing &amp; Conversion Rate Optimization</h4>
+      <dl>
+        <dt>Dataset</dt><dd>Kaggle — "Marketing A/B Testing" dataset, or the Google Merchandise Store's public BigQuery sample (GA4 event-level, free).</dd>
+        <dt>Build it with</dt><dd>Module 5 in full — significance calculator, sample-size calculator, the peeking/multiple-testing warnings.</dd>
+        <dt>Steps</dt>
+        <dd>
+          <ol style="margin:8px 0 0; padding-left:18px;">
+            <li>State the hypothesis and success metric before looking at results (Module 0's "so what" test, applied for real).</li>
+            <li>Calculate conversion rate per group, run the significance test, and check it against a sample-size calculation done retroactively.</li>
+            <li>Segment the result by device or another dimension — check whether the effect holds everywhere or is concentrated in one segment.</li>
+            <li>Write the ship/no-ship recommendation with the confidence level and one caveat.</li>
+          </ol>
+        </dd>
+        <dt>The narrative to write</dt><dd>"Variant B lifted conversion X points at 95% confidence; I'd recommend shipping it but flag that the sample under-represents mobile traffic." The caveat is what separates an analyst from someone who ran a formula.</dd>
+        <dt>Publish it</dt><dd>A one-page write-up with the numbers, the chart, and the recommendation — this is the mini-project from Module 5, extended into a full narrative.</dd>
+      </dl>
+    </div>
+
+    <div class="card" id="cap-3">
+      <span class="card-tag">Capstone 3 — Weeks 13–14 — lead with this one</span>
+      <h4>Marketing Campaign ROI Dashboard</h4>
+      <dl>
+        <dt>Dataset</dt><dd>Kaggle — "Marketing Campaign Performance Dataset," blended with a UTM-tagged funnel you construct yourself (or Google/Meta Ads' downloadable sample exports).</dd>
+        <dt>Build it with</dt><dd>Everything — Module 1 (cleaning), Module 2 (SQL aggregation), Module 3 (dashboard build), Module 4 (UTM/channel structure), Module 5 (CAC/ROAS/LTV).</dd>
+        <dt>Steps</dt>
+        <dd>
+          <ol style="margin:8px 0 0; padding-left:18px;">
+            <li>Aggregate spend, revenue, CAC, and ROAS by channel and month in SQL.</li>
+            <li>Build a 3-view Tableau/Power BI dashboard following Module 3's hierarchy: KPI tiles → trend → channel breakdown → detail table.</li>
+            <li>Add one filter (date range) and one annotation per view — the "so what," not just the number.</li>
+            <li>Find the one non-obvious insight (e.g. a channel that looks cheap by CAC but has weak 90-day LTV) and lead the write-up with it.</li>
+          </ol>
+        </dd>
+        <dt>The narrative to write</dt><dd>"Channel C looks cheapest by CAC but has the worst 90-day LTV — reallocating 15% of its budget to Channel A would improve blended ROAS." This is the project you self-assigned and completed like the actual job.</dd>
+        <dt>Publish it</dt><dd>A published/embedded dashboard (Tableau Public is free and public by default) plus the write-up. This is the project you open with in a case-study interview round.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="box teal" style="margin-top:8px;">
+    <p style="margin:0">Once Capstones 1 and 2 are published and your resume is rewritten (around week 12), you're ready to start applying per the <a href="roadmap.html">Roadmap</a> — Capstone 3 finishes in parallel with your first applications, not before them.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="roadmap.html">← Roadmap</a>
+    <a href="resume.html">Resume &amp; Apply →</a>
+  </div>
+</main>
+
+<footer class="site">PROJECTS · INTERVIEW-READY MARKETING ANALYST</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  initChecklist('projects-checklist', 'ma-projects-progress-v1', PROJECTS_CHECKLIST);
+</script>
+</body>
+</html>
