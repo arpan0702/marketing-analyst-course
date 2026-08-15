@@ -55,6 +55,27 @@
     </svg>
   </div>
 
+  <h2>The vocabulary, from zero: pageview, session, event, conversion</h2>
+  <p>One visitor lands on a page, scrolls, clicks a button, and submits a form. Every one of those actions is an <strong>event</strong> — even loading the page counts as one (<code class="inline">page_view</code>). All the events from one visit, bundled together, form a <strong>session</strong>. If one of those events matters enough to the business to count as a win — a form submit, a purchase — you mark it as a <strong>key event</strong> (GA4's word for what everyone still colloquially calls a "conversion").</p>
+
+  <div class="diagram">
+    <p class="diagram-label">one visit, broken into events</p>
+    <svg viewBox="0 0 640 130" width="100%" height="130" role="img" aria-label="A timeline of one session containing four events: page view, scroll, click, and form submit, with the form submit marked as a key event or conversion">
+      <g font-family="var(--mono)" font-size="10">
+        <path d="M20,30 L620,30" stroke="var(--line)" stroke-width="1" marker-end="url(#arrow4)"/>
+        <text x="320" y="16" text-anchor="middle" fill="var(--code-ink)" opacity="0.6" font-size="9.5">← one SESSION (everything within this one visit) →</text>
+      </g>
+      <g font-family="var(--sans)" font-size="10">
+        <circle cx="80" cy="30" r="7" fill="var(--teal)"/><text x="80" y="60" text-anchor="middle" fill="var(--code-ink)">page_view</text>
+        <circle cx="250" cy="30" r="7" fill="var(--teal)"/><text x="250" y="60" text-anchor="middle" fill="var(--code-ink)">scroll</text>
+        <circle cx="420" cy="30" r="7" fill="var(--teal)"/><text x="420" y="60" text-anchor="middle" fill="var(--code-ink)">click</text>
+        <circle cx="580" cy="30" r="9" fill="var(--gold)"/><text x="580" y="60" text-anchor="middle" fill="var(--code-ink)" font-weight="700">form_submit</text>
+        <text x="580" y="76" text-anchor="middle" fill="var(--gold-ink,#caa15a)" font-size="9.5">↑ marked as a KEY EVENT</text>
+      </g>
+      <text x="0" y="110" font-family="var(--sans)" font-size="10.5" fill="var(--code-ink)" opacity="0.75">Every dot is an "event" — the old Universal Analytics tracked pageviews and sessions as fundamentally different things; GA4 treats everything, including a pageview, as just another event with parameters.</text>
+    </svg>
+  </div>
+
   <h2>Core concepts</h2>
   <ul>
     <li><strong>GA4's event model</strong>: everything is an event with parameters (not session-based, like the old Universal Analytics).</li>
@@ -92,6 +113,9 @@
     <li>Query the public BigQuery GA4 sample dataset (<code class="inline">bigquery-public-data.ga4_obfuscated_sample_ecommerce</code>) with Module 2 SQL skills — this step is what most career-changers skip, and it's the differentiator.</li>
   </ol>
 
+  <h2>Check yourself: Beginner</h2>
+  <div id="quiz-mount-beginner"></div>
+
   <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
 
   <h2>Beyond pageviews: tracking what actually matters to the business</h2>
@@ -102,6 +126,9 @@
     <li><strong>GA4 + Google Ads linking</strong>: without this link, Ads campaign performance and GA4 on-site behavior live in two disconnected systems — linking is what makes an "assisted conversions" or full-funnel view possible at all.</li>
     <li><strong>Consent Mode</strong>: when a visitor declines cookies, GA4 models (statistically estimates) the missing conversions rather than showing zero — worth knowing this exists so a sudden regional dip doesn't get mis-diagnosed as a real drop.</li>
   </ul>
+
+  <h2>Check yourself: Intermediate</h2>
+  <div id="quiz-mount-intermediate"></div>
 
   <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
 
@@ -119,8 +146,8 @@
     <li><strong>Reconciling GA4 vs. CRM vs. ad platform numbers</strong>: these will never match exactly, and that's expected — different attribution windows, client-side tracking loss (ad blockers, iOS ITP/Safari ITP), and ad platforms self-reporting more generous attribution than GA4's model all contribute. Pick one source of truth per decision and say which, rather than trying to force all three into agreement.</li>
   </ul>
 
-  <h2>Check your understanding</h2>
-  <div id="quiz-mount"></div>
+  <h2>Check yourself: Advanced</h2>
+  <div id="quiz-mount-advanced"></div>
 
   <h2>Interview questions for this module</h2>
   <div class="qa">
@@ -193,13 +220,33 @@
   ids.forEach(id => document.getElementById(id).addEventListener('input', buildUrl));
   buildUrl();
 
-  initQuiz('quiz-mount', [
+  initQuiz('quiz-mount-beginner', [
     {
       q: 'GA4\'s data model is fundamentally organized around:',
       options: ['Sessions', 'Events', 'Pageviews only', 'Cookies'],
       correct: 1,
       explain: 'GA4 replaced Universal Analytics\' session-based model with an event-based model — everything, including a pageview, is an event.'
     },
+    {
+      q: 'A visitor loads a page, scrolls, and clicks a button — all in one visit. In GA4 terms, that whole bundle is called a:',
+      options: ['Key event', 'Session', 'Conversion', 'UTM'],
+      correct: 1,
+      explain: 'A session bundles all the events from one visit together; each individual action (page_view, scroll, click) is its own event within it.'
+    },
+    {
+      q: 'What turns a regular GA4 event into a "key event" (conversion)?',
+      options: [
+        'It happens automatically for every event',
+        'Someone explicitly marks that specific event as meaningful to the business',
+        'Only purchases can ever be key events',
+        'It requires a UTM parameter'
+      ],
+      correct: 1,
+      explain: 'Nothing is a conversion by default — a form_submit or purchase only becomes a "key event" once it\'s explicitly flagged as one.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-intermediate', [
     {
       q: 'Which utm_ parameter would you typically use for a specific ad creative variant (e.g. "carousel_ad_1")?',
       options: ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign'],
@@ -217,6 +264,20 @@
       correct: 1,
       explain: 'GA4 treats "Email" and "email" as different dimension values — the channel\'s true performance ends up split across rows.'
     },
+    {
+      q: 'A business tracks "loyalty tier" as part of its data. Why won\'t it show up as a usable GA4 report column on its own?',
+      options: [
+        'GA4 can\'t track custom business concepts at all',
+        'It arrives as an event parameter but needs to be registered as a custom dimension before it becomes a report-able column',
+        'It requires GTM specifically',
+        'Loyalty data is against GA4\'s terms of service'
+      ],
+      correct: 1,
+      explain: 'GA4 only knows the standard vocabulary out of the box — anything business-specific needs to be explicitly registered as a custom dimension or metric.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-advanced', [
     {
       q: 'A low-volume conversion event\'s GA4 attribution report looks suspiciously last-click-heavy. Most likely cause?',
       options: [
@@ -238,6 +299,17 @@
       ],
       correct: 1,
       explain: 'Treat discrepancy as the default, not a red flag — the skill is picking one source of truth per decision and explaining why, not forcing three systems to agree.'
+    },
+    {
+      q: 'A checkout lives on a different domain than the main site, and isn\'t configured for cross-domain tracking. What happens?',
+      options: [
+        'Nothing, GA4 handles this automatically',
+        'The same visitor gets counted as two separate sessions/visitors — one on each domain',
+        'The checkout stops working',
+        'Revenue gets double-counted'
+      ],
+      correct: 1,
+      explain: 'Without explicitly passing the client ID across the domain boundary, GA4 has no way to know it\'s still the same visitor — it silently splits one journey into two.'
     }
   ]);
 

@@ -18,6 +18,54 @@
 
   <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
 
+  <h2>Start here: five chart shapes, five jobs</h2>
+  <p>Before "which tool" comes "which chart" — and that choice follows entirely from the question being asked, not from what looks impressive. Five shapes cover almost every real marketing question:</p>
+
+  <div class="diagram">
+    <p class="diagram-label">match the shape to the question</p>
+    <svg viewBox="0 0 640 190" width="100%" height="190" role="img" aria-label="Five mini chart icons: a bar chart for comparing categories, a line chart for trend over time, a scatter plot for relationship between two numbers, a table for precise individual values, and a stacked bar for part-to-whole">
+      <g font-family="var(--sans)" font-size="9.5" fill="var(--code-ink)">
+        <!-- bar -->
+        <g transform="translate(10,10)">
+          <rect x="0" y="0" width="110" height="90" rx="6" fill="var(--code-bg)"/>
+          <g fill="var(--teal)"><rect x="14" y="50" width="14" height="30"/><rect x="36" y="30" width="14" height="50"/><rect x="58" y="45" width="14" height="35"/><rect x="80" y="20" width="14" height="60"/></g>
+          <text x="55" y="105" text-anchor="middle" font-weight="700">BAR</text>
+          <text x="55" y="118" text-anchor="middle" opacity="0.7">compare categories</text>
+        </g>
+        <!-- line -->
+        <g transform="translate(135,10)">
+          <rect x="0" y="0" width="110" height="90" rx="6" fill="var(--code-bg)"/>
+          <polyline points="10,70 35,55 60,60 85,25 100,35" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+          <text x="55" y="105" text-anchor="middle" font-weight="700">LINE</text>
+          <text x="55" y="118" text-anchor="middle" opacity="0.7">trend over time</text>
+        </g>
+        <!-- scatter -->
+        <g transform="translate(260,10)">
+          <rect x="0" y="0" width="110" height="90" rx="6" fill="var(--code-bg)"/>
+          <g fill="var(--gold)"><circle cx="20" cy="70" r="3.5"/><circle cx="40" cy="55" r="3.5"/><circle cx="55" cy="60" r="3.5"/><circle cx="70" cy="40" r="3.5"/><circle cx="85" cy="35" r="3.5"/><circle cx="95" cy="20" r="3.5"/><circle cx="60" cy="30" r="3.5"/></g>
+          <text x="55" y="105" text-anchor="middle" font-weight="700">SCATTER</text>
+          <text x="55" y="118" text-anchor="middle" opacity="0.7">relationship, 2 numbers</text>
+        </g>
+        <!-- table -->
+        <g transform="translate(385,10)">
+          <rect x="0" y="0" width="110" height="90" rx="6" fill="var(--code-bg)"/>
+          <g stroke="#24312f" stroke-width="1"><rect x="10" y="10" width="90" height="16" fill="#1a2523"/><rect x="10" y="26" width="90" height="16" fill="none"/><rect x="10" y="42" width="90" height="16" fill="none"/><rect x="10" y="58" width="90" height="16" fill="none"/></g>
+          <text x="55" y="105" text-anchor="middle" font-weight="700">TABLE</text>
+          <text x="55" y="118" text-anchor="middle" opacity="0.7">precise individual values</text>
+        </g>
+        <!-- stacked bar -->
+        <g transform="translate(510,10)">
+          <rect x="0" y="0" width="110" height="90" rx="6" fill="var(--code-bg)"/>
+          <g><rect x="35" y="15" width="40" height="24" fill="var(--teal)"/><rect x="35" y="39" width="40" height="18" fill="var(--gold)"/><rect x="35" y="57" width="40" height="23" fill="var(--teal)" opacity="0.5"/></g>
+          <text x="55" y="105" text-anchor="middle" font-weight="700">STACKED %</text>
+          <text x="55" y="118" text-anchor="middle" opacity="0.7">part-to-whole</text>
+        </g>
+      </g>
+      <text x="0" y="155" font-family="var(--sans)" font-size="10.5" fill="var(--code-ink)" opacity="0.75">Notice pie charts aren't here. They're readable for exactly 2–3 slices and get worse from there — a stacked bar or a simple table almost always communicates part-to-whole better.</text>
+      <text x="0" y="175" font-family="var(--sans)" font-size="10.5" fill="var(--code-ink)" opacity="0.75">Every chart choice below follows from this: identify the question first ("compare," "trend," "relationship," "exact value," "share"), then pick the shape built for it.</text>
+    </svg>
+  </div>
+
   <h2>Core concepts</h2>
   <ul>
     <li><strong>Chart selection</strong>: when a line, bar, or table beats a fancier alternative (usually: often).</li>
@@ -78,6 +126,9 @@
     <li>Find a dashboard online you think is bad and rewrite its worst chart on paper.</li>
   </ol>
 
+  <h2>Check yourself: Beginner</h2>
+  <div id="quiz-mount-beginner"></div>
+
   <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
 
   <h2>Making the tool do more of the thinking</h2>
@@ -87,6 +138,9 @@
     <li><strong>Parameters &amp; filters</strong>: a parameter lets a viewer swap what metric a chart shows (e.g. toggle between Spend / Revenue / ROAS) without you building three separate charts.</li>
     <li><strong>Small multiples</strong>: the same small chart repeated once per channel/segment, side by side — often clearer than one crowded chart with 6 overlapping lines.</li>
   </ul>
+
+  <h2>Check yourself: Intermediate</h2>
+  <div id="quiz-mount-intermediate"></div>
 
   <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
 
@@ -151,8 +205,8 @@
     <p style="margin:0"><strong>Situation</strong> — the business context, one sentence. <strong>Complication</strong> — what's wrong or uncertain (the CAC jump, the underperforming channel). <strong>Question</strong> — the one question your analysis answers. <strong>Answer</strong> — your recommendation, stated first, with the supporting data available if asked. This is also called the Pyramid Principle: conclusion first, evidence on demand — the opposite instinct from "let me walk you through my SQL."</p>
   </div>
 
-  <h2>Check your understanding</h2>
-  <div id="quiz-mount"></div>
+  <h2>Check yourself: Advanced</h2>
+  <div id="quiz-mount-advanced"></div>
 
   <h2>Interview questions for this module</h2>
   <div class="qa">
@@ -211,13 +265,33 @@
     res.textContent = `${score} / ${scenarios.length} correct.`;
   });
 
-  initQuiz('quiz-mount', [
+  initQuiz('quiz-mount-beginner', [
     {
       q: 'A CMO wants to compare revenue across 5 channels at a glance. Best default choice?',
       options: ['Pie chart', 'Bar chart', '3D bar chart', 'Radar chart'],
       correct: 1,
       explain: 'Bar charts let the eye compare lengths accurately; pie/3D/radar charts distort magnitude comparisons.'
     },
+    {
+      q: 'Why do pie charts get avoided for more than 2–3 slices?',
+      options: [
+        'They\'re never acceptable in any context',
+        'The human eye is bad at comparing angles/areas precisely — a stacked bar or table communicates the same part-to-whole idea more clearly',
+        'They\'re slow to render',
+        'They only work with round numbers'
+      ],
+      correct: 1,
+      explain: 'This is a form limitation, not a style opinion — angle comparison is measurably less accurate than length comparison for the human eye.'
+    },
+    {
+      q: 'You want to show the relationship between ad spend and revenue across 50 campaigns, looking for a pattern. Which shape?',
+      options: ['Line chart', 'Scatter plot', 'Pie chart', 'Table'],
+      correct: 1,
+      explain: 'Scatter plots exist specifically to reveal the relationship between two numeric variables — a line implies a single ordered sequence, which 50 unordered campaigns aren\'t.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-intermediate', [
     {
       q: 'What\'s the main risk of a dashboard with 12 filters and 9 charts on one screen?',
       options: [
@@ -230,17 +304,6 @@
       explain: 'A dashboard\'s job is to drive a decision. Without hierarchy, every chart competes for attention and none win.'
     },
     {
-      q: 'Why annotate a chart in a portfolio project instead of leaving it to speak for itself?',
-      options: [
-        'Annotations are required by Tableau',
-        'It proves you can interpret the data, not just plot it — that\'s what\'s actually being evaluated',
-        'It makes the file size smaller',
-        'It\'s not necessary if the chart is well-designed'
-      ],
-      correct: 1,
-      explain: 'Interviewers screen for judgment, not charting mechanics — the one-sentence "so what" is the actual deliverable.'
-    },
-    {
       q: 'Why build ROAS as a calculated field (SUM(Revenue)/SUM(Spend)) instead of averaging a pre-computed ROAS column?',
       options: [
         'It looks more professional',
@@ -250,6 +313,31 @@
       ],
       correct: 1,
       explain: 'A calculated field recomputes the ratio from the summed totals at whatever level you\'re viewing — averaging pre-computed ratios weights every row equally regardless of its size, which is usually wrong.'
+    },
+    {
+      q: 'A parameter that lets a viewer toggle a chart between Spend / Revenue / ROAS solves what problem?',
+      options: [
+        'It makes the file smaller',
+        'It avoids building three near-identical charts for what\'s really one question with a swappable metric',
+        'Parameters are required for publishing',
+        'It replaces the need for filters'
+      ],
+      correct: 1,
+      explain: 'One parameterized chart is easier to maintain and audit than three separate ones that will drift out of sync over time.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-advanced', [
+    {
+      q: 'Why annotate a chart in a portfolio project instead of leaving it to speak for itself?',
+      options: [
+        'Annotations are required by Tableau',
+        'It proves you can interpret the data, not just plot it — that\'s what\'s actually being evaluated',
+        'It makes the file size smaller',
+        'It\'s not necessary if the chart is well-designed'
+      ],
+      correct: 1,
+      explain: 'Interviewers screen for judgment, not charting mechanics — the one-sentence "so what" is the actual deliverable.'
     },
     {
       q: 'In a retention heatmap, what does the diagonal of blank cells (bottom-right) usually mean?',

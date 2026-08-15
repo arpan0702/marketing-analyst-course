@@ -99,6 +99,9 @@
     <li>Rewrite three resume bullets using: <code class="inline">[analytical verb] + [what was measured] + [tool/method] + [quantified result]</code> — before learning any tool. This proves the pivot is framing first, tools second.</li>
   </ol>
 
+  <h2>Check yourself: Beginner</h2>
+  <div id="quiz-mount-beginner"></div>
+
   <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
 
   <h2>Prioritizing when everyone wants an analysis "by Friday"</h2>
@@ -124,6 +127,9 @@
     <div class="result-box" id="rice-result" style="display:block;"></div>
   </div>
 
+  <h2>Check yourself: Intermediate</h2>
+  <div id="quiz-mount-intermediate"></div>
+
   <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
 
   <h2>The analytics maturity model — and knowing which level you're operating at</h2>
@@ -141,8 +147,8 @@
     <p style="margin:0"><strong>Confirmation bias</strong> — building the query to find what you already expected. Counter it by writing the "so what" sentence <em>before</em> looking at the data, then checking if the data actually supports it. &nbsp;<strong>Survivorship bias</strong> — analyzing only customers who converted/stayed, missing what churned/bounced customers looked like. &nbsp;<strong>Simpson's paradox</strong> — a trend that holds in every individual segment can reverse when segments are combined (e.g. overall conversion rate drops even though it rose in every channel, because mix shifted toward a lower-converting channel). Always check a segment breakdown before trusting an aggregate trend.</p>
   </div>
 
-  <h2>Check your understanding</h2>
-  <div id="quiz-mount"></div>
+  <h2>Check yourself: Advanced</h2>
+  <div id="quiz-mount-advanced"></div>
 
   <h2>Interview questions for this module</h2>
   <div class="qa">
@@ -225,7 +231,7 @@
   ['rice-reach','rice-impact','rice-conf','rice-effort'].forEach(id => document.getElementById(id).addEventListener('input', updateRice));
   updateRice();
 
-  initQuiz('quiz-mount', [
+  initQuiz('quiz-mount-beginner', [
     {
       q: 'A campaign brief that defines a target audience and a goal is closest to which analytical step?',
       options: ['Data cleaning', 'Defining a hypothesis and success metric', 'Building a dashboard', 'Running a JOIN'],
@@ -254,13 +260,36 @@
       ],
       correct: 1,
       explain: 'Always start from the business question — pulling data first and looking for a story afterward is how misleading analysis happens.'
-    },
+    }
+  ]);
+
+  initQuiz('quiz-mount-intermediate', [
     {
       q: 'In RICE scoring, what does a very high Effort number do to the score?',
       options: ['Increases it', 'Has no effect', 'Decreases it — Effort is the denominator', 'Doubles the Reach'],
       correct: 2,
       explain: 'RICE = Reach × Impact × Confidence ÷ Effort. Effort divides the score, so a high-effort request needs proportionally higher Reach/Impact/Confidence to rank well.'
     },
+    {
+      q: 'What does RICE add on top of ICE (Impact × Confidence ÷ Effort)?',
+      options: ['Nothing, they\'re identical', 'Reach — how many people or campaigns the work actually touches', 'A time estimate', 'A cost in dollars'],
+      correct: 1,
+      explain: 'RICE adds Reach specifically because ICE alone can rank a tiny-audience request the same as a company-wide one if Impact/Confidence/Effort happen to match.'
+    },
+    {
+      q: 'The "so what" test asks you to do what before starting an analysis?',
+      options: [
+        'Estimate how long it will take',
+        'Write the decision-changing sentence you expect to end with — if you can\'t imagine one, don\'t start yet',
+        'Ask your manager for permission',
+        'Build the dashboard first, then find the question'
+      ],
+      correct: 1,
+      explain: 'If no plausible finding would change what anyone does, the analysis isn\'t worth the time — regardless of how interesting the data looks.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-advanced', [
     {
       q: 'An overall metric goes down even though it improved in every individual segment. This is:',
       options: ['A tracking bug, always', 'Simpson\'s paradox — a mix shift toward a lower-performing segment', 'Impossible', 'Survivorship bias'],
@@ -272,6 +301,23 @@
       options: ['Descriptive', 'Diagnostic', 'Predictive', 'Prescriptive'],
       correct: 2,
       explain: 'Forecasting "what will happen" is predictive analytics — one level up from diagnosing why something already happened.'
+    },
+    {
+      q: 'The best defense against confirmation bias when building a query is to:',
+      options: [
+        'Only look at data that supports the hypothesis',
+        'Write the "so what" sentence before looking at the data, then check whether the data actually supports it',
+        'Skip writing a hypothesis entirely',
+        'Ask a colleague to agree with you first'
+      ],
+      correct: 1,
+      explain: 'Committing to the expected finding in advance makes it obvious when the data doesn\'t actually support it, instead of unconsciously shaping the query to find what you expected.'
+    },
+    {
+      q: 'Recommending a specific budget reallocation, backed by a completed A/B test, sits at which analytics maturity level?',
+      options: ['Descriptive', 'Diagnostic', 'Predictive', 'Prescriptive'],
+      correct: 3,
+      explain: 'Prescriptive analytics is "what to do about it" — a concrete, evidence-backed recommendation, one level beyond just diagnosing or predicting.'
     }
   ]);
 

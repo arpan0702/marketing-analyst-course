@@ -39,10 +39,10 @@
       </g>
       <g font-family="var(--sans)" font-size="11" fill="var(--teal)">
         <line x1="55" y1="18" x2="55" y2="28" stroke="var(--teal)" stroke-width="1.5"/>
-        <text x="10" y="130" fill="var(--ink)">↑ Each of these is a <tspan font-weight="700">column</tspan> — one fixed piece of information (like an Excel header).</text>
+        <text x="10" y="130" fill="var(--code-ink)">↑ Each of these is a <tspan font-weight="700">column</tspan> — one fixed piece of information (like an Excel header).</text>
         <line x1="440" y1="43" x2="460" y2="43" stroke="var(--teal)" stroke-width="1.5"/>
-        <text x="10" y="150" fill="var(--ink)">→ Each horizontal line is a <tspan font-weight="700">row</tspan> — here, one row = one order. This is the table's "grain."</text>
-        <text x="10" y="180" fill="var(--ink-muted)" font-size="10.5">SQL (Structured Query Language) is simply how you ask a table — or several joined together — a question.</text>
+        <text x="10" y="150" fill="var(--code-ink)">→ Each horizontal line is a <tspan font-weight="700">row</tspan> — here, one row = one order. This is the table's "grain."</text>
+        <text x="10" y="180" fill="var(--code-ink)" opacity="0.75" font-size="10.5">SQL (Structured Query Language) is simply how you ask a table — or several joined together — a question.</text>
       </g>
     </svg>
   </div>
@@ -334,9 +334,9 @@ SELECT channel FROM orders WHERE month = '2025-04';</pre>
           <rect x="0" y="52" width="200" height="24" fill="var(--gold)" opacity="0.4"/><text x="8" y="68" fill="var(--code-bg)">$45 revenue</text><text x="160" y="68" fill="var(--code-bg)" font-weight="700">rank 3</text>
         </g>
       </g>
-      <text x="10" y="115" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">PARTITION BY resets the count per group — rank restarts at 1 for every country, instead of numbering 1–6 straight through.</text>
-      <text x="10" y="140" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">RANK() gives tied values the same rank and skips the next number; ROW_NUMBER() never ties, always 1,2,3...;</text>
-      <text x="10" y="160" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">DENSE_RANK() ties like RANK() but doesn't skip the next number.</text>
+      <text x="10" y="115" font-family="var(--sans)" font-size="10.5" fill="var(--code-ink)" opacity="0.75">PARTITION BY resets the count per group — rank restarts at 1 for every country, instead of numbering 1–6 straight through.</text>
+      <text x="10" y="140" font-family="var(--sans)" font-size="10.5" fill="var(--code-ink)" opacity="0.75">RANK() gives tied values the same rank and skips the next number; ROW_NUMBER() never ties, always 1,2,3...;</text>
+      <text x="10" y="160" font-family="var(--sans)" font-size="10.5" fill="var(--code-ink)" opacity="0.75">DENSE_RANK() ties like RANK() but doesn't skip the next number.</text>
     </svg>
   </div>
 
@@ -377,10 +377,10 @@ SELECT channel FROM orders WHERE month = '2025-04';</pre>
         <rect x="150" y="10" width="140" height="50" rx="6" fill="var(--teal)"/>
         <text x="220" y="30" text-anchor="middle" fill="var(--code-bg)" font-weight="700">Starter Kit +</text>
         <text x="220" y="44" text-anchor="middle" fill="var(--code-bg)" font-weight="700">Pro Add-on</text>
-        <text x="220" y="90" text-anchor="middle" fill="var(--ink)" font-family="var(--mono)" font-size="13" font-weight="700">lift ≈ 1.25</text>
+        <text x="220" y="90" text-anchor="middle" fill="var(--code-ink)" font-family="var(--mono)" font-size="13" font-weight="700">lift ≈ 1.25</text>
         <text x="220" y="106" text-anchor="middle" fill="var(--good)" font-size="10">bought together more than chance — bundle these</text>
       </g>
-      <text x="220" y="140" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--ink-faint)">Support Plan + Starter Kit comes back under 1.0 — rarely bought together, run the challenge below to see it</text>
+      <text x="220" y="140" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--code-ink)" opacity="0.65">Support Plan + Starter Kit comes back under 1.0 — rarely bought together, run the challenge below to see it</text>
     </svg>
   </div>
 
@@ -398,20 +398,20 @@ SELECT channel FROM orders WHERE month = '2025-04';</pre>
     <p class="diagram-label">one customer's RFM score, visualized</p>
     <svg viewBox="0 0 460 130" width="100%" height="130" role="img" aria-label="Three horizontal bars for one example customer showing Recency score 4, Frequency score 3, Monetary score 4, combining into segment code 434">
       <g font-family="var(--sans)" font-size="11">
-        <text x="0" y="14" fill="var(--ink)">Recency</text>
+        <text x="0" y="14" fill="var(--code-ink)">Recency</text>
         <rect x="90" y="2" width="320" height="16" rx="3" fill="var(--surface-2)" stroke="var(--line)"/>
         <rect x="90" y="2" width="320" height="16" rx="3" fill="var(--teal)"/>
-        <text x="420" y="14" font-family="var(--mono)" fill="var(--ink)">4/4</text>
+        <text x="420" y="14" font-family="var(--mono)" fill="var(--code-ink)">4/4</text>
 
-        <text x="0" y="42" fill="var(--ink)">Frequency</text>
+        <text x="0" y="42" fill="var(--code-ink)">Frequency</text>
         <rect x="90" y="30" width="320" height="16" rx="3" fill="var(--surface-2)" stroke="var(--line)"/>
         <rect x="90" y="30" width="240" height="16" rx="3" fill="var(--teal)" opacity="0.75"/>
-        <text x="420" y="42" font-family="var(--mono)" fill="var(--ink)">3/4</text>
+        <text x="420" y="42" font-family="var(--mono)" fill="var(--code-ink)">3/4</text>
 
-        <text x="0" y="70" fill="var(--ink)">Monetary</text>
+        <text x="0" y="70" fill="var(--code-ink)">Monetary</text>
         <rect x="90" y="58" width="320" height="16" rx="3" fill="var(--surface-2)" stroke="var(--line)"/>
         <rect x="90" y="58" width="320" height="16" rx="3" fill="var(--teal)"/>
-        <text x="420" y="70" font-family="var(--mono)" fill="var(--ink)">4/4</text>
+        <text x="420" y="70" font-family="var(--mono)" fill="var(--code-ink)">4/4</text>
 
         <text x="90" y="105" font-family="var(--mono)" font-size="14" font-weight="700" fill="var(--gold-ink,#caa15a)">→ segment code "434" — recent, high spend, moderate frequency</text>
       </g>
