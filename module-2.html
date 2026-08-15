@@ -13,22 +13,175 @@
   <div class="lesson-head">
     <p class="lesson-num">Module 2</p>
     <h1>SQL for Marketing Analytics</h1>
-    <p class="lesson-goal">The single highest-leverage skill in this whole plan. A real SQL database is loaded below, in your browser — write real queries against it.</p>
+    <p class="lesson-goal">The single highest-leverage skill in this whole plan, taught from absolute zero. No prior SQL knowledge assumed. Every command below is explained, drawn, and runnable in the live database in your browser — nothing here requires you to leave this page.</p>
   </div>
 
   <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
 
-  <h2>Start here: what a database actually is</h2>
-  <p>A database is just a set of spreadsheets (called <strong>tables</strong>) that can talk to each other. Each table has columns (like a spreadsheet's headers) and rows (one row = one thing — one order, one customer). SQL is the language for asking that set of tables a question. Everything below — SELECT, JOIN, GROUP BY — is one type of question.</p>
+  <h2>What a database actually is</h2>
+  <p>You already understand this — you learned it in Module 1. A database <strong>table</strong> is just an Excel sheet with stricter rules: every column has one fixed type of data (numbers stay numbers, text stays text), and every row represents exactly one real-world thing. A database is simply a collection of these sheets ("tables") that can be connected to each other.</p>
 
-  <h2>Core concepts</h2>
-  <ul>
-    <li><code class="inline">SELECT</code>, <code class="inline">WHERE</code>, <code class="inline">ORDER BY</code>, <code class="inline">LIMIT</code> — basic retrieval.</li>
-    <li><code class="inline">JOIN</code> (INNER, LEFT) — combining an orders table with a customers table.</li>
-    <li><code class="inline">GROUP BY</code> + aggregations (<code class="inline">SUM</code>, <code class="inline">COUNT</code>, <code class="inline">AVG</code>) — the pivot table, formalized.</li>
-    <li>Window functions (<code class="inline">RANK()</code>, <code class="inline">LAG()</code>) — rank within a group, month-over-month change.</li>
-    <li><code class="inline">CASE WHEN</code> for segment bucketing.</li>
-  </ul>
+  <div class="diagram">
+    <p class="diagram-label">anatomy of a table</p>
+    <svg viewBox="0 0 620 220" width="100%" height="220" role="img" aria-label="A table labeled orders, with columns id, customer_id, channel, revenue labeled as columns across the top, and each horizontal line labeled as a row representing one order">
+      <g font-family="var(--mono)" font-size="11">
+        <text x="10" y="20" fill="var(--code-ink)" opacity="0.6" font-size="10">TABLE: orders</text>
+        <g stroke="#24312f" stroke-width="1">
+          <rect x="10" y="30" width="90" height="26" fill="#1a2523"/><rect x="100" y="30" width="120" height="26" fill="#1a2523"/><rect x="220" y="30" width="110" height="26" fill="#1a2523"/><rect x="330" y="30" width="100" height="26" fill="#1a2523"/>
+          <rect x="10" y="56" width="90" height="26" fill="none"/><rect x="100" y="56" width="120" height="26" fill="none"/><rect x="220" y="56" width="110" height="26" fill="none"/><rect x="330" y="56" width="100" height="26" fill="none"/>
+          <rect x="10" y="82" width="90" height="26" fill="none"/><rect x="100" y="82" width="120" height="26" fill="none"/><rect x="220" y="82" width="110" height="26" fill="none"/><rect x="330" y="82" width="100" height="26" fill="none"/>
+        </g>
+        <g fill="var(--code-ink)">
+          <text x="16" y="47" font-weight="700">id</text><text x="106" y="47" font-weight="700">customer_id</text><text x="226" y="47" font-weight="700">channel</text><text x="336" y="47" font-weight="700">revenue</text>
+          <text x="16" y="73">1</text><text x="106" y="73">101</text><text x="226" y="73">Paid Social</text><text x="336" y="73">82.5</text>
+          <text x="16" y="99">2</text><text x="106" y="99">102</text><text x="226" y="99">Email</text><text x="336" y="99">45.0</text>
+        </g>
+      </g>
+      <g font-family="var(--sans)" font-size="11" fill="var(--teal)">
+        <line x1="55" y1="18" x2="55" y2="28" stroke="var(--teal)" stroke-width="1.5"/>
+        <text x="10" y="130" fill="var(--ink)">↑ Each of these is a <tspan font-weight="700">column</tspan> — one fixed piece of information (like an Excel header).</text>
+        <line x1="440" y1="43" x2="460" y2="43" stroke="var(--teal)" stroke-width="1.5"/>
+        <text x="10" y="150" fill="var(--ink)">→ Each horizontal line is a <tspan font-weight="700">row</tspan> — here, one row = one order. This is the table's "grain."</text>
+        <text x="10" y="180" fill="var(--ink-muted)" font-size="10.5">SQL (Structured Query Language) is simply how you ask a table — or several joined together — a question.</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Your first query: SELECT</h2>
+  <p>Every SQL question starts with the word <code class="inline">SELECT</code>. The simplest possible query asks for everything in a table:</p>
+  <pre class="code">SELECT * FROM orders;</pre>
+  <p>Read it left to right, literally: <strong>SELECT</strong> (give me) <strong>*</strong> (every column) <strong>FROM orders</strong> (from the orders table). The <code class="inline">*</code> means "all columns." The semicolon just marks the end of the statement.</p>
+  <p><button class="ghost" data-load-example="0" type="button" style="font-size:12px; padding:6px 12px;">Try it — load into the editor below</button></p>
+
+  <p>Usually you don't want every column — just the ones relevant to your question. Name them, comma-separated, instead of <code class="inline">*</code>:</p>
+  <pre class="code">SELECT channel, revenue FROM orders;</pre>
+  <p><button class="ghost" data-load-example="1" type="button" style="font-size:12px; padding:6px 12px;">Try it</button></p>
+
+  <h2>Filtering rows: WHERE</h2>
+  <p><code class="inline">WHERE</code> keeps only the rows matching a condition — the SQL equivalent of an Excel filter. It goes after the table name:</p>
+  <pre class="code">SELECT * FROM orders WHERE channel = 'Email';</pre>
+
+  <div class="diagram">
+    <p class="diagram-label">what WHERE does to your rows</p>
+    <svg viewBox="0 0 560 170" width="100%" height="170" role="img" aria-label="Six rows, three highlighted green because they match channel equals Email, three greyed out because they don't match">
+      <g font-family="var(--mono)" font-size="11">
+        <text x="10" y="16" fill="var(--code-ink)" opacity="0.6" font-size="10">BEFORE (all 6 rows)</text>
+        <g transform="translate(10,24)">
+          <rect x="0" y="0" width="220" height="22" fill="var(--good-soft,#123321)"/><text x="8" y="15" fill="var(--code-ink)">Email · $45</text>
+          <rect x="0" y="24" width="220" height="22" fill="none" stroke="#24312f"/><text x="8" y="39" fill="var(--code-ink)" opacity="0.4">Paid Social · $82</text>
+          <rect x="0" y="48" width="220" height="22" fill="var(--good-soft,#123321)"/><text x="8" y="63" fill="var(--code-ink)">Email · $30</text>
+          <rect x="0" y="72" width="220" height="22" fill="none" stroke="#24312f"/><text x="8" y="87" fill="var(--code-ink)" opacity="0.4">Paid Search · $120</text>
+          <rect x="0" y="96" width="220" height="22" fill="var(--good-soft,#123321)"/><text x="8" y="111" fill="var(--code-ink)">Email · $55</text>
+          <rect x="0" y="120" width="220" height="22" fill="none" stroke="#24312f"/><text x="8" y="135" fill="var(--code-ink)" opacity="0.4">Organic · $60</text>
+        </g>
+      </g>
+      <g font-family="var(--sans)" font-size="18" fill="var(--teal)"><text x="255" y="90">→</text></g>
+      <g font-family="var(--mono)" font-size="11">
+        <text x="300" y="16" fill="var(--code-ink)" opacity="0.6" font-size="10">AFTER: WHERE channel = 'Email'</text>
+        <g transform="translate(300,24)">
+          <rect x="0" y="0" width="220" height="22" fill="var(--teal)"/><text x="8" y="15" fill="var(--code-bg)">Email · $45</text>
+          <rect x="0" y="24" width="220" height="22" fill="var(--teal)"/><text x="8" y="39" fill="var(--code-bg)">Email · $30</text>
+          <rect x="0" y="48" width="220" height="22" fill="var(--teal)"/><text x="8" y="63" fill="var(--code-bg)">Email · $55</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <p>Common WHERE operators — this covers essentially every filter you'll ever write:</p>
+  <table class="map-table">
+    <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><code class="inline">=</code></td><td>equals</td><td><code class="inline">channel = 'Email'</code></td></tr>
+    <tr><td><code class="inline">!=</code> or <code class="inline">&lt;&gt;</code></td><td>not equal to</td><td><code class="inline">channel != 'Email'</code></td></tr>
+    <tr><td><code class="inline">&gt; &lt; &gt;= &lt;=</code></td><td>greater/less than (numbers, dates)</td><td><code class="inline">revenue &gt; 100</code></td></tr>
+    <tr><td><code class="inline">AND</code> / <code class="inline">OR</code></td><td>combine multiple conditions</td><td><code class="inline">revenue &gt; 100 AND channel = 'Email'</code></td></tr>
+    <tr><td><code class="inline">IN (...)</code></td><td>matches any value in a list</td><td><code class="inline">channel IN ('Email','Organic')</code></td></tr>
+    <tr><td><code class="inline">BETWEEN</code></td><td>within a range, inclusive</td><td><code class="inline">revenue BETWEEN 50 AND 100</code></td></tr>
+    <tr><td><code class="inline">LIKE '%text%'</code></td><td>text pattern match; <code class="inline">%</code> = any characters</td><td><code class="inline">channel LIKE '%Paid%'</code></td></tr>
+    <tr><td><code class="inline">IS NULL</code> / <code class="inline">IS NOT NULL</code></td><td>tests for missing data — never use <code class="inline">= NULL</code>, it silently fails</td><td><code class="inline">country IS NULL</code></td></tr>
+  </table>
+  <p><button class="ghost" data-load-example="2" type="button" style="font-size:12px; padding:6px 12px;">Try WHERE =</button>
+     <button class="ghost" data-load-example="3" type="button" style="font-size:12px; padding:6px 12px;">Try AND</button>
+     <button class="ghost" data-load-example="4" type="button" style="font-size:12px; padding:6px 12px;">Try IN</button>
+     <button class="ghost" data-load-example="7" type="button" style="font-size:12px; padding:6px 12px;">Try IS NULL</button></p>
+
+  <h2>Sorting and limiting: ORDER BY, LIMIT</h2>
+  <p><code class="inline">ORDER BY</code> sorts your result (<code class="inline">ASC</code> = ascending, low→high, the default; <code class="inline">DESC</code> = descending, high→low). <code class="inline">LIMIT</code> caps how many rows come back — essential once a table has thousands of rows.</p>
+  <pre class="code">SELECT * FROM orders ORDER BY revenue DESC LIMIT 5;</pre>
+  <p>This reads as: "give me every column, sorted by revenue from highest to lowest, but only the top 5 rows." <button class="ghost" data-load-example="5" type="button" style="font-size:12px; padding:6px 12px;">Try it</button></p>
+
+  <h2>Renaming a column: aliases (AS)</h2>
+  <p><code class="inline">AS</code> gives a column (or a calculated value) a cleaner name in your output — purely cosmetic, doesn't change the data.</p>
+  <pre class="code">SELECT channel, revenue AS order_value FROM orders;</pre>
+  <p><button class="ghost" data-load-example="6" type="button" style="font-size:12px; padding:6px 12px;">Try it</button></p>
+
+  <h2>Practice here — the live database</h2>
+  <p>Three tables are loaded below: <code class="inline">orders</code>, <code class="inline">customers</code>, and <code class="inline">order_items</code> (used later for Market Basket Analysis). Every "Try it" button above loads its example straight into this editor — press <strong>Run query</strong> after.</p>
+
+  <div class="sql-runner">
+    <div class="sql-editor-wrap">
+      <textarea id="sql-input" spellcheck="false">SELECT * FROM orders LIMIT 5;</textarea>
+    </div>
+    <div class="sql-actions">
+      <button id="sql-run">Run query</button>
+      <button class="ghost" id="sql-reset" type="button">Reset editor</button>
+      <span id="sql-status" style="align-self:center; font-family:var(--mono); font-size:12px; color:var(--ink-muted);">Loading SQL engine…</span>
+    </div>
+    <div class="sql-output" id="sql-output"></div>
+    <div class="sql-schema">
+      <b>orders</b>(id, customer_id, channel, order_date, month, revenue) · 24 rows &nbsp;·&nbsp;
+      <b>customers</b>(customer_id, country, signup_month) · 10 rows &nbsp;·&nbsp;
+      <b>order_items</b>(order_id, product) · 15 baskets
+    </div>
+  </div>
+
+  <h2>Beginner exercises</h2>
+  <ol>
+    <li>Write a query that shows only orders from the <code class="inline">Paid Search</code> channel with revenue over $100.</li>
+    <li>Show the 3 highest-revenue orders overall, with the revenue column renamed to <code class="inline">order_value</code>.</li>
+    <li>Find the customer(s) with a missing (<code class="inline">NULL</code>) country.</li>
+  </ol>
+
+  <h2>Check yourself: Beginner</h2>
+  <div id="quiz-mount-beginner"></div>
+
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>Aggregating data: turning many rows into one number</h2>
+  <p>These five functions collapse a column of many rows into a single summary number — this is the exact operation a pivot table's "Values" area does, just with a keyword instead of a drag-and-drop:</p>
+  <table class="map-table">
+    <tr><th>Function</th><th>Does</th></tr>
+    <tr><td><code class="inline">COUNT(*)</code></td><td>how many rows</td></tr>
+    <tr><td><code class="inline">SUM(column)</code></td><td>total</td></tr>
+    <tr><td><code class="inline">AVG(column)</code></td><td>average</td></tr>
+    <tr><td><code class="inline">MIN(column)</code> / <code class="inline">MAX(column)</code></td><td>smallest / largest value</td></tr>
+  </table>
+
+  <h2>Grouping rows: GROUP BY</h2>
+  <p>On its own, <code class="inline">SUM(revenue)</code> collapses the <em>entire table</em> into one number. <code class="inline">GROUP BY</code> tells it to collapse <em>per category</em> instead — one summary row per channel, per month, per whatever you group by.</p>
+  <pre class="code">SELECT channel, COUNT(*) AS num_orders, AVG(revenue) AS avg_revenue
+FROM orders
+GROUP BY channel;</pre>
+  <p><button class="ghost" data-load-example="8" type="button" style="font-size:12px; padding:6px 12px;">Try it</button></p>
+
+  <div class="diagram">
+    <p class="diagram-label">mental model bridge</p>
+    <pre>PIVOT TABLE (Module 1)                SQL EQUIVALENT
+------------------------------        -------------------------------
+Rows:    Channel                      SELECT channel,
+Values:  Average of Revenue    -->            AVG(revenue) AS avg_revenue
+                                       FROM   orders
+                                       GROUP BY channel;</pre>
+  </div>
+
+  <h3>Filtering groups: HAVING vs. WHERE</h3>
+  <p>This trips up almost everyone once: <code class="inline">WHERE</code> filters individual rows <em>before</em> grouping happens. <code class="inline">HAVING</code> filters the grouped results <em>after</em> aggregation. You cannot write <code class="inline">WHERE COUNT(*) > 3</code> — <code class="inline">COUNT(*)</code> doesn't exist yet at the point <code class="inline">WHERE</code> runs.</p>
+  <pre class="code">SELECT channel, COUNT(*) AS num_orders
+FROM orders
+GROUP BY channel
+HAVING COUNT(*) > 3;</pre>
+
+  <h2>Combining tables: JOIN</h2>
+  <p>A JOIN lines up rows from two tables that share a common value (a "key") — here, <code class="inline">customer_id</code> exists in both <code class="inline">orders</code> and <code class="inline">customers</code>, so you can pull a customer's country onto every one of their orders.</p>
 
   <div class="diagram">
     <p class="diagram-label">orders ⋈ customers on customer_id</p>
@@ -43,61 +196,90 @@
                             matched on cust_id = id</pre>
   </div>
 
+  <p>Four kinds of JOIN, differing only in what happens to <em>unmatched</em> rows:</p>
   <div class="diagram">
-    <p class="diagram-label">which rows you get, by JOIN type</p>
-    <svg viewBox="0 0 640 170" width="100%" height="170" role="img" aria-label="Venn diagrams showing INNER JOIN keeps only overlap, LEFT JOIN keeps all of the left circle plus overlap, FULL JOIN keeps everything">
+    <p class="diagram-label">which rows survive, by JOIN type</p>
+    <svg viewBox="0 0 640 170" width="100%" height="170" role="img" aria-label="Venn diagrams: INNER JOIN keeps only the overlap, LEFT JOIN keeps all of orders plus the overlap, RIGHT JOIN keeps all of customers plus the overlap, FULL JOIN keeps everything from both">
       <g font-family="var(--sans)" font-size="11" fill="var(--code-ink)">
-        <!-- INNER -->
-        <g transform="translate(70,20)">
-          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.35"/>
-          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.35"/>
+        <g transform="translate(20,20)">
+          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.35"/><circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.35"/>
           <path d="M55,15 A45,45 0 0 1 55,95 A45,45 0 0 1 55,15 Z" fill="var(--teal)" opacity="0.9"/>
-          <text x="55" y="130" text-anchor="middle" font-weight="700">INNER JOIN</text>
-          <text x="55" y="145" text-anchor="middle" font-size="9.5" opacity="0.7">only matched rows</text>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">INNER</text><text x="55" y="145" text-anchor="middle" font-size="9" opacity="0.7">matched only</text>
         </g>
-        <!-- LEFT -->
-        <g transform="translate(280,20)">
-          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.25"/>
-          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.9"/>
+        <g transform="translate(190,20)">
+          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.25"/><circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.9"/>
           <path d="M55,15 A45,45 0 0 1 55,95 A45,45 0 0 1 55,15 Z" fill="var(--teal)" opacity="0.6"/>
-          <text x="55" y="130" text-anchor="middle" font-weight="700">LEFT JOIN</text>
-          <text x="55" y="145" text-anchor="middle" font-size="9.5" opacity="0.7">all of orders, matched or not</text>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">LEFT</text><text x="55" y="145" text-anchor="middle" font-size="9" opacity="0.7">all of orders</text>
         </g>
-        <!-- FULL -->
-        <g transform="translate(480,20)">
-          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.85"/>
-          <circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.55"/>
-          <text x="55" y="130" text-anchor="middle" font-weight="700">FULL JOIN</text>
-          <text x="55" y="145" text-anchor="middle" font-size="9.5" opacity="0.7">everything, matched or not</text>
+        <g transform="translate(360,20)">
+          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.25"/><circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.9"/>
+          <path d="M55,15 A45,45 0 0 1 55,95 A45,45 0 0 1 55,15 Z" fill="var(--gold)" opacity="0.6"/>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">RIGHT</text><text x="55" y="145" text-anchor="middle" font-size="9" opacity="0.7">all of customers</text>
+        </g>
+        <g transform="translate(530,20)">
+          <circle cx="35" cy="55" r="45" fill="var(--teal)" opacity="0.85"/><circle cx="75" cy="55" r="45" fill="var(--gold)" opacity="0.55"/>
+          <text x="55" y="130" text-anchor="middle" font-weight="700">FULL</text><text x="55" y="145" text-anchor="middle" font-size="9" opacity="0.7">everything</text>
         </g>
       </g>
     </svg>
   </div>
+  <table class="map-table">
+    <tr><th>Syntax</th><th>Use when</th></tr>
+    <tr><td><code class="inline">FROM orders o JOIN customers c ON o.customer_id = c.customer_id</code></td><td>you only want orders that have a matching customer (default JOIN = INNER JOIN)</td></tr>
+    <tr><td><code class="inline">FROM customers c LEFT JOIN orders o ON ...</code></td><td>you want every customer even with zero orders — <strong>required</strong> for churn/inactivity analysis</td></tr>
+    <tr><td><code class="inline">FROM orders o RIGHT JOIN customers c ON ...</code></td><td>same idea, written the other direction (SQLite/this course's engine doesn't support RIGHT JOIN directly — flip to a LEFT JOIN by swapping table order, which is what real analysts do anyway)</td></tr>
+    <tr><td><code class="inline">FULL JOIN</code></td><td>rare — everything from both sides, matched or not</td></tr>
+  </table>
 
-  <h2>Live SQL runner</h2>
-  <p>Two tables are loaded: <code class="inline">orders</code> and <code class="inline">customers</code>. Write any query and run it.</p>
+  <h2>Conditional logic: CASE WHEN</h2>
+  <p><code class="inline">CASE WHEN</code> is an if/then/else you can drop inside a SELECT — the SQL version of Excel's nested <code class="inline">IF</code>. It checks conditions top to bottom and stops at the first match.</p>
+  <pre class="code">SELECT customer_id, revenue,
+  CASE
+    WHEN revenue >= 100 THEN 'High'
+    WHEN revenue >= 50  THEN 'Medium'
+    ELSE 'Low'
+  END AS spend_tier
+FROM orders;</pre>
+  <p><button class="ghost" data-load-example="9" type="button" style="font-size:12px; padding:6px 12px;">Try it</button></p>
 
-  <div class="sql-runner">
-    <div class="sql-editor-wrap">
-      <textarea id="sql-input" spellcheck="false">SELECT channel, SUM(revenue) AS total_revenue
-FROM orders
-GROUP BY channel
-ORDER BY total_revenue DESC;</textarea>
-    </div>
-    <div class="sql-actions">
-      <button id="sql-run">Run query</button>
-      <button class="ghost" id="sql-reset" type="button">Reset editor</button>
-      <span id="sql-status" style="align-self:center; font-family:var(--mono); font-size:12px; color:var(--ink-muted);">Loading SQL engine…</span>
-    </div>
-    <div class="sql-output" id="sql-output"></div>
-    <div class="sql-schema">
-      <b>orders</b>(id, customer_id, channel, order_date, month, revenue) · 24 rows &nbsp;·&nbsp;
-      <b>customers</b>(customer_id, country, signup_month) · 10 rows
-    </div>
+  <h2>Cleaning text: string functions</h2>
+  <p>Remember the UTM-casing problem from Module 4 ("Email" vs "email" fragmenting a channel into two rows)? This is how you'd fix it in SQL rather than at the source:</p>
+  <table class="map-table">
+    <tr><th>Function</th><th>Does</th></tr>
+    <tr><td><code class="inline">UPPER(x)</code> / <code class="inline">LOWER(x)</code></td><td>forces consistent case</td></tr>
+    <tr><td><code class="inline">TRIM(x)</code></td><td>removes leading/trailing spaces</td></tr>
+    <tr><td><code class="inline">x || y</code> (or <code class="inline">CONCAT</code> on some engines)</td><td>joins two text values together</td></tr>
+  </table>
+  <pre class="code">SELECT LOWER(TRIM(channel)) AS channel_clean FROM orders;</pre>
+  <p><button class="ghost" data-load-example="10" type="button" style="font-size:12px; padding:6px 12px;">Try it</button></p>
+
+  <h2>Working with dates</h2>
+  <p>This dataset's <code class="inline">month</code> column ('2025-05') was itself pulled out of <code class="inline">order_date</code> ('2025-05-16') using a date function — in SQLite, <code class="inline">strftime('%Y-%m', order_date)</code>. Every SQL engine has its own date-function names (BigQuery uses <code class="inline">FORMAT_DATE</code>), but the idea — extract a smaller unit from a full date — is universal.</p>
+
+  <h2>Combining result sets: UNION</h2>
+  <p><code class="inline">UNION</code> stacks the results of two separate SELECTs into one list (and removes duplicates; <code class="inline">UNION ALL</code> keeps them and is faster). Rare in day-to-day marketing analysis, but shows up when combining two differently-sourced tables with the same shape — e.g. this month's data and last month's, stored separately.</p>
+  <pre class="code">SELECT channel FROM orders WHERE month = '2025-05'
+UNION
+SELECT channel FROM orders WHERE month = '2025-04';</pre>
+
+  <h2>Breaking a big question into steps: subqueries and CTEs</h2>
+  <p>A <strong>subquery</strong> is a query nested inside another — usually because you need a computed value (like an average) before you can filter on it. A <strong>CTE</strong> (<code class="inline">WITH name AS (...)</code>) does the same thing but names the intermediate result, so a complex query reads top-to-bottom like numbered steps instead of nested parentheses.</p>
+
+  <div class="diagram">
+    <p class="diagram-label">a CTE is just a named, temporary step</p>
+    <svg viewBox="0 0 620 110" width="100%" height="110" role="img" aria-label="Step 1 computes channel_totals, an arrow leads to Step 2 which filters using channel_totals">
+      <defs><marker id="arrow2b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--teal)"/></marker></defs>
+      <line x1="290" y1="45" x2="330" y2="45" stroke="var(--teal)" stroke-width="2" marker-end="url(#arrow2b)"/>
+      <g font-family="var(--sans)" font-size="11" font-weight="700">
+        <rect x="10" y="20" width="270" height="50" rx="8" fill="var(--teal)"/>
+        <text x="145" y="41" text-anchor="middle" fill="var(--code-bg)" font-size="11">WITH channel_totals AS (...)</text>
+        <text x="145" y="57" text-anchor="middle" fill="var(--code-bg)" font-size="9" font-weight="400">Step 1 — named, temporary result</text>
+        <rect x="335" y="20" width="275" height="50" rx="8" fill="var(--gold)"/>
+        <text x="472" y="41" text-anchor="middle" fill="var(--code-bg)" font-size="11">SELECT * FROM channel_totals WHERE ...</text>
+        <text x="472" y="57" text-anchor="middle" fill="var(--code-bg)" font-size="9" font-weight="400">Step 2 — uses the named result like a table</text>
+      </g>
+    </svg>
   </div>
-
-  <h2>Challenges</h2>
-  <p>Each challenge checks your query's <em>output</em>, not the exact SQL text — there's more than one correct way to write it.</p>
 
   <div class="challenge">
     <b>Challenge 1</b>
@@ -111,42 +293,68 @@ ORDER BY total_revenue DESC;</textarea>
   </div>
   <div class="challenge">
     <b>Challenge 3</b>
-    Rank customers by total revenue within their country (use a window function).
+    Rank customers by total revenue within their country (window function).
     <div style="margin-top:8px;"><button class="ghost" data-load-challenge="2" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
   </div>
-
-  <h2>Exercises (beyond the challenges)</h2>
-  <ol>
-    <li>Use <code class="inline">LAG()</code> to compute month-over-month revenue change per channel.</li>
-    <li>Write a <code class="inline">CASE WHEN</code> that buckets customers into "high / medium / low" spend tiers.</li>
-    <li>Find channels with zero orders in the most recent month using a <code class="inline">LEFT JOIN</code>.</li>
-  </ol>
-
-  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
-
-  <h2>Breaking a question into steps</h2>
-  <ul>
-    <li><strong>CTEs</strong> (<code class="inline">WITH name AS (...)</code>): name an intermediate result so a complex query reads top-to-bottom instead of as nested parentheses. Anywhere you'd build one pivot table, then a second pivot table off the first, a CTE is that same move in SQL.</li>
-    <li><strong>Subqueries</strong>: a query inside a query, often to filter against a computed value (e.g. "channels above the average revenue" — you can't write <code class="inline">WHERE revenue > AVG(revenue)</code> directly, the average has to be computed first).</li>
-    <li><strong>HAVING vs. WHERE</strong>: <code class="inline">WHERE</code> filters rows before grouping; <code class="inline">HAVING</code> filters groups after aggregation (e.g. "channels with more than 5 orders").</li>
-    <li><strong>COALESCE</strong>: <code class="inline">COALESCE(discount, 0)</code> substitutes a default when a value is NULL — the SQL version of Module 1's blank-handling.</li>
-    <li><strong>Date functions</strong>: pulling a month or week out of a full date (SQLite: <code class="inline">strftime('%Y-%m', order_date)</code>) — this is how the <code class="inline">month</code> column in this dataset was actually derived.</li>
-  </ul>
-
   <div class="challenge">
     <b>Challenge 4</b>
     Using a CTE, find channels whose total revenue is above the average channel revenue.
     <div style="margin-top:8px;"><button class="ghost" data-load-challenge="3" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
   </div>
 
+  <h2>Intermediate exercises (beyond the challenges)</h2>
+  <ol>
+    <li>Use a <code class="inline">CASE WHEN</code> to bucket every order into "High" / "Medium" / "Low" spend tiers, then <code class="inline">GROUP BY</code> that tier and count orders in each.</li>
+    <li>Find channels with zero orders in <code class="inline">'2025-05'</code> using a <code class="inline">LEFT JOIN</code> from a full list of channels (hint: <code class="inline">SELECT DISTINCT channel FROM orders</code> as your left table).</li>
+    <li>Clean the <code class="inline">channel</code> column with <code class="inline">LOWER(TRIM(channel))</code> and confirm it doesn't change any of this dataset's row count (it's already clean — this is the fix, not a bug demo).</li>
+  </ol>
+
+  <h2>Check yourself: Intermediate</h2>
+  <div id="quiz-mount-intermediate"></div>
+
   <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
+
+  <h2>Window functions: the full family</h2>
+  <p>A window function looks across a <em>group of related rows</em> without collapsing them into one row the way <code class="inline">GROUP BY</code> does — you still get one output row per input row, plus a calculated column. <code class="inline">PARTITION BY</code> defines the group (like GROUP BY, but non-collapsing); <code class="inline">ORDER BY</code> inside the <code class="inline">OVER()</code> defines the order the function walks the rows in.</p>
+
+  <div class="diagram">
+    <p class="diagram-label">RANK() OVER (PARTITION BY country ORDER BY revenue DESC)</p>
+    <svg viewBox="0 0 460 180" width="100%" height="180" role="img" aria-label="Six rows split into two color-coded partitions by country, US and UK, each with its own independent rank column restarting at 1">
+      <g font-family="var(--mono)" font-size="11">
+        <text x="10" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">country=US partition</text>
+        <g transform="translate(10,20)">
+          <rect x="0" y="0" width="200" height="24" fill="var(--teal)" opacity="0.85"/><text x="8" y="16" fill="var(--code-bg)">$150 revenue</text><text x="160" y="16" fill="var(--code-bg)" font-weight="700">rank 1</text>
+          <rect x="0" y="26" width="200" height="24" fill="var(--teal)" opacity="0.6"/><text x="8" y="42" fill="var(--code-bg)">$98 revenue</text><text x="160" y="42" fill="var(--code-bg)" font-weight="700">rank 2</text>
+          <rect x="0" y="52" width="200" height="24" fill="var(--teal)" opacity="0.4"/><text x="8" y="68" fill="var(--code-bg)">$60 revenue</text><text x="160" y="68" fill="var(--code-bg)" font-weight="700">rank 3</text>
+        </g>
+        <text x="240" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">country=UK partition</text>
+        <g transform="translate(240,20)">
+          <rect x="0" y="0" width="200" height="24" fill="var(--gold)" opacity="0.85"/><text x="8" y="16" fill="var(--code-bg)">$140 revenue</text><text x="160" y="16" fill="var(--code-bg)" font-weight="700">rank 1</text>
+          <rect x="0" y="26" width="200" height="24" fill="var(--gold)" opacity="0.6"/><text x="8" y="42" fill="var(--code-bg)">$58 revenue</text><text x="160" y="42" fill="var(--code-bg)" font-weight="700">rank 2</text>
+          <rect x="0" y="52" width="200" height="24" fill="var(--gold)" opacity="0.4"/><text x="8" y="68" fill="var(--code-bg)">$45 revenue</text><text x="160" y="68" fill="var(--code-bg)" font-weight="700">rank 3</text>
+        </g>
+      </g>
+      <text x="10" y="115" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">PARTITION BY resets the count per group — rank restarts at 1 for every country, instead of numbering 1–6 straight through.</text>
+      <text x="10" y="140" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">RANK() gives tied values the same rank and skips the next number; ROW_NUMBER() never ties, always 1,2,3...;</text>
+      <text x="10" y="160" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">DENSE_RANK() ties like RANK() but doesn't skip the next number.</text>
+    </svg>
+  </div>
+
+  <table class="map-table">
+    <tr><th>Function</th><th>Does</th></tr>
+    <tr><td><code class="inline">RANK()</code></td><td>1,2,2,4 — ties share a rank, next rank skips</td></tr>
+    <tr><td><code class="inline">DENSE_RANK()</code></td><td>1,2,2,3 — ties share a rank, next rank doesn't skip</td></tr>
+    <tr><td><code class="inline">ROW_NUMBER()</code></td><td>1,2,3,4 — always unique, ties broken arbitrarily</td></tr>
+    <tr><td><code class="inline">LAG(col)</code> / <code class="inline">LEAD(col)</code></td><td>pulls the previous / next row's value into the current row — the standard way to compute period-over-period change</td></tr>
+    <tr><td><code class="inline">SUM(col) OVER (ORDER BY ...)</code></td><td>running total</td></tr>
+  </table>
 
   <h2>Cohort analysis &amp; working with real analytics exports</h2>
   <ul>
-    <li><strong>Cohort retention</strong>: group customers by their signup month, then track how many of each cohort ordered in each subsequent month — the query the "improve retention" case interview question is actually asking for.</li>
-    <li><strong>Correlated subqueries</strong>: a subquery that references the outer query's current row (e.g. "each customer's revenue vs. their own country's average") — powerful but can be slow on large tables; a window function is often the faster equivalent.</li>
-    <li><strong>Query performance (conceptually)</strong>: an index is like a book's table of contents for a column — it lets the database find matching rows without scanning every one. You won't be building indexes as a marketing analyst, but knowing why a query on a 50M-row events table is slow (no index on the filtered column) is a real interview topic.</li>
-    <li><strong>GA4's BigQuery export schema</strong>: unlike this course's flat <code class="inline">orders</code> table, GA4's export stores event parameters as a <em>nested, repeated</em> field — you need <code class="inline">UNNEST(event_params)</code> to flatten them into rows before you can filter or aggregate on a specific parameter like <code class="inline">campaign</code>. This single function is the biggest jump from this course's schema to a real GA4 SQL analysis (see Module 4, Advanced).</li>
+    <li><strong>Cohort retention</strong>: group customers by signup month, then track how many of each cohort ordered in each subsequent month.</li>
+    <li><strong>Correlated subqueries</strong>: a subquery referencing the outer query's current row — powerful but can be slow on huge tables; a window function is often the faster equivalent.</li>
+    <li><strong>Query performance (conceptually)</strong>: an index is like a book's table of contents for a column — lets the database find rows without scanning every one. You won't build indexes as a marketing analyst, but knowing why a 50M-row query is slow (no index on the filtered column) is a real interview topic.</li>
+    <li><strong>GA4's BigQuery export schema</strong>: event parameters are stored nested and repeated per event — <code class="inline">UNNEST(event_params)</code> flattens them into rows you can filter and aggregate on. The single biggest jump from this course's flat schema to a real GA4 SQL analysis.</li>
   </ul>
 
   <div class="challenge">
@@ -154,10 +362,97 @@ ORDER BY total_revenue DESC;</textarea>
     Cohort retention: for each signup-month cohort, count distinct customers who placed an order in each order month at or after signup.
     <div style="margin-top:8px;"><button class="ghost" data-load-challenge="4" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
   </div>
-  <div id="challenge-result"></div>
 
-  <h2>Check your understanding</h2>
-  <div id="quiz-mount"></div>
+  <h2>Market Basket Analysis &amp; Lift</h2>
+  <p>A classic retail/e-commerce question: "which two products get bought together more often than random chance would predict?" This is what recommendation engines and store-layout decisions are built on.</p>
+  <p><strong>Lift</strong> compares how often two products actually co-occur to how often they'd co-occur if purchases were totally independent:</p>
+  <div class="box gold">
+    <p style="margin:0"><code class="inline">Lift(A, B) = P(A and B) / (P(A) × P(B))</code> — Lift &gt; 1 means the products are bought together <em>more</em> than chance (a real association, worth bundling/cross-selling). Lift &lt; 1 means they're bought together <em>less</em> than chance (possibly substitutes for each other, not complements).</p>
+  </div>
+
+  <div class="diagram">
+    <p class="diagram-label">co-occurrence in this course's order_items data</p>
+    <svg viewBox="0 0 460 160" width="100%" height="160" role="img" aria-label="A 2x2 grid comparing Starter Kit and Support Plan against Pro Add-on, colored by lift value, Starter Kit and Pro Add-on shown with high positive lift, Support Plan and Starter Kit shown with low lift below 1">
+      <g font-family="var(--sans)" font-size="11">
+        <rect x="150" y="10" width="140" height="50" rx="6" fill="var(--teal)"/>
+        <text x="220" y="30" text-anchor="middle" fill="var(--code-bg)" font-weight="700">Starter Kit +</text>
+        <text x="220" y="44" text-anchor="middle" fill="var(--code-bg)" font-weight="700">Pro Add-on</text>
+        <text x="220" y="90" text-anchor="middle" fill="var(--ink)" font-family="var(--mono)" font-size="13" font-weight="700">lift ≈ 1.25</text>
+        <text x="220" y="106" text-anchor="middle" fill="var(--good)" font-size="10">bought together more than chance — bundle these</text>
+      </g>
+      <text x="220" y="140" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--ink-faint)">Support Plan + Starter Kit comes back under 1.0 — rarely bought together, run the challenge below to see it</text>
+    </svg>
+  </div>
+
+  <div class="challenge">
+    <b>Challenge 6</b>
+    Compute the co-occurrence and lift between every pair of products in <code class="inline">order_items</code>.
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="5" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+  <p style="font-size:13.5px; color:var(--ink-muted);">Run it, then look at the two rows: Starter Kit + Pro Add-on comes back around 1.25 lift (bought together more than chance). Support Plan + Starter Kit comes back well under 1 — they're rarely bought together, despite Starter Kit being the most popular single product.</p>
+
+  <h2>RFM Scoring with NTILE()</h2>
+  <p>Module 1 and Portfolio Project 1 already used RFM (Recency, Frequency, Monetary) conceptually. Here's the real technique analysts use to turn it into a clean, comparable score: <code class="inline">NTILE(4)</code> splits customers into four equal-sized buckets (quartiles) by whichever column you order by — bucket 4 as "best" for all three dimensions, so a <code class="inline">433</code> customer is easy to read as "recent, but not the most frequent or highest-spending."</p>
+
+  <div class="diagram">
+    <p class="diagram-label">one customer's RFM score, visualized</p>
+    <svg viewBox="0 0 460 130" width="100%" height="130" role="img" aria-label="Three horizontal bars for one example customer showing Recency score 4, Frequency score 3, Monetary score 4, combining into segment code 434">
+      <g font-family="var(--sans)" font-size="11">
+        <text x="0" y="14" fill="var(--ink)">Recency</text>
+        <rect x="90" y="2" width="320" height="16" rx="3" fill="var(--surface-2)" stroke="var(--line)"/>
+        <rect x="90" y="2" width="320" height="16" rx="3" fill="var(--teal)"/>
+        <text x="420" y="14" font-family="var(--mono)" fill="var(--ink)">4/4</text>
+
+        <text x="0" y="42" fill="var(--ink)">Frequency</text>
+        <rect x="90" y="30" width="320" height="16" rx="3" fill="var(--surface-2)" stroke="var(--line)"/>
+        <rect x="90" y="30" width="240" height="16" rx="3" fill="var(--teal)" opacity="0.75"/>
+        <text x="420" y="42" font-family="var(--mono)" fill="var(--ink)">3/4</text>
+
+        <text x="0" y="70" fill="var(--ink)">Monetary</text>
+        <rect x="90" y="58" width="320" height="16" rx="3" fill="var(--surface-2)" stroke="var(--line)"/>
+        <rect x="90" y="58" width="320" height="16" rx="3" fill="var(--teal)"/>
+        <text x="420" y="70" font-family="var(--mono)" fill="var(--ink)">4/4</text>
+
+        <text x="90" y="105" font-family="var(--mono)" font-size="14" font-weight="700" fill="var(--gold-ink,#caa15a)">→ segment code "434" — recent, high spend, moderate frequency</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="challenge">
+    <b>Challenge 7</b>
+    Score every customer on Recency, Frequency, and Monetary using <code class="inline">NTILE(4)</code>.
+    <div style="margin-top:8px;"><button class="ghost" data-load-challenge="6" type="button" style="font-size:12px; padding:6px 12px;">Load into editor</button></div>
+  </div>
+
+  <h2>Check yourself: Advanced</h2>
+  <div id="quiz-mount-advanced"></div>
+
+  <h2>Full SQL command reference</h2>
+  <p>Everything covered on this page, in one table — this is the cheat sheet for a technical screen; nothing here requires an outside resource.</p>
+  <table class="map-table">
+    <tr><th>Command / clause</th><th>What it does</th></tr>
+    <tr><td><code class="inline">SELECT col1, col2</code></td><td>choose which columns to return</td></tr>
+    <tr><td><code class="inline">FROM table</code></td><td>which table to read</td></tr>
+    <tr><td><code class="inline">WHERE condition</code></td><td>filter rows before any grouping</td></tr>
+    <tr><td><code class="inline">ORDER BY col ASC|DESC</code></td><td>sort the result</td></tr>
+    <tr><td><code class="inline">LIMIT n</code></td><td>cap the number of rows returned</td></tr>
+    <tr><td><code class="inline">AS</code></td><td>rename a column/value in the output</td></tr>
+    <tr><td><code class="inline">COUNT / SUM / AVG / MIN / MAX</code></td><td>aggregate a column into one number</td></tr>
+    <tr><td><code class="inline">GROUP BY col</code></td><td>aggregate per category instead of the whole table</td></tr>
+    <tr><td><code class="inline">HAVING condition</code></td><td>filter groups after aggregation (WHERE can't do this)</td></tr>
+    <tr><td><code class="inline">JOIN ... ON</code></td><td>combine rows from two tables on a shared key</td></tr>
+    <tr><td><code class="inline">INNER / LEFT / RIGHT / FULL JOIN</code></td><td>control what happens to unmatched rows</td></tr>
+    <tr><td><code class="inline">CASE WHEN ... THEN ... ELSE ... END</code></td><td>if/then/else inside a query</td></tr>
+    <tr><td><code class="inline">UPPER / LOWER / TRIM</code></td><td>clean up text values</td></tr>
+    <tr><td><code class="inline">UNION / UNION ALL</code></td><td>stack two result sets into one list</td></tr>
+    <tr><td><code class="inline">WITH name AS (...)</code> (CTE)</td><td>name an intermediate result for a later step</td></tr>
+    <tr><td><code class="inline">Subquery</code></td><td>a query nested inside another, often for a computed filter value</td></tr>
+    <tr><td><code class="inline">RANK() / DENSE_RANK() / ROW_NUMBER()</code></td><td>number rows within a group without collapsing them</td></tr>
+    <tr><td><code class="inline">LAG() / LEAD()</code></td><td>pull the previous/next row's value into the current row</td></tr>
+    <tr><td><code class="inline">PARTITION BY</code></td><td>defines the group a window function operates within</td></tr>
+    <tr><td><code class="inline">NTILE(n)</code></td><td>splits rows into n equal-sized buckets — used for RFM scoring</td></tr>
+    <tr><td><code class="inline">IS NULL / IS NOT NULL</code></td><td>test for missing data</td></tr>
+  </table>
 
   <h2>Interview questions for this module</h2>
   <div class="qa">
@@ -180,6 +475,10 @@ ORDER BY total_revenue DESC;</textarea>
     <p class="q">"How would you handle missing data or outliers when using SQL for marketing analysis?" (real, sourced)</p>
     <p class="a">Model answer: for missing values, decide explicitly between <code class="inline">COALESCE</code>-to-a-default, excluding the row, or flagging it — and say which. For outliers, don't silently delete: a $50,000 single order might be a real enterprise deal, not a data error. Check before excluding, and disclose it in the write-up if you do.</p>
   </div>
+  <div class="qa">
+    <p class="q">"How would you find products that are frequently bought together?"</p>
+    <p class="a">Model answer: self-join an order_items-style table to itself on order_id, count co-occurrences per product pair, and compute lift against each product's independent purchase frequency — lift above 1 signals a real association worth acting on (bundling, cross-sell placement), not just popularity.</p>
+  </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
 
@@ -197,6 +496,28 @@ ORDER BY total_revenue DESC;</textarea>
   let db = null;
   const statusEl = document.getElementById('sql-status');
   const outputEl = document.getElementById('sql-output');
+
+  const EXAMPLES = [
+/*0*/ `SELECT * FROM orders;`,
+/*1*/ `SELECT channel, revenue FROM orders;`,
+/*2*/ `SELECT * FROM orders WHERE channel = 'Email';`,
+/*3*/ `SELECT * FROM orders WHERE revenue > 100 AND channel != 'Email';`,
+/*4*/ `SELECT * FROM orders WHERE channel IN ('Email','Organic');`,
+/*5*/ `SELECT * FROM orders ORDER BY revenue DESC LIMIT 5;`,
+/*6*/ `SELECT channel, revenue AS order_value FROM orders;`,
+/*7*/ `SELECT * FROM customers WHERE country IS NULL;`,
+/*8*/ `SELECT channel, COUNT(*) AS num_orders, AVG(revenue) AS avg_revenue
+FROM orders
+GROUP BY channel;`,
+/*9*/ `SELECT customer_id, revenue,
+  CASE
+    WHEN revenue >= 100 THEN 'High'
+    WHEN revenue >= 50  THEN 'Medium'
+    ELSE 'Low'
+  END AS spend_tier
+FROM orders;`,
+/*10*/ `SELECT LOWER(TRIM(channel)) AS channel_clean FROM orders;`
+  ];
 
   const CHALLENGES = [
 `SELECT channel, SUM(revenue) AS total_revenue
@@ -227,7 +548,43 @@ FROM customers c
 JOIN orders o ON o.customer_id = c.customer_id
 WHERE o.month >= c.signup_month
 GROUP BY c.signup_month, o.month
-ORDER BY c.signup_month, o.month;`
+ORDER BY c.signup_month, o.month;`,
+`WITH pairs AS (
+  SELECT a.product AS product_a, b.product AS product_b,
+         COUNT(DISTINCT a.order_id) AS both_count
+  FROM order_items a
+  JOIN order_items b ON a.order_id = b.order_id AND a.product < b.product
+  GROUP BY a.product, b.product
+),
+totals AS (
+  SELECT product, COUNT(DISTINCT order_id) AS product_count
+  FROM order_items GROUP BY product
+),
+basket_count AS (
+  SELECT COUNT(DISTINCT order_id) AS n FROM order_items
+)
+SELECT p.product_a, p.product_b, p.both_count,
+       ROUND(1.0 * p.both_count / bc.n, 3) AS support_both,
+       ROUND((1.0*p.both_count/bc.n) / ((1.0*ta.product_count/bc.n)*(1.0*tb.product_count/bc.n)), 2) AS lift
+FROM pairs p
+JOIN totals ta ON ta.product = p.product_a
+JOIN totals tb ON tb.product = p.product_b
+CROSS JOIN basket_count bc
+ORDER BY lift DESC;`,
+`WITH customer_stats AS (
+  SELECT customer_id,
+         MAX(order_date) AS last_order,
+         COUNT(*) AS frequency,
+         SUM(revenue) AS monetary
+  FROM orders
+  GROUP BY customer_id
+)
+SELECT customer_id, last_order, frequency, monetary,
+       NTILE(4) OVER (ORDER BY last_order ASC)  AS r_score,
+       NTILE(4) OVER (ORDER BY frequency ASC)   AS f_score,
+       NTILE(4) OVER (ORDER BY monetary ASC)    AS m_score
+FROM customer_stats
+ORDER BY monetary DESC;`
   ];
 
   function initSql() {
@@ -237,10 +594,11 @@ ORDER BY c.signup_month, o.month;`
         db.run(`
           CREATE TABLE customers (customer_id INTEGER, country TEXT, signup_month TEXT);
           CREATE TABLE orders (id INTEGER, customer_id INTEGER, channel TEXT, order_date TEXT, month TEXT, revenue REAL);
+          CREATE TABLE order_items (order_id INTEGER, product TEXT);
         `);
         const customers = [
           [101,'US','2025-01'],[102,'UK','2025-01'],[103,'US','2025-02'],[104,'DE','2025-02'],
-          [105,'US','2025-03'],[106,'UK','2025-03'],[107,'CA','2025-04'],[108,'US','2025-04'],
+          [105,'US','2025-03'],[106,'UK','2025-03'],[107,'CA','2025-04'],[108,null,'2025-04'],
           [109,'DE','2025-05'],[110,'CA','2025-05']
         ];
         const orders = [
@@ -257,12 +615,31 @@ ORDER BY c.signup_month, o.month;`
           [21,109,'Email','2025-05-20','2025-05',48.0],[22,110,'Paid Search','2025-05-25','2025-05',175.0],
           [23,102,'Organic','2025-05-27','2025-05',58.0],[24,103,'Email','2025-05-29','2025-05',42.0]
         ];
+        const orderItems = [
+          [1,'Starter Kit'],[1,'Pro Add-on'],
+          [2,'Starter Kit'],
+          [3,'Starter Kit'],[3,'Pro Add-on'],
+          [4,'Support Plan'],
+          [5,'Starter Kit'],[5,'Pro Add-on'],[5,'Support Plan'],
+          [6,'Pro Add-on'],
+          [7,'Starter Kit'],
+          [8,'Support Plan'],
+          [9,'Starter Kit'],[9,'Pro Add-on'],
+          [10,'Extra Seats'],
+          [11,'Starter Kit'],[11,'Pro Add-on'],
+          [12,'Support Plan'],
+          [13,'Starter Kit'],
+          [14,'Pro Add-on'],
+          [15,'Starter Kit'],[15,'Pro Add-on'],[15,'Extra Seats']
+        ];
         const cstmt = db.prepare('INSERT INTO customers VALUES (?,?,?)');
         customers.forEach(r => cstmt.run(r)); cstmt.free();
         const ostmt = db.prepare('INSERT INTO orders VALUES (?,?,?,?,?,?)');
         orders.forEach(r => ostmt.run(r)); ostmt.free();
+        const istmt = db.prepare('INSERT INTO order_items VALUES (?,?)');
+        orderItems.forEach(r => istmt.run(r)); istmt.free();
 
-        statusEl.textContent = 'Ready — 34 rows loaded.';
+        statusEl.textContent = 'Ready — 3 tables loaded.';
         runQuery();
       })
       .catch(err => {
@@ -275,7 +652,7 @@ ORDER BY c.signup_month, o.month;`
     if (!res || !res.length) { outputEl.innerHTML = '<p style="margin:0; color:var(--ink-faint); font-size:13px;">Query ran, no rows returned.</p>'; return; }
     const { columns, values } = res[0];
     outputEl.innerHTML = `<table class="result-table"><thead><tr>${columns.map(c => `<th>${c}</th>`).join('')}</tr></thead>
-      <tbody>${values.map(row => `<tr>${row.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+      <tbody>${values.map(row => `<tr>${row.map(v => `<td>${v === null ? 'NULL' : v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
   }
 
   function runQuery() {
@@ -291,22 +668,58 @@ ORDER BY c.signup_month, o.month;`
     }
   }
 
+  function loadIntoEditor(sql) {
+    document.getElementById('sql-input').value = sql;
+    window.scrollTo({ top: document.querySelector('.sql-runner').offsetTop - 20, behavior: 'smooth' });
+  }
+
   document.getElementById('sql-run').addEventListener('click', runQuery);
   document.getElementById('sql-reset').addEventListener('click', () => {
-    document.getElementById('sql-input').value = 'SELECT * FROM orders LIMIT 5;';
+    loadIntoEditor('SELECT * FROM orders LIMIT 5;');
     runQuery();
   });
   document.querySelectorAll('[data-load-challenge]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById('sql-input').value = CHALLENGES[parseInt(btn.dataset.loadChallenge, 10)];
-      document.getElementById('challenge-result').innerHTML = '';
-      window.scrollTo({ top: document.querySelector('.sql-runner').offsetTop - 20, behavior: 'smooth' });
-    });
+    btn.addEventListener('click', () => loadIntoEditor(CHALLENGES[parseInt(btn.dataset.loadChallenge, 10)]));
+  });
+  document.querySelectorAll('[data-load-example]').forEach(btn => {
+    btn.addEventListener('click', () => loadIntoEditor(EXAMPLES[parseInt(btn.dataset.loadExample, 10)]));
   });
 
   initSql();
 
-  initQuiz('quiz-mount', [
+  initQuiz('quiz-mount-beginner', [
+    {
+      q: 'What does SELECT * FROM orders; return?',
+      options: ['Nothing, it\'s invalid', 'Every column, every row, from the orders table', 'Only the first row', 'A count of rows'],
+      correct: 1,
+      explain: '"*" means "all columns" — this is the broadest possible query on a table.'
+    },
+    {
+      q: 'Which clause filters individual rows before any aggregation happens?',
+      options: ['HAVING', 'GROUP BY', 'WHERE', 'ORDER BY'],
+      correct: 2,
+      explain: 'WHERE runs first, row by row, before any grouping or aggregation exists.'
+    },
+    {
+      q: 'Why should you never write "WHERE country = NULL"?',
+      options: [
+        'It\'s a syntax error',
+        'NULL means "unknown," so equality comparisons against it always silently fail — use IS NULL instead',
+        'It only works with numbers',
+        'It works fine, this is a myth'
+      ],
+      correct: 1,
+      explain: 'NULL isn\'t a value that can equal anything, including itself — SQL requires the special IS NULL / IS NOT NULL test.'
+    },
+    {
+      q: 'SELECT * FROM orders ORDER BY revenue DESC LIMIT 5; returns:',
+      options: ['The 5 lowest-revenue orders', 'The 5 highest-revenue orders', 'All orders, just sorted', '5 random orders'],
+      correct: 1,
+      explain: 'DESC sorts highest-to-lowest; LIMIT 5 then keeps only the first 5 rows of that sorted list.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-intermediate', [
     {
       q: 'Which clause groups rows so aggregate functions (SUM, COUNT) apply per category?',
       options: ['ORDER BY', 'WHERE', 'GROUP BY', 'LIMIT'],
@@ -314,11 +727,37 @@ ORDER BY c.signup_month, o.month;`
       explain: 'GROUP BY is the SQL equivalent of a pivot table\'s row/column grouping.'
     },
     {
-      q: 'You want every customer to appear even if they have zero orders. Which JOIN do you use, from the customers table?',
-      options: ['INNER JOIN', 'LEFT JOIN (customers LEFT JOIN orders)', 'CROSS JOIN', 'SELF JOIN'],
+      q: 'You need to filter groups AFTER aggregation (e.g. "channels with more than 5 orders"). Which clause?',
+      options: ['WHERE', 'HAVING', 'GROUP BY', 'ORDER BY'],
+      correct: 1,
+      explain: 'WHERE filters rows before grouping happens; HAVING filters the grouped/aggregated results afterward.'
+    },
+    {
+      q: 'You want every customer to appear even if they have zero orders. Which JOIN, from the customers table?',
+      options: ['INNER JOIN', 'LEFT JOIN (customers LEFT JOIN orders)', 'CROSS JOIN', 'None, this is impossible'],
       correct: 1,
       explain: 'LEFT JOIN keeps all rows from the left (customers) table regardless of a match — required for churn/inactivity analysis.'
     },
+    {
+      q: 'CASE WHEN in a SELECT is best understood as:',
+      options: ['A type of JOIN', 'An if/then/else you can compute inline, like a nested Excel IF', 'A way to delete rows', 'A JOIN condition'],
+      correct: 1,
+      explain: 'It checks conditions top-to-bottom and returns the first match — identical logic to a nested IF in a spreadsheet.'
+    },
+    {
+      q: 'A CTE (WITH clause) is best understood as:',
+      options: [
+        'A way to permanently save a new table',
+        'A named, temporary result you can reference later in the same query',
+        'A faster version of GROUP BY',
+        'A type of JOIN'
+      ],
+      correct: 1,
+      explain: 'CTEs exist for readability and structure — naming an intermediate step so a query reads like sequential steps.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-advanced', [
     {
       q: 'RANK() OVER (PARTITION BY country ORDER BY revenue DESC) does what?',
       options: [
@@ -331,33 +770,38 @@ ORDER BY c.signup_month, o.month;`
       explain: 'PARTITION BY resets the window function per group — here, ranking restarts at 1 for each country.'
     },
     {
-      q: 'Which function would you use to compare this month\'s spend to last month\'s, row-by-row?',
-      options: ['SUM()', 'LAG()', 'COUNT()', 'DISTINCT'],
-      correct: 1,
-      explain: 'LAG() pulls a prior row\'s value into the current row — the standard way to compute period-over-period change.'
-    },
-    {
-      q: 'A CTE (WITH clause) is best understood as:',
+      q: 'What\'s the difference between RANK() and ROW_NUMBER() when two rows tie?',
       options: [
-        'A way to permanently save a new table',
-        'A named, temporary result you can reference later in the same query — like naming an intermediate pivot table',
-        'A faster version of GROUP BY',
-        'A type of JOIN'
+        'No difference',
+        'RANK() gives tied rows the same number and skips the next; ROW_NUMBER() always assigns unique, sequential numbers',
+        'ROW_NUMBER() only works with dates',
+        'RANK() is faster'
       ],
       correct: 1,
-      explain: 'CTEs exist purely for readability and structure — they let you break a complex query into named, sequential steps.'
+      explain: 'This distinction is a common interview trip-up — know which one you actually want before using it.'
     },
     {
-      q: 'You need to filter groups AFTER aggregation (e.g. "channels with more than 5 orders"). Which clause?',
-      options: ['WHERE', 'HAVING', 'GROUP BY', 'ORDER BY'],
-      correct: 1,
-      explain: 'WHERE filters rows before grouping happens; HAVING filters the grouped/aggregated results afterward.'
-    },
-    {
-      q: 'In GA4\'s BigQuery export, event parameters are stored nested and repeated per event. What do you need to flatten them into queryable rows?',
+      q: 'In GA4\'s BigQuery export, event parameters are stored nested and repeated per event. What flattens them into queryable rows?',
       options: ['GROUP BY', 'UNNEST()', 'HAVING', 'A second table'],
       correct: 1,
-      explain: 'UNNEST() turns the nested event_params array into individual rows you can filter and aggregate on — the key function bridging this course\'s flat schema to a real GA4 export.'
+      explain: 'UNNEST() turns the nested event_params array into individual rows you can filter and aggregate on.'
+    },
+    {
+      q: 'Lift(A,B) = 1.25 for two products means:',
+      options: [
+        'They\'re bought together 25% of the time',
+        'They\'re bought together 25% more often than random chance would predict — a real positive association',
+        'They\'re never bought together',
+        'Product A costs 25% more than B'
+      ],
+      correct: 1,
+      explain: 'Lift compares actual co-occurrence to what independence would predict; 1.0 = no association, above 1 = positive association, below 1 = negative.'
+    },
+    {
+      q: 'In an RFM score where "4" means best on every dimension, NTILE(4) OVER (ORDER BY frequency ASC) puts the highest-frequency customers in which bucket?',
+      options: ['Bucket 1', 'Bucket 4', 'A random bucket', 'It errors'],
+      correct: 1,
+      explain: 'Ordering ASC means the smallest values fill bucket 1 first, leaving the largest values for the last bucket — bucket 4 — keeping "4 = best" consistent across R, F, and M.'
     }
   ]);
 

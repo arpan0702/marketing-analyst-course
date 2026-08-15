@@ -94,6 +94,9 @@
     <li>In the significance calculator, drop Variant B's visitor count to 500 with the same conversion rate — watch the result flip. Write two sentences on why that matters when a stakeholder wants to end a test early.</li>
   </ol>
 
+  <h2>Check yourself: Beginner</h2>
+  <div id="quiz-mount-beginner"></div>
+
   <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
 
   <h2>Sizing a test before you run it</h2>
@@ -116,6 +119,9 @@
     <li><strong>Retention curves</strong>: the row-by-row read of Module 3's cohort heatmap — where retention typically drops steeply in month 1 then flattens; the flattening point is roughly your realistic long-run LTV assumption.</li>
   </ul>
 
+  <h2>Check yourself: Intermediate</h2>
+  <div id="quiz-mount-intermediate"></div>
+
   <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
 
   <h2>Proving it's causal, not just correlated</h2>
@@ -123,11 +129,50 @@
     <li><strong>Correlation vs. causation</strong>: spend and revenue moving together doesn't prove spend caused the revenue — both could be driven by seasonality. A recommendation based on correlation alone should be framed as a hypothesis to test, not a proven lever.</li>
     <li><strong>Incrementality / holdout testing</strong>: deliberately withhold a channel or campaign from a random slice of geography or audience, then compare outcomes vs. the exposed group — this is how you separate "channel gets credit for a sale" from "channel actually caused the sale," especially for brand/awareness spend attribution can't cleanly measure.</li>
     <li><strong>Multiple testing correction</strong>: testing 5 variants at a 5% significance threshold gives roughly a 1-in-4 chance <em>at least one</em> looks "significant" purely by chance. A simple fix (Bonferroni correction): divide your significance threshold by the number of comparisons (5 tests → use 0.01, not 0.05, as the bar).</li>
-    <li><strong>Simple linear regression, conceptually</strong>: fits a line describing how one variable moves with another (e.g. spend vs. revenue) and gives you a slope — useful for marketing-mix-style questions ("what's the marginal return on the next $1,000 of spend"), but only as good as the confounding variables you've controlled for.</li>
   </ul>
 
-  <h2>Check your understanding</h2>
-  <div id="quiz-mount"></div>
+  <div class="box">
+    <h4 style="margin-top:0;">Literacy note — not a tool to build, a skill to have</h4>
+    <p style="margin:0">The next two topics (regression, clustering) are usually built by a data scientist, not a marketing analyst. But someone will hand you their output and expect you to evaluate it, not just nod. That's the bar here: read it well, don't build it from scratch.</p>
+  </div>
+
+  <h2>Reading a regression someone hands you</h2>
+  <p>Simple linear regression fits a straight line through a scatter of points (e.g. spend vs. revenue by campaign) to describe how one variable moves with another. You'll rarely build this yourself, but a data scientist or a vendor report will hand you output like this constantly — know how to read it.</p>
+
+  <div class="diagram">
+    <p class="diagram-label">what the line and the scatter tell you</p>
+    <svg viewBox="0 0 460 190" width="100%" height="190" role="img" aria-label="Scatter plot of spend versus revenue with points loosely following an upward trend line, illustrating R-squared as how tightly points cluster around the line">
+      <g>
+        <rect x="0" y="0" width="460" height="150" fill="var(--surface-2)" stroke="var(--line)" rx="6"/>
+        <line x1="20" y1="130" x2="20" y2="15" stroke="var(--line)" stroke-width="1"/>
+        <line x1="20" y1="130" x2="440" y2="130" stroke="var(--line)" stroke-width="1"/>
+        <line x1="30" y1="120" x2="420" y2="30" stroke="var(--teal)" stroke-width="2.5"/>
+        <g fill="var(--gold)">
+          <circle cx="60" cy="105" r="4"/><circle cx="95" cy="118" r="4"/><circle cx="130" cy="95" r="4"/><circle cx="170" cy="88" r="4"/>
+          <circle cx="210" cy="70" r="4"/><circle cx="245" cy="80" r="4"/><circle cx="280" cy="58" r="4"/><circle cx="320" cy="65" r="4"/>
+          <circle cx="355" cy="45" r="4"/><circle cx="390" cy="40" r="4"/>
+        </g>
+        <text x="230" y="145" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--ink-faint)">Spend →</text>
+        <text x="10" y="20" font-family="var(--sans)" font-size="10" fill="var(--ink-faint)" transform="rotate(-90 10 20)" text-anchor="end">Revenue →</text>
+      </g>
+      <text x="0" y="172" font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">The line's slope = "for every extra $1 of spend, revenue moves by this much." How tightly the dots hug the line = R².</text>
+    </svg>
+  </div>
+
+  <table class="map-table">
+    <tr><th>Term</th><th>What it tells you</th></tr>
+    <tr><td><code class="inline">R²</code> (R-squared)</td><td>0 to 1 — how much of the variation in revenue this model explains. 0.85 = strong fit; 0.15 = the line barely describes what's happening, treat the slope skeptically.</td></tr>
+    <tr><td><code class="inline">p-value</code> (per variable)</td><td>same logic as Module 5's significance calculator — below 0.05 means this variable's relationship is unlikely to be noise.</td></tr>
+    <tr><td>Slope / coefficient</td><td>the "for every +1 unit of X, Y moves by this much" number — the headline result, but only trustworthy if R² and p-value both back it up.</td></tr>
+    <tr><td>Multicollinearity (red flag)</td><td>if two input variables are themselves highly correlated (e.g. spend and impressions), the model can't cleanly tell which one is doing the work — coefficients become unstable. If someone's regression has this problem, their individual coefficients aren't trustworthy even if overall R² looks fine.</td></tr>
+  </table>
+
+  <h2>Reading a cluster analysis someone hands you</h2>
+  <p>Clustering is an algorithm that groups customers (or campaigns, or products) into buckets based on similarity across several numeric variables at once — more rigorous than a manual RFM-style bucketing, but the same underlying goal: find groups that behave alike. You'll typically receive "cluster 3 is your high-value, low-frequency segment" as a finished output, not build the algorithm.</p>
+  <p>What to check before trusting it: <strong>how many clusters</strong> were chosen (too few hides real differences, too many creates noise — there's rarely one "correct" number), <strong>what variables fed it</strong> (garbage in, garbage out — a clustering built only on spend will never surface a behavioral segment), and <strong>whether the clusters are stable</strong> (re-running it shouldn't reshuffle everyone into different groups).</p>
+
+  <h2>Check yourself: Advanced</h2>
+  <div id="quiz-mount-advanced"></div>
 
   <h2>Interview questions for this module</h2>
   <div class="qa">
@@ -254,7 +299,7 @@
   ['ss-baseline','ss-mde'].forEach(id => document.getElementById(id).addEventListener('input', updateSampleSize));
   updateSampleSize();
 
-  initQuiz('quiz-mount', [
+  initQuiz('quiz-mount-beginner', [
     {
       q: 'LTV : CAC of 5 : 1 generally signals:',
       options: ['Dangerously unprofitable acquisition', 'A healthy, sustainable acquisition economics', 'A tracking error', 'Nothing without more context on churn'],
@@ -283,7 +328,10 @@
       options: ['Automatically profitable', 'Unprofitable — ROAS alone doesn\'t account for margin or fulfillment cost', 'Impossible to calculate', 'The same thing as CAC'],
       correct: 1,
       explain: 'ROAS is revenue over spend, not profit over spend — a "good" ROAS can still lose money if margins are thin.'
-    },
+    }
+  ]);
+
+  initQuiz('quiz-mount-intermediate', [
     {
       q: 'Comparing average order value (a continuous number) between two test groups — which test?',
       options: ['Chi-square test', 't-test', 'RANK() window function', 'COALESCE'],
@@ -291,10 +339,68 @@
       explain: 'Chi-square compares rates/proportions (categorical outcomes); a t-test compares averages of a continuous number. Mixing these up is a common interview trip-up.'
     },
     {
+      q: 'Why calculate required sample size BEFORE launching a test, using 80% power / 95% confidence?',
+      options: [
+        'It\'s a formality nobody checks',
+        'Without it you risk running an underpowered test for weeks and never being able to detect a real effect',
+        'It guarantees the test will be significant',
+        'Only large companies need to do this'
+      ],
+      correct: 1,
+      explain: 'A test with too few visitors for the effect size you\'re hoping to detect can run indefinitely without ever reaching significance — sizing it first prevents wasted weeks.'
+    },
+    {
+      q: 'A confidence interval of "8% lift, 95% CI: 3%–13%" is more honest than "8% lift" alone because:',
+      options: [
+        'It\'s not more honest, just longer',
+        'It communicates the uncertainty range instead of implying false precision on a single number',
+        'It always has a wider range',
+        'Confidence intervals are only for advanced statisticians'
+      ],
+      correct: 1,
+      explain: 'A single point estimate hides how much the true effect could plausibly vary — the range is the actually informative part.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-advanced', [
+    {
       q: 'Testing 5 variants at a 5% significance threshold each — what\'s the real risk of at least one false positive?',
       options: ['Exactly 5%', 'Roughly 1 in 4', '0%, thresholds don\'t stack', '50%'],
       correct: 1,
       explain: 'The multiple-comparisons problem: with 5 independent tests at 5% each, the chance of at least one false positive is roughly 1 - 0.95^5 ≈ 23% — correct with a method like Bonferroni.'
+    },
+    {
+      q: 'A regression has R² = 0.15. What does that tell you?',
+      options: [
+        'The model is excellent',
+        'The model explains only 15% of the variation in the outcome — treat the slope/coefficient skeptically',
+        'There\'s a 15% chance the result is real',
+        'R² doesn\'t apply to marketing data'
+      ],
+      correct: 1,
+      explain: 'R² measures how much of the outcome\'s variation the model accounts for — low R² means most of what\'s happening isn\'t captured by this model.'
+    },
+    {
+      q: 'Two input variables in a regression (spend and impressions) are themselves highly correlated with each other. What\'s the risk?',
+      options: [
+        'No risk, more variables is always better',
+        'Multicollinearity — the model can\'t cleanly separate their individual effects, so the coefficients become unstable and untrustworthy',
+        'The model will refuse to run',
+        'R² automatically becomes 1.0'
+      ],
+      correct: 1,
+      explain: 'When two predictors move together, the regression can\'t tell which one is actually driving the outcome — a real red flag to check for before trusting individual coefficients.'
+    },
+    {
+      q: 'Someone hands you a cluster analysis. What should you check before trusting the segments?',
+      options: [
+        'Nothing, clustering output is always correct',
+        'How many clusters were chosen, what variables fed the model, and whether the clusters are stable on a re-run',
+        'Only the total number of customers',
+        'Whether it was built in Python or Excel'
+      ],
+      correct: 1,
+      explain: 'Cluster count and input variables are judgment calls, not objective truths — a clustering built on the wrong variables or an arbitrary cluster count can look authoritative while being meaningless.'
     }
   ]);
 

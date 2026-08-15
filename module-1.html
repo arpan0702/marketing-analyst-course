@@ -13,20 +13,90 @@
   <div class="lesson-head">
     <p class="lesson-num">Module 1</p>
     <h1>Advanced Excel &amp; Google Sheets for Marketers</h1>
-    <p class="lesson-goal">Pivot tables, XLOOKUP, and dynamic charts — the bridge into SQL logic. Every idea here has a direct SQL equivalent in Module 2.</p>
+    <p class="lesson-goal">Taught from zero — cells and formulas first, then pivot tables and lookups, then the automation techniques that turn a spreadsheet into a real reporting tool. Every idea here has a direct SQL equivalent in Module 2.</p>
   </div>
 
   <div class="tier-divider"><span class="tier-badge beginner">Beginner</span><span class="tline"></span></div>
 
-  <h2>Start here: what a pivot table actually does</h2>
-  <p>A pivot table takes a long list of raw rows (one row per transaction) and collapses it into a summary: pick a category to group by (rows), pick a number to total up (values). Nothing more mysterious than that — see it happen below.</p>
+  <h2>Start here: what a cell and a formula actually are</h2>
+  <p>A spreadsheet is a grid. Every box in that grid — a <strong>cell</strong> — has an address made of its column letter and row number: the cell in column B, row 2, is called <code class="inline">B2</code>. A <strong>formula</strong> is anything you type into a cell starting with <code class="inline">=</code> — it tells the cell "don't just sit there with a fixed value, calculate this instead, and recalculate automatically whenever the cells it references change."</p>
+
+  <div class="diagram">
+    <p class="diagram-label">a cell, a reference, a formula</p>
+    <svg viewBox="0 0 480 190" width="100%" height="190" role="img" aria-label="A spreadsheet grid with columns A through D and rows 1 through 4, cell B2 highlighted and containing the value 82.5, cell D2 showing the formula equals B2 times C2">
+      <g font-family="var(--mono)" font-size="11">
+        <text x="0" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">formula bar:  D2 =  =B2*C2</text>
+        <g stroke="#24312f" stroke-width="1">
+          <rect x="0" y="24" width="30" height="24" fill="#1a2523"/><rect x="30" y="24" width="110" height="24" fill="#1a2523"/><rect x="140" y="24" width="90" height="24" fill="#1a2523"/><rect x="230" y="24" width="90" height="24" fill="#1a2523"/>
+          <rect x="0" y="48" width="30" height="24" fill="none"/><rect x="30" y="48" width="110" height="24" fill="none"/><rect x="140" y="48" width="90" height="24" fill="none"/><rect x="230" y="48" width="90" height="24" fill="none"/>
+          <rect x="0" y="72" width="30" height="24" fill="none"/><rect x="30" y="72" width="110" height="24" fill="var(--teal)" opacity="0.9"/><rect x="140" y="72" width="90" height="24" fill="none"/><rect x="230" y="72" width="90" height="24" fill="var(--gold)" opacity="0.9"/>
+        </g>
+        <g fill="var(--code-ink)">
+          <text x="10" y="40" font-weight="700">#</text><text x="36" y="40" font-weight="700">Channel</text><text x="146" y="40" font-weight="700">Units</text><text x="236" y="40" font-weight="700">Revenue</text>
+          <text x="10" y="64">1</text><text x="36" y="64" opacity="0.5">(header row)</text>
+          <text x="10" y="88">2</text><text x="36" y="88" fill="var(--code-bg)" font-weight="700">B2: Email</text><text x="146" y="88">3</text><text x="236" y="88" fill="var(--code-bg)" font-weight="700">D2: =B2*C2</text>
+        </g>
+      </g>
+      <g font-family="var(--sans)" font-size="10.5" fill="var(--ink-muted)">
+        <text x="0" y="140">The address "B2" is a <tspan font-weight="700" fill="var(--ink)">cell reference</tspan> — instead of typing the value 82.5, D2's formula points at the cells that produce it.</text>
+        <text x="0" y="160">Change B2 or C2, and D2 recalculates on its own. This single idea — reference, don't retype — is what makes a spreadsheet a tool instead of a static table.</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Relative vs. absolute references — the mistake almost everyone makes once</h2>
+  <p>When you copy a formula down a column, its cell references normally shift with it ("relative"). Sometimes you don't want that — e.g. every row should divide by the same total in one fixed cell. Lock a reference with <code class="inline">$</code>: <code class="inline">$C$1</code> stays put no matter where the formula is copied.</p>
+  <div class="diagram">
+    <p class="diagram-label">what happens when you copy a formula down</p>
+    <pre>Relative reference (=B2*C1)         Absolute reference (=B2*$C$1)
+--------------------------------    --------------------------------
+Row 2:  =B2*C1                      Row 2:  =B2*$C$1
+Row 3:  =B3*C2   ← C1 shifted to C2 Row 3:  =B3*$C$1   ← C1 stays locked
+Row 4:  =B4*C3   ← shifted again    Row 4:  =B4*$C$1   ← still locked</pre>
+  </div>
+  <p>Rule of thumb: if a formula is copied down and suddenly returns wrong or zero values, the first thing to check is a reference that should have been locked with <code class="inline">$</code> and wasn't.</p>
+
+  <h2>Basic functions — the ones you'll use constantly</h2>
+  <table class="map-table">
+    <tr><th>Function</th><th>Does</th><th>SQL equivalent (Module 2)</th></tr>
+    <tr><td><code class="inline">SUM(range)</code></td><td>adds up a range of numbers</td><td><code class="inline">SUM()</code></td></tr>
+    <tr><td><code class="inline">AVERAGE(range)</code></td><td>the mean</td><td><code class="inline">AVG()</code></td></tr>
+    <tr><td><code class="inline">COUNT(range)</code> / <code class="inline">COUNTA(range)</code></td><td>counts numeric cells / counts non-blank cells</td><td><code class="inline">COUNT()</code></td></tr>
+    <tr><td><code class="inline">MIN(range)</code> / <code class="inline">MAX(range)</code></td><td>smallest / largest value</td><td><code class="inline">MIN() / MAX()</code></td></tr>
+    <tr><td><code class="inline">IF(condition, if_true, if_false)</code></td><td>one conditional branch</td><td><code class="inline">CASE WHEN</code></td></tr>
+  </table>
+  <p>Example: <code class="inline">=IF(D2&gt;100, "Big", "Normal")</code> — if D2's value is over 100, show "Big," otherwise show "Normal."</p>
+
+  <div class="challenge">
+    <b>Challenge 1</b>
+    Write a formula for cell E2 that returns "Big" if revenue (D2) is over 100, otherwise "Normal."
+  </div>
+  <div class="tool-card">
+    <div class="field"><label for="formula-input-1">Formula for E2</label><input type="text" id="formula-input-1" placeholder="=IF(...)"></div>
+    <button id="formula-check-1">Check formula</button>
+    <div class="result-box" id="formula-result-1" style="display:none;"></div>
+  </div>
+
+  <h2>Beginner exercises</h2>
+  <ol>
+    <li>In any spreadsheet, build a small table of 10 fake orders (channel, revenue). Write a SUM and an AVERAGE formula referencing the revenue column.</li>
+    <li>Copy that AVERAGE formula down 3 rows, once with a plain reference and once with an absolute reference to a fixed total cell — watch the difference.</li>
+    <li>Write an IF formula flagging any revenue value under $40 as "Low."</li>
+  </ol>
+
+  <h2>Check yourself: Beginner</h2>
+  <div id="quiz-mount-beginner"></div>
+
+  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
+
+  <h2>What a pivot table actually does</h2>
+  <p>A pivot table takes a long list of raw rows (one row per transaction) and collapses it into a summary: pick a category to group by (rows), pick a number to total up (values). This is the exact same operation as SQL's <code class="inline">GROUP BY</code> — a pivot table is <code class="inline">GROUP BY</code> with a drag-and-drop interface instead of a keyword.</p>
 
   <div class="diagram">
     <p class="diagram-label">before → after: raw rows become a summary</p>
     <svg viewBox="0 0 640 190" width="100%" height="190" role="img" aria-label="Raw transaction rows on the left collapse into a pivot table summed by channel on the right">
       <defs><marker id="arrow1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--teal)"/></marker></defs>
       <g font-family="var(--mono)" font-size="11">
-        <!-- raw table -->
         <text x="10" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">RAW ROWS</text>
         <g stroke="#24312f" stroke-width="1">
           <rect x="10" y="20" width="90" height="22" fill="#1a2523"/><rect x="100" y="20" width="70" height="22" fill="#1a2523"/>
@@ -44,10 +114,8 @@
           <text x="16" y="123">Paid Social</text><text x="106" y="123">$95</text>
           <text x="16" y="145">Paid Search</text><text x="106" y="145">$120</text>
         </g>
-        <!-- arrow -->
         <line x1="185" y1="90" x2="230" y2="90" stroke="var(--teal)" stroke-width="2" marker-end="url(#arrow1)"/>
         <text x="207" y="78" text-anchor="middle" fill="var(--teal)" font-size="9.5">GROUP + SUM</text>
-        <!-- pivot table -->
         <text x="250" y="14" fill="var(--code-ink)" opacity="0.6" font-size="10">PIVOT RESULT</text>
         <g stroke="#24312f" stroke-width="1">
           <rect x="250" y="20" width="120" height="22" fill="#1a2523"/><rect x="370" y="20" width="90" height="22" fill="#1a2523"/>
@@ -63,16 +131,10 @@
     </svg>
   </div>
 
-  <h2>Core concepts</h2>
-  <ul>
-    <li><strong>Pivot tables</strong>: rows, columns, values, filters — maps directly to <code class="inline">GROUP BY</code>.</li>
-    <li><strong>XLOOKUP</strong> (over VLOOKUP/INDEX-MATCH): join a second table of data by a matching key — the spreadsheet version of a SQL JOIN.</li>
-    <li><strong>Dynamic charts &amp; conditional formatting</strong> for fast visual QA of a dataset.</li>
-    <li><strong>Cleaning</strong>: TRIM, TEXT-TO-COLUMNS, removing duplicates, handling blanks.</li>
-  </ul>
+  <p>Building one, step by step: select your raw data → <strong>Insert &gt; PivotTable</strong> → a new pane appears with four boxes: <strong>Filters, Columns, Rows, Values</strong>. Drag <code class="inline">Channel</code> into <strong>Rows</strong>, drag <code class="inline">Spend</code> into <strong>Values</strong> (it defaults to Sum) — that's the entire build. Everything else (adding a second row-grouping like Month, filtering, formatting) is a variation of this same drag.</p>
 
   <div class="diagram">
-    <p class="diagram-label">mental model bridge</p>
+    <p class="diagram-label">mental model bridge to Module 2</p>
     <pre>PIVOT TABLE                          SQL EQUIVALENT (Module 2)
 ------------------------------       -------------------------------
 Rows:    Channel                     SELECT channel,
@@ -82,8 +144,16 @@ Filter:  Month = "June"              FROM   campaigns
                                       GROUP BY channel;</pre>
   </div>
 
-  <h2>Interactive: write the XLOOKUP</h2>
-  <p>Scenario: you have a <code class="inline">campaigns</code> sheet with a <code class="inline">channel</code> column, and a separate <code class="inline">targets</code> sheet listing <code class="inline">channel</code> and <code class="inline">target_cpa</code>. Write a formula for cell C2 on <code class="inline">campaigns</code> that pulls in the matching <code class="inline">target_cpa</code>.</p>
+  <p><code class="inline">GETPIVOTDATA</code> pulls one specific number out of a pivot table into a regular cell (e.g. for a KPI tile or a sentence in a report) — Excel writes this formula automatically when you click a pivot cell from outside the pivot table.</p>
+
+  <h2>Combining tables: XLOOKUP</h2>
+  <p>A pivot table summarizes <em>one</em> table. To pull data from a <em>second</em> table by a matching key — the spreadsheet version of a SQL JOIN — use <code class="inline">XLOOKUP</code>: <code class="inline">=XLOOKUP(lookup_value, lookup_array, return_array)</code>. It searches for <code class="inline">lookup_value</code> inside <code class="inline">lookup_array</code>, and returns the matching position from <code class="inline">return_array</code>.</p>
+  <p>(You'll also see <code class="inline">VLOOKUP</code> in older files — same idea, but it only searches left-to-right and breaks if columns get reordered. XLOOKUP fixes both problems; use it by default.)</p>
+
+  <div class="challenge">
+    <b>Challenge 2</b>
+    You have a <code class="inline">campaigns</code> sheet with a <code class="inline">channel</code> column, and a separate <code class="inline">targets</code> sheet listing <code class="inline">channel</code> and <code class="inline">target_cpa</code>. Write a formula for cell C2 on <code class="inline">campaigns</code> that pulls in the matching <code class="inline">target_cpa</code>.
+  </div>
   <div class="tool-card">
     <span class="ttag">Formula check</span>
     <div class="field">
@@ -95,8 +165,8 @@ Filter:  Month = "June"              FROM   campaigns
   </div>
 
   <div class="challenge">
-    <b>Challenge 2</b>
-    Now write the conditional-flag formula: mark a channel "Over target" if <code class="inline">actual_cpa &gt; target_cpa</code>.
+    <b>Challenge 3</b>
+    Now write the conditional-flag formula: mark a channel "Over target" if <code class="inline">actual_cpa &gt; target_cpa</code> (the value Challenge 2 just looked up).
   </div>
   <div class="tool-card">
     <div class="field">
@@ -107,26 +177,15 @@ Filter:  Month = "June"              FROM   campaigns
     <div class="result-box" id="formula-result-2" style="display:none;"></div>
   </div>
 
-  <h2>Exercises</h2>
-  <ol>
-    <li>Download a raw campaign export (Kaggle "Marketing Campaign Performance Dataset" works well). Clean it: fix blanks, standardize dates, remove duplicate rows.</li>
-    <li>Build a pivot table: total spend and conversions by channel and month.</li>
-    <li>Use XLOOKUP to merge in a second table (channel-level target CPA) and flag channels over target.</li>
-    <li>Build one dynamic chart that updates automatically when the pivot filter changes.</li>
-  </ol>
-
-  <div class="tier-divider"><span class="tier-badge intermediate">Intermediate</span><span class="tline"></span></div>
-
   <h2>Beyond a single condition</h2>
   <ul>
     <li><strong>SUMIFS / COUNTIFS / AVERAGEIFS</strong>: sum, count, or average with multiple conditions at once — "total spend where channel = Email AND month = June" without a pivot table.</li>
     <li><strong>Nested IFs / IFS()</strong>: more than two outcomes (e.g. "High" / "Medium" / "Low" spend tiers) without stacking IF-inside-IF by hand.</li>
     <li><strong>Data validation</strong>: dropdown lists on a "channel" column prevent "Email" / "email" / "e-mail" from silently becoming three different values in a pivot table — this is the spreadsheet-side fix for the UTM-casing problem in Module 4.</li>
-    <li><strong>Pivot charts + slicers</strong>: a pivot table with a slicer becomes a lightweight, clickable dashboard — the spreadsheet precursor to Module 3.</li>
   </ul>
 
   <div class="challenge">
-    <b>Challenge 3</b>
+    <b>Challenge 4</b>
     Write a SUMIFS formula: total spend where channel = "Email" AND month = "June".
   </div>
   <div class="tool-card">
@@ -138,18 +197,65 @@ Filter:  Month = "June"              FROM   campaigns
     <div class="result-box" id="formula-result-3" style="display:none;"></div>
   </div>
 
+  <div class="challenge">
+    <b>Challenge 5</b>
+    Write an IFS (or nested IF) formula: "High" if spend ≥ 100, "Medium" if spend ≥ 50, otherwise "Low."
+  </div>
+  <div class="tool-card">
+    <div class="field">
+      <label for="formula-input-5">Formula</label>
+      <input type="text" id="formula-input-5" placeholder="=IFS(...) or nested =IF(...)">
+    </div>
+    <button id="formula-check-5">Check formula</button>
+    <div class="result-box" id="formula-result-5" style="display:none;"></div>
+  </div>
+
+  <h2>Charts that don't need rebuilding every week</h2>
+  <ul>
+    <li><strong>Combination charts</strong>: two chart types sharing one x-axis (bars for spend, a line for ROAS on a second axis) — the standard way to show a volume metric and a rate metric together without one dwarfing the other.</li>
+    <li><strong>PivotCharts</strong>: a chart built directly on a pivot table — filter the pivot, the chart updates with it, no rebuilding.</li>
+    <li><strong>Sparklines</strong>: a tiny trend line inside a single cell, next to a number — lets a table of 20 rows show a trend per row without 20 separate charts.</li>
+    <li><strong>Slicers</strong>: clickable filter buttons attached to a pivot table/chart — the spreadsheet precursor to a real dashboard filter in Module 3.</li>
+  </ul>
+  <div class="diagram">
+    <p class="diagram-label">a combination chart — two metrics, two scales, one x-axis</p>
+    <svg viewBox="0 0 460 160" width="100%" height="160" role="img" aria-label="Bar chart of spend by month on the left axis, with a line for ROAS overlaid on a right axis, sharing the same month categories">
+      <g font-family="var(--sans)" font-size="10">
+        <rect x="0" y="0" width="460" height="130" fill="var(--surface-2)" stroke="var(--line)" rx="6"/>
+        <g fill="var(--gold)">
+          <rect x="30" y="70" width="40" height="50"/><rect x="120" y="55" width="40" height="65"/><rect x="210" y="40" width="40" height="80"/><rect x="300" y="50" width="40" height="70"/>
+        </g>
+        <polyline points="50,95 140,80 230,45 320,60" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+        <circle cx="50" cy="95" r="3.5" fill="var(--teal)"/><circle cx="140" cy="80" r="3.5" fill="var(--teal)"/><circle cx="230" cy="45" r="3.5" fill="var(--teal)"/><circle cx="320" cy="60" r="3.5" fill="var(--teal)"/>
+        <text x="20" y="145" fill="var(--gold-ink,#caa15a)">■ Spend (left axis)</text>
+        <text x="200" y="145" fill="var(--teal)">— ROAS (right axis)</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>Intermediate exercises</h2>
+  <ol>
+    <li>Download a raw campaign export (Kaggle "Marketing Campaign Performance Dataset" works well). Clean it: fix blanks, standardize dates, remove duplicate rows.</li>
+    <li>Build a pivot table: total spend and conversions by channel and month.</li>
+    <li>Use XLOOKUP to merge in a second table (channel-level target CPA) and flag channels over target.</li>
+    <li>Build one combination chart (bars + line) and one sparkline-per-row table.</li>
+  </ol>
+
+  <h2>Check yourself: Intermediate</h2>
+  <div id="quiz-mount-intermediate"></div>
+
   <div class="tier-divider"><span class="tier-badge advanced">Advanced</span><span class="tline"></span></div>
 
   <h2>Dynamic arrays &amp; automated reporting</h2>
   <ul>
     <li><strong>FILTER / UNIQUE / SORT</strong> (dynamic arrays): <code class="inline">=FILTER(range, condition)</code> spills a live list of matching rows without a pivot table or a manual filter click — it updates automatically as source data changes.</li>
-    <li><strong>SUMPRODUCT</strong>: multi-condition math that doesn't require an array-entered formula — useful for weighted metrics (e.g. spend-weighted average CPA across channels).</li>
+    <li><strong>SUMPRODUCT</strong>: multi-condition math without an array-entered formula — the standard way to compute a <em>weighted</em> average, like spend-weighted average CPA across channels, which a plain AVERAGE gets wrong.</li>
     <li><strong>Power Query / Get &amp; Transform</strong>: import and reshape messy source files (multiple CSV exports, inconsistent headers) into a clean table on a schedule, without manual copy-paste every week — this is what "automating a report" actually means before anyone touches SQL or Python.</li>
     <li><strong>Named ranges</strong>: replace <code class="inline">$B$2:$B$500</code> with <code class="inline">Spend</code> in formulas — makes a workbook a stakeholder can audit instead of a black box.</li>
   </ul>
 
   <div class="challenge">
-    <b>Challenge 4</b>
+    <b>Challenge 6</b>
     Write a FILTER formula that returns all rows from a <code class="inline">campaigns</code> table where <code class="inline">channel = "Paid Social"</code>.
   </div>
   <div class="tool-card">
@@ -161,8 +267,49 @@ Filter:  Month = "June"              FROM   campaigns
     <div class="result-box" id="formula-result-4" style="display:none;"></div>
   </div>
 
-  <h2>Check your understanding</h2>
-  <div id="quiz-mount"></div>
+  <div class="challenge">
+    <b>Challenge 7</b>
+    Write a SUMPRODUCT formula for the spend-weighted average CPA: <code class="inline">SUMPRODUCT(spend_range, cpa_range) / SUM(spend_range)</code>.
+  </div>
+  <div class="tool-card">
+    <div class="field">
+      <label for="formula-input-6">Formula</label>
+      <input type="text" id="formula-input-6" placeholder="=SUMPRODUCT(...)/SUM(...)">
+    </div>
+    <button id="formula-check-6">Check formula</button>
+    <div class="result-box" id="formula-result-6" style="display:none;"></div>
+  </div>
+
+  <p class="lede" style="font-size:14px;">Why not just <code class="inline">AVERAGE(cpa_range)</code>? A plain average treats a channel with 5 orders and a channel with 500 orders as equally important. SUMPRODUCT weights by volume — the same fix that Module 3's calculated-field ROAS problem needed.</p>
+
+  <h2>Advanced exercises</h2>
+  <ol>
+    <li>Build a FILTER-based live list of only "Over target" campaigns from Challenge 3's flag column.</li>
+    <li>Compute a spend-weighted average CPA with SUMPRODUCT and compare it to a plain AVERAGE on the same data — quantify the gap.</li>
+    <li>Set up one named range and rewrite an existing SUMIFS formula to use it instead of a raw cell range.</li>
+  </ol>
+
+  <h2>Check yourself: Advanced</h2>
+  <div id="quiz-mount-advanced"></div>
+
+  <h2>Full formula reference</h2>
+  <p>Everything covered on this page, in one table.</p>
+  <table class="map-table">
+    <tr><th>Formula</th><th>What it does</th></tr>
+    <tr><td><code class="inline">=SUM(range)</code></td><td>total of a range</td></tr>
+    <tr><td><code class="inline">=AVERAGE(range)</code></td><td>mean of a range</td></tr>
+    <tr><td><code class="inline">=COUNT(range)</code> / <code class="inline">=COUNTA(range)</code></td><td>count numeric cells / count non-blank cells</td></tr>
+    <tr><td><code class="inline">=IF(cond, true, false)</code></td><td>one conditional branch</td></tr>
+    <tr><td><code class="inline">=IFS(cond1, val1, cond2, val2, ...)</code></td><td>multiple conditional branches without nesting</td></tr>
+    <tr><td><code class="inline">=XLOOKUP(value, lookup_range, return_range)</code></td><td>find a value in one table, return a matching column from it</td></tr>
+    <tr><td><code class="inline">=SUMIFS(sum_range, cond_range1, cond1, ...)</code></td><td>sum with multiple conditions</td></tr>
+    <tr><td><code class="inline">=COUNTIFS(...)</code> / <code class="inline">=AVERAGEIFS(...)</code></td><td>same idea, count or average instead of sum</td></tr>
+    <tr><td><code class="inline">=FILTER(range, condition)</code></td><td>a live, auto-updating list of matching rows</td></tr>
+    <tr><td><code class="inline">=UNIQUE(range)</code> / <code class="inline">=SORT(range)</code></td><td>distinct values / sorted list, both live</td></tr>
+    <tr><td><code class="inline">=SUMPRODUCT(range1, range2)</code></td><td>multiplies two ranges element-by-element, then sums — the basis of a weighted average</td></tr>
+    <tr><td><code class="inline">=GETPIVOTDATA(...)</code></td><td>pulls one number out of a pivot table into a normal cell</td></tr>
+    <tr><td><code class="inline">$A$1</code> vs <code class="inline">A1</code></td><td>absolute (locked) vs. relative (shifting) cell reference</td></tr>
+  </table>
 
   <h2>Interview questions for this module</h2>
   <div class="qa">
@@ -176,6 +323,10 @@ Filter:  Month = "June"              FROM   campaigns
   <div class="qa">
     <p class="q">"When would you use SUMIFS instead of a pivot table?"</p>
     <p class="a">Model answer: SUMIFS when you need one specific number embedded in a sentence or a KPI tile (e.g. a single cell feeding a summary dashboard); a pivot table when you need to explore or slice a full dataset interactively. They solve the same aggregation problem in different contexts.</p>
+  </div>
+  <div class="qa">
+    <p class="q">"What's the difference between a relative and an absolute cell reference, and when do you need the absolute one?"</p>
+    <p class="a">Model answer: a relative reference (A1) shifts when a formula is copied to another cell; an absolute reference ($A$1) stays locked. Use an absolute reference whenever every copy of a formula needs to point at the same fixed cell — a total, a tax rate, a target value.</p>
   </div>
 
   <div style="margin-top:32px;"><button id="complete-btn"></button></div>
@@ -191,7 +342,6 @@ Filter:  Month = "June"              FROM   campaigns
 <script src="assets/app.js"></script>
 <script>
   function checkFormula(inputId, resultId, patterns, hint) {
-    const btn = document.activeElement;
     const val = document.getElementById(inputId).value.trim();
     const normalized = val.toUpperCase().replace(/\s+/g, '');
     const pass = patterns.some(p => p.test(normalized));
@@ -199,9 +349,16 @@ Filter:  Month = "June"              FROM   campaigns
     res.style.display = 'block';
     res.className = 'result-box ' + (pass ? 'good' : 'bad');
     res.textContent = pass
-      ? 'Correct shape — that will resolve the lookup correctly.'
+      ? 'Correct shape.'
       : `Not quite. ${hint}`;
   }
+
+  document.getElementById('formula-check-1').addEventListener('click', () => {
+    checkFormula('formula-input-1', 'formula-result-1',
+      [/=IF\(D2>100,.*BIG.*,.*NORMAL.*\)/, /=IF\(.*>100,/],
+      'Shape should be =IF(D2>100, "Big", "Normal") — a condition, then the true value, then the false value.'
+    );
+  });
 
   document.getElementById('formula-check').addEventListener('click', () => {
     checkFormula('formula-input', 'formula-result',
@@ -232,6 +389,17 @@ Filter:  Month = "June"              FROM   campaigns
       : 'Shape should be =SUMIFS(sum_range, channel_range, "Email", month_range, "June") — a sum range followed by condition-range/condition pairs.';
   });
 
+  document.getElementById('formula-check-5').addEventListener('click', () => {
+    const val = document.getElementById('formula-input-5').value.trim().toUpperCase().replace(/\s+/g, '');
+    const pass = /=IFS\(.+&gt;=?100.+&gt;=?50/.test(val) || /=IFS\(/.test(val) || (/=IF\(.*&gt;=?100/.test(val) && /=IF\(.*&gt;=?50/.test(val)) || /=IF\(.+&gt;=100/.test(val.replace(/>=/g,'&gt;=')) || /(=IF\(){2,}/.test(val);
+    const res = document.getElementById('formula-result-5');
+    res.style.display = 'block';
+    res.className = 'result-box ' + (pass ? 'good' : 'bad');
+    res.textContent = pass
+      ? 'Correct shape — three tiers, checked in order.'
+      : 'Shape should be =IFS(spend>=100,"High", spend>=50,"Medium", TRUE,"Low") or a nested =IF(spend>=100,"High",IF(spend>=50,"Medium","Low")).';
+  });
+
   document.getElementById('formula-check-4').addEventListener('click', () => {
     const val = document.getElementById('formula-input-4').value.trim().toUpperCase().replace(/\s+/g, '');
     const pass = /=FILTER\(.+,.+PAIDSOCIAL.*\)/.test(val) || /=FILTER\(/.test(val);
@@ -243,7 +411,39 @@ Filter:  Month = "June"              FROM   campaigns
       : 'Shape should be =FILTER(campaigns!A:Z, campaigns!B:B = "Paid Social") — an array followed by a boolean condition on the channel column.';
   });
 
-  initQuiz('quiz-mount', [
+  document.getElementById('formula-check-6').addEventListener('click', () => {
+    const val = document.getElementById('formula-input-6').value.trim().toUpperCase().replace(/\s+/g, '');
+    const pass = /=SUMPRODUCT\(.+\)\/SUM\(.+\)/.test(val);
+    const res = document.getElementById('formula-result-6');
+    res.style.display = 'block';
+    res.className = 'result-box ' + (pass ? 'good' : 'bad');
+    res.textContent = pass
+      ? 'Correct shape — SUMPRODUCT of the two ranges, divided by the sum of the weight range.'
+      : 'Shape should be =SUMPRODUCT(spend_range, cpa_range)/SUM(spend_range).';
+  });
+
+  initQuiz('quiz-mount-beginner', [
+    {
+      q: 'What must every Excel formula begin with?',
+      options: ['A letter', 'The = sign', 'A number', 'A cell reference'],
+      correct: 1,
+      explain: '= tells the cell "calculate this," rather than treating it as plain text or a fixed number.'
+    },
+    {
+      q: 'A formula in B3 references A1. You copy that formula down to B4. With a RELATIVE reference, what happens?',
+      options: ['A1 stays A1', 'A1 shifts to A2', 'The formula breaks', 'Nothing changes'],
+      correct: 1,
+      explain: 'Relative references shift with the formula\'s new position — this is the default and the most common source of "why is this formula wrong" bugs.'
+    },
+    {
+      q: '=IF(D2>100, "Big", "Normal") — if D2 is exactly 100, what does it return?',
+      options: ['"Big"', '"Normal"', 'An error', 'Blank'],
+      correct: 1,
+      explain: '> is strictly greater-than; 100 is not greater than 100, so the condition is false and it falls to "Normal."'
+    }
+  ]);
+
+  initQuiz('quiz-mount-intermediate', [
     {
       q: 'In a pivot table, "SUM of Spend" is placed in which area?',
       options: ['Rows', 'Filters', 'Values', 'Columns'],
@@ -268,6 +468,31 @@ Filter:  Month = "June"              FROM   campaigns
       explain: 'Matching rows across two tables by a shared key (channel) is exactly what a JOIN does in SQL.'
     },
     {
+      q: 'When would you use SUMIFS instead of a full pivot table?',
+      options: [
+        'Never, they do different things entirely',
+        'When you need one specific number (e.g. for a KPI tile or a sentence), not an interactive full-data exploration',
+        'SUMIFS is always better',
+        'Only when there\'s just one condition'
+      ],
+      correct: 1,
+      explain: 'SUMIFS is for a single computed value; a pivot table is for exploring a whole dataset interactively.'
+    },
+    {
+      q: 'A combination chart with bars for Spend and a line for ROAS on a second axis exists because:',
+      options: [
+        'It looks more advanced',
+        'Spend and ROAS are on very different scales — one axis would make one of them unreadable',
+        'Excel requires it',
+        'Bars can\'t be combined with anything else'
+      ],
+      correct: 1,
+      explain: 'A volume metric (spend, in thousands) and a rate metric (ROAS, a small multiplier) need separate axes to both be readable on the same chart.'
+    }
+  ]);
+
+  initQuiz('quiz-mount-advanced', [
+    {
       q: 'A FILTER formula\'s result updates automatically when source data changes. Why does that matter for reporting?',
       options: [
         'It doesn\'t matter, it\'s just a style preference',
@@ -279,10 +504,32 @@ Filter:  Month = "June"              FROM   campaigns
       explain: 'Dynamic arrays "spill" and recalculate live — this is the first step toward the automated, self-refreshing reports Module 3 formalizes with dashboards.'
     },
     {
+      q: 'Why does SUMPRODUCT(spend, cpa)/SUM(spend) give a more honest "average CPA" than plain AVERAGE(cpa)?',
+      options: [
+        'It doesn\'t, they\'re identical',
+        'It weights each channel\'s CPA by how much was actually spent there, instead of treating every channel equally',
+        'SUMPRODUCT is just faster',
+        'AVERAGE can\'t handle more than 2 channels'
+      ],
+      correct: 1,
+      explain: 'A plain average gives a low-spend channel the same influence as a high-spend one — the same mistake Module 3 flags for averaging a pre-computed ROAS column.'
+    },
+    {
       q: 'Data validation dropdowns on a "channel" input column primarily prevent:',
       options: ['Formula errors', 'Free-text variants like "Email"/"email"/"e-mail" fragmenting one channel into three rows', 'Slow spreadsheets', 'Broken charts'],
       correct: 1,
       explain: 'Same root problem as inconsistent UTM casing in Module 4 — forcing a fixed list of values at entry time is cheaper than cleaning it up in every downstream report.'
+    },
+    {
+      q: 'What does Power Query mainly solve that formulas alone don\'t?',
+      options: [
+        'Making charts prettier',
+        'Repeatably importing and reshaping messy source files without manual copy-paste each time',
+        'Password-protecting a workbook',
+        'It replaces pivot tables entirely'
+      ],
+      correct: 1,
+      explain: 'Power Query is a repeatable import/transform pipeline — the spreadsheet-native version of "automate the report," before anyone touches SQL or Python.'
     }
   ]);
 
