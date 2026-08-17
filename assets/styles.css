@@ -242,3 +242,17 @@ table.result-table td{padding:6px 10px; border-bottom:1px solid var(--line-soft)
 .lesson-nav a{text-decoration:none; font-family:var(--mono); font-size:12.5px; color:var(--teal);}
 
 footer.site{max-width:760px; margin:0 auto; padding:24px 28px 60px; color:var(--ink-faint); font-size:12px; font-family:var(--mono);}
+
+/* ---------- User text highlights ---------- */
+mark.user-highlight{
+  background:var(--gold-soft); color:var(--gold-ink); border-radius:2px;
+  padding:0 1px; cursor:pointer; box-decoration-break:clone; -webkit-box-decoration-break:clone;
+}
+mark.user-highlight:hover{ box-shadow:0 0 0 1px var(--gold) inset; }
+.hl-popover-btn{
+  position:absolute; z-index:60; transform:translateX(-50%);
+  background:var(--ink); color:var(--bg); border:none; border-radius:7px;
+  padding:7px 13px; font-size:12.5px; font-family:var(--sans); font-weight:600; cursor:pointer;
+  box-shadow:var(--shadow); white-space:nowrap;
+}
+.hl-popover-btn:hover{ filter:brightness(1.2); }

@@ -248,6 +248,175 @@ function initChecklist(mountId, storageKey, items, opts = {}) {
   draw();
 }
 
+// ---------- Text highlighting (persisted per page, in this browser) ----------
+(function () {
+  const HL_ROOT_SELECTOR = 'main.page';
+  const HL_KEY_PREFIX = 'ma-highlights::';
+
+  function hlStorageKey() {
+    return HL_KEY_PREFIX + (location.pathname.split('/').pop() || 'index.html');
+  }
+  function loadHighlights() {
+    try { return JSON.parse(localStorage.getItem(hlStorageKey())) || []; } catch (e) { return []; }
+  }
+  function saveHighlights(list) {
+    localStorage.setItem(hlStorageKey(), JSON.stringify(list));
+  }
+
+  function textNodesUnder(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_SKIP;
+        let el = node.parentElement;
+        while (el && el !== root) {
+          const tag = el.tagName;
+          if (tag === 'SVG' || tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEXTAREA') return NodeFilter.FILTER_REJECT;
+          el = el.parentElement;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    return nodes;
+  }
+
+  function getOffset(root, node, offset) {
+    const nodes = textNodesUnder(root);
+    let total = 0;
+    for (const n of nodes) {
+      if (n === node) return total + offset;
+      total += n.nodeValue.length;
+    }
+    return total;
+  }
+
+  function getNodeAtOffset(root, targetOffset) {
+    const nodes = textNodesUnder(root);
+    let total = 0;
+    for (const n of nodes) {
+      const len = n.nodeValue.length;
+      if (targetOffset <= total + len) return { node: n, offset: targetOffset - total };
+      total += len;
+    }
+    if (nodes.length) return { node: nodes[nodes.length - 1], offset: nodes[nodes.length - 1].nodeValue.length };
+    return null;
+  }
+
+  function wrapNodeInMark(node, id) {
+    const mark = document.createElement('mark');
+    mark.className = 'user-highlight';
+    mark.dataset.hlId = id;
+    mark.title = 'Click to remove highlight';
+    node.parentNode.insertBefore(mark, node);
+    mark.appendChild(node);
+  }
+
+  function applyHighlight(root, startOffset, endOffset, id) {
+    const start = getNodeAtOffset(root, startOffset);
+    const end = getNodeAtOffset(root, endOffset);
+    if (!start || !end) return false;
+    const range = document.createRange();
+    try { range.setStart(start.node, start.offset); range.setEnd(end.node, end.offset); }
+    catch (e) { return false; }
+    if (range.collapsed) return false;
+
+    const origStartContainer = start.node, origStartOffset = start.offset;
+    const origEndContainer = end.node, origEndOffset = end.offset;
+    const nodes = textNodesUnder(root).filter(n => range.intersectsNode(n));
+
+    nodes.forEach(node => {
+      let localStart = (node === origStartContainer) ? origStartOffset : 0;
+      let localEnd = (node === origEndContainer) ? origEndOffset : node.nodeValue.length;
+      if (localStart >= localEnd) return;
+      let target = node;
+      if (localStart > 0) {
+        target = node.splitText(localStart);
+        localEnd -= localStart;
+      }
+      if (localEnd < target.nodeValue.length) target.splitText(localEnd);
+      wrapNodeInMark(target, id);
+    });
+    return true;
+  }
+
+  function removeHighlight(id) {
+    document.querySelectorAll(`mark.user-highlight[data-hl-id="${id}"]`).forEach(m => {
+      const parent = m.parentNode;
+      while (m.firstChild) parent.insertBefore(m.firstChild, m);
+      parent.removeChild(m);
+      parent.normalize();
+    });
+    saveHighlights(loadHighlights().filter(h => h.id !== id));
+  }
+
+  function getSelectionOffsets(root) {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return null;
+    const range = sel.getRangeAt(0);
+    if (!root.contains(range.commonAncestorContainer)) return null;
+    const a = getOffset(root, range.startContainer, range.startOffset);
+    const b = getOffset(root, range.endContainer, range.endOffset);
+    if (a === b) return null;
+    return { start: Math.min(a, b), end: Math.max(a, b) };
+  }
+
+  function initHighlighting() {
+    const root = document.querySelector(HL_ROOT_SELECTOR);
+    if (!root) return;
+
+    const saved = loadHighlights();
+    const stillValid = [];
+    saved.forEach(h => { if (applyHighlight(root, h.start, h.end, h.id)) stillValid.push(h); });
+    if (stillValid.length !== saved.length) saveHighlights(stillValid);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = '✎ Highlight';
+    btn.className = 'hl-popover-btn';
+    document.body.appendChild(btn);
+    function hideBtn() { btn.style.display = 'none'; }
+    hideBtn();
+
+    document.addEventListener('mouseup', (e) => {
+      if (e.target === btn) return;
+      setTimeout(() => {
+        const info = getSelectionOffsets(root);
+        if (!info) { hideBtn(); return; }
+        const rect = window.getSelection().getRangeAt(0).getBoundingClientRect();
+        btn.style.left = Math.round(rect.left + rect.width / 2 + window.scrollX) + 'px';
+        btn.style.top = Math.round(rect.top + window.scrollY - 38) + 'px';
+        btn.style.display = 'block';
+        btn.dataset.start = info.start;
+        btn.dataset.end = info.end;
+      }, 0);
+    });
+
+    document.addEventListener('mousedown', (e) => { if (e.target !== btn) hideBtn(); });
+
+    btn.addEventListener('click', () => {
+      const start = parseInt(btn.dataset.start, 10);
+      const end = parseInt(btn.dataset.end, 10);
+      const id = 'hl' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      if (applyHighlight(root, start, end, id)) {
+        const list = loadHighlights();
+        list.push({ id, start, end, ts: Date.now() });
+        saveHighlights(list);
+      }
+      window.getSelection().removeAllRanges();
+      hideBtn();
+    });
+
+    root.addEventListener('click', (e) => {
+      const mark = e.target.closest('mark.user-highlight');
+      if (mark) removeHighlight(mark.dataset.hlId);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initHighlighting);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   const mount = document.getElementById('topbar-mount');
   const current = mount ? mount.dataset.current : null;
